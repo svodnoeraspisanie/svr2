@@ -1,18 +1,147 @@
 <template>
-<v-container
 
-        fill-height
-      >
-
+<v-container fill-height   >
+ 
 
 
-  <v-layout fill-height >
+  <v-layout  >
+     <v-navigation-drawer
+      v-model="drawer"
+      :clipped="$vuetify.breakpoint.lgAndUp"
+      app
+        width="300px"
+    >
+
+
+
+
+             <v-list-item>
+
+        <v-list-item-content>
+
+
+          <v-list-item-title class="title">
+            Город:
+          </v-list-item-title>
+
+               <v-select
+          :items="city"
+
+        ></v-select>
+              </v-list-item-content>
+      </v-list-item>
+        <v-list-item>
+
+        <v-list-item-content>
+
+
+          <v-list-item-title class="title">
+            Метки:
+          </v-list-item-title>
+
+                <v-flex
+          v-for="(selection, i) in selections"
+          :key="selection.text"
+          shrink
+        >
+          <v-chip
+            :disabled="loading"
+            close
+            @click:close="selected.splice(i, 1)"
+          >
+            <v-icon
+              left
+              v-text="selection.icon"
+            ></v-icon>
+            {{ selection.text }}
+          </v-chip>
+        </v-flex>
+
+        <v-flex v-if="!allSelected" xs12>
+
+          <v-text-field
+            ref="search"
+            v-model="search"
+            full-width
+            hide-details
+            label="Поиск"
+            single-line
+          ></v-text-field>
+             <v-divider v-if="!allSelected"></v-divider>
+        </v-flex>
+
+
+
+
+
+    <v-list>
+      <template v-for="(item, i) in categories">
+        <v-list-item
+          v-if="!selected.includes(i)"
+          :key="i"
+          :disabled="loading"
+          @click="selected.push(i)"
+        >
+          <v-list-item-avatar>
+            <v-icon
+              :disabled="loading"
+              v-text="item.icon"
+            ></v-icon>
+          </v-list-item-avatar>
+          <v-list-item-title v-text="item.text"></v-list-item-title>
+        </v-list-item>
+      </template>
+    </v-list>
+
+    </v-list-item-content>
+      </v-list-item>
+    </v-navigation-drawer>
+    
     <v-flex>
-
+        <v-toolbar flat color="white">
+          <v-btn outlined class="mr-4" @click="setToday">
+            Сегодня
+          </v-btn>
+          <v-btn fab text small @click="prev">
+            <v-icon small>mdi-chevron-left</v-icon>
+          </v-btn>
+          <v-btn fab text small @click="next">
+            <v-icon small>mdi-chevron-right</v-icon>
+          </v-btn>
+          <v-toolbar-title>{{ title }}</v-toolbar-title>
+          <v-spacer></v-spacer>
+          <v-menu bottom right>
+            <template v-slot:activator="{ on }">
+              <v-btn
+                outlined
+                v-on="on"
+              >
+                <span>{{ typeToLabel[type] }}</span>
+                <v-icon right>mdi-menu-down</v-icon>
+              </v-btn>
+            </template>
+            <v-list>
+              <v-list-item @click="type = 'day'">
+                <v-list-item-title>День</v-list-item-title>
+              </v-list-item>
+              <v-list-item @click="type = 'week'">
+                <v-list-item-title>Неделя</v-list-item-title>
+              </v-list-item>
+              <v-list-item @click="type = 'month'">
+                <v-list-item-title>Месяц</v-list-item-title>
+              </v-list-item>
+              <v-list-item @click="type = '4day'">
+                <v-list-item-title>4 дня</v-list-item-title>
+              </v-list-item>
+            </v-list>
+          </v-menu>
+        </v-toolbar>
         <v-calendar
           ref="calendar"
           v-model="focus"
           color="primary"
+
+          :weekdays="[1,2,3,4,5,6,0]"
 
           :events="events"
           :event-color="getEventColor"
@@ -42,15 +171,15 @@
               dark
             >
               <v-btn icon>
-                <v-icon>edit</v-icon>
+                <v-icon>mdi-pencil</v-icon>
               </v-btn>
               <v-toolbar-title v-html="selectedEvent.name"></v-toolbar-title>
               <v-spacer></v-spacer>
               <v-btn icon>
-                <v-icon>favorite</v-icon>
+                <v-icon>mdi-heart</v-icon>
               </v-btn>
               <v-btn icon>
-                <v-icon>more_vert</v-icon>
+                <v-icon>mdi-dots-vertical</v-icon>
               </v-btn>
             </v-toolbar>
             <v-card-text>
@@ -96,11 +225,12 @@ export default {
       selectedOpen: false,
       events: [
         {
-          name: 'Vacation',
-          details: 'Going to the beach!',
-          start: '2018-12-29',
+          name: 'Русское народное пение: традиция и импровизация',
+          details: 'Описание: <br> https://slovo-vdnh.timepad.ru/event/1025381/ <br> Покосные, свадебные, бурлацкие, разбойничьи, казачьи — лишь несколько жанров русской народной песни, о которых мы все кое-что слышали. А как звучат «подблюдные», «волочебные», «купальские» песни? Откуда произошли «небылицы» и почему частушки, которые известны нам как веселые песни, называли иногда «страданиями»? <br>Филолог и этнограф Александр Маточкин, который двадцать лет собирает, сказывает эпос и поет традиционный фольклор по всей России, устроит встречу в центре «Слово» на ВДНХ. Мы будем не только слушать авторское пропевание русских песен под импровизации гармони, но и сами научимся правильно исполнять хором «хиты» казачьего фольклора с ведущим певцом.<br>Александр Маточкин — бакалавр лингвистики, магистр филологии, автор научных работ по фольклористике. С фольклорно-этнографическими экспедициями неоднократно ездит по деревням Архангельской, Вологодской и других областей России около 20 лет.  Русским народным пением Александр занимается с 1998, в том числе в составе ведущих фольклорных ансамблей Санкт-Петербурга. Участник и лауреат многих фольклорных фестивалей и конкурсов, создатель культурно-просветительского ВК-сообщества по традиционной русской культуре «Ладно-Хорошо» (более 34 тысяч подписчиков). С 2013 проводит лекции и встречи-беседы со сказыванием русских старин и фольклорным пением.',
+          start: '2019-01-01',
           end: '2019-01-01',
           color: 'blue',
+          
         },
         {
           name: 'Meeting',
@@ -222,24 +352,7 @@ export default {
       ],
     }),
   computed: {
-            allSelected () {
-        return this.selected.length === this.items.length
-      },
-      categories () {
-        const search = this.search.toLowerCase()
-        if (!search) return this.items
-        return this.items.filter(item => {
-          const text = item.text.toLowerCase()
-          return text.indexOf(search) > -1
-        })
-      },
-      selections () {
-        const selections = []
-        for (const selection of this.selected) {
-          selections.push(this.items[selection])
-        }
-        return selections
-      },
+            
       title () {
         const { start, end } = this
         if (!start || !end) {
@@ -312,11 +425,9 @@ export default {
           : ['th', 'st', 'nd', 'rd', 'th', 'th', 'th', 'th', 'th', 'th'][d % 10]
       },
     },
-        watch: {
-      selected () {
-        this.search = ''
-      },
-    },
+  
     
 }
 </script>
+<style scoped>
+</style>
