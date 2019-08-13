@@ -1,23 +1,66 @@
 <template>
 
 <v-container fill-height   >
- 
-
-
-  <v-layout  >
-     <v-navigation-drawer
+ <v-navigation-drawer
       v-model="drawer"
       :clipped="$vuetify.breakpoint.lgAndUp"
-      app
+    app
         width="300px"
     >
-
-
-
+    <v-list>
+<v-list-item>
+<v-date-picker first-day-of-week="1" locale="ru" no-title></v-date-picker>
+</v-list-item>
 
              <v-list-item>
+              
+   <span>{{ title }}</span>
+   
+ </v-list-item>
 
-        <v-list-item-content>
+               <v-list-item>
+<v-btn outlined class="mr-4" @click="setToday">
+            Сегодня
+          </v-btn>
+          
+          <v-btn fab text small @click="prev">
+            <v-icon small>mdi-chevron-left</v-icon>
+          </v-btn>
+          <v-btn fab text small @click="next">
+            <v-icon small>mdi-chevron-right</v-icon>
+          </v-btn>
+           </v-list-item>
+       
+          
+ <v-list-item>
+          <v-menu bottom right>
+            <template v-slot:activator="{ on }">
+              <v-btn
+                outlined
+                v-on="on"
+              >
+                <span>{{ typeToLabel[type] }}</span>
+                <v-icon right>mdi-menu-down</v-icon>
+              </v-btn>
+            </template>
+            <v-list>
+              <v-list-item @click="type = 'day'">
+                <v-list-item-title>День</v-list-item-title>
+              </v-list-item>
+              <v-list-item @click="type = 'week'">
+                <v-list-item-title>Неделя</v-list-item-title>
+              </v-list-item>
+              <v-list-item @click="type = 'month'">
+                <v-list-item-title>Месяц</v-list-item-title>
+              </v-list-item>
+              <v-list-item @click="type = '4day'">
+                <v-list-item-title>4 дня</v-list-item-title>
+              </v-list-item>
+            </v-list>
+          </v-menu>
+
+ </v-list-item>
+        <v-list-item>
 
 
           <v-list-item-title class="title">
@@ -28,8 +71,8 @@
           :items="city"
 
         ></v-select>
-              </v-list-item-content>
-      </v-list-item>
+              </v-list-item>
+      
         <v-list-item>
 
         <v-list-item-content>
@@ -95,47 +138,15 @@
 
     </v-list-item-content>
       </v-list-item>
+      </v-list>
     </v-navigation-drawer>
+
+
+  <v-layout  >
+     
     
     <v-flex>
-        <v-toolbar flat color="white">
-          <v-btn outlined class="mr-4" @click="setToday">
-            Сегодня
-          </v-btn>
-          <v-btn fab text small @click="prev">
-            <v-icon small>mdi-chevron-left</v-icon>
-          </v-btn>
-          <v-btn fab text small @click="next">
-            <v-icon small>mdi-chevron-right</v-icon>
-          </v-btn>
-          <v-toolbar-title>{{ title }}</v-toolbar-title>
-          <v-spacer></v-spacer>
-          <v-menu bottom right>
-            <template v-slot:activator="{ on }">
-              <v-btn
-                outlined
-                v-on="on"
-              >
-                <span>{{ typeToLabel[type] }}</span>
-                <v-icon right>mdi-menu-down</v-icon>
-              </v-btn>
-            </template>
-            <v-list>
-              <v-list-item @click="type = 'day'">
-                <v-list-item-title>День</v-list-item-title>
-              </v-list-item>
-              <v-list-item @click="type = 'week'">
-                <v-list-item-title>Неделя</v-list-item-title>
-              </v-list-item>
-              <v-list-item @click="type = 'month'">
-                <v-list-item-title>Месяц</v-list-item-title>
-              </v-list-item>
-              <v-list-item @click="type = '4day'">
-                <v-list-item-title>4 дня</v-list-item-title>
-              </v-list-item>
-            </v-list>
-          </v-menu>
-        </v-toolbar>
+       
         <v-calendar
           ref="calendar"
           v-model="focus"
@@ -164,6 +175,7 @@
           <v-card
             color="grey lighten-4"
             min-width="350px"
+            max-width="800px"
             flat
           >
             <v-toolbar

@@ -17,12 +17,12 @@
                         <v-app-bar-nav-icon
                             @click.stop="drawer = !drawer"
                         ></v-app-bar-nav-icon>
-                        <span class="hidden-sm-and-down">Свора</span>
+                        <span class="hidden-sm-and-down"><router-link to="/"  class="toolbar-title">Свора</router-link></span>
                     </v-toolbar-title>
 
                     <v-toolbar-items>
                         <v-btn text 
-                        to="/home"
+                        to="/predpriyatiya"
                         >
                             <v-icon left
                                 >mdi-account-badge-horizontal-outline</v-icon
@@ -46,3 +46,10 @@ export default {
     
 }
 </script>
+
+<style scoped>
+.toolbar-title {
+  color: inherit;
+  text-decoration: inherit;
+}
+</style>
