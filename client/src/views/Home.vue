@@ -1,7 +1,7 @@
 <template>
  <v-container>
 <v-layout>
-  <v-flex xs6>
+  <v-flex xs10>
     <v-card>
       <v-card-title>Добро пожаловать</v-card-title>
       <v-card-text><p>Свора - это инкубатор и акселератор национальных предприятий. Разберём каждое слово.
