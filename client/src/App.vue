@@ -1,8 +1,9 @@
 <template>
   <v-app>
-    <appbar/>
+    <appbar :drawer="drawer"/>
 
     <v-content>
+      {{drawer}}
        <router-view/>
     </v-content>
   </v-app>
@@ -21,6 +22,7 @@ export default {
     lefttagslist,
   },
   data: () => ({
+    drawer:true,
     //
   }),
 };

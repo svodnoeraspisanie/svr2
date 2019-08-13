@@ -5,6 +5,7 @@
                     dark
                     src="https://picsum.photos/id/466/1920/1080"
                     color="#fcb69f"
+                    
                 >
                     <template v-slot:img="{ props }">
                         <v-img
@@ -17,7 +18,7 @@
                         <v-app-bar-nav-icon
                             @click.stop="drawer = !drawer"
                         ></v-app-bar-nav-icon>
-                        <span class="hidden-sm-and-down"><router-link to="/"  class="toolbar-title">Свора</router-link></span>
+                        <span class="hidden-sm-and-down"><router-link to="/"  class="toolbar-title">Свора  {{drawer}}</router-link></span>
                     </v-toolbar-title>
 
                     <v-toolbar-items>
@@ -43,6 +44,10 @@
 
 <script>
 export default {
+      props: {
+    drawer: Boolean,
+    source: String
+  },
     
 }
 </script>

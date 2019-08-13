@@ -2,7 +2,7 @@
 
 <v-container fill-height   >
  <v-navigation-drawer
-      v-model="drawer"
+      :v-model="drawer"
       :clipped="$vuetify.breakpoint.lgAndUp"
     app
         width="300px"
@@ -219,6 +219,7 @@
 
 <script>
 export default {
+
     data: () => ({
 
        today: '2019-01-08',
