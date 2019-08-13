@@ -9,14 +9,14 @@
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld';
+
 import appbar from './components/appbar';
 import lefttagslist from './components/lefttagslist';
 
 export default {
   name: 'App',
   components: {
-    HelloWorld,
+    
     appbar,
     lefttagslist,
   },
