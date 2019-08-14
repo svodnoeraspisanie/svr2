@@ -1,6 +1,6 @@
 <template>
 
-<v-container fill-height fluid  >
+<v-container fill-height fluid pa-0 ma-0 pt-2 >
  <v-navigation-drawer
       :v-model="drawer"
       :clipped="$vuetify.breakpoint.lgAndUp"
@@ -146,9 +146,10 @@
   <v-layout  >
      
     
-    <v-flex>
+    <v-flex >
        
         <v-calendar
+        
           ref="calendar"
           v-model="focus"
           color="primary"
