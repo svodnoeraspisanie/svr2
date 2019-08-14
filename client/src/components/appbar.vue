@@ -18,7 +18,7 @@
                         <v-app-bar-nav-icon
                             @click.stop="drawer = !drawer"
                         ></v-app-bar-nav-icon>
-                        <span class="hidden-sm-and-down"><router-link to="/"  class="toolbar-title">Свора  {{drawer}}</router-link></span>
+                        <span class="hidden-sm-and-down"><router-link to="/"  class="toolbar-title">Свора </router-link></span>
                     </v-toolbar-title>
 
                     <v-toolbar-items>

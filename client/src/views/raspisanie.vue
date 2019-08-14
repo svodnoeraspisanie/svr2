@@ -154,7 +154,8 @@
           color="primary"
 
           :weekdays="[1,2,3,4,5,6,0]"
-
+          :shortMonths= false
+          :shortWeekdays=false
           :events="events"
           :event-color="getEventColor"
           :event-margin-bottom="3"
@@ -448,6 +449,6 @@ export default {
 
 
 .v-calendar .v-event.v-event-start{
-  margin-left:3px;
+  margin-left:5px;
 }
 </style>
