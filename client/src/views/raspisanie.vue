@@ -9,10 +9,11 @@
     >
     <v-list>
 <v-list-item>
-<v-date-picker first-day-of-week="1" locale="ru" no-title class="expansion-0"></v-date-picker>
+<v-date-picker first-day-of-week="1" locale="ru" no-title class="elevation-0"></v-date-picker>
 </v-list-item>
 
              <v-list-item>
+               <v-divider> </v-divider>
               
    <span>{{ title }}</span>
    
@@ -442,5 +443,11 @@ export default {
     
 }
 </script>
-<style scoped>
+
+<style >
+
+
+.v-calendar .v-event.v-event-start{
+  margin-left:3px;
+}
 </style>
