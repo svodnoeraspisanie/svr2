@@ -1,6 +1,6 @@
 <template>
 
-<v-container fill-height   >
+<v-container fill-height fluid  >
  <v-navigation-drawer
       :v-model="drawer"
       :clipped="$vuetify.breakpoint.lgAndUp"
@@ -9,7 +9,7 @@
     >
     <v-list>
 <v-list-item>
-<v-date-picker first-day-of-week="1" locale="ru" no-title></v-date-picker>
+<v-date-picker first-day-of-week="1" locale="ru" no-title class="expansion-0"></v-date-picker>
 </v-list-item>
 
              <v-list-item>

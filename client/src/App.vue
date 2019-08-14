@@ -3,8 +3,7 @@
     <appbar :drawer="drawer"/>
 
     <v-content>
-      {{drawer}}
-       <router-view/>
+        <router-view/>
     </v-content>
   </v-app>
 </template>
