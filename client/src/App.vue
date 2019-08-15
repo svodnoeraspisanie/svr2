@@ -1,8 +1,11 @@
 <template>
   <v-app>
-    <appbar :drawer="drawer"/>
+  
+    <appbar />
 
-    <v-content>
+  <v-content class="pa-0">
+    
+      
         <router-view/>
     </v-content>
   </v-app>

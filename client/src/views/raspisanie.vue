@@ -1,77 +1,35 @@
 <template>
 
-<v-container fill-height fluid pa-0 ma-0 pt-2 >
+<v-container  fluid pa-0 ma-0 style="height:100%;"  >
+  
  <v-navigation-drawer
       :v-model="drawer"
       :clipped="$vuetify.breakpoint.lgAndUp"
     app
         width="300px"
     >
-    <v-list>
-<v-list-item>
-<v-date-picker first-day-of-week="1" locale="ru" no-title class="elevation-0"></v-date-picker>
+    <v-list class="py-0">
+<v-list-item class="px-1 py-0">
+<v-date-picker first-day-of-week="1" locale="ru" no-title class="elevation-0"
+ 
+></v-date-picker>
 </v-list-item>
+   <v-divider> </v-divider>
 
-             <v-list-item>
-               <v-divider> </v-divider>
               
-   <span>{{ title }}</span>
-   
- </v-list-item>
-
-               <v-list-item>
-<v-btn outlined class="mr-4" @click="setToday">
-            Сегодня
-          </v-btn>
-          
-          <v-btn fab text small @click="prev">
-            <v-icon small>mdi-chevron-left</v-icon>
-          </v-btn>
-          <v-btn fab text small @click="next">
-            <v-icon small>mdi-chevron-right</v-icon>
-          </v-btn>
-           </v-list-item>
-       
-          
- <v-list-item>
-          <v-menu bottom right>
-            <template v-slot:activator="{ on }">
-              <v-btn
-                outlined
-                v-on="on"
-              >
-                <span>{{ typeToLabel[type] }}</span>
-                <v-icon right>mdi-menu-down</v-icon>
-              </v-btn>
-            </template>
-            <v-list>
-              <v-list-item @click="type = 'day'">
-                <v-list-item-title>День</v-list-item-title>
-              </v-list-item>
-              <v-list-item @click="type = 'week'">
-                <v-list-item-title>Неделя</v-list-item-title>
-              </v-list-item>
-              <v-list-item @click="type = 'month'">
-                <v-list-item-title>Месяц</v-list-item-title>
-              </v-list-item>
-              <v-list-item @click="type = '4day'">
-                <v-list-item-title>4 дня</v-list-item-title>
-              </v-list-item>
-            </v-list>
-          </v-menu>
-
- </v-list-item>
         <v-list-item>
 
-
-          <v-list-item-title class="title">
+<v-list-item-content>
+          <v-list-item-title class="title ">
             Город:
           </v-list-item-title>
 
-               <v-select
+               <v-select 
           :items="city"
 
         ></v-select>
+        </v-list-item-content>
+
               </v-list-item>
       
         <v-list-item>
@@ -143,13 +101,53 @@
     </v-navigation-drawer>
 
 
-  <v-layout  >
+
+
+  <v-layout  style="height:90%;">
      
-    
-    <v-flex >
-       
+    <v-divider vertical ></v-divider>
+    <v-flex  >
+       <v-toolbar flat color="white" style="padding-left:300px;">
+          <v-btn outlined class="mr-4" @click="setToday">
+            Сегодня
+          </v-btn>
+          <v-btn fab text small @click="prev">
+            <v-icon small>mdi-chevron-left</v-icon>
+          </v-btn>
+          <v-btn fab text small @click="next">
+            <v-icon small>mdi-chevron-right</v-icon>
+          </v-btn>
+          <v-toolbar-title>{{ title }}</v-toolbar-title>
+          <v-spacer></v-spacer>
+          <v-menu bottom right>
+            <template v-slot:activator="{ on }">
+              <v-btn
+                outlined
+                v-on="on"
+              >
+                <span>{{ typeToLabel[type] }}</span>
+                <v-icon right>mdi-menu-down</v-icon>
+              </v-btn>
+            </template>
+            <v-list>
+              <v-list-item @click="type = 'day'">
+                <v-list-item-title>День</v-list-item-title>
+              </v-list-item>
+              <v-list-item @click="type = 'week'">
+                <v-list-item-title>Неделя</v-list-item-title>
+              </v-list-item>
+              <v-list-item @click="type = 'month'">
+                <v-list-item-title>Месяц</v-list-item-title>
+              </v-list-item>
+              <v-list-item @click="type = '4day'">
+                <v-list-item-title>4 дня</v-list-item-title>
+              </v-list-item>
+            </v-list>
+          </v-menu>
+        </v-toolbar>
+        <v-divider  ></v-divider>
         <v-calendar
-        
+         style="height:100%"
           ref="calendar"
           v-model="focus"
           color="primary"
@@ -451,5 +449,10 @@ export default {
 
 .v-calendar .v-event.v-event-start{
   margin-left:5px;
+}
+
+.theme--light.v-calendar-weekly .v-calendar-weekly__head-weekday {
+
+  padding-top:4px;
 }
 </style>
