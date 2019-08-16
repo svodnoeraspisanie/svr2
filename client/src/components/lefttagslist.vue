@@ -7,8 +7,6 @@
     >
 
 
-
-
              <v-list-item>
 
         <v-list-item-content>
@@ -65,9 +63,6 @@
         </v-flex>
 
 
-
-
-
     <v-list>
       <template v-for="(item, i) in categories">
         <v-list-item
@@ -94,6 +89,6 @@
 
 <script>
 export default {
-    
-}
+
+};
 </script>

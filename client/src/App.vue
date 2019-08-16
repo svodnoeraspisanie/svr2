@@ -16,12 +16,12 @@ import lefttagslist from './components/lefttagslist';
 export default {
   name: 'App',
   components: {
-    
+
     appbar,
     lefttagslist,
   },
   data: () => ({
-    drawer:true,
+    drawer: true,
     //
   }),
 };

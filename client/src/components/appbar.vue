@@ -1,11 +1,11 @@
 <template>
 <v-app-bar
-                    :clipped-left="$vuetify.breakpoint.lgAndUp"
+                    clipped-left
                     app
                     dark
                     src="https://picsum.photos/id/466/1920/1080"
                     color="#fcb69f"
-                    
+
                 >
                     <template v-slot:img="{ props }">
                         <v-img
@@ -22,7 +22,7 @@
                     </v-toolbar-title>
 
                     <v-toolbar-items>
-                        <v-btn text 
+                        <v-btn text
                         to="/predpriyatiya"
                         >
                             <v-icon left
@@ -39,17 +39,17 @@
                         >
                     </v-toolbar-items>
                 </v-app-bar>
-    
+
 </template>
 
 <script>
 export default {
-      props: {
+  props: {
     drawer: Boolean,
-    source: String
+    source: String,
   },
-    
-}
+
+};
 </script>
 
 <style scoped>

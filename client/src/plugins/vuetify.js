@@ -6,8 +6,6 @@ import '@mdi/font/css/materialdesignicons.css';
 import 'roboto-fontface/css/roboto/roboto-fontface.css';
 import ru from 'vuetify/es5/locale/ru';
 
-
-
 Vue.use(Vuetify);
 
 export default new Vuetify({
@@ -16,7 +14,7 @@ export default new Vuetify({
   },
 
   lang: {
-    locales: { ru},
+    locales: { ru },
     current: 'ru',
   },
 });
