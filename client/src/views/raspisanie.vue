@@ -222,6 +222,7 @@
 export default {
 
     data: () => ({
+      drawer:true,
 
        today: '2019-01-08',
       focus: '2019-01-08',
