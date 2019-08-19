@@ -163,7 +163,10 @@
           @click:more="viewDay"
           @click:date="viewDay"
           @change="updateRange"
-        ></v-calendar>
+        >
+        
+        
+        </v-calendar>
 
         <v-menu
           v-model="selectedOpen"
@@ -227,9 +230,9 @@ export default {
     focus: '2019-08-19',
     type: 'month',
     typeToLabel: {
-      month: 'Месяц',
-      week: 'Неделя',
-      day: 'День',
+      'month': 'Месяц',
+      'week': 'Неделя',
+      'day': 'День',
       '4day': '4 дня',
     },
     start: null,
@@ -283,17 +286,20 @@ export default {
       
       var jcalData = ICAL.parse(data);
       var vcalendar = new ICAL.Component(jcalData);
+      let novsob ={}
       for (let sob=0; sob < vcalendar.jCal[2].length;sob++){
-          var novsob = {};
+          novsob = {};
           novsob.name=vcalendar.jCal[2][sob][1][10][3];
           novsob.details=vcalendar.jCal[2][sob][1][5][3];
+          
           let start = new Date(vcalendar.jCal[2][sob][1][0][3]);
-          novsob.start=start.getFullYear()+'-'+start.getMonth()+'-'+start.getDate()+' '+start.getHours()+':'+start.getMinutes();
+          novsob.start=start.getFullYear()+'-'+(start.getMonth()+1)+'-'+start.getDate()+' '+start.getHours()+':'+start.getMinutes();
+          
           let end = new Date(vcalendar.jCal[2][sob][1][1][3]);
-          novsob.end=end.getFullYear()+'-'+end.getMonth()+'-'+end.getDate()+' '+end.getHours()+':'+end.getMinutes();
+          novsob.end=end.getFullYear()+'-'+(end.getMonth()+1)+'-'+end.getDate()+' '+end.getHours()+':'+end.getMinutes();
           novsob.color= 'light-blue';
 
-          console.log(novsob);
+          
           this.events.push(novsob);
 
         }
@@ -350,13 +356,14 @@ export default {
     },
     nth(d) {
       return d > 3 && d < 21
-        ? 'th'
-        : ['th', 'st', 'nd', 'rd', 'th', 'th', 'th', 'th', 'th', 'th'][d % 10];
+        ? '-ое'
+        : ['-ео', '-ое', '-ое', '-е', '-ое', '-ое', '-ое', '-ое', '-ое', '-ое'][d % 10];
     },
   },
 
 mounted() {
     this.zagruzkaraspisaniya ("mesto");
+    this.updateRange(null,null);
     
   }
 };
