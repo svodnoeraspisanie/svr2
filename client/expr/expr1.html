@@ -1,0 +1,68 @@
+<html>
+    <head>
+
+    </head>
+
+    <body>
+    
+
+    <pre id="console"></pre>
+
+
+    <script type="text/javascript" src="https://cdn.rawgit.com/mozilla-comm/ical.js/2d08c79b4e77bfe4dbf1c9ac0b463580f0605a7d/build/ical.js"></script>
+
+
+
+
+
+
+    <script>
+    var iCalendarData = [
+    'BEGIN:VCALENDAR',
+    'CALSCALE:GREGORIAN',
+    'PRODID:-//Example Inc.//Example Calendar//EN',
+    'VERSION:2.0',
+    'BEGIN:VEVENT',    
+    'DTSTAMP:20080205T191224Z',
+    'DTSTART:20081006',
+    'SUMMARY:Planning meeting',
+    'UID:4088E990AD89CB3DBB484909',
+    'END:VEVENT',
+    'END:VCALENDAR'
+].join("\r\n");
+
+url="https://calendar.google.com/calendar/ical/ct8a4t3tuim1jjnkno2d6skkck%40group.calendar.google.com/public/basic.ics";
+
+async function async_fetch(url) {
+  let response = await fetch(url);
+
+  if (response.ok) {
+      data = await response.text();
+      var jcalData = ICAL.parse(data);
+      var vcalendar = new ICAL.Component(jcalData);
+      var vevent = vcalendar.getFirstSubcomponent('vevent');
+      console.log(vevent);
+
+
+  }
+    
+
+  throw new Error(response.status);
+
+
+}
+
+res= async_fetch(url).then(data =>console.log(data));
+
+
+
+var jcalData = ICAL.parse(iCalendarData);
+var vcalendar = new ICAL.Component(jcalData);
+var vevent = vcalendar.getFirstSubcomponent('vevent');
+var summary = vevent.getFirstPropertyValue('summary');
+console.log('Summary: ' + summary);
+
+</script>
+
+</body>  
+</html>
