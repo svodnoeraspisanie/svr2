@@ -33,6 +33,9 @@
 
 url="https://calendar.google.com/calendar/ical/ct8a4t3tuim1jjnkno2d6skkck%40group.calendar.google.com/public/basic.ics";
 
+var asd;
+var arr = [];
+
 async function async_fetch(url) {
   let response = await fetch(url);
 
@@ -40,10 +43,24 @@ async function async_fetch(url) {
       data = await response.text();
       var jcalData = ICAL.parse(data);
       var vcalendar = new ICAL.Component(jcalData);
-      var vevent = vcalendar.getFirstSubcomponent('vevent');
-      console.log(vevent);
+     // var vevent = vcalendar.getFirstSubcomponent('vevent');
+      console.log(vcalendar);
+      asd=vcalendar;
 
+      for (let sob=0; sob < vcalendar.jCal[2].length;sob++){
+          var novsob = {};
+          novsob.name=vcalendar.jCal[2][sob][1][10][3];
+          novsob.details=vcalendar.jCal[2][sob][1][5][3];
+          let start = new Date(vcalendar.jCal[2][sob][1][0][3]);
+          novsob.start=start.getFullYear()+'-'+(start.getMonth()+1)+'-'+(start.getDay()+1)+' '+start.getHours()+':'+start.getMinutes();
+          let end = new Date(vcalendar.jCal[2][sob][1][1][3]);
+          novsob.end=end.getFullYear()+'-'+end.getMonth()+'-'+end.getDay()+' '+end.getHours()+':'+end.getMinutes();
+          novsob.color= 'light-blue';
+          console.log(novsob);
+          arr.push(novsob);
 
+        }
+        console.log(arr);
   }
     
 
