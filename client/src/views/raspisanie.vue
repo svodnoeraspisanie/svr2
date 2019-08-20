@@ -368,9 +368,12 @@ mounted() {
 </script>
 
 <style >
-
-
 .v-calendar .v-event.v-event-start{
   margin-left:5px;
+}
+
+.theme--light.v-calendar-weekly .v-calendar-weekly__head-weekday {
+
+  padding-top:4px;
 }
 </style>
