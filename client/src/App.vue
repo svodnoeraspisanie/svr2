@@ -1,31 +1,69 @@
 <template>
-  <v-app>
-  
-    <appbar />
+<v-app-bar
+                    :clipped-left="$vuetify.breakpoint.lgAndUp"
+                    app
+                    dark
+                    src="https://picsum.photos/id/466/1920/1080"
+                    color="#fcb69f"
+                    collapse
+                    min-width="300"
+                    
+                >
+                    <template v-slot:img="{ props }">
+                        <v-img
+                            v-bind="props"
+                            gradient="to top right, rgba(19,84,122,.5), rgba(128,208,199,.8)"
+                        ></v-img>
+                    </template>
+<v-app-bar-nav-icon
+                            @click.stop="drawer = !drawer"
+                        ></v-app-bar-nav-icon>
+                    <v-toolbar-title style="width: 300px" class="ml-0 pl-3">
+                        
+                        <span class="hidden-sm-and-down"><router-link to="/"  class="toolbar-title">Свора </router-link></span>
+                    </v-toolbar-title>
 
-  <v-content class="pt-0">
+                    <v-toolbar-items>
+                        <v-btn text 
+                        to="/"
+                        >
+                            Свора</v-btn>
+
+                        
+                        
+                    </v-toolbar-items>
+                    <v-btn icon 
+                        to="/predpriyatiya"
+                        >
+                            <v-icon 
+                                >mdi-account-badge-horizontal-outline</v-icon
+                            ></v-btn
+                        >
+                        <v-btn icon
+                        to="/raspisanie">
+                            <v-icon >mdi-calendar</v-icon></v-btn
+                        >
+                        <v-btn icon
+                        to="/">
+                            <v-icon >mdi-help</v-icon></v-btn
+                        >
+                </v-app-bar>
     
-      
-        <router-view/>
-    </v-content>
-  </v-app>
 </template>
 
 <script>
-
-import appbar from './components/appbar';
-import lefttagslist from './components/lefttagslist';
-
 export default {
-  name: 'App',
-  components: {
-
-    appbar,
-    lefttagslist,
+      props: {
+    drawer: Boolean,
+    source: String
   },
-  data: () => ({
-    drawer: true,
-    //
-  }),
-};
+    
+}
 </script>
+
+<style scoped>
+.toolbar-title {
+  color: inherit;
+  text-decoration: inherit;
+}
+</style>
