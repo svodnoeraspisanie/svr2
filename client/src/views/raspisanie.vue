@@ -1,6 +1,6 @@
 <template>
 
-<v-container fill-height fluid pa-0 ma-0 pt-2 >
+<v-container  fluid pa-0 ma-0 style="height:100%;"  >
  <v-navigation-drawer
       :v-model="drawer"
       :clipped="$vuetify.breakpoint.lgAndUp"
