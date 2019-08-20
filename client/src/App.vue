@@ -3,7 +3,7 @@
   
     <appbar />
 
-  <v-content class="pa-0">
+  <v-content class="pt-0">
     
       
         <router-view/>
