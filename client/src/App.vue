@@ -2,7 +2,7 @@
   <v-app>
 
 
-  <v-content pt-0 >
+  <v-content class="pt-0" >
         <router-view/>
 
     </v-content>

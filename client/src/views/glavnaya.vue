@@ -1,5 +1,7 @@
 <template>
  <v-container>
+   <appbar v-on:toggle-drawer="drawer=!drawer" />
+
 <v-layout>
   <v-flex xs10>
     <v-card>
@@ -24,8 +26,17 @@
 
 <script>
 
+import appbar from '../components/appbar';
 
 export default {
+  components: {
 
-};
+    appbar,
+
+  },
+
+  data: () => ({
+    drawer:true,
+  })
+}
 </script>

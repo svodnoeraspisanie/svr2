@@ -46,7 +46,7 @@
                             <v-icon >mdi-calendar</v-icon></v-btn
                         >
                         <v-btn icon
-                        to="/">
+                        to="/spravka">
                             <v-icon >mdi-help</v-icon></v-btn
                         >
                 </v-app-bar>
