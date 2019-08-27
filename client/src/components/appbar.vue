@@ -22,7 +22,8 @@
 
                     <v-toolbar-title style="width: 300px" class="ml-0 pl-3">
 
-                        <span class="hidden-sm-and-down"><router-link to="/"  class="toolbar-title">Свора </router-link></span>
+                        <span class="hidden-sm-and-down">
+                            <router-link to="/"  class="toolbar-title">Свора </router-link></span>
                     </v-toolbar-title>
 
                     <v-toolbar-items>
@@ -54,6 +55,7 @@
 
 <script>
 export default {
+
 
 };
 </script>

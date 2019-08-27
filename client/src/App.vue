@@ -2,8 +2,9 @@
   <v-app>
 
 
-  <v-content >
+  <v-content pt-0 >
         <router-view/>
+
     </v-content>
   </v-app>
 </template>
@@ -14,6 +15,7 @@ export default {
   name: 'App',
 
   data: () => ({
+
 
     //
   }),
