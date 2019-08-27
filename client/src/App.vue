@@ -1,11 +1,9 @@
 <template>
   <v-app>
   
-    <appbar />
+    
 
   <v-content class="pt-0">
-    
-      
         <router-view/>
     </v-content>
   </v-app>

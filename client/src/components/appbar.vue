@@ -15,9 +15,11 @@
                             gradient="to top right, rgba(19,84,122,.5), rgba(128,208,199,.8)"
                         ></v-img>
                     </template>
+
 <v-app-bar-nav-icon
-                            @click.stop="drawer = !drawer"
+                            @click.stop="$emit('toggle-drawer')"
                         ></v-app-bar-nav-icon>
+
                     <v-toolbar-title style="width: 300px" class="ml-0 pl-3">
                         
                         <span class="hidden-sm-and-down"><router-link to="/"  class="toolbar-title">Свора </router-link></span>
@@ -53,11 +55,7 @@
 
 <script>
 export default {
-      props: {
-    drawer: Boolean,
-    source: String
-  },
-    
+
 }
 </script>
 

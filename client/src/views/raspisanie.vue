@@ -1,8 +1,11 @@
 <template>
 
 <v-container  fluid pa-0 ma-0 style="height:100%;"  >
+
  <v-navigation-drawer
-      :v-model="drawer"
+      
+      v-model="drawer"
+
       :clipped="$vuetify.breakpoint.lgAndUp"
     app
         width="300px"
@@ -99,11 +102,13 @@
       </v-list>
     </v-navigation-drawer>
 
+<appbar v-on:toggle-drawer="drawer=!drawer" />
+
 <v-layout  style="height:90%;">
      
     <v-divider vertical ></v-divider>
     <v-flex  >
-       <v-toolbar flat color="white" style="padding-left:300px;">
+       <v-toolbar flat color="white" :style="toolbarstyle">
           <v-btn outlined class="mr-4" @click="setToday">
             Сегодня
           </v-btn>
@@ -219,11 +224,17 @@
 </template>
 
 <script>
+import appbar from '../components/appbar';
 
 export default {
+  components: {
+    
+    appbar,
+    
+  },
 
   data: () => ({
-
+    drawer:true,
     today: '2019-08-19',
     focus: '2019-08-19',
     type: 'month',
@@ -242,6 +253,9 @@ export default {
     events: [],
   }),
   computed: {
+    toolbarstyle(){
+      if (!this.drawer){ return "padding-left: 300px;";}
+    },
 
     title() {
       const { start, end } = this;
