@@ -93,10 +93,12 @@
       </v-list-item>
     </v-navigation-drawer>
 
+<appbar v-on:toggle-drawer="drawer=!drawer" />
 
   <v-layout justify-center row class="manual-v-layout">
 <v-flex lg3 md4 xs12   v-for="pr in predpriyatiya" :key="pr.n">
       <v-card class="flexcard" height="100%" >
+        
 
         <v-img
         :src="pr.obraz"
@@ -110,25 +112,28 @@
 
           <v-card-title>{{pr.nazvanie}}</v-card-title>
           <v-card-text> {{pr.kratkoe_opisanie}}</v-card-text>
-          <v-spacer></v-spacer>
-            <v-divider></v-divider>
-              <v-card-text>
-                  <div>
+
+
+          <v-spacer/>
+
+            <v-divider/>
+
+              <v-card-actions>
+                  
                    <b>Место: </b>
 
                     <v-chip v-for="(mesto, nm) in pr.mesto" :key="nm" small >{{mesto}} </v-chip>
 
-
-                </div>
-                 <div>
-                   <b>Метки: </b>
-
+</v-card-actions>
+                <v-card-actions>
+                   
+                    <div width="100%">
+                      <b>Метки: </b>
                     <v-chip v-for="(metka, nm) in pr.metki" :key="nm" small >{{metka}} </v-chip>
+</div>
 
 
-                </div>
-
-            </v-card-text>
+            </v-card-actions>
 
       </v-card>
 </v-flex>
@@ -137,9 +142,16 @@
 </template>
 
 <script>
-export default {
-  data: () => ({
+import appbar from '../components/appbar';
 
+export default {
+  components: {
+    
+    appbar,
+    
+  },
+  data: () => ({
+drawer:true,
     predpriyatiya: [
       {
         n: 1,
@@ -214,7 +226,7 @@ export default {
         n: 4,
         nazvanie: 'Центра изучения этнической преступности. Дмитрий Бобров',
         sozdano: '2019',
-        kratkoe_opisanie: 'независимый проект по сбору и анализу информации связанной с этнопреступностью в Российской Федерации. Под этнической преступностью мы понимаем преступления, совершённые представителями этнических групп, не являющихся коренными для данной местности и составляющих меньшинство населения.',
+        kratkoe_opisanie: 'Независимый проект по сбору и анализу информации связанной с этнопреступностью в Российской Федерации.',
         podrobnoe_opisanie: '',
         obraz: '/obrazy/ethnocrime.png',
         ssilki: [
@@ -261,6 +273,8 @@ export default {
 
 };
 </script>
+
+<style>
  .flexcard {
             display: flex;
             flex-direction: column;
@@ -282,6 +296,4 @@ export default {
             padding-bottom: 8px !important;
             padding-top: 8px !important;
         }
-<style>
-
 </style>
