@@ -98,7 +98,7 @@
   <v-layout justify-center row class="manual-v-layout">
 <v-flex lg3 md4 xs12   v-for="pr in predpriyatiya" :key="pr.n">
       <v-card class="flexcard" height="100%" >
-        
+
 
         <v-img
         :src="pr.obraz"
@@ -119,14 +119,14 @@
             <v-divider/>
 
               <v-card-actions>
-                  
+
                    <b>Место: </b>
 
                     <v-chip v-for="(mesto, nm) in pr.mesto" :key="nm" small >{{mesto}} </v-chip>
 
 </v-card-actions>
                 <v-card-actions>
-                   
+
                     <div width="100%">
                       <b>Метки: </b>
                     <v-chip v-for="(metka, nm) in pr.metki" :key="nm" small >{{metka}} </v-chip>
@@ -146,12 +146,12 @@ import appbar from '../components/appbar';
 
 export default {
   components: {
-    
+
     appbar,
-    
+
   },
   data: () => ({
-drawer:true,
+    drawer: true,
     predpriyatiya: [
       {
         n: 1,
@@ -233,20 +233,19 @@ drawer:true,
           'Сайт: http://etnocrime.info',
           'Элпочта: etnocrime@protonmail.com',
           'Patreon: https://www.patreon.com/dmbobrov',
-          'Youtube: https://www.youtube.com/user/nsiorg'
+          'Youtube: https://www.youtube.com/user/nsiorg',
 
-      
 
         ],
         scheta: [
           'Patreon: https://www.patreon.com/dmbobrov',
-          'карта Сбербанка: 5336 6900 6767 1067'
+          'карта Сбербанка: 5336 6900 6767 1067',
 
         ],
         meropriyatiya: [
 
         ],
-        metki: ['преступность','исследование','мигранты','кавказ','азия'],
+        metki: ['преступность', 'исследование', 'мигранты', 'кавказ', 'азия'],
         mesto: ['Сеть', 'Санкт-Петербург'],
       },
       {

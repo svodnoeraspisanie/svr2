@@ -7,7 +7,7 @@
                     color="#fcb69f"
                     collapse
                     min-width="300"
-                    
+
                 >
                     <template v-slot:img="{ props }">
                         <v-img
@@ -21,23 +21,22 @@
                         ></v-app-bar-nav-icon>
 
                     <v-toolbar-title style="width: 300px" class="ml-0 pl-3">
-                        
+
                         <span class="hidden-sm-and-down"><router-link to="/"  class="toolbar-title">Свора </router-link></span>
                     </v-toolbar-title>
 
                     <v-toolbar-items>
-                        <v-btn text 
+                        <v-btn text
                         to="/"
                         >
                             Свора</v-btn>
 
-                        
-                        
+
                     </v-toolbar-items>
-                    <v-btn icon 
+                    <v-btn icon
                         to="/predpriyatiya"
                         >
-                            <v-icon 
+                            <v-icon
                                 >mdi-account-badge-horizontal-outline</v-icon
                             ></v-btn
                         >
@@ -50,13 +49,13 @@
                             <v-icon >mdi-help</v-icon></v-btn
                         >
                 </v-app-bar>
-    
+
 </template>
 
 <script>
 export default {
 
-}
+};
 </script>
 
 <style scoped>

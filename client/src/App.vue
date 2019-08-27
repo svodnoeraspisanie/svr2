@@ -1,9 +1,8 @@
 <template>
   <v-app>
-  
-    
 
-  <v-content class="pt-0">
+
+  <v-content >
         <router-view/>
     </v-content>
   </v-app>
@@ -11,18 +10,11 @@
 
 <script>
 
-import appbar from './components/appbar';
-import lefttagslist from './components/lefttagslist';
-
 export default {
   name: 'App',
-  components: {
-    
-    appbar,
-    lefttagslist,
-  },
+
   data: () => ({
-    drawer:true,
+
     //
   }),
 };

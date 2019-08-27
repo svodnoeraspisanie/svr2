@@ -3,7 +3,7 @@
 <v-container  fluid pa-0 ma-0 style="height:100%;"  >
 
  <v-navigation-drawer
-      
+
       v-model="drawer"
 
       :clipped="$vuetify.breakpoint.lgAndUp"
@@ -13,12 +13,12 @@
     <v-list class="py-0">
 <v-list-item class="px-1 py-0">
 <v-date-picker first-day-of-week="1" locale="ru" no-title class="elevation-0"
- 
+
 ></v-date-picker>
 </v-list-item>
    <v-divider> </v-divider>
 
-              
+
         <v-list-item>
 
 <v-list-item-content>
@@ -26,14 +26,14 @@
             Город:
           </v-list-item-title>
 
-               <v-select 
+               <v-select
           :items="city"
 
         ></v-select>
         </v-list-item-content>
 
               </v-list-item>
-      
+
         <v-list-item>
 
         <v-list-item-content>
@@ -75,9 +75,6 @@
         </v-flex>
 
 
-
-
-
     <v-list>
       <template v-for="(item, i) in categories">
         <v-list-item
@@ -105,7 +102,7 @@
 <appbar v-on:toggle-drawer="drawer=!drawer" />
 
 <v-layout  style="height:90%;">
-     
+
     <v-divider vertical ></v-divider>
     <v-flex  >
        <v-toolbar flat color="white" :style="toolbarstyle">
@@ -167,8 +164,8 @@
           @click:date="viewDay"
           @change="updateRange"
         >
-        
-        
+
+
         </v-calendar>
 
         <v-menu
@@ -228,20 +225,20 @@ import appbar from '../components/appbar';
 
 export default {
   components: {
-    
+
     appbar,
-    
+
   },
 
   data: () => ({
-    drawer:true,
+    drawer: true,
     today: '2019-08-19',
     focus: '2019-08-19',
     type: 'month',
     typeToLabel: {
-      'month': 'Месяц',
-      'week': 'Неделя',
-      'day': 'День',
+      month: 'Месяц',
+      week: 'Неделя',
+      day: 'День',
       '4day': '4 дня',
     },
     start: null,
@@ -249,12 +246,12 @@ export default {
     selectedEvent: {},
     selectedElement: null,
     selectedOpen: false,
-    ev2:[],
+    ev2: [],
     events: [],
   }),
   computed: {
-    toolbarstyle(){
-      if (!this.drawer){ return "padding-left: 300px;";}
+    toolbarstyle() {
+      if (!this.drawer) { return 'padding-left: 300px;'; }
     },
 
     title() {
@@ -288,47 +285,37 @@ export default {
     },
   },
   methods: {
-    async zagruzkaraspisaniya (mesto){
+    async zagruzkaraspisaniya(mesto) {
+      const url = 'https://calendar.google.com/calendar/ical/ct8a4t3tuim1jjnkno2d6skkck%40group.calendar.google.com/public/basic.ics';
 
-      var url="https://calendar.google.com/calendar/ical/ct8a4t3tuim1jjnkno2d6skkck%40group.calendar.google.com/public/basic.ics";
-
-      let response = await fetch(url);
+      const response = await fetch(url);
       if (response.ok) {
-      var data = await response.text();
-      
-      var jcalData = ICAL.parse(data);
-      var vcalendar = new ICAL.Component(jcalData);
-      let novsob ={}
-      for (let sob=0; sob < vcalendar.jCal[2].length;sob++){
+        const data = await response.text();
+
+        const jcalData = ICAL.parse(data);
+        const vcalendar = new ICAL.Component(jcalData);
+        let novsob = {};
+        for (let sob = 0; sob < vcalendar.jCal[2].length; sob++) {
           novsob = {};
-          novsob.name=vcalendar.jCal[2][sob][1][10][3];
-          novsob.details=vcalendar.jCal[2][sob][1][5][3];
-          
-          let start = new Date(vcalendar.jCal[2][sob][1][0][3]);
-          novsob.start=start.getFullYear()+'-'+(start.getMonth()+1)+'-'+start.getDate()+' '+start.getHours()+':'+start.getMinutes();
-          
-          let end = new Date(vcalendar.jCal[2][sob][1][1][3]);
-          novsob.end=end.getFullYear()+'-'+(end.getMonth()+1)+'-'+end.getDate()+' '+end.getHours()+':'+end.getMinutes();
-          novsob.color= 'light-blue';
+          novsob.name = vcalendar.jCal[2][sob][1][10][3];
+          novsob.details = vcalendar.jCal[2][sob][1][5][3];
 
-          
+          const start = new Date(vcalendar.jCal[2][sob][1][0][3]);
+          novsob.start = `${start.getFullYear()}-${start.getMonth() + 1}-${start.getDate()} ${start.getHours()}:${start.getMinutes()}`;
+
+          const end = new Date(vcalendar.jCal[2][sob][1][1][3]);
+          novsob.end = `${end.getFullYear()}-${end.getMonth() + 1}-${end.getDate()} ${end.getHours()}:${end.getMinutes()}`;
+          novsob.color = 'light-blue';
+
+
           this.events.push(novsob);
-
         }
-     console.log(this.events);
-
-      
-
-  }
-    
-
-  throw new Error(response.status);
+        console.log(this.events);
+      }
 
 
-},
-
-    
-
+      throw new Error(response.status);
+    },
 
 
     viewDay({ date }) {
@@ -373,11 +360,10 @@ export default {
     },
   },
 
-mounted() {
-    this.zagruzkaraspisaniya ("mesto");
-    this.updateRange(null,null);
-    
-  }
+  mounted() {
+    this.zagruzkaraspisaniya('mesto');
+    this.updateRange(null, null);
+  },
 };
 </script>
 
