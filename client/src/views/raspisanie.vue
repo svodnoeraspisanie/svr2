@@ -22,36 +22,18 @@
         <v-list-item>
 
 <v-list-item-content>
-          <v-list-item-title class="title ">
-            Город:
-          </v-list-item-title>
-
-               <v-select
-          :items="city"
-
-        ></v-select>
-        </v-list-item-content>
-
-              </v-list-item>
-
-        <v-list-item>
-
-        <v-list-item-content>
-
-
-          <v-list-item-title class="title">
+         <v-list-item-title class="title">
             Метки:
           </v-list-item-title>
 
-                <v-flex
-          v-for="(selection, i) in selections"
+          <div>
+          <v-chip v-for="(selection, i) in selections"
           :key="selection.text"
-          shrink
-        >
-          <v-chip
             :disabled="loading"
-            close
-            @click:close="selected.splice(i, 1)"
+            class="mb-1 mr-1"
+            
+            @click="selected.splice(i, 1)"
+            small
           >
             <v-icon
               left
@@ -59,9 +41,9 @@
             ></v-icon>
             {{ selection.text }}
           </v-chip>
-        </v-flex>
+        </div>
 
-        <v-flex v-if="!allSelected" xs12>
+        <v-flex  v-if="!allSelected" xs12>
 
           <v-text-field
             ref="search"
@@ -73,6 +55,8 @@
           ></v-text-field>
              <v-divider v-if="!allSelected"></v-divider>
         </v-flex>
+
+
 
 
     <v-list>
@@ -173,6 +157,7 @@
           :close-on-content-click="false"
           :activator="selectedElement"
           full-width
+       
           offset-x
         >
           <v-card
@@ -180,13 +165,18 @@
             min-width="350px"
             max-width="800px"
             flat
+            class="overflow-y-auto" max-height="500px"
+            
           >
             <v-toolbar
               :color="selectedEvent.color"
               dark
+              
             >
-              <v-btn icon>
-                <v-icon>mdi-pencil</v-icon>
+              <v-btn icon 
+              @click="selectedOpen = false">
+              
+                <v-icon>mdi-close</v-icon>
               </v-btn>
               <v-toolbar-title v-html="selectedEvent.name"></v-toolbar-title>
               <v-spacer></v-spacer>
@@ -197,18 +187,10 @@
                 <v-icon>mdi-dots-vertical</v-icon>
               </v-btn>
             </v-toolbar>
-            <v-card-text>
-              <span v-html="selectedEvent.details"></span>
+            <v-card-text  >
+              <span  v-html="selectedEvent.details"></span>
             </v-card-text>
-            <v-card-actions>
-              <v-btn
-                text
-                color="secondary"
-                @click="selectedOpen = false"
-              >
-                Закрыть
-              </v-btn>
-            </v-card-actions>
+         
           </v-card>
         </v-menu>
 
@@ -232,6 +214,36 @@ export default {
 
   data: () => ({
     drawer: true,
+
+mesta: ['Сеть', 'Москва', 'Санкт-Петербург', 'остальная Россия'],
+
+ items: [
+        {
+          text: 'Лекции',
+          icon: 'mdi-nature',
+        },
+        {
+          text: 'Экскурсии',
+          icon: 'mdi-glass-wine',
+        },
+        {
+          text: 'Москва',
+          icon: 'mdi-calendar-range',
+        },
+        {
+          text: 'Санкт-Петербург',
+          icon: 'mdi-map-marker',
+        },
+        {
+          text: 'Концерты',
+          icon: 'mdi-bike',
+        },
+      ],
+      loading: false,
+      search: '',
+      selected: [],
+
+
     today: '2019-08-19',
     focus: '2019-08-19',
     type: 'month',
@@ -250,6 +262,30 @@ export default {
     events: [],
   }),
   computed: {
+
+    allSelected () {
+        return this.selected.length === this.items.length
+      },
+      categories () {
+        const search = this.search.toLowerCase()
+
+        if (!search) return this.items
+
+        return this.items.filter(item => {
+          const text = item.text.toLowerCase()
+
+          return text.indexOf(search) > -1
+        })
+      },
+      selections () {
+        const selections = []
+
+        for (const selection of this.selected) {
+          selections.push(this.items[selection])
+        }
+
+        return selections
+      },
     toolbarstyle() {
       if (!this.drawer) { return 'padding-left: 300px;'; }
     },
