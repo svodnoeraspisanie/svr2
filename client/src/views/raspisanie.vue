@@ -4,7 +4,9 @@
       <v-list class="py-0">
         <v-list-item class="px-1 py-0">
           <v-date-picker first-day-of-week="1"
-          locale="ru" no-title class="elevation-0">
+          locale="ru" no-title class="elevation-0"
+          v-model="focus"
+          show-current="today">
           </v-date-picker>
         </v-list-item>
         <v-divider></v-divider>
@@ -109,7 +111,8 @@
         <v-divider></v-divider>
 
         <v-calendar 
-          
+          locale="ru"
+          event-ripple
           ref="calendar"
           v-model="focus"
           color="primary"
@@ -117,47 +120,53 @@
           :shortMonths="false"
           :shortWeekdays="false"
           :events="events"
+          event-text-color="black"
           :event-color="getEventColor"
-          :event-margin-bottom="3"
+          :event-margin-bottom="2"
           :now="today"
           :type="type"
           @click:event="showEvent"
           @click:more="viewDay"
           @click:date="viewDay"
           @change="updateRange"
-        ></v-calendar>
+        >
+        
+      
+        
+        
+        </v-calendar>
 
         <v-menu
           v-model="selectedOpen"
           :close-on-content-click="false"
           :activator="selectedElement"
-          full-width
+          max-width="400px"
           offset-x
         >
-          <v-card
-            color="grey lighten-4"
-            min-width="150px"
-            max-width="400px"
-            flat
-            class="overflow-y-auto"
-            max-height="500px"
+        
+          <v-card 
           >
-            <v-toolbar :color="selectedEvent.color" dark>
-              <v-btn icon @click="selectedOpen = false">
-                <v-icon>mdi-close</v-icon>
+            <v-toolbar :color="selectedEvent.color"  height="32" elevation="1"> 
+              <v-spacer/>
+              <v-btn icon small @click="selectedOpen = false">
+                <v-icon >mdi-close</v-icon>
               </v-btn>
-              <v-toolbar-title v-html="selectedEvent.name"></v-toolbar-title>
-              <v-spacer></v-spacer>
-              <v-btn icon>
-                <v-icon>mdi-heart</v-icon>
-              </v-btn>
-              <v-btn icon>
-                <v-icon>mdi-dots-vertical</v-icon>
-              </v-btn>
+              
+              
             </v-toolbar>
-            <v-card-text>
+            
+            
+              <v-sheet class="overflow-y-auto mt-1"
+              min-width="150px"
+            max-width="400px"
+            max-height="500px"
+              >
+              <v-card-text>
+              <h3> {{selectedEvent.name}}</h3>
               <span v-html="selectedEvent.details"></span>
-            </v-card-text>
+              </v-card-text>
+              </v-sheet>
+            
           </v-card>
         </v-menu>
       </v-sheet>
@@ -261,8 +270,8 @@ export default {
       const startYear = start.year;
       const endYear = end.year;
       const suffixYear = startYear === endYear ? '' : endYear;
-      const startDay = start.day + this.nth(start.day);
-      const endDay = end.day + this.nth(end.day);
+      const startDay = start.day;
+      const endDay = end.day;
       switch (this.type) {
         case 'month':
           return `${startMonth} ${startYear} г.`;
@@ -289,9 +298,8 @@ export default {
       if (this.mesto === 'Москва') { url = 'https://calendar.google.com/calendar/ical/ct8a4t3tuim1jjnkno2d6skkck%40group.calendar.google.com/public/basic.ics'; }
       if (this.mesto === 'Сеть') { url = 'https://calendar.google.com/calendar/ical/2kpu7kvisrlvmgkiheabippc20%40group.calendar.google.com/public/basic.ics'; }
       if (this.mesto === 'Санкт-Петербург') { url = 'https://calendar.google.com/calendar/ical/uq550s4cd42vsoojk09patvfvk%40group.calendar.google.com/public/basic.ics'; }
+      if (this.mesto === 'остальная Россия') { url = 'https://calendar.google.com/calendar/ical/fsnvudft85si8k73nrki6i1sv4%40group.calendar.google.com/private-927c3a0c49464fbc850092facb59b783/basic.ics'; }
 
-      console.log(this.mesto);
-      console.log(url);
       const response = await fetch(url);
       if (response.ok) {
         const data = await response.text();
@@ -311,9 +319,9 @@ export default {
           const end = new Date(vcalendar.jCal[2][sob][1][1][3]);
           novsob.end = `${end.getFullYear()}-${end.getMonth()
             + 1}-${end.getDate()} ${end.getHours()}:${end.getMinutes()}`;
-          novsob.color = 'light-blue';
+          novsob.color = 'none';
 
-          this.events.push(novsob);
+          if (novsob.name !== "CONFIRMED"){ this.events.push(novsob);}
         }
         console.log(this.events);
       }
@@ -356,13 +364,7 @@ export default {
       this.start = start;
       this.end = end;
     },
-    nth(d) {
-      return d > 3 && d < 21
-        ? '-ое'
-        : ['-ео', '-ое', '-ое', '-е', '-ое', '-ое', '-ое', '-ое', '-ое', '-ое'][
-          d % 10
-        ];
-    },
+
   },
 
   mounted() {
@@ -390,4 +392,15 @@ export default {
 .theme--light.v-calendar-weekly .v-calendar-weekly__head-weekday {
   padding-top: 4px;
 }
+
+.v-calendar-weekly__day-label .v-btn {
+  height:20px;
+  width:20px;
+}
+
+.v-event:hover{
+
+background-color: lightgray;
+}
+
 </style>
