@@ -6,9 +6,16 @@
           <v-date-picker first-day-of-week="1" locale="ru" no-title class="elevation-0"></v-date-picker>
         </v-list-item>
         <v-divider></v-divider>
-
+     
         <v-list-item>
           <v-list-item-content>
+             <v-select
+          :items="mesta"
+          label="Выбор места"
+          v-model="mesto"
+          @change="zagruzkaraspisaniya()"
+
+        ></v-select>
             <v-list-item-title class="title">Метки:</v-list-item-title>
 
             <div>
@@ -164,7 +171,7 @@ export default {
     drawer: true,
 
     mesta: ["Сеть", "Москва", "Санкт-Петербург", "остальная Россия"],
-
+    mesto:"Сеть",
     items: [
       {
         text: "Лекции",
@@ -271,10 +278,15 @@ export default {
     }
   },
   methods: {
-    async zagruzkaraspisaniya(mesto) {
-      const url =
-        "https://calendar.google.com/calendar/ical/ct8a4t3tuim1jjnkno2d6skkck%40group.calendar.google.com/public/basic.ics";
-
+    async zagruzkaraspisaniya() {
+        this.events=[];
+        var url="";
+        if (this.mesto=="Москва" ){url = "https://calendar.google.com/calendar/ical/ct8a4t3tuim1jjnkno2d6skkck%40group.calendar.google.com/public/basic.ics";}
+        if (this.mesto=="Сеть" ){url = "https://calendar.google.com/calendar/ical/2kpu7kvisrlvmgkiheabippc20%40group.calendar.google.com/public/basic.ics";}
+      if (this.mesto=="Санкт-Петербург" ){url = "https://calendar.google.com/calendar/ical/uq550s4cd42vsoojk09patvfvk%40group.calendar.google.com/public/basic.ics";}
+       
+       console.log(this.mesto);
+      console.log(url);
       const response = await fetch(url);
       if (response.ok) {
         const data = await response.text();
@@ -351,7 +363,7 @@ export default {
 
   mounted() {
     
-this.zagruzkaraspisaniya("mesto");
+this.zagruzkaraspisaniya("Москва");
     const today = new Date();
     const dd = String(today.getDate()).padStart(2, "0");
     const mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
