@@ -3,10 +3,12 @@
     <v-navigation-drawer v-model="drawer" :clipped="$vuetify.breakpoint.lgAndUp" app width="300px">
       <v-list class="py-0">
         <v-list-item class="px-1 py-0">
-          <v-date-picker first-day-of-week="1" locale="ru" no-title class="elevation-0"></v-date-picker>
+          <v-date-picker first-day-of-week="1"
+          locale="ru" no-title class="elevation-0">
+          </v-date-picker>
         </v-list-item>
         <v-divider></v-divider>
-     
+
         <v-list-item>
           <v-list-item-content>
              <v-select
@@ -65,13 +67,14 @@
     </v-navigation-drawer>
 
     <appbar v-on:toggle-drawer="drawer=!drawer">
-      <v-btn outlined @click="setToday">Сегодня</v-btn>
-      <v-btn fab text small @click="prev">
-        <v-icon small>mdi-chevron-left</v-icon>
+      <v-btn outlined  @click="setToday">Сегодня</v-btn>
+      <v-btn icon @click="prev">
+        <v-icon >mdi-chevron-left</v-icon>
       </v-btn>
-      <v-btn fab text small @click="next">
-        <v-icon small>mdi-chevron-right</v-icon>
+      <v-btn icon @click="next">
+        <v-icon >mdi-chevron-right</v-icon>
       </v-btn>
+      <v-spacer></v-spacer>
       <v-toolbar-title>{{ title }}</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-menu bottom right>
@@ -98,16 +101,19 @@
       </v-menu>
     </appbar>
 
-    <v-layout style="height:90%;">
+    <v-container fluid class="fill-height" >
       <v-divider vertical></v-divider>
-      <v-flex>
+      <v-row class="fill-height" >
+    <v-col class="fill-height">
+      <v-sheet class="fill-height">
         <v-divider></v-divider>
 
-        <v-calendar
+        <v-calendar 
+          
           ref="calendar"
           v-model="focus"
           color="primary"
-          :weekdays="[1,2,3,4,5,6,0]"
+          :weekdays="wd"
           :shortMonths="false"
           :shortWeekdays="false"
           :events="events"
@@ -130,8 +136,8 @@
         >
           <v-card
             color="grey lighten-4"
-            min-width="350px"
-            max-width="800px"
+            min-width="150px"
+            max-width="400px"
             flat
             class="overflow-y-auto"
             max-height="500px"
@@ -154,58 +160,62 @@
             </v-card-text>
           </v-card>
         </v-menu>
-      </v-flex>
-    </v-layout>
+      </v-sheet>
+         </v-col>
+  </v-row>
+    </v-container> 
   </v-container>
 </template>
 
 <script>
-import appbar from "../components/appbar";
+import appbar from '../components/appbar.vue';
+import ICAL from 'ical.js/build/ical.min.js';
 
 export default {
   components: {
-    appbar
+    appbar,
   },
 
   data: () => ({
-    drawer: true,
-
-    mesta: ["Сеть", "Москва", "Санкт-Петербург", "остальная Россия"],
-    mesto:"Сеть",
+    drawer: true, 
+    wd:[1, 2, 3, 4, 5, 6, 0],
+    
+    mesta: ['Сеть', 'Москва', 'Санкт-Петербург', 'остальная Россия'],
+    mesto: 'Сеть',
     items: [
       {
-        text: "Лекции",
-        icon: "mdi-nature"
+        text: 'Лекции',
+        icon: 'mdi-nature',
       },
       {
-        text: "Экскурсии",
-        icon: "mdi-glass-wine"
+        text: 'Экскурсии',
+        icon: 'mdi-glass-wine',
       },
       {
-        text: "Москва",
-        icon: "mdi-calendar-range"
+        text: 'Москва',
+        icon: 'mdi-calendar-range',
       },
       {
-        text: "Санкт-Петербург",
-        icon: "mdi-map-marker"
+        text: 'Санкт-Петербург',
+        icon: 'mdi-map-marker',
       },
       {
-        text: "Концерты",
-        icon: "mdi-bike"
-      }
+        text: 'Концерты',
+        icon: 'mdi-bike',
+      },
     ],
     loading: false,
-    search: "",
+    search: '',
     selected: [],
 
-    today: "2019-08-19",
-    focus: "2019-08-19",
-    type: "month",
+    today: '2019-08-19',
+    focus: '2019-08-19',
+    type: 'month',
     typeToLabel: {
-      month: "Месяц",
-      week: "Неделя",
-      day: "День",
-      "4day": "4 дня"
+      month: 'Месяц',
+      week: 'Неделя',
+      day: 'День',
+      '4day': '4 дня',
     },
     start: null,
     end: null,
@@ -213,7 +223,7 @@ export default {
     selectedElement: null,
     selectedOpen: false,
     ev2: [],
-    events: []
+    events: [],
   }),
   computed: {
     allSelected() {
@@ -224,7 +234,7 @@ export default {
 
       if (!search) return this.items;
 
-      return this.items.filter(item => {
+      return this.items.filter((item) => {
         const text = item.text.toLowerCase();
 
         return text.indexOf(search) > -1;
@@ -239,53 +249,48 @@ export default {
 
       return selections;
     },
-    toolbarstyle() {
-      if (!this.drawer) {
-        return "padding-left: 300px;";
-      }
-    },
 
     title() {
       const { start, end } = this;
       if (!start || !end) {
-        return "";
+        return '';
       }
       const startMonth = this.monthFormatter(start);
       const endMonth = this.monthFormatter(end);
-      const suffixMonth = startMonth === endMonth ? "" : endMonth;
+      const suffixMonth = startMonth === endMonth ? '' : endMonth;
       const startYear = start.year;
       const endYear = end.year;
-      const suffixYear = startYear === endYear ? "" : endYear;
+      const suffixYear = startYear === endYear ? '' : endYear;
       const startDay = start.day + this.nth(start.day);
       const endDay = end.day + this.nth(end.day);
       switch (this.type) {
-        case "month":
+        case 'month':
           return `${startMonth} ${startYear} г.`;
-        case "week":
+        case 'week':
           return `${startDay} ${startMonth} ${startYear} - ${endDay} ${suffixMonth} ${suffixYear} г.`;
-        case "4day":
+        case '4day':
           return `${startDay} ${startMonth} ${startYear} - ${endDay} ${suffixMonth} ${suffixYear} г.`;
-        case "day":
+        case 'day':
           return `${startDay} ${startMonth} ${startYear} г.`;
       }
-      return "";
+      return '';
     },
     monthFormatter() {
       return this.$refs.calendar.getFormatter({
-        timeZone: "UTC",
-        month: "long"
+        timeZone: 'UTC',
+        month: 'long',
       });
-    }
+    },
   },
   methods: {
     async zagruzkaraspisaniya() {
-        this.events=[];
-        var url="";
-        if (this.mesto=="Москва" ){url = "https://calendar.google.com/calendar/ical/ct8a4t3tuim1jjnkno2d6skkck%40group.calendar.google.com/public/basic.ics";}
-        if (this.mesto=="Сеть" ){url = "https://calendar.google.com/calendar/ical/2kpu7kvisrlvmgkiheabippc20%40group.calendar.google.com/public/basic.ics";}
-      if (this.mesto=="Санкт-Петербург" ){url = "https://calendar.google.com/calendar/ical/uq550s4cd42vsoojk09patvfvk%40group.calendar.google.com/public/basic.ics";}
-       
-       console.log(this.mesto);
+      this.events = [];
+      let url = '';
+      if (this.mesto === 'Москва') { url = 'https://calendar.google.com/calendar/ical/ct8a4t3tuim1jjnkno2d6skkck%40group.calendar.google.com/public/basic.ics'; }
+      if (this.mesto === 'Сеть') { url = 'https://calendar.google.com/calendar/ical/2kpu7kvisrlvmgkiheabippc20%40group.calendar.google.com/public/basic.ics'; }
+      if (this.mesto === 'Санкт-Петербург') { url = 'https://calendar.google.com/calendar/ical/uq550s4cd42vsoojk09patvfvk%40group.calendar.google.com/public/basic.ics'; }
+
+      console.log(this.mesto);
       console.log(url);
       const response = await fetch(url);
       if (response.ok) {
@@ -300,25 +305,25 @@ export default {
           novsob.details = vcalendar.jCal[2][sob][1][5][3];
 
           const start = new Date(vcalendar.jCal[2][sob][1][0][3]);
-          novsob.start = `${start.getFullYear()}-${start.getMonth() +
-            1}-${start.getDate()} ${start.getHours()}:${start.getMinutes()}`;
+          novsob.start = `${start.getFullYear()}-${start.getMonth()
+            + 1}-${start.getDate()} ${start.getHours()}:${start.getMinutes()}`;
 
           const end = new Date(vcalendar.jCal[2][sob][1][1][3]);
-          novsob.end = `${end.getFullYear()}-${end.getMonth() +
-            1}-${end.getDate()} ${end.getHours()}:${end.getMinutes()}`;
-          novsob.color = "light-blue";
+          novsob.end = `${end.getFullYear()}-${end.getMonth()
+            + 1}-${end.getDate()} ${end.getHours()}:${end.getMinutes()}`;
+          novsob.color = 'light-blue';
 
           this.events.push(novsob);
         }
         console.log(this.events);
       }
 
-      //throw new Error(response.status);
+      // throw new Error(response.status);
     },
 
     viewDay({ date }) {
       this.focus = date;
-      this.type = "day";
+      this.type = 'day';
     },
     getEventColor(event) {
       return event.color;
@@ -350,32 +355,30 @@ export default {
       // You could load events from an outside source (like database) now that we have the start and end dates on the calendar
       this.start = start;
       this.end = end;
-      
     },
     nth(d) {
       return d > 3 && d < 21
-        ? "-ое"
-        : ["-ео", "-ое", "-ое", "-е", "-ое", "-ое", "-ое", "-ое", "-ое", "-ое"][
-            d % 10
-          ];
-    }
+        ? '-ое'
+        : ['-ео', '-ое', '-ое', '-е', '-ое', '-ое', '-ое', '-ое', '-ое', '-ое'][
+          d % 10
+        ];
+    },
   },
 
   mounted() {
-    
-this.zagruzkaraspisaniya("Москва");
+    this.zagruzkaraspisaniya('Москва');
     const today = new Date();
-    const dd = String(today.getDate()).padStart(2, "0");
-    const mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
+    const dd = String(today.getDate()).padStart(2, '0');
+    const mm = String(today.getMonth() + 1).padStart(2, '0'); // January is 0!
     const yyyy = today.getFullYear();
 
-    this.today = yyyy + "-" + mm + "-" + dd;
-    this.focus = yyyy + "-" + mm + "-" + dd;
-    const start = yyyy + "-" + mm + "- 01";
-    const end = yyyy + "-" + mm + "- 31";
-    
-    this.updateRange({start,end});
-  }
+    this.today = `${yyyy}-${mm}-${dd}`;
+    this.focus = `${yyyy}-${mm}-${dd}`;
+    const start = `${yyyy}-${mm}- 01`;
+    const end = `${yyyy}-${mm}- 31`;
+
+    this.updateRange({ start, end });
+  },
 };
 </script>
 

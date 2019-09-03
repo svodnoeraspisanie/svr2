@@ -142,7 +142,7 @@
 </template>
 
 <script>
-import appbar from '../components/appbar';
+import appbar from '../components/appbar.vue';
 
 export default {
   components: {

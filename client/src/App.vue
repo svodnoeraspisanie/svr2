@@ -8,10 +8,16 @@
 
 <script>
 export default {
-  name: "App",
+  name: 'App',
 
   data: () => ({
     //
-  })
+  }),
 };
 </script>
+
+<style scoped>
+html,body {
+  height: 100%;
+}
+</style>
