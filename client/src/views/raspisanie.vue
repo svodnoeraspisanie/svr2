@@ -121,7 +121,7 @@
       duration: { days: 1 },
       }}"
 
-      @eventClick="selectedOpen=true"
+      @eventClick="showevent()"
       />
 
 
@@ -151,7 +151,7 @@
             max-height="500px"
               >
               <v-card-text>
-              <h3> {{selectedEvent.name}}</h3>
+              <h3> {{selectedEvent.title}}</h3>
               <span v-html="selectedEvent.details"></span>
               </v-card-text>
               </v-sheet>
@@ -304,14 +304,10 @@ let calendarApi = this.$refs.fullCalendar.getApi() // from the ref="..."
       let calendarApi = this.$refs.fullCalendar.getApi() // from the ref="..."
       calendarApi.gotoDate('2000-01-01') // call a method on the Calendar object
     },
-    handleDateClick(arg) {
-      if (confirm('Would you like to add an event to ' + arg.dateStr + ' ?')) {
-        this.calendarEvents.push({ // add new event data
-          title: 'New Event',
-          start: arg.date,
-          allDay: arg.allDay
-        })
-      }
+    showevent(arg) {
+      this.selectedEvent=arg.event;
+      this.selectedOpen=true;
+      
     },
     async zagruzkaraspisaniya() {
       this.events = [];
