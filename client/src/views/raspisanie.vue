@@ -236,7 +236,15 @@ export default {
     ev2: [],
     events: [{ title: 'Event Now', start: new Date() }],
   }),
+  
   computed: {
+    title() {
+let calendarApi = this.$refs.fullCalendar.getApi();
+return calendarApi.getDate();
+
+    },
+
+
     allSelected() {
       return this.selected.length === this.items.length;
     },
