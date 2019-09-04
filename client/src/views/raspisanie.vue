@@ -9,7 +9,7 @@
           v-model="focus"
          
 
-          @change="gotodate()">
+          @change="gotodate">
           </v-date-picker>
         </v-list-item>
         <v-divider></v-divider>
