@@ -118,7 +118,9 @@
        <FullCalendar
       height="parent"
       ref="fullCalendar"
-      defaultView="dayGridMonth"
+
+      :defaultView="type"
+      
       :header="false"
       :plugins="calendarPlugins"
       :weekends="calendarWeekends"
@@ -231,10 +233,10 @@ export default {
     focus: '2019-08-19',
     type: 'month',
     typeToLabel: {
-      month: 'Месяц',
-      week: 'Неделя',
-      day: 'День',
-      '4day': '4 дня',
+      dayGridMonth: 'Месяц',
+      timeGridWeek: 'Неделя',
+      dayGridWeek: 'День',
+      listWeek: 'Расписание',
     },
     start: null,
     end: null,
