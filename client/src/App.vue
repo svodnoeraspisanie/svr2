@@ -1,8 +1,8 @@
 <template>
   <v-app>
-    <v-content>
+   
       <router-view />
-    </v-content>
+    
   </v-app>
 </template>
 
@@ -17,7 +17,8 @@ export default {
 </script>
 
 <style scoped>
-html,body {
-  height: 100%;
+html, 
+body {
+    height: 100%;
 }
 </style>

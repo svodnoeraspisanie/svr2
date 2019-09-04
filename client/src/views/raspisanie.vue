@@ -1,6 +1,7 @@
 <template>
-  <v-container fluid pa-0 ma-0 style="height:100%;">
-    <v-navigation-drawer v-model="drawer" :clipped="$vuetify.breakpoint.lgAndUp" app width="300px">
+   <div class="fill-height">
+  
+    <v-navigation-drawer v-model="drawer" clipped app width="300px">
       <v-list class="py-0">
         <v-list-item class="px-1 py-0">
           <v-date-picker first-day-of-week="1"
@@ -69,72 +70,30 @@
     </v-navigation-drawer>
 
     <appbar v-on:toggle-drawer="drawer=!drawer">
-      <v-btn outlined  @click="setToday">Сегодня</v-btn>
-      <v-btn icon @click="prev">
-        <v-icon >mdi-chevron-left</v-icon>
-      </v-btn>
-      <v-btn icon @click="next">
-        <v-icon >mdi-chevron-right</v-icon>
-      </v-btn>
-      <v-spacer></v-spacer>
-      <v-toolbar-title>{{ title }}</v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-menu bottom right>
-        <template v-slot:activator="{ on }">
-          <v-btn outlined v-on="on">
-            <span>{{ typeToLabel[type] }}</span>
-            <v-icon right>mdi-menu-down</v-icon>
-          </v-btn>
-        </template>
-        <v-list>
-          <v-list-item @click="type = 'day'">
-            <v-list-item-title>День</v-list-item-title>
-          </v-list-item>
-          <v-list-item @click="type = 'week'">
-            <v-list-item-title>Неделя</v-list-item-title>
-          </v-list-item>
-          <v-list-item @click="type = 'month'">
-            <v-list-item-title>Месяц</v-list-item-title>
-          </v-list-item>
-          <v-list-item @click="type = '4day'">
-            <v-list-item-title>4 дня</v-list-item-title>
-          </v-list-item>
-        </v-list>
-      </v-menu>
+
     </appbar>
 
-    <v-container fluid class="fill-height" >
-      <v-divider vertical></v-divider>
-      <v-row class="fill-height" >
-    <v-col class="fill-height">
-      <v-sheet class="fill-height">
-        <v-divider></v-divider>
 
-        <v-calendar 
-          locale="ru"
-          event-ripple
-          ref="calendar"
-          v-model="focus"
-          color="primary"
-          :weekdays="wd"
-          :shortMonths="false"
-          :shortWeekdays="false"
-          :events="events"
-          event-text-color="black"
-          :event-color="getEventColor"
-          :event-margin-bottom="2"
-          :now="today"
-          :type="type"
-          @click:event="showEvent"
-          @click:more="viewDay"
-          @click:date="viewDay"
-          @change="updateRange"
-        >
-        
-      
-        
-        
-        </v-calendar>
+<v-content class="fill-height">
+      <v-container
+        style="height:99%"
+        class="pa-0 ma-0"
+        fluid
+      >
+
+       <FullCalendar
+      height="parent"
+      ref="fullCalendar"
+      defaultView="dayGridMonth"
+      :header="false"
+      :plugins="calendarPlugins"
+      :weekends="calendarWeekends"
+      :events="events"
+      @dateClick="handleDateClick"
+      :firstDay="1"
+      locale="ru"
+      />
+
 
         <v-menu
           v-model="selectedOpen"
@@ -169,23 +128,39 @@
             
           </v-card>
         </v-menu>
-      </v-sheet>
-         </v-col>
-  </v-row>
-    </v-container> 
+     
   </v-container>
+   </v-content>
+   </div>
 </template>
 
 <script>
 import appbar from '../components/appbar.vue';
 import ICAL from 'ical.js/build/ical.min.js';
 
+import FullCalendar from '@fullcalendar/vue'
+import dayGridPlugin from '@fullcalendar/daygrid'
+import timeGridPlugin from '@fullcalendar/timegrid'
+import interactionPlugin from '@fullcalendar/interaction'
+
+
 export default {
   components: {
     appbar,
+    FullCalendar,
   },
 
   data: () => ({
+    calendarPlugins: [ // plugins must be defined in the JS
+        dayGridPlugin,
+        timeGridPlugin,
+        interactionPlugin // needed for dateClick
+      ],
+      calendarWeekends: true,
+      calendarEvents: [ // initial event data
+        { title: 'Event Now', start: new Date() }
+      ],
+
     drawer: true, 
     wd:[1, 2, 3, 4, 5, 6, 0],
     
@@ -232,7 +207,7 @@ export default {
     selectedElement: null,
     selectedOpen: false,
     ev2: [],
-    events: [],
+    events: [{ title: 'Event Now', start: new Date() }],
   }),
   computed: {
     allSelected() {
@@ -259,39 +234,26 @@ export default {
       return selections;
     },
 
-    title() {
-      const { start, end } = this;
-      if (!start || !end) {
-        return '';
-      }
-      const startMonth = this.monthFormatter(start);
-      const endMonth = this.monthFormatter(end);
-      const suffixMonth = startMonth === endMonth ? '' : endMonth;
-      const startYear = start.year;
-      const endYear = end.year;
-      const suffixYear = startYear === endYear ? '' : endYear;
-      const startDay = start.day;
-      const endDay = end.day;
-      switch (this.type) {
-        case 'month':
-          return `${startMonth} ${startYear} г.`;
-        case 'week':
-          return `${startDay} ${startMonth} ${startYear} - ${endDay} ${suffixMonth} ${suffixYear} г.`;
-        case '4day':
-          return `${startDay} ${startMonth} ${startYear} - ${endDay} ${suffixMonth} ${suffixYear} г.`;
-        case 'day':
-          return `${startDay} ${startMonth} ${startYear} г.`;
-      }
-      return '';
-    },
-    monthFormatter() {
-      return this.$refs.calendar.getFormatter({
-        timeZone: 'UTC',
-        month: 'long',
-      });
-    },
+   
+ 
   },
   methods: {
+    toggleWeekends() {
+      this.calendarWeekends = !this.calendarWeekends // update a property
+    },
+    gotoPast() {
+      let calendarApi = this.$refs.fullCalendar.getApi() // from the ref="..."
+      calendarApi.gotoDate('2000-01-01') // call a method on the Calendar object
+    },
+    handleDateClick(arg) {
+      if (confirm('Would you like to add an event to ' + arg.dateStr + ' ?')) {
+        this.calendarEvents.push({ // add new event data
+          title: 'New Event',
+          start: arg.date,
+          allDay: arg.allDay
+        })
+      }
+    },
     async zagruzkaraspisaniya() {
       this.events = [];
       let url = '';
@@ -309,19 +271,17 @@ export default {
         let novsob = {};
         for (let sob = 0; sob < vcalendar.jCal[2].length; sob++) {
           novsob = {};
-          novsob.name = vcalendar.jCal[2][sob][1][10][3];
+          novsob.title = vcalendar.jCal[2][sob][1][10][3];
           novsob.details = vcalendar.jCal[2][sob][1][5][3];
 
-          const start = new Date(vcalendar.jCal[2][sob][1][0][3]);
-          novsob.start = `${start.getFullYear()}-${start.getMonth()
-            + 1}-${start.getDate()} ${start.getHours()}:${start.getMinutes()}`;
+          novsob.start  = new Date(vcalendar.jCal[2][sob][1][0][3]);
+          
 
-          const end = new Date(vcalendar.jCal[2][sob][1][1][3]);
-          novsob.end = `${end.getFullYear()}-${end.getMonth()
-            + 1}-${end.getDate()} ${end.getHours()}:${end.getMinutes()}`;
+          novsob.end = new Date(vcalendar.jCal[2][sob][1][1][3]);
+          
           novsob.color = 'none';
 
-          if (novsob.name !== "CONFIRMED"){ this.events.push(novsob);}
+          if (novsob.title !== "CONFIRMED"){ this.events.push(novsob);}
         }
         console.log(this.events);
       }
@@ -329,78 +289,24 @@ export default {
       // throw new Error(response.status);
     },
 
-    viewDay({ date }) {
-      this.focus = date;
-      this.type = 'day';
-    },
-    getEventColor(event) {
-      return event.color;
-    },
-    setToday() {
-      this.focus = this.today;
-    },
-    prev() {
-      this.$refs.calendar.prev();
-    },
-    next() {
-      this.$refs.calendar.next();
-    },
-    showEvent({ nativeEvent, event }) {
-      const open = () => {
-        this.selectedEvent = event;
-        this.selectedElement = nativeEvent.target;
-        setTimeout(() => (this.selectedOpen = true), 10);
-      };
-      if (this.selectedOpen) {
-        this.selectedOpen = false;
-        setTimeout(open, 10);
-      } else {
-        open();
-      }
-      nativeEvent.stopPropagation();
-    },
-    updateRange({ start, end }) {
-      // You could load events from an outside source (like database) now that we have the start and end dates on the calendar
-      this.start = start;
-      this.end = end;
-    },
-
+  
   },
 
   mounted() {
     this.zagruzkaraspisaniya('Москва');
-    const today = new Date();
-    const dd = String(today.getDate()).padStart(2, '0');
-    const mm = String(today.getMonth() + 1).padStart(2, '0'); // January is 0!
-    const yyyy = today.getFullYear();
 
-    this.today = `${yyyy}-${mm}-${dd}`;
-    this.focus = `${yyyy}-${mm}-${dd}`;
-    const start = `${yyyy}-${mm}- 01`;
-    const end = `${yyyy}-${mm}- 31`;
 
-    this.updateRange({ start, end });
+  
   },
 };
 </script>
 
-<style >
-.v-calendar .v-event.v-event-start {
-  margin-left: 5px;
-}
+<style  lang='scss'>
+@import '~@fullcalendar/core/main.css';
+@import '~@fullcalendar/daygrid/main.css';
+@import '~@fullcalendar/timegrid/main.css';
 
-.theme--light.v-calendar-weekly .v-calendar-weekly__head-weekday {
-  padding-top: 4px;
-}
 
-.v-calendar-weekly__day-label .v-btn {
-  height:20px;
-  width:20px;
-}
 
-.v-event:hover{
-
-background-color: lightgray;
-}
 
 </style>
