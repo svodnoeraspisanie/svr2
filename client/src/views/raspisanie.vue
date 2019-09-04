@@ -71,6 +71,40 @@
 
     <appbar v-on:toggle-drawer="drawer=!drawer">
 
+ <v-btn outlined  @click="setToday">Сегодня</v-btn>
+      <v-btn icon @click="prev">
+        <v-icon >mdi-chevron-left</v-icon>
+      </v-btn>
+      <v-btn icon @click="next">
+        <v-icon >mdi-chevron-right</v-icon>
+      </v-btn>
+      <v-spacer></v-spacer>
+      <v-toolbar-title>{{ title }}</v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-menu bottom right>
+        <template v-slot:activator="{ on }">
+          <v-btn outlined v-on="on">
+            <span>{{ typeToLabel[type] }}</span>
+            <v-icon right>mdi-menu-down</v-icon>
+          </v-btn>
+        </template>
+        <v-list>
+          <v-list-item @click="type = 'day'">
+            <v-list-item-title>День</v-list-item-title>
+          </v-list-item>
+          <v-list-item @click="type = 'week'">
+            <v-list-item-title>Неделя</v-list-item-title>
+          </v-list-item>
+          <v-list-item @click="type = 'month'">
+            <v-list-item-title>Месяц</v-list-item-title>
+          </v-list-item>
+          <v-list-item @click="type = '4day'">
+            <v-list-item-title>4 дня</v-list-item-title>
+          </v-list-item>
+        </v-list>
+      </v-menu>
+
+
     </appbar>
 
 
@@ -138,11 +172,11 @@
 import appbar from '../components/appbar.vue';
 import ICAL from 'ical.js/build/ical.min.js';
 
-import FullCalendar from '@fullcalendar/vue'
-import dayGridPlugin from '@fullcalendar/daygrid'
-import timeGridPlugin from '@fullcalendar/timegrid'
-import interactionPlugin from '@fullcalendar/interaction'
-
+import FullCalendar from '@fullcalendar/vue';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import timeGridPlugin from '@fullcalendar/timegrid';
+import interactionPlugin from '@fullcalendar/interaction';
+import listPlugin from '@fullcalendar/list';
 
 export default {
   components: {
@@ -154,6 +188,7 @@ export default {
     calendarPlugins: [ // plugins must be defined in the JS
         dayGridPlugin,
         timeGridPlugin,
+        listPlugin,
         interactionPlugin // needed for dateClick
       ],
       calendarWeekends: true,
@@ -238,6 +273,18 @@ export default {
  
   },
   methods: {
+    prev(){
+      let calendarApi = this.$refs.fullCalendar.getApi() // from the ref="..."
+      calendarApi.prev();
+    },
+    next(){
+let calendarApi = this.$refs.fullCalendar.getApi() // from the ref="..."
+      calendarApi.next();
+    },
+    setToday(){
+let calendarApi = this.$refs.fullCalendar.getApi() // from the ref="..."
+      calendarApi.today();
+    },
     toggleWeekends() {
       this.calendarWeekends = !this.calendarWeekends // update a property
     },
@@ -305,7 +352,7 @@ export default {
 @import '~@fullcalendar/core/main.css';
 @import '~@fullcalendar/daygrid/main.css';
 @import '~@fullcalendar/timegrid/main.css';
-
+@import '~@fullcalendar/list/main.css';
 
 
 
