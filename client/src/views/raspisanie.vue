@@ -288,14 +288,18 @@ let calendarApi = this.$refs.fullCalendar.getApi() // from the ref="..."
     prev(){
       let calendarApi = this.$refs.fullCalendar.getApi() // from the ref="..."
       calendarApi.prev();
+      this.focus=calendarApi.getDate();
     },
     next(){
 let calendarApi = this.$refs.fullCalendar.getApi() // from the ref="..."
       calendarApi.next();
+      this.focus=formatDate(calendarApi.getDate(),{year: 'numeric',month: 'numeric',day: 'numeric'});
+      console.log(this.focus)
     },
     setToday(){
 let calendarApi = this.$refs.fullCalendar.getApi() // from the ref="..."
       calendarApi.today();
+      this.focus=calendarApi.getDate();
     },
     toggleWeekends() {
       this.calendarWeekends = !this.calendarWeekends // update a property
