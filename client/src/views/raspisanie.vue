@@ -239,8 +239,7 @@ export default {
   
   computed: {
     title() {
-let calendarApi = this.$refs.fullCalendar.getApi();
-return calendarApi.getDate();
+      return this.getdate();
 
     },
 
@@ -273,9 +272,15 @@ return calendarApi.getDate();
  
   },
   methods: {
+
     changeView(view){
 let calendarApi = this.$refs.fullCalendar.getApi() // from the ref="..."
       calendarApi.changeView(view);
+    },
+        getdate(){
+let calendarApi = this.$refs.fullCalendar.getApi() // from the ref="..."
+return calendarApi.getDate();
+
     },
 
     prev(){
