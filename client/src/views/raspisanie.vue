@@ -81,29 +81,13 @@
       <v-spacer></v-spacer>
       <v-toolbar-title>{{ title }}</v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-menu bottom right>
-        <template v-slot:activator="{ on }">
-          <v-btn outlined v-on="on">
-            <span>{{ typeToLabel[type] }}</span>
-            <v-icon right>mdi-menu-down</v-icon>
-          </v-btn>
-        </template>
-        <v-list>
-          <v-list-item @click="type = 'day'">
-            <v-list-item-title>День</v-list-item-title>
-          </v-list-item>
-          <v-list-item @click="type = 'week'">
-            <v-list-item-title>Неделя</v-list-item-title>
-          </v-list-item>
-          <v-list-item @click="type = 'month'">
-            <v-list-item-title>Месяц</v-list-item-title>
-          </v-list-item>
-          <v-list-item @click="type = '4day'">
-            <v-list-item-title>4 дня</v-list-item-title>
-          </v-list-item>
-        </v-list>
-      </v-menu>
 
+      
+        <v-btn outlined  @click="changeView('dayGridMonth')">Месяц</v-btn>
+        <v-btn outlined class="ml-2" @click="changeView('timeGridWeek')">Неделя</v-btn>
+        <v-btn outlined class="ml-2" @click="changeView('timeGridFourDay')">День</v-btn>
+        <v-btn outlined class="ml-2" @click="changeView('listWeek')">Расписание</v-btn>
+      
 
     </appbar>
 
@@ -125,9 +109,15 @@
       :plugins="calendarPlugins"
       :weekends="calendarWeekends"
       :events="events"
-      @dateClick="handleDateClick"
+      
       :firstDay="1"
       locale="ru"
+
+      :views= "{
+      timeGridFourDay: {
+      type: 'timeGrid',
+      duration: { days: 1 },
+      }}"
       />
 
 
@@ -231,7 +221,7 @@ export default {
 
     today: '2019-08-19',
     focus: '2019-08-19',
-    type: 'month',
+    type: 'dayGridMonth',
     typeToLabel: {
       dayGridMonth: 'Месяц',
       timeGridWeek: 'Неделя',
@@ -275,6 +265,11 @@ export default {
  
   },
   methods: {
+    changeView(view){
+let calendarApi = this.$refs.fullCalendar.getApi() // from the ref="..."
+      calendarApi.changeView(view);
+    },
+
     prev(){
       let calendarApi = this.$refs.fullCalendar.getApi() // from the ref="..."
       calendarApi.prev();
