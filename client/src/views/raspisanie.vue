@@ -305,11 +305,25 @@ let calendarApi = this.$refs.fullCalendar.getApi() // from the ref="..."
       calendarApi.gotoDate('2000-01-01') // call a method on the Calendar object
     },
     showevent(arg) {
-      this.selectedEvent=arg.event;
-      this.selectedOpen=true;
       console.log(arg);
-      
+
+      const open = () => {
+        this.selectedEvent = arg.event;
+        this.selectedElement = arg.jsEvent.target;
+        console.log(this.selectedElement);
+        setTimeout(() => (this.selectedOpen = true), 10);
+      };
+
+      if (this.selectedOpen) {
+        this.selectedOpen = false;
+        setTimeout(open, 10);
+      } else {
+        open();
+      }
+      arg.jsEvent.stopPropagation();
     },
+      
+    
     async zagruzkaraspisaniya() {
       this.events = [];
       let url = '';
