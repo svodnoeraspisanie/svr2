@@ -7,7 +7,9 @@
           <v-date-picker first-day-of-week="1"
           locale="ru" no-title class="elevation-0"
           v-model="focus"
-          show-current="today">
+         
+
+          @change="gotodate()">
           </v-date-picker>
         </v-list-item>
         <v-divider></v-divider>
@@ -18,7 +20,7 @@
           :items="mesta"
           label="Выбор места"
           v-model="mesto"
-          @change="zagruzkaraspisaniya()"
+          @input="zagruzkaraspisaniya()"
 
         ></v-select>
             <v-list-item-title class="title">Метки:</v-list-item-title>
@@ -102,7 +104,7 @@
        <FullCalendar
       height="parent"
       ref="fullCalendar"
-
+      v-model="focus"
       :defaultView="type"
       
       :header="false"
@@ -118,6 +120,8 @@
       type: 'timeGrid',
       duration: { days: 1 },
       }}"
+
+      @eventClick="selectedOpen=true"
       />
 
 
@@ -169,6 +173,7 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import listPlugin from '@fullcalendar/list';
+import { formatDate } from '@fullcalendar/core';
 
 export default {
   components: {
@@ -184,9 +189,7 @@ export default {
         interactionPlugin // needed for dateClick
       ],
       calendarWeekends: true,
-      calendarEvents: [ // initial event data
-        { title: 'Event Now', start: new Date() }
-      ],
+      
 
     drawer: true, 
     wd:[1, 2, 3, 4, 5, 6, 0],
@@ -219,30 +222,24 @@ export default {
     search: '',
     selected: [],
 
-    today: '2019-08-19',
-    focus: '2019-08-19',
+    today: '',
+    focus: '',
     type: 'dayGridMonth',
-    typeToLabel: {
-      dayGridMonth: 'Месяц',
-      timeGridWeek: 'Неделя',
-      dayGridWeek: 'День',
-      listWeek: 'Расписание',
-    },
-    start: null,
-    end: null,
+ 
+
     selectedEvent: {},
     selectedElement: null,
     selectedOpen: false,
-    ev2: [],
-    events: [{ title: 'Event Now', start: new Date() }],
+    
+    events: [],
   }),
   
   computed: {
-    title() {
-      return this.getdate();
+ 
+    title(){
+      if(this.type==='dayGridMonth'){return formatDate(this.focus,{month: 'long',  year: 'numeric',  locale: 'ru'})}
 
     },
-
 
     allSelected() {
       return this.selected.length === this.items.length;
@@ -276,10 +273,15 @@ export default {
     changeView(view){
 let calendarApi = this.$refs.fullCalendar.getApi() // from the ref="..."
       calendarApi.changeView(view);
+      this.type=view;
     },
-        getdate(){
+    getdate(){
+
+
+    },
+    gotodate(){
 let calendarApi = this.$refs.fullCalendar.getApi() // from the ref="..."
-return calendarApi.getDate();
+      calendarApi.gotoDate(new Date(this.focus));
 
     },
 
@@ -351,6 +353,8 @@ let calendarApi = this.$refs.fullCalendar.getApi() // from the ref="..."
 
   mounted() {
     this.zagruzkaraspisaniya('Москва');
+    this.today=new Date();
+    this.focus=this.today;
 
 
   
