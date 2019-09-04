@@ -121,7 +121,7 @@
       duration: { days: 1 },
       }}"
 
-      @eventClick="showevent()"
+      @eventClick="showevent"
       />
 
 
@@ -307,6 +307,7 @@ let calendarApi = this.$refs.fullCalendar.getApi() // from the ref="..."
     showevent(arg) {
       this.selectedEvent=arg.event;
       this.selectedOpen=true;
+      console.log(arg);
       
     },
     async zagruzkaraspisaniya() {
