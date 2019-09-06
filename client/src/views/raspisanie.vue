@@ -330,13 +330,7 @@ export default {
       this.calendarApi.today();
    
     },
-    toggleWeekends() {
-      this.calendarWeekends = !this.calendarWeekends; 
-    },
-    gotoPast() {
-     // let calendarApi = this.$refs.fullCalendar.getApi();
-      this.calendarApi.gotoDate('2000-01-01'); 
-    },
+
     
     showevent(arg) {
       console.log(arg);
