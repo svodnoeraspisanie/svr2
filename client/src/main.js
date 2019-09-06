@@ -6,7 +6,7 @@ import vuetify from './plugins/vuetify';
 
 Vue.config.productionTip = false;
 
-new Vue({
+let app = new Vue({
   router,
   store,
   vuetify,

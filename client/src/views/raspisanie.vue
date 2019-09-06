@@ -81,14 +81,14 @@
         <v-icon >mdi-chevron-right</v-icon>
       </v-btn>
       <v-spacer></v-spacer>
-      <v-toolbar-title>{{ title }}</v-toolbar-title>
+      <v-toolbar-title  > {{title}}</v-toolbar-title>
       <v-spacer></v-spacer>
 
       
         <v-btn outlined  @click="changeView('dayGridMonth')">Месяц</v-btn>
         <v-btn outlined class="ml-2" @click="changeView('timeGridWeek')">Неделя</v-btn>
-        <v-btn outlined class="ml-2" @click="changeView('timeGridFourDay')">День</v-btn>
-        <v-btn outlined class="ml-2" @click="changeView('listWeek')">Расписание</v-btn>
+        <v-btn outlined class="ml-2" @click="changeView('timeGridDay')">День</v-btn>
+        <v-btn outlined class="ml-2" @click="changeView('listMonth')">Расписание</v-btn>
       
 
     </appbar>
@@ -106,7 +106,11 @@
       ref="fullCalendar"
       v-model="focus"
       :defaultView="type"
-      
+      eventTextColor ="black"
+      :allDaySlot="false"
+      :eventLimit="true"
+      eventLimitText="ещё"
+      :nowIndicator="true"
       :header="false"
       :plugins="calendarPlugins"
       :weekends="calendarWeekends"
@@ -116,12 +120,20 @@
       locale="ru"
 
       :views= "{
-      timeGridFourDay: {
+      timeGridDay: {
       type: 'timeGrid',
       duration: { days: 1 },
       }}"
 
+      :listDayFormat="{month: 'long',
+    year: 'numeric',
+    day: 'numeric',
+    weekday: 'long'}"
+    :listDayAltFormat="false"
+
       @eventClick="showevent"
+      @datesRender="update"
+      @dateClick="clickdate"
       />
 
 
@@ -182,6 +194,10 @@ export default {
   },
 
   data: () => ({
+
+    calendarApi:null,
+
+  title:"",
     calendarPlugins: [ // plugins must be defined in the JS
         dayGridPlugin,
         timeGridPlugin,
@@ -235,12 +251,13 @@ export default {
   }),
   
   computed: {
+
  
-    title(){
-      if(this.type==='dayGridMonth'){return formatDate(this.focus,{month: 'long',  year: 'numeric',  locale: 'ru'})}
-
-    },
-
+    // 
+    
+       
+    
+   
     allSelected() {
       return this.selected.length === this.items.length;
     },
@@ -269,45 +286,58 @@ export default {
  
   },
   methods: {
+     clickdate(arg){
+
+     this.changeView('timeGridDay');
+    this.calendarApi.gotoDate(arg.date);
+    },
+
+  update(){
+
+      this.title=this.calendarApi.view.title;
+    },
+
 
     changeView(view){
-let calendarApi = this.$refs.fullCalendar.getApi() // from the ref="..."
-      calendarApi.changeView(view);
+
+      this.calendarApi.changeView(view);
       this.type=view;
+      this.calendarApi.scrollToTime(this.calendarApi.getDate());
     },
-    getdate(){
-
-
-    },
+  
     gotodate(){
-let calendarApi = this.$refs.fullCalendar.getApi() // from the ref="..."
-      calendarApi.gotoDate(new Date(this.focus));
+
+      this.calendarApi.gotoDate(new Date(this.focus));
 
     },
 
     prev(){
-      let calendarApi = this.$refs.fullCalendar.getApi() // from the ref="..."
-      calendarApi.prev();
-      this.focus=calendarApi.getDate();
+    
+      this.calendarApi.prev();
+      
     },
     next(){
-let calendarApi = this.$refs.fullCalendar.getApi() // from the ref="..."
-      calendarApi.next();
-      this.focus=formatDate(calendarApi.getDate(),{year: 'numeric',month: 'numeric',day: 'numeric'});
-      console.log(this.focus)
+    
+      this.calendarApi.next();
+   
+      
+     
+      
+     
     },
     setToday(){
-let calendarApi = this.$refs.fullCalendar.getApi() // from the ref="..."
-      calendarApi.today();
-      this.focus=calendarApi.getDate();
+
+      this.calendarApi.today();
+   
     },
     toggleWeekends() {
-      this.calendarWeekends = !this.calendarWeekends // update a property
+      this.calendarWeekends = !this.calendarWeekends; 
     },
     gotoPast() {
-      let calendarApi = this.$refs.fullCalendar.getApi() // from the ref="..."
-      calendarApi.gotoDate('2000-01-01') // call a method on the Calendar object
+     // let calendarApi = this.$refs.fullCalendar.getApi();
+      this.calendarApi.gotoDate('2000-01-01'); 
     },
+    
     showevent(arg) {
       console.log(arg);
 
@@ -353,7 +383,8 @@ let calendarApi = this.$refs.fullCalendar.getApi() // from the ref="..."
 
           novsob.end = new Date(vcalendar.jCal[2][sob][1][1][3]);
           
-          novsob.color = 'none';
+          novsob.backgroundColor = '#80CBC4';
+          novsob.borderColor = '#80CBC4';
 
           if (novsob.title !== "CONFIRMED"){ this.events.push(novsob);}
         }
@@ -370,7 +401,8 @@ let calendarApi = this.$refs.fullCalendar.getApi() // from the ref="..."
     this.zagruzkaraspisaniya('Москва');
     this.today=new Date();
     this.focus=this.today;
-
+    this.calendarApi=this.$refs.fullCalendar.getApi();
+    
 
   
   },
