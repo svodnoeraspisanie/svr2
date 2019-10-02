@@ -164,7 +164,7 @@
               >
               <v-card-text>
               <h3> {{selectedEvent.title}}</h3>
-              <span v-html="selectedEvent.details"></span>
+              <div v-html="selectedEvent.details"></div>
               </v-card-text>
               </v-sheet>
             
@@ -210,7 +210,7 @@ export default {
     drawer: true, 
     wd:[1, 2, 3, 4, 5, 6, 0],
     
-    mesta: ['Сеть', 'Москва', 'Санкт-Петербург', 'остальная Россия'],
+    mesta: ['Сеть', 'Москва', 'Санкт-Петербург'],
     mesto: 'Сеть',
     items: [
       {
@@ -337,7 +337,8 @@ export default {
 
       const open = () => {
         this.selectedEvent = arg.event;
-        this.selectedElement = arg.jsEvent.target;
+        this.selectedEvent.details = arg.event.extendedProps.details;
+        this.selectedElement = arg.el;
         console.log(this.selectedElement);
         setTimeout(() => (this.selectedOpen = true), 10);
       };
@@ -358,8 +359,7 @@ export default {
       if (this.mesto === 'Москва') { url = 'https://calendar.google.com/calendar/ical/ct8a4t3tuim1jjnkno2d6skkck%40group.calendar.google.com/public/basic.ics'; }
       if (this.mesto === 'Сеть') { url = 'https://calendar.google.com/calendar/ical/2kpu7kvisrlvmgkiheabippc20%40group.calendar.google.com/public/basic.ics'; }
       if (this.mesto === 'Санкт-Петербург') { url = 'https://calendar.google.com/calendar/ical/uq550s4cd42vsoojk09patvfvk%40group.calendar.google.com/public/basic.ics'; }
-      if (this.mesto === 'остальная Россия') { url = 'https://calendar.google.com/calendar/ical/fsnvudft85si8k73nrki6i1sv4%40group.calendar.google.com/private-927c3a0c49464fbc850092facb59b783/basic.ics'; }
-
+      
       const response = await fetch(url);
       if (response.ok) {
         const data = await response.text();
