@@ -7,8 +7,8 @@
           <v-date-picker first-day-of-week="1"
           locale="ru" no-title class="elevation-0"
           v-model="focus"
-         
-
+         show-current
+          reactive
           @change="gotodate">
           </v-date-picker>
         </v-list-item>
@@ -20,7 +20,7 @@
           :items="mesta"
           label="Выбор места"
           v-model="mesto"
-          @input="zagruzkaraspisaniya()"
+        
 
         ></v-select>
             <v-list-item-title class="title">Метки:</v-list-item-title>
@@ -114,7 +114,9 @@
       :header="false"
       :plugins="calendarPlugins"
       :weekends="calendarWeekends"
-      :events="events"
+      
+      :eventSources="eventSources"
+      :googleCalendarApiKey="googleCalendarApiKey"
       
       :firstDay="1"
       locale="ru"
@@ -133,14 +135,16 @@
 
       @eventClick="showevent"
       @datesRender="update"
-      @dateClick="clickdate"
+      
       />
 
 
         <v-menu
           v-model="selectedOpen"
           :close-on-content-click="false"
-          :activator="selectedElement"
+          
+          :position-x="cardposX"
+          :position-y="cardposY"
           max-width="400px"
           offset-x
         >
@@ -164,7 +168,7 @@
               >
               <v-card-text>
               <h3> {{selectedEvent.title}}</h3>
-              <div v-html="selectedEvent.details"></div>
+              <div v-html="selectedEvent.description"></div>
               </v-card-text>
               </v-sheet>
             
@@ -185,6 +189,7 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import listPlugin from '@fullcalendar/list';
+import googleCalendarPlugin from '@fullcalendar/google-calendar';
 import { formatDate } from '@fullcalendar/core';
 
 export default {
@@ -194,7 +199,8 @@ export default {
   },
 
   data: () => ({
-
+    cardposX:0,
+    cardposY:0,
     calendarApi:null,
 
   title:"",
@@ -202,10 +208,12 @@ export default {
         dayGridPlugin,
         timeGridPlugin,
         listPlugin,
+        googleCalendarPlugin,
         interactionPlugin // needed for dateClick
       ],
       calendarWeekends: true,
       
+    googleCalendarApiKey: "AIzaSyCSV5kxpkQN3Vfvg_9D_vyBN2DQ7AiBzr4",
 
     drawer: true, 
     wd:[1, 2, 3, 4, 5, 6, 0],
@@ -247,7 +255,26 @@ export default {
     selectedElement: null,
     selectedOpen: false,
     
-    events: [],
+    eventSources: [
+        {
+          googleCalendarId: '2kpu7kvisrlvmgkiheabippc20@group.calendar.google.com',
+          color: 'yellow',
+          className:'set',
+        },
+        {
+          googleCalendarId: 'ct8a4t3tuim1jjnkno2d6skkck@group.calendar.google.com',
+          className:'moskva',
+        },
+        {
+          googleCalendarId: 'uq550s4cd42vsoojk09patvfvk@group.calendar.google.com',
+          color: 'red',
+          className:'piter',
+        }
+      ],
+
+    events: {
+    googleCalendarId: 'ct8a4t3tuim1jjnkno2d6skkck@group.calendar.google.com'
+  },
   }),
   
   computed: {
@@ -314,13 +341,13 @@ export default {
     prev(){
     
       this.calendarApi.prev();
+      this.focus=this.calendarApi.getDate().toISOString().substr(0, 10);
       
     },
     next(){
     
       this.calendarApi.next();
-   
-      
+   this.focus=this.calendarApi.getDate().toISOString().substr(0, 10)
      
       
      
@@ -334,13 +361,16 @@ export default {
     
     showevent(arg) {
       console.log(arg);
+      arg.jsEvent.preventDefault(); 
 
       const open = () => {
         this.selectedEvent = arg.event;
-        this.selectedEvent.details = arg.event.extendedProps.details;
+        this.selectedEvent.description = arg.event.extendedProps.description;
         this.selectedElement = arg.el;
+        this.cardposX=arg.jsEvent.pageX;
+        this.cardposY=arg.jsEvent.pageY;
         console.log(this.selectedElement);
-        setTimeout(() => (this.selectedOpen = true), 10);
+        setTimeout(() => (this.selectedOpen = true), 3);
       };
 
       if (this.selectedOpen) {
@@ -353,50 +383,17 @@ export default {
     },
       
     
-    async zagruzkaraspisaniya() {
-      this.events = [];
-      let url = '';
-      if (this.mesto === 'Москва') { url = 'https://calendar.google.com/calendar/ical/ct8a4t3tuim1jjnkno2d6skkck%40group.calendar.google.com/public/basic.ics'; }
-      if (this.mesto === 'Сеть') { url = 'https://calendar.google.com/calendar/ical/2kpu7kvisrlvmgkiheabippc20%40group.calendar.google.com/public/basic.ics'; }
-      if (this.mesto === 'Санкт-Петербург') { url = 'https://calendar.google.com/calendar/ical/uq550s4cd42vsoojk09patvfvk%40group.calendar.google.com/public/basic.ics'; }
-      
-      const response = await fetch(url);
-      if (response.ok) {
-        const data = await response.text();
-
-        const jcalData = ICAL.parse(data);
-        const vcalendar = new ICAL.Component(jcalData);
-        let novsob = {};
-        for (let sob = 0; sob < vcalendar.jCal[2].length; sob++) {
-          novsob = {};
-          novsob.title = vcalendar.jCal[2][sob][1][10][3];
-          novsob.details = vcalendar.jCal[2][sob][1][5][3];
-
-          novsob.start  = new Date(vcalendar.jCal[2][sob][1][0][3]);
-          
-
-          novsob.end = new Date(vcalendar.jCal[2][sob][1][1][3]);
-          
-          novsob.backgroundColor = '#80CBC4';
-          novsob.borderColor = '#80CBC4';
-
-          if (novsob.title !== "CONFIRMED"){ this.events.push(novsob);}
-        }
-        console.log(this.events);
-      }
-
-      // throw new Error(response.status);
-    },
+   
 
   
   },
 
   mounted() {
-    this.zagruzkaraspisaniya('Москва');
+  
     this.today=new Date();
-    this.focus=this.today;
+    this.focus=this.today.toISOString().substr(0, 10);
     this.calendarApi=this.$refs.fullCalendar.getApi();
-    
+    console.log(this.focus);
 
   
   },
