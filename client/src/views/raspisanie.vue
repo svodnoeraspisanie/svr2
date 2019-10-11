@@ -115,6 +115,7 @@
       :plugins="calendarPlugins"
       :weekends="calendarWeekends"
       
+      
       :eventSources="eventSources"
       :googleCalendarApiKey="googleCalendarApiKey"
       
@@ -133,10 +134,26 @@
     weekday: 'long'}"
     :listDayAltFormat="false"
 
+      @eventMouseEnter="eventMouseEnter"
+
       @eventClick="showevent"
+
       @datesRender="update"
+
+      @eventMouseLeave="eventMouseLeave"
       
       />
+
+      <v-tooltip 
+        v-model="showTooltip"
+        right
+        offset-overflow
+        :position-x="cardposX"
+        :position-y="cardposY"
+      >
+          
+          {{selectedEvent.title}}
+        </v-tooltip>
 
 
         <v-menu
@@ -244,6 +261,7 @@ export default {
     ],
     loading: false,
     search: '',
+    showTooltip:false,
     selected: [],
 
     today: '',
@@ -365,9 +383,11 @@ export default {
     },
 
 
+   
 
     showevent(arg) {
       console.log(arg);
+      console.log('click');
       arg.jsEvent.preventDefault(); 
       
 
@@ -391,7 +411,24 @@ export default {
       arg.jsEvent.stopPropagation();
     },
       
-    
+     eventMouseEnter(arg){
+     
+      this.selectedEvent =   arg.event;
+      this.selectedElement = arg.el;
+        this.cardposX=arg.jsEvent.pageX;
+        this.cardposY=arg.jsEvent.pageY;
+      //this.showTooltip=true;
+      console.log('hover');
+      
+    },
+
+
+    eventMouseLeave(arg){
+      
+     // this.showTooltip=false;
+      console.log('leave');
+    },
+
    
 
   
