@@ -341,15 +341,15 @@ export default {
     prev(){
     
       this.calendarApi.prev();
-      this.focus=this.calendarApi.getDate().toISOString().substr(0, 10);
+      this.focus=dateToYMD(this.calendarApi.getDate());
       
     },
     next(){
+
     
       this.calendarApi.next();
-   this.focus=this.calendarApi.getDate().toISOString().substr(0, 10)
-     
-      
+     this.focus=dateToYMD(this.calendarApi.getDate());
+   
      
     },
     setToday(){
@@ -359,23 +359,32 @@ export default {
     },
 
     
+    eventRender(arg){
+
+
+    },
+
+
+
     showevent(arg) {
       console.log(arg);
       arg.jsEvent.preventDefault(); 
+      
+
 
       const open = () => {
-        this.selectedEvent = arg.event;
+        this.selectedEvent =   arg.event;
         this.selectedEvent.description = arg.event.extendedProps.description;
         this.selectedElement = arg.el;
         this.cardposX=arg.jsEvent.pageX;
         this.cardposY=arg.jsEvent.pageY;
-        console.log(this.selectedElement);
+        console.log(this.selectedElement); 
         setTimeout(() => (this.selectedOpen = true), 3);
       };
 
       if (this.selectedOpen) {
         this.selectedOpen = false;
-        setTimeout(open, 10);
+        setTimeout(open, 3);
       } else {
         open();
       }
@@ -391,13 +400,21 @@ export default {
   mounted() {
   
     this.today=new Date();
-    this.focus=this.today.toISOString().substr(0, 10);
+    this.focus=dateToYMD(this.today);
     this.calendarApi=this.$refs.fullCalendar.getApi();
     console.log(this.focus);
 
   
   },
 };
+
+function dateToYMD(date) {
+    var d = date.getDate();
+    var m = date.getMonth() + 1; //Month from 0 to 11
+    var y = date.getFullYear();
+    return '' + y + '-' + (m<=9 ? '0' + m : m) + '-' + (d <= 9 ? '0' + d : d);
+}
+
 </script>
 
 <style  lang='scss'>
