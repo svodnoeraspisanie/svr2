@@ -134,26 +134,17 @@
     weekday: 'long'}"
     :listDayAltFormat="false"
 
-      @eventMouseEnter="eventMouseEnter"
+      
 
       @eventClick="showevent"
 
       @datesRender="update"
 
-      @eventMouseLeave="eventMouseLeave"
+      
       
       />
 
-      <v-tooltip 
-        v-model="showTooltip"
-        right
-        offset-overflow
-        :position-x="cardposX"
-        :position-y="cardposY"
-      >
-          
-          {{selectedEvent.title}}
-        </v-tooltip>
+      
 
 
         <v-menu
@@ -399,35 +390,21 @@ export default {
         this.cardposX=arg.jsEvent.pageX;
         this.cardposY=arg.jsEvent.pageY;
         console.log(this.selectedElement); 
-        setTimeout(() => (this.selectedOpen = true), 3);
+        setTimeout(() => (this.selectedOpen = true), 1);
       };
 
       if (this.selectedOpen) {
         this.selectedOpen = false;
-        setTimeout(open, 3);
+        setTimeout(open, 1);
       } else {
         open();
       }
       arg.jsEvent.stopPropagation();
     },
       
-     eventMouseEnter(arg){
-     
-      this.selectedEvent =   arg.event;
-      this.selectedElement = arg.el;
-        this.cardposX=arg.jsEvent.pageX;
-        this.cardposY=arg.jsEvent.pageY;
-      //this.showTooltip=true;
-      console.log('hover');
-      
-    },
 
 
-    eventMouseLeave(arg){
-      
-     // this.showTooltip=false;
-      console.log('leave');
-    },
+
 
    
 
