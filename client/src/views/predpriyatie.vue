@@ -10,114 +10,28 @@
         width="300px"
     >
 
-    <v-list-item>
-        <v-list-item-content>
-            <v-list-item-title class="title">
-            Поиск:
-          </v-list-item-title>
-        </v-list-item-content>
-    </v-list-item>
-             <v-list-item>
-
-        <v-list-item-content>
-
-
-          <v-list-item-title class="title">
-            Место:
-          </v-list-item-title>
-
-               <v-select
-          :items="city"
-
-        ></v-select>
-              </v-list-item-content>
-      </v-list-item>
-        <v-list-item>
-
-        <v-list-item-content>
-
-
-          <v-list-item-title class="title">
-            Метки:
-          </v-list-item-title>
-
-                <v-flex
-          v-for="(selection, i) in selections"
-          :key="selection.text"
-          shrink
-        >
-          <v-chip
-            :disabled="loading"
-            close
-            @click:close="selected.splice(i, 1)"
-          >
-            <v-icon
-              left
-              v-text="selection.icon"
-            ></v-icon>
-            {{ selection.text }}
-          </v-chip>
-        </v-flex>
-
-        <v-flex v-if="!allSelected" xs12>
-
-          <v-text-field
-            ref="search"
-            v-model="search"
-            full-width
-            hide-details
-            label="Поиск"
-            single-line
-          ></v-text-field>
-             <v-divider v-if="!allSelected"></v-divider>
-        </v-flex>
-
-
-    <v-list>
-      <template v-for="(item, i) in categories">
-        <v-list-item
-          v-if="!selected.includes(i)"
-          :key="i"
-          :disabled="loading"
-          @click="selected.push(i)"
-        >
-          <v-list-item-avatar>
-            <v-icon
-              :disabled="loading"
-              v-text="item.icon"
-            ></v-icon>
-          </v-list-item-avatar>
-          <v-list-item-title v-text="item.text"></v-list-item-title>
-        </v-list-item>
-      </template>
-    </v-list>
-
-    </v-list-item-content>
-      </v-list-item>
+    
     </v-navigation-drawer>
 
 
 <appbar v-on:toggle-drawer="drawer=!drawer" >
 
-<h2>Список предприятий</h2>
+<h2 >{{pr.nazvanie}}</h2>
 <v-spacer></v-spacer>
 </appbar>
 
 <v-content class="fill-height">
       <v-container
         style="height:99%"
-        class="pt-0 mt-0"
+       
         fluid
       >
 
- <v-row>
-<v-col  md="3" xs="12" v-for="pr in predpriyatiya" :key="pr.n">
-      <v-card class="flexcard" height="100%" >
-
-
+<v-card>
         <v-img
         :src="pr.obraz"
         aspect-ratio="1.5"
+        max-width="500px"
         contain >
 
             <v-layout slot="placeholder" fill-height align-center justify-center ma-0>
@@ -151,8 +65,7 @@
             </v-card-actions>
 
       </v-card>
-</v-col>
-  </v-row>
+
     </v-container>
    </v-content>
 </div>
@@ -286,6 +199,11 @@ export default {
       },
     ],
   }),
+  computed: {
+      pr(){
+          return this.predpriyatiya[this.$route.params.n-1];
+      }
+  },
 
 };
 </script>

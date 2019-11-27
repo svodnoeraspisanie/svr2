@@ -1,9 +1,16 @@
 <template>
- <v-container>
-   <appbar v-on:toggle-drawer="drawer=!drawer" />
+ <div class="fill-height">
+   <appbar v-on:toggle-drawer="drawer=!drawer" >
+     <h2> Сводка </h2>
+     <v-spacer></v-spacer>
+   </appbar>
 
-<v-layout>
-  <v-flex xs10>
+<v-content class="fill-height">
+      <v-container
+      
+     
+        
+      >
     <v-card>
       <v-card-title>Добро пожаловать</v-card-title>
       <v-card-text><p>Свора - это центр поддержки русских национальных предприятий.
@@ -22,10 +29,10 @@
 </p>
 </v-card-text>
     </v-card>
-  </v-flex>
-</v-layout>
 
- </v-container>
+      </v-container>
+</v-content>
+ </div>
 </template>
 
 <script>

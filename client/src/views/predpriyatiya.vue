@@ -112,7 +112,7 @@
 
  <v-row>
 <v-col  md="3" xs="12" v-for="pr in predpriyatiya" :key="pr.n">
-      <v-card class="flexcard" height="100%" >
+      <v-card class="flexcard" height="100%" :to="{path: `/predpriyatiya/${pr.n}`}">
 
 
         <v-img
