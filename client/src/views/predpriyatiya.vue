@@ -1,5 +1,8 @@
 <template>
-  <v-container fill-height grid-list-md   >
+
+<div class="fill-height">
+  
+
  <v-navigation-drawer
       v-model="drawer"
       :clipped="$vuetify.breakpoint.lgAndUp"
@@ -93,10 +96,22 @@
       </v-list-item>
     </v-navigation-drawer>
 
-<appbar v-on:toggle-drawer="drawer=!drawer" />
 
-  <v-layout justify-center row class="manual-v-layout">
-<v-flex lg3 md4 xs12   v-for="pr in predpriyatiya" :key="pr.n">
+<appbar v-on:toggle-drawer="drawer=!drawer" >
+
+<h2>Список предприятий</h2>
+<v-spacer></v-spacer>
+</appbar>
+
+<v-content class="fill-height">
+      <v-container
+        style="height:99%"
+        class="pt-0 mt-0"
+        fluid
+      >
+
+ <v-row>
+<v-col  md="3" xs="12" v-for="pr in predpriyatiya" :key="pr.n">
       <v-card class="flexcard" height="100%" >
 
 
@@ -136,9 +151,11 @@
             </v-card-actions>
 
       </v-card>
-</v-flex>
-  </v-layout>
-  </v-container>
+</v-col>
+  </v-row>
+    </v-container>
+   </v-content>
+</div>
 </template>
 
 <script>
@@ -279,20 +296,5 @@ export default {
             flex-direction: column;
         }
 
-          .manual-v-layout {
-            display: -webkit-box;
-            display: -ms-flexbox;
-            display: flex;
-            -webkit-box-flex: 1;
-            -ms-flex: 1 1 auto;
-            flex: 1 1 auto;
-            -ms-flex-wrap: wrap;
-            flex-wrap: wrap;
-            -webkit-box-orient: horizontal;
-            -webkit-box-direction: normal;
-            -ms-flex-direction: row;
-            flex-direction: row;
-            padding-bottom: 8px !important;
-            padding-top: 8px !important;
-        }
+          
 </style>
