@@ -33,5 +33,11 @@ export default new Router({
 
       component: () => import(/* webpackChunkName: "about" */ './views/predpriyatiya.vue'),
     },
+    {
+      path: '/predpriyatiya/:n',
+      
+
+      component: () => import(/* webpackChunkName: "about" */ './views/predpriyatie.vue'),
+    },
   ],
 });

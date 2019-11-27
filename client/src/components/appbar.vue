@@ -22,9 +22,7 @@
     </v-toolbar-title>
 
 
-    <v-btn icon to="/predpriyatiya">
-        <v-icon>mdi-file-document-box-multiple-outline</v-icon>
-      </v-btn>
+  
       <v-btn icon to="/predpriyatiya">
         <v-icon>mdi-account-badge-horizontal-outline</v-icon>
       </v-btn>
