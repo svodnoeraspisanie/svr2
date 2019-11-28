@@ -18,22 +18,32 @@
       </span>
     </v-toolbar-title>
 
-    <v-tooltip right>
+    <v-tooltip bottom >
       <template v-slot:activator="{ on }">
-        <v-btn icon to="/predpriyatiya">
+        <v-btn icon to="/predpriyatiya" v-on="on">
           <v-icon>mdi-account-badge-horizontal-outline</v-icon>
         </v-btn>
       </template>
       <span>Список предприятий</span>
     </v-tooltip>
 
-    <v-btn icon to="/sbori">
+ <v-tooltip bottom >
+      <template v-slot:activator="{ on }">
+    <v-btn icon to="/sbori" v-on="on">
       <v-icon>mdi-cash-100</v-icon>
     </v-btn>
+    </template>
+      <span>Сборы средств</span>
+    </v-tooltip>
 
-    <v-btn icon to="/raspisanie">
+<v-tooltip bottom >
+      <template v-slot:activator="{ on }">
+    <v-btn icon to="/raspisanie" v-on="on">
       <v-icon>mdi-calendar</v-icon>
     </v-btn>
+        </template>
+      <span>Расписание событий</span>
+    </v-tooltip>
 
     <v-divider vertical class="mx-1" />
     <v-divider vertical class="mx-1" />
@@ -43,12 +53,23 @@
     <v-divider vertical class="mx-1" />
     <v-divider vertical class="mx-1" />
 
-    <v-btn icon to="/spravka">
+<v-tooltip bottom >
+      <template v-slot:activator="{ on }">
+    <v-btn icon to="/spravka" v-on="on">
       <v-icon>mdi-account</v-icon>
     </v-btn>
-    <v-btn icon to="/spravka">
+       </template>
+      <span>Учётная запись</span>
+    </v-tooltip>
+
+<v-tooltip bottom >
+      <template v-slot:activator="{ on }">
+    <v-btn icon to="/spravka" v-on="on">
       <v-icon>mdi-help</v-icon>
     </v-btn>
+           </template>
+      <span>Справка</span>
+    </v-tooltip>
   </v-app-bar>
 </template>
 
