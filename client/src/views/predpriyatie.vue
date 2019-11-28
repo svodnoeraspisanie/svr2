@@ -43,7 +43,7 @@
     </appbar>
 
     <v-content>
-      <v-container fluid>
+      <v-container >
         <v-card class="mb-2">
           <v-card-title>Что мы делаем?</v-card-title>
           <v-card-text v-html="pr.podrobnoe_opisanie"></v-card-text>

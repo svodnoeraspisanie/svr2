@@ -60,10 +60,10 @@
       <v-spacer></v-spacer>
     </appbar>
 
-    <v-content class="fill-height">
-      <v-container style="height:99%" class="pt-0 mt-0" fluid>
+    <v-content >
+      <v-container  class="pt-0 mt-0" >
         <v-row>
-          <v-col md="3" xs="12" v-for="pr in predpriyatiya" :key="pr.n">
+          <v-col lg="3" md="4" sm="6" cols="12" v-for="pr in predpriyatiya" :key="pr.n">
             <v-card class="flexcard" height="100%" :to="{path: `/predpriyatiya/${pr.n}`}">
               <v-img :src="pr.obraz" aspect-ratio="1.5" contain>
                 <v-layout slot="placeholder" fill-height align-center justify-center ma-0>

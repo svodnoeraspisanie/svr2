@@ -45,5 +45,11 @@ export default new Router({
 
       component: () => import(/* webpackChunkName: "about" */ './views/sbori.vue'),
     },
+    {
+      path: '/dob',
+      name: 'dob',
+
+      component: () => import(/* webpackChunkName: "about" */ './views/dobavlenie.vue'),
+    },
   ],
 });
