@@ -39,5 +39,11 @@ export default new Router({
 
       component: () => import(/* webpackChunkName: "about" */ './views/predpriyatie.vue'),
     },
+    {
+      path: '/sbori',
+      name: 'sbori',
+
+      component: () => import(/* webpackChunkName: "about" */ './views/sbori.vue'),
+    },
   ],
 });

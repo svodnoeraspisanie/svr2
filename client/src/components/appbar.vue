@@ -18,8 +18,17 @@
       </span>
     </v-toolbar-title>
 
-    <v-btn icon to="/predpriyatiya">
-      <v-icon>mdi-account-badge-horizontal-outline</v-icon>
+    <v-tooltip right>
+      <template v-slot:activator="{ on }">
+        <v-btn icon to="/predpriyatiya">
+          <v-icon>mdi-account-badge-horizontal-outline</v-icon>
+        </v-btn>
+      </template>
+      <span>Список предприятий</span>
+    </v-tooltip>
+
+    <v-btn icon to="/sbori">
+      <v-icon>mdi-cash-100</v-icon>
     </v-btn>
 
     <v-btn icon to="/raspisanie">
