@@ -232,18 +232,19 @@ export default {
       {
         googleCalendarId:
           "2kpu7kvisrlvmgkiheabippc20@group.calendar.google.com",
-        color: "yellow",
+        color: "#c5dde8",
         className: "set"
       },
       {
         googleCalendarId:
           "ct8a4t3tuim1jjnkno2d6skkck@group.calendar.google.com",
+          color: "#cde6bb",
         className: "moskva"
       },
       {
         googleCalendarId:
           "uq550s4cd42vsoojk09patvfvk@group.calendar.google.com",
-        color: "red",
+        color: "#e9ddbb",
         className: "piter"
       }
     ],
