@@ -1,10 +1,11 @@
 <template>
  <div class="fill-height">
+   
    <appbar v-on:toggle-drawer="drawer=!drawer" >
-     <h2 class="pl-2"> Сводка </h2>
-     <v-spacer></v-spacer>
+   
+    
    </appbar>
-
+<sidemenu></sidemenu>
 <v-content class="fill-height">
       <v-container
       
@@ -38,11 +39,13 @@
 <script>
 
 import appbar from '../components/appbar.vue';
+import sidemenu from '../components/sidemenu.vue';
 
 export default {
   components: {
 
     appbar,
+    sidemenu,
 
   },
 

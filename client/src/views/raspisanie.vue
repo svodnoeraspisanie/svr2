@@ -1,6 +1,27 @@
 <template>
   <div class="fill-height">
-    <v-navigation-drawer v-model="drawer" clipped app width="300px">
+    <appbar v-on:toggle-drawer="drawer=!drawer">
+      <v-btn outlined @click="setToday">Сегодня</v-btn>
+      <v-btn icon @click="prev">
+        <v-icon>mdi-chevron-left</v-icon>
+      </v-btn>
+      <v-btn icon @click="next">
+        <v-icon>mdi-chevron-right</v-icon>
+      </v-btn>
+      <v-spacer></v-spacer>
+      <v-toolbar-title>{{title}}</v-toolbar-title>
+      <v-spacer></v-spacer>
+
+      <v-btn outlined @click="changeView('dayGridMonth')">Месяц</v-btn>
+      <v-btn outlined class="ml-2" @click="changeView('timeGridWeek')">Неделя</v-btn>
+      <v-btn outlined class="ml-2" @click="changeView('timeGridDay')">День</v-btn>
+      <v-btn outlined class="ml-2" @click="changeView('listMonth')">Расписание</v-btn>
+    </appbar>
+
+    <sidemenu>
+       <template v-slot:rp>
+    
+  
       <v-list class="py-0">
         <v-list-item class="px-1 py-0">
           <v-date-picker
@@ -65,25 +86,10 @@
           </v-list-item-content>
         </v-list-item>
       </v-list>
-    </v-navigation-drawer>
+      </template>
+    </sidemenu>
 
-    <appbar v-on:toggle-drawer="drawer=!drawer">
-      <v-btn outlined @click="setToday">Сегодня</v-btn>
-      <v-btn icon @click="prev">
-        <v-icon>mdi-chevron-left</v-icon>
-      </v-btn>
-      <v-btn icon @click="next">
-        <v-icon>mdi-chevron-right</v-icon>
-      </v-btn>
-      <v-spacer></v-spacer>
-      <v-toolbar-title>{{title}}</v-toolbar-title>
-      <v-spacer></v-spacer>
-
-      <v-btn outlined @click="changeView('dayGridMonth')">Месяц</v-btn>
-      <v-btn outlined class="ml-2" @click="changeView('timeGridWeek')">Неделя</v-btn>
-      <v-btn outlined class="ml-2" @click="changeView('timeGridDay')">День</v-btn>
-      <v-btn outlined class="ml-2" @click="changeView('listMonth')">Расписание</v-btn>
-    </appbar>
+    
 
     <v-content class="fill-height">
       <v-container style="height:99%" class="pa-0 ma-0" fluid>
@@ -154,6 +160,7 @@
 
 <script>
 import appbar from "../components/appbar.vue";
+import sidemenu from "../components/sidemenu.vue";
 import ICAL from "ical.js/build/ical.min.js";
 
 import FullCalendar from "@fullcalendar/vue";
@@ -167,6 +174,7 @@ import { formatDate } from "@fullcalendar/core";
 export default {
   components: {
     appbar,
+    sidemenu,
     FullCalendar
   },
 

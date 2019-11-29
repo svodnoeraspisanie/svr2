@@ -1,6 +1,11 @@
 <template>
   <div class="fill-height">
-    <v-navigation-drawer v-model="drawer" :clipped="$vuetify.breakpoint.lgAndUp" app width="300px">
+        <appbar v-on:toggle-drawer="drawer=!drawer">
+      <h2>Список предприятий</h2>
+      <v-spacer></v-spacer>
+    </appbar>
+    <sidemenu>
+       <template v-slot:pr>
       <v-list-item>
         <v-list-item-content>
           <v-list-item-title class="title">Поиск:</v-list-item-title>
@@ -53,12 +58,10 @@
           </v-list>
         </v-list-item-content>
       </v-list-item>
-    </v-navigation-drawer>
+       </template>
+    </sidemenu>
 
-    <appbar v-on:toggle-drawer="drawer=!drawer">
-      <h2>Список предприятий</h2>
-      <v-spacer></v-spacer>
-    </appbar>
+
 
     <v-content >
       <v-container  class="pt-0 mt-0" >
@@ -99,10 +102,11 @@
 
 <script>
 import appbar from "../components/appbar.vue";
-
+import sidemenu from "../components/sidemenu.vue";
 export default {
   components: {
-    appbar
+    appbar,
+    sidemenu,
   },
   data: () => ({
     drawer: true,
