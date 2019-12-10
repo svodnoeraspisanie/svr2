@@ -34,7 +34,7 @@ export default new Router({
       component: () => import(/* webpackChunkName: "about" */ './views/predpriyatiya.vue'),
     },
     {
-      path: '/predpriyatiya/:n',
+      path: '/predpriyatiya/:id',
       
 
       component: () => import(/* webpackChunkName: "about" */ './views/predpriyatie.vue'),

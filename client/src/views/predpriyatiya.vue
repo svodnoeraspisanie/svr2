@@ -67,7 +67,7 @@
       <v-container  class="pt-0 mt-0" >
         <v-row>
           <v-col lg="3" md="4" sm="6" cols="12" v-for="pr in predpriyatiya" :key="pr.n">
-            <v-card class="flexcard" height="100%" :to="{path: `/predpriyatiya/${pr.n}`}">
+            <v-card class="flexcard" height="100%" :to="{path: `/predpriyatiya/${pr.id}`}">
               <v-img :src="pr.obraz" aspect-ratio="1.5" contain>
                 <v-layout slot="placeholder" fill-height align-center justify-center ma-0>
                   <v-progress-circular indeterminate color="teal lighten-5"></v-progress-circular>
@@ -103,10 +103,7 @@
 <script>
 import appbar from "../components/appbar.vue";
 import sidemenu from "../components/sidemenu.vue";
-import firebase from 'firebase/app';
-import 'firebase/firestore';
-
-export const db = firebase.initializeApp({ projectId: 'svora-6f3df' }).firestore();
+import { db } from '../db'
 
 export default {
   components: {
