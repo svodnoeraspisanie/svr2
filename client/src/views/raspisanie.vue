@@ -15,7 +15,7 @@
       <v-btn icon @click="next">
         <v-icon>mdi-chevron-right</v-icon>
       </v-btn>
-      <v-spacer></v-spacer>
+      
       <v-toolbar-title>{{title}}</v-toolbar-title>
       <v-spacer></v-spacer>
 
@@ -25,10 +25,16 @@
       <v-btn outlined class="ml-2" @click="changeView('listMonth')">Расписание</v-btn>
    
    </v-app-bar>
-   <v-navigation-drawer 
-  width="350px"
-  permanent  app  >
-  
+   <v-navigation-drawer  permanent  app  >
+           <v-list-item to="/">
+        <v-list-item-content>
+
+         <v-img src="/svora.png" contain></v-img>
+    
+
+        </v-list-item-content>
+      </v-list-item>
+<v-divider></v-divider>
       <v-list >
            <v-list-item  link to="/">
             <v-list-item-icon>

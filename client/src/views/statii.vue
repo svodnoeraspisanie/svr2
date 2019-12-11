@@ -1,13 +1,18 @@
 <template>
   <div class="fill-height">
-        <appbar v-on:toggle-drawer="drawer=!drawer">
-      <h2>Статьи</h2>
-      <v-spacer></v-spacer>
-    </appbar>
 
    <v-navigation-drawer 
-  width="350px"
+ 
   permanent clipped app  >
+           <v-list-item to="/">
+        <v-list-item-content>
+
+         <v-img src="/svora.png" contain></v-img>
+    
+
+        </v-list-item-content>
+      </v-list-item>
+<v-divider></v-divider>
 <v-list>
       <v-list-item  link to="/">
             <v-list-item-icon>
@@ -26,9 +31,10 @@
 
 
 
-    <v-content class="fill-height" >
+    <v-content  >
       <v-container  >
-          <v-card v-for="(statia,i) in statii" :key="i">
+        <h2>Статьи</h2>
+          <v-card v-for="(statia,i) in statii" :key="i" elevation="1" class="mb-2">
               <v-card-title>{{statia.nazvanie}} </v-card-title>
               <v-card-text>{{statia.text}}</v-card-text>
           </v-card>

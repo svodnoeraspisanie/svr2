@@ -1,14 +1,17 @@
 <template>
   <div class="fill-height">
-    <appbar v-on:toggle-drawer="drawer=!drawer">
-      <h2 class="pl-2">{{pr.nazvanie}}</h2>
-      <v-spacer></v-spacer>
-    </appbar>
 
-    <v-navigation-drawer 
-  width="350px"
-  permanent clipped app  >
-     
+
+    <v-navigation-drawer permanent clipped app  >
+         <v-list-item to="/">
+        <v-list-item-content>
+
+         <v-img src="/svora.png" contain></v-img>
+    
+
+        </v-list-item-content>
+      </v-list-item>
+<v-divider></v-divider>
 
         <v-list>
 
@@ -63,6 +66,7 @@
 
     <v-content>
       <v-container>
+        <h2>{{pr.nazvanie}}</h2>
         <v-card class="mb-2">
           <v-card-title>Что мы делаем?</v-card-title>
           <v-card-text v-html="pr.podrobnoe_opisanie"></v-card-text>

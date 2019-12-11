@@ -2,9 +2,18 @@
   <div class="fill-height">
   
 
-   <v-navigation-drawer 
-  width="350px"
-  permanent clipped app  >
+   <v-navigation-drawer  permanent  app  >
+
+    <v-list-item to="/" >
+        <v-list-item-content>
+
+         <v-img src="/svora.png" contain></v-img>
+    
+
+        </v-list-item-content>
+      </v-list-item>
+<v-divider></v-divider>
+
 <v-list>
       <v-list-item  link to="/">
             <v-list-item-icon>
@@ -81,7 +90,7 @@
         <h2>Список русских национальных предприятий</h2>
         <v-row>
           <v-col lg="3" md="4" sm="6" cols="12" v-for="pr in predpriyatiya" :key="pr.n">
-            <v-card class="flexcard" height="100%" :to="{path: `/predpriyatiya/${pr.id}`}">
+            <v-card class="flexcard" height="100%" :to="{path: `/predpriyatiya/${pr.id}`}" elevation="1" >
               <v-img :src="pr.obraz" aspect-ratio="1.5" contain>
                 <v-layout slot="placeholder" fill-height align-center justify-center ma-0>
                   <v-progress-circular indeterminate color="teal lighten-5"></v-progress-circular>

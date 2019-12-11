@@ -3,20 +3,18 @@
    
    
 <v-navigation-drawer 
-  width="350px"
+  
   permanent clipped app  >
 
   <v-list-item>
         <v-list-item-content>
-          <v-list-item-title class="title">
-            Application
-                         <v-img src="/svora.png" contain>
-  </v-img>
-          </v-list-item-title>
+
+         <v-img src="/svora.png" contain></v-img>
+    
 
         </v-list-item-content>
       </v-list-item>
-
+<v-divider></v-divider>
       <v-list  >
 
                   
@@ -86,15 +84,11 @@
 
 
 <v-content class="fill-height">
-      <v-container
-      
-     
-        
-      >
-    <v-card>
-      <v-card-title>Добро пожаловать</v-card-title>
-      <v-card-text><p>Свора - это центр поддержки русских национальных предприятий.
-      <p>
+      <v-container>
+        <h2>Добро пожаловать</h2>
+    <v-card elevation="1">
+      <v-card-title>Свора - это центр поддержки русских национальных предприятий.</v-card-title>
+      <v-card-text>
       <b>Предприятие</b> - это то, что предпринимают люди.
       Этим словом здесь обозначается любое дело, начинание, продукт или проект.
       <p>

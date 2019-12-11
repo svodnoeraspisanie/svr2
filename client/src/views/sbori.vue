@@ -1,12 +1,18 @@
 <template>
   <div class="fill-height">
-       <appbar v-on:toggle-drawer="drawer=!drawer">
-      <h2>Сборы средств</h2>
-      <v-spacer></v-spacer>
-    </appbar>
+
    <v-navigation-drawer 
-  width="350px"
+ 
   permanent clipped app  >
+        <v-list-item to="/">
+        <v-list-item-content>
+
+         <v-img src="/svora.png" contain></v-img>
+    
+
+        </v-list-item-content>
+      </v-list-item>
+<v-divider></v-divider>
   <v-list>
        <v-list-item  link to="/">
             <v-list-item-icon>
@@ -27,9 +33,9 @@
 
  
 
-    <v-content class="fill-height">
-      <v-container fluid>
-       
+    <v-content>
+      <v-container >
+       <h2>Сборы средств</h2>
       </v-container>
     </v-content>
   </div>
