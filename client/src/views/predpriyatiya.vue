@@ -1,9 +1,6 @@
 <template>
   <div class="fill-height">
-        <appbar v-on:toggle-drawer="drawer=!drawer">
-      <h2>Список предприятий</h2>
-      <v-spacer></v-spacer>
-    </appbar>
+  
 
    <v-navigation-drawer 
   width="350px"
@@ -80,7 +77,8 @@
 
 
     <v-content >
-      <v-container  class="pt-0 mt-0" >
+      <v-container   >
+        <h2>Список русских национальных предприятий</h2>
         <v-row>
           <v-col lg="3" md="4" sm="6" cols="12" v-for="pr in predpriyatiya" :key="pr.n">
             <v-card class="flexcard" height="100%" :to="{path: `/predpriyatiya/${pr.id}`}">

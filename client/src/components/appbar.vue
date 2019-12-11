@@ -2,7 +2,7 @@
   <v-app-bar
     clipped-left
     app
-    
+    elevation="1"
     
   
   >
@@ -18,7 +18,7 @@
 
     <v-spacer/>
 
-    <slot class="mx-1"></slot>
+    <slot></slot>
 
     
 <v-spacer/>

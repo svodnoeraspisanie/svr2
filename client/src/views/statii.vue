@@ -26,7 +26,7 @@
 
 
 
-    <v-content >
+    <v-content class="fill-height" >
       <v-container  >
           <v-card v-for="(statia,i) in statii" :key="i">
               <v-card-title>{{statia.nazvanie}} </v-card-title>

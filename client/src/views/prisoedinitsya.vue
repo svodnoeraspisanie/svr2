@@ -1,7 +1,7 @@
 <template>
   <div class="fill-height">
        <appbar v-on:toggle-drawer="drawer=!drawer">
-      <h2>Сборы средств</h2>
+      <h2>Присоединиться</h2>
       <v-spacer></v-spacer>
     </appbar>
    <v-navigation-drawer 

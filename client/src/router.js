@@ -57,5 +57,13 @@ export default new Router({
 
       component: () => import('./views/dobavlenie.vue'),
     },
+    {
+      path: '/prisoedinitsya',
+      name: 'prisoedinitsya',
+
+      component: () => import('./views/prisoedinitsya.vue'),
+    },
+
+    
   ],
 });

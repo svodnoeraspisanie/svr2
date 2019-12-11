@@ -1,15 +1,25 @@
 <template>
  <div class="fill-height">
    
-   <appbar v-on:toggle-drawer="drawer=!drawer" >
    
-    
-   </appbar>
 <v-navigation-drawer 
   width="350px"
   permanent clipped app  >
+
+  <v-list-item>
+        <v-list-item-content>
+          <v-list-item-title class="title">
+            Application
+                         <v-img src="/svora.png" contain>
+  </v-img>
+          </v-list-item-title>
+
+        </v-list-item-content>
+      </v-list-item>
+
       <v-list  >
-         
+
+                  
           <v-list-item  link to="/statii">
             <v-list-item-icon>
               <v-icon>mdi-book-open</v-icon>
@@ -52,6 +62,18 @@
 
             <v-list-item-content>
               <v-list-item-title>Расписание событий</v-list-item-title>
+              
+            </v-list-item-content>
+           
+          </v-list-item>
+
+           <v-list-item  link to="/prisoedinitsya">
+            <v-list-item-icon>
+              <v-icon>mdi-google-circles-group</v-icon>
+            </v-list-item-icon>
+
+            <v-list-item-content>
+              <v-list-item-title>Присоединиться</v-list-item-title>
               
             </v-list-item-content>
            

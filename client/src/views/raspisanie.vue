@@ -1,6 +1,13 @@
 <template>
   <div class="fill-height">
-    <appbar v-on:toggle-drawer="drawer=!drawer">
+   
+   <v-app-bar
+    
+    app
+    elevation="0"
+    
+  
+  >
       <v-btn outlined @click="setToday">Сегодня</v-btn>
       <v-btn icon @click="prev">
         <v-icon>mdi-chevron-left</v-icon>
@@ -16,11 +23,11 @@
       <v-btn outlined class="ml-2" @click="changeView('timeGridWeek')">Неделя</v-btn>
       <v-btn outlined class="ml-2" @click="changeView('timeGridDay')">День</v-btn>
       <v-btn outlined class="ml-2" @click="changeView('listMonth')">Расписание</v-btn>
-    </appbar>
-
+   
+   </v-app-bar>
    <v-navigation-drawer 
   width="350px"
-  permanent clipped app  >
+  permanent  app  >
   
       <v-list >
            <v-list-item  link to="/">
