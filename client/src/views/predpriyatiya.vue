@@ -87,7 +87,7 @@
 
     <v-content >
       <v-container   >
-        <h2>Список русских национальных предприятий</h2>
+        <h2>Русские национальные предприятия</h2>
         <v-row>
           <v-col lg="3" md="4" sm="6" cols="12" v-for="pr in predpriyatiya" :key="pr.n">
             <v-card class="flexcard" height="100%" :to="{path: `/predpriyatiya/${pr.id}`}" elevation="1" >
