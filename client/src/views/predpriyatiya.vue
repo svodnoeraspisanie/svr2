@@ -4,8 +4,25 @@
       <h2>Список предприятий</h2>
       <v-spacer></v-spacer>
     </appbar>
-    <sidemenu>
-       <template v-slot:pr>
+
+   <v-navigation-drawer 
+  width="350px"
+  permanent clipped app  >
+<v-list>
+      <v-list-item  link to="/">
+            <v-list-item-icon>
+              <v-icon>mdi-arrow-left-bold</v-icon>
+            </v-list-item-icon>
+
+            <v-list-item-content>
+              <v-list-item-title>Назад</v-list-item-title>
+              
+            </v-list-item-content>
+            
+          </v-list-item>
+          <v-divider></v-divider>
+
+
       <v-list-item>
         <v-list-item-content>
           <v-list-item-title class="title">Поиск:</v-list-item-title>
@@ -58,8 +75,7 @@
           </v-list>
         </v-list-item-content>
       </v-list-item>
-       </template>
-    </sidemenu>
+</v-list></v-navigation-drawer>
 
 
 
@@ -102,13 +118,13 @@
 
 <script>
 import appbar from "../components/appbar.vue";
-import sidemenu from "../components/sidemenu.vue";
+
 import { db } from '../db'
 
 export default {
   components: {
     appbar, 
-    sidemenu,
+
   },
   data: () => ({
     drawer: true,

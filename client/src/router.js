@@ -22,34 +22,40 @@ export default new Router({
       component: () => import(/* webpackChunkName: "about" */ './views/spravka.vue'),
     },
     {
+      path: '/statii',
+      name: 'statii',
+    
+      component: () => import('./views/statii.vue'),
+    },
+    {
       path: '/raspisanie',
       name: 'raspisanie',
 
-      component: () => import(/* webpackChunkName: "about" */ './views/raspisanie.vue'),
+      component: () => import('./views/raspisanie.vue'),
     },
     {
       path: '/predpriyatiya',
       name: 'predpriyatiya',
 
-      component: () => import(/* webpackChunkName: "about" */ './views/predpriyatiya.vue'),
+      component: () => import('./views/predpriyatiya.vue'),
     },
     {
       path: '/predpriyatiya/:id',
       
 
-      component: () => import(/* webpackChunkName: "about" */ './views/predpriyatie.vue'),
+      component: () => import('./views/predpriyatie.vue'),
     },
     {
       path: '/sbori',
       name: 'sbori',
 
-      component: () => import(/* webpackChunkName: "about" */ './views/sbori.vue'),
+      component: () => import('./views/sbori.vue'),
     },
     {
       path: '/dob',
       name: 'dob',
 
-      component: () => import(/* webpackChunkName: "about" */ './views/dobavlenie.vue'),
+      component: () => import('./views/dobavlenie.vue'),
     },
   ],
 });

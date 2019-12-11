@@ -18,11 +18,23 @@
       <v-btn outlined class="ml-2" @click="changeView('listMonth')">Расписание</v-btn>
     </appbar>
 
-    <sidemenu>
-       <template v-slot:rp>
-    
+   <v-navigation-drawer 
+  width="350px"
+  permanent clipped app  >
   
-      <v-list class="py-0">
+      <v-list >
+           <v-list-item  link to="/">
+            <v-list-item-icon>
+              <v-icon>mdi-arrow-left-bold</v-icon>
+            </v-list-item-icon>
+
+            <v-list-item-content>
+              <v-list-item-title>Назад</v-list-item-title>
+              
+            </v-list-item-content>
+            
+          </v-list-item>
+          <v-divider></v-divider>
         <v-list-item class="px-1 py-0">
           <v-date-picker
             first-day-of-week="1"
@@ -86,9 +98,7 @@
           </v-list-item-content>
         </v-list-item>
       </v-list>
-      </template>
-    </sidemenu>
-
+   </v-navigation-drawer>
     
 
     <v-content class="fill-height">
@@ -160,8 +170,8 @@
 
 <script>
 import appbar from "../components/appbar.vue";
-import sidemenu from "../components/sidemenu.vue";
-import ICAL from "ical.js/build/ical.min.js";
+
+
 
 import FullCalendar from "@fullcalendar/vue";
 import dayGridPlugin from "@fullcalendar/daygrid";
@@ -174,7 +184,7 @@ import { formatDate } from "@fullcalendar/core";
 export default {
   components: {
     appbar,
-    sidemenu,
+ 
     FullCalendar
   },
 

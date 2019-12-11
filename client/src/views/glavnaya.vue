@@ -5,7 +5,64 @@
    
     
    </appbar>
-<sidemenu></sidemenu>
+<v-navigation-drawer 
+  width="350px"
+  permanent clipped app  >
+      <v-list  >
+         
+          <v-list-item  link to="/statii">
+            <v-list-item-icon>
+              <v-icon>mdi-book-open</v-icon>
+            </v-list-item-icon>
+
+            <v-list-item-content>
+              <v-list-item-title>Статьи</v-list-item-title>
+              
+            </v-list-item-content>
+           
+          </v-list-item>
+           <v-list-item  link to="/predpriyatiya">
+            <v-list-item-icon>
+              <v-icon>mdi-account-badge-horizontal-outline</v-icon>
+            </v-list-item-icon>
+
+            <v-list-item-content>
+              <v-list-item-title>Список предприятий</v-list-item-title>
+              
+            </v-list-item-content>
+           
+          </v-list-item>
+
+           <v-list-item  link to="/sbori">
+            <v-list-item-icon>
+              <v-icon>mdi-cash-100</v-icon>
+            </v-list-item-icon>
+
+            <v-list-item-content>
+              <v-list-item-title>Сборы средств</v-list-item-title>
+              
+            </v-list-item-content>
+           
+          </v-list-item>
+
+           <v-list-item  link to="/raspisanie">
+            <v-list-item-icon>
+              <v-icon>mdi-calendar</v-icon>
+            </v-list-item-icon>
+
+            <v-list-item-content>
+              <v-list-item-title>Расписание событий</v-list-item-title>
+              
+            </v-list-item-content>
+           
+          </v-list-item>
+          
+
+        </v-list>
+      
+    </v-navigation-drawer>
+
+
 <v-content class="fill-height">
       <v-container
       
@@ -39,13 +96,13 @@
 <script>
 
 import appbar from '../components/appbar.vue';
-import sidemenu from '../components/sidemenu.vue';
+
 
 export default {
   components: {
 
     appbar,
-    sidemenu,
+
 
   },
 

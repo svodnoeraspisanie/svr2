@@ -5,9 +5,26 @@
       <v-spacer></v-spacer>
     </appbar>
 
-    <sidemenu>
-      <template v-slot:pr>
-        <v-list class="py-0">
+    <v-navigation-drawer 
+  width="350px"
+  permanent clipped app  >
+     
+
+        <v-list>
+
+            <v-list-item  link to="/predpriyatiya" exact>
+            <v-list-item-icon>
+              <v-icon>mdi-arrow-left-bold</v-icon>
+            </v-list-item-icon>
+
+            <v-list-item-content>
+              <v-list-item-title>Назад</v-list-item-title>
+              
+            </v-list-item-content>
+            
+          </v-list-item>
+<v-divider></v-divider>
+
           <v-list-item class="px-1 py-0">
             <v-list-item-content>
               <v-img :src="pr.obraz" aspect-ratio="1.5" max-width="500px" contain>
@@ -41,8 +58,8 @@
           </v-list-item>
           <v-divider></v-divider>
         </v-list>
-      </template>
-    </sidemenu>
+
+</v-navigation-drawer>
 
     <v-content>
       <v-container>
@@ -77,14 +94,14 @@
 
 <script>
 import appbar from "../components/appbar.vue";
-import sidemenu from "../components/sidemenu.vue";
+
 import { db } from "../db";
 import { app } from "../main";
 
 export default {
   components: {
     appbar,
-    sidemenu
+
   },
   data: () => ({
     drawer: true,
