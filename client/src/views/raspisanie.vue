@@ -11,7 +11,7 @@
 
 
   <div style="max-width:220px">
-    <v-select flat :items="cals" item-text="title" return-object  label="Выбор места" v-model="events" outlined dense class="pt-6" ></v-select>     
+    <v-select flat :items="cals" item-text="title" return-object  label="Место" v-model="events" outlined dense class="pt-7" ></v-select>     
   </div>
   
       <v-btn outlined @click="setToday" class="ml-2">Сегодня</v-btn>
