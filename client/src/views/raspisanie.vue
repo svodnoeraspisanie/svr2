@@ -25,7 +25,7 @@
       <v-btn outlined class="ml-2" @click="changeView('listMonth')">Расписание</v-btn>
    
    </v-app-bar>
-   <v-navigation-drawer  permanent  app  >
+   <v-navigation-drawer  permanent  app width="300px"  >
            <v-list-item to="/">
         <v-list-item-content>
 
@@ -48,7 +48,7 @@
             
           </v-list-item>
           <v-divider></v-divider>
-        <v-list-item class="px-1 py-0">
+        <v-list-item class="px-0 py-0">
           <v-date-picker
             first-day-of-week="1"
             locale="ru"
@@ -64,50 +64,9 @@
 
         <v-list-item>
           <v-list-item-content>
-            <v-select :items="mesta" label="Выбор места" v-model="mesto"></v-select>
-            <v-list-item-title class="title">Метки:</v-list-item-title>
+            <v-select :items="cals" item-text="title" return-object  label="Выбор места" v-model="events"></v-select>
 
-            <div>
-              <v-chip
-                v-for="(selection, i) in selections"
-                :key="selection.text"
-                :disabled="loading"
-                class="mb-1 mr-1"
-                @click="selected.splice(i, 1)"
-                small
-              >
-                <v-icon left v-text="selection.icon"></v-icon>
-                {{ selection.text }}
-              </v-chip>
-            </div>
-
-            <v-flex v-if="!allSelected" xs12>
-              <v-text-field
-                ref="search"
-                v-model="search"
-                full-width
-                hide-details
-                label="Поиск"
-                single-line
-              ></v-text-field>
-              <v-divider v-if="!allSelected"></v-divider>
-            </v-flex>
-
-            <v-list>
-              <template v-for="(item, i) in categories">
-                <v-list-item
-                  v-if="!selected.includes(i)"
-                  :key="i"
-                  :disabled="loading"
-                  @click="selected.push(i)"
-                >
-                  <v-list-item-avatar>
-                    <v-icon :disabled="loading" v-text="item.icon"></v-icon>
-                  </v-list-item-avatar>
-                  <v-list-item-title v-text="item.text"></v-list-item-title>
-                </v-list-item>
-              </template>
-            </v-list>
+           
           </v-list-item-content>
         </v-list-item>
       </v-list>
@@ -129,7 +88,7 @@
           :header="false"
           :plugins="calendarPlugins"
           :weekends="calendarWeekends"
-          :eventSources="eventSources"
+          :events="events"
           :googleCalendarApiKey="googleCalendarApiKey"
           :firstDay="1"
           locale="ru"
@@ -224,32 +183,11 @@ export default {
 
     mesta: ["Сеть", "Москва", "Санкт-Петербург"],
     mesto: "Сеть",
-    items: [
-      {
-        text: "Лекции",
-        icon: "mdi-nature"
-      },
-      {
-        text: "Экскурсии",
-        icon: "mdi-glass-wine"
-      },
-      {
-        text: "Москва",
-        icon: "mdi-calendar-range"
-      },
-      {
-        text: "Санкт-Петербург",
-        icon: "mdi-map-marker"
-      },
-      {
-        text: "Концерты",
-        icon: "mdi-bike"
-      }
-    ],
+   
     loading: false,
-    search: "",
+    
     showTooltip: false,
-    selected: [],
+    
 
     today: "",
     focus: "",
@@ -259,30 +197,40 @@ export default {
     selectedElement: null,
     selectedOpen: false,
 
-    eventSources: [
-      {
-        googleCalendarId:
+       
+    events:{
+      title:"Сеть",
+      googleCalendarId:
           "2kpu7kvisrlvmgkiheabippc20@group.calendar.google.com",
         color: "#c5dde8",
         className: "set"
-      },
-      {
-        googleCalendarId:
+    },
+
+
+    cals:[
+    {
+      title:"Сеть",
+      googleCalendarId:
+          "2kpu7kvisrlvmgkiheabippc20@group.calendar.google.com",
+        color: "#c5dde8",
+        className: "set"
+    },
+
+    {
+      title:"Москва",
+      googleCalendarId:
           "ct8a4t3tuim1jjnkno2d6skkck@group.calendar.google.com",
           color: "#cde6bb",
         className: "moskva"
-      },
-      {
-        googleCalendarId:
+    },
+
+    {
+      title:"Санкт-Петербург",
+      googleCalendarId:
           "uq550s4cd42vsoojk09patvfvk@group.calendar.google.com",
         color: "#e9ddbb",
         className: "piter"
-      }
-    ],
-
-    events: {
-      googleCalendarId: "ct8a4t3tuim1jjnkno2d6skkck@group.calendar.google.com"
-    }
+    }]
   }),
 
   computed: {

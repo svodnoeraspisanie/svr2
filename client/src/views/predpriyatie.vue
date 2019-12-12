@@ -2,7 +2,7 @@
   <div class="fill-height">
 
 
-    <v-navigation-drawer permanent clipped app  >
+    <v-navigation-drawer permanent clipped app width="300px"   >
          <v-list-item to="/">
         <v-list-item-content>
 
