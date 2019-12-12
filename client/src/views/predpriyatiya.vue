@@ -34,7 +34,9 @@
 
 
     <v-content >
-      <v-container   >
+       <v-container >
+    
+
         <h2>Русские национальные предприятия</h2>
         <v-row>
           <v-col lg="3" md="4" sm="6" cols="12" v-for="pr in predpriyatiya" :key="pr.n">
@@ -66,6 +68,7 @@
             </v-card>
           </v-col>
         </v-row>
+    
       </v-container>
     </v-content>
   </div>

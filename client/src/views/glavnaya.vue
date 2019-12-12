@@ -84,9 +84,11 @@
 
 
 <v-content class="fill-height">
-      <v-container>
+  <v-container fluid >
+     <v-row justify="center">
+       <v-col cols="auto">
         <h2>Добро пожаловать</h2>
-    <v-card elevation="1">
+    <v-card elevation="1" max-width="936px">
       <v-card-title>Свора - это центр поддержки русских национальных предприятий.</v-card-title>
       <v-card-text>
       <b>Предприятие</b> - это то, что предпринимают люди.
@@ -103,8 +105,9 @@
 </p>
 </v-card-text>
     </v-card>
-
-      </v-container>
+       </v-col>
+     </v-row>
+  </v-container>
 </v-content>
  </div>
 </template>

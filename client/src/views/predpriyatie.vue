@@ -65,14 +65,17 @@
 </v-navigation-drawer>
 
     <v-content>
-      <v-container>
+          <v-container fluid >
+     <v-row justify="center">
+       <v-col cols="auto">
+
         <h2>{{pr.nazvanie}}</h2>
-        <v-card class="mb-2">
+        <v-card class="mb-2" max-width="936px">
           <v-card-title>Что мы делаем?</v-card-title>
           <v-card-text v-html="pr.podrobnoe_opisanie"></v-card-text>
         </v-card>
 
-        <v-card class="mb-2">
+        <v-card class="mb-2" max-width="936px">
           <v-card-title>Как нас поддержать?</v-card-title>
           <v-card-text>
             <ul v-for="(schet,gate) in pr.scheta">
@@ -81,7 +84,7 @@
           </v-card-text>
         </v-card>
 
-        <v-card>
+        <v-card max-width="936px">
           <v-card-title>Наши страницы в сети</v-card-title>
           <v-card-text>
             <ul v-for="(ssilka,servis) in pr.ssilki">
@@ -91,6 +94,7 @@
             </ul>
           </v-card-text>
         </v-card>
+       </v-col></v-row>
       </v-container>
     </v-content>
   </div>

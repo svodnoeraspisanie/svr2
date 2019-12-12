@@ -36,6 +36,29 @@
     <v-content>
       <v-container >
        <h2>Сборы средств</h2>
+
+              <v-row>
+          <v-col lg="3" md="4" sm="6" cols="12" v-for="(sbor,i) in sbori" :key="i">
+            <v-card class="flexcard" height="100%" elevation="1" @click="openlink(sbor.ssilka)" >
+              <v-img :src="sbor.obraz" aspect-ratio="1.5" contain>
+                <v-layout slot="placeholder" fill-height align-center justify-center ma-0>
+                  <v-progress-circular indeterminate color="teal lighten-5"></v-progress-circular>
+                </v-layout>
+              </v-img>
+
+              <v-card-title>{{sbor.nazvanie}}</v-card-title>
+              <v-card-text>{{sbor.kratkoe_opisanie}}</v-card-text>
+
+              <v-spacer />
+
+              
+
+              
+            </v-card>
+          </v-col>
+        </v-row>
+    
+   
       </v-container>
     </v-content>
   </div>
@@ -44,6 +67,7 @@
 <script>
 import appbar from "../components/appbar.vue";
 
+import { db } from '../db'
 
 export default {
   components: {
@@ -52,8 +76,18 @@ export default {
   },
   data: () => ({
     drawer: true,
+    sbori:[],
     
-  })
+  }),
+  firestore: {
+    sbori: db.collection('sbori'),
+  },
+  methods:{
+
+    openlink(arg) {
+      window.open(arg, '_blank')
+    },
+  }
 };
 </script>
 
