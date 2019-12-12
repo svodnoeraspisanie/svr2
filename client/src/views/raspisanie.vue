@@ -8,15 +8,21 @@
     
   
   >
-      <v-btn outlined @click="setToday">Сегодня</v-btn>
-      <v-btn icon @click="prev">
+
+
+  <div style="max-width:220px">
+    <v-select flat :items="cals" item-text="title" return-object  label="Выбор места" v-model="events" outlined dense class="pt-6" ></v-select>     
+  </div>
+  
+      <v-btn outlined @click="setToday" class="ml-2">Сегодня</v-btn>
+      <v-btn  @click="prev" outlined class="ml-2" min-width="36px" width="36px">
         <v-icon>mdi-chevron-left</v-icon>
       </v-btn>
-      <v-btn icon @click="next">
+      <v-btn  @click="next" outlined class="ml-2" min-width="36px" width="36px">
         <v-icon>mdi-chevron-right</v-icon>
       </v-btn>
       
-      <v-toolbar-title>{{title}}</v-toolbar-title>
+      <v-toolbar-title class="ml-2">{{title}}</v-toolbar-title>
       <v-spacer></v-spacer>
 
       <v-btn outlined @click="changeView('dayGridMonth')">Месяц</v-btn>
@@ -36,6 +42,7 @@
       </v-list-item>
 <v-divider></v-divider>
       <v-list >
+        
            <v-list-item  link to="/">
             <v-list-item-icon>
               <v-icon>mdi-arrow-left-bold</v-icon>
@@ -48,6 +55,7 @@
             
           </v-list-item>
           <v-divider></v-divider>
+ 
         <v-list-item class="px-0 py-0">
           <v-date-picker
             first-day-of-week="1"
@@ -62,13 +70,7 @@
         </v-list-item>
         <v-divider></v-divider>
 
-        <v-list-item>
-          <v-list-item-content>
-            <v-select :items="cals" item-text="title" return-object  label="Выбор места" v-model="events"></v-select>
-
-           
-          </v-list-item-content>
-        </v-list-item>
+        
       </v-list>
    </v-navigation-drawer>
     
