@@ -226,7 +226,7 @@
                   absolute
                   top
                   right
-                  flat
+                
                   @click="si=anyel(si,sbori)" 
                   style="margin-top:5px;margin-right:-24px"
                 >
@@ -264,7 +264,7 @@
                   absolute
                   top
                   right
-                  flat
+                 
                   
                   style="margin-top:5px;margin-right:-24px"
                   @click="pi=anyel(pi,predpriyatiya)" 
