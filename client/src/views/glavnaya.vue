@@ -1,5 +1,5 @@
 <template>
- <div class="fill-height">
+ <span>
    
    
 <v-navigation-drawer 
@@ -83,13 +83,13 @@
     </v-navigation-drawer>
 
 
-<v-content class="fill-height">
-  <v-container fluid >
+<v-content>
+  <v-container  >
      <v-row justify="center">
-       <v-col cols="auto">
+       <v-col cols="12">
         <h2>Добро пожаловать</h2>
-    <v-card elevation="1" max-width="936px">
-      <v-card-title>Свора - это центр поддержки русских национальных предприятий.</v-card-title>
+    <v-card  flat class="mb-4">
+      <v-card-title>Свора - это центр поддержки русских национальных предприятий</v-card-title>
       <v-card-text>
       <b>Предприятие</b> - это то, что предпринимают люди.
       Этим словом здесь обозначается любое дело, начинание, продукт или проект.
@@ -105,11 +105,77 @@
 </p>
 </v-card-text>
     </v-card>
+
+    <div class="headline font-weight-bold	">Сегодняшние события</div>
+    <v-row>
+      <v-col>
+        <v-card  max-width="936px" flat>
+      <v-card-title class="pt-2 pb-0">в Cети </v-card-title>
+     
+      <v-card-text class="pt-1">
+        
+       <v-simple-table dense >
+         <tbody>
+           <tr > 
+             <td valign="top"> 12:00</td>
+             <td>Доклад об эксперименте по электронному голосованию на выборах в МГД-2019 </td>
+           </tr>
+           <tr > 
+             <td valign="top"> 19:00</td>
+             <td>Шестая лекция «Крестный путь Василия Розанова» </td>
+           </tr>
+         </tbody>
+      </v-simple-table>
+      
+ 
+</v-card-text>
+    </v-card>
+      </v-col>
+        <v-col>
+        <v-card  max-width="936px" flat>
+      <v-card-title  class="pt-2">в Москве</v-card-title>
+      <v-card-text>
+      <v-simple-table dense>
+         <tbody>
+           <tr > 
+             <td valign="top"> 12:00</td>
+             <td>Доклад об эксперименте по электронному голосованию на выборах в МГД-2019 </td>
+           </tr>
+           <tr > 
+             <td valign="top"> 19:00</td>
+             <td>Шестая лекция «Крестный путь Василия Розанова» </td>
+           </tr>
+         </tbody>
+      </v-simple-table>
+      
+</v-card-text>
+    </v-card>
+      </v-col>
+        <v-col>
+        <v-card  max-width="936px" flat>
+      <v-card-title  class="pt-2">в Санкт-Петербурге</v-card-title>
+      <v-card-text>
+     <v-simple-table dense>
+         <tbody>
+           <tr > 
+             <td valign="top"> 12:00</td>
+             <td>Доклад об эксперименте по электронному голосованию на выборах в МГД-2019 </td>
+           </tr>
+           <tr > 
+             <td valign="top"> 19:00</td>
+             <td>Шестая лекция «Крестный путь Василия Розанова» </td>
+           </tr>
+         </tbody>
+      </v-simple-table>
+</v-card-text>
+    </v-card>
+      </v-col>
+    </v-row>
        </v-col>
      </v-row>
   </v-container>
 </v-content>
- </div>
+ </span>
 </template>
 
 <script>
