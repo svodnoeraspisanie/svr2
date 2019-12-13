@@ -119,7 +119,7 @@
     </v-card>
        </v-col>
       <v-col class="pt-0">
-    <div class="headline font-weight-bold pb-1	"> <router-link to="/spravka">Что такое Свора?</router-link> </div>
+    <div class="headline font-weight-bold pb-1	"> <router-link class="mainlink" to="/spravka">Что такое Свора?</router-link> </div>
     <v-card  flat >
      
       <v-card-text class="pb-1 pt-2">
@@ -140,24 +140,24 @@
 
       
     </v-row>
-    <div class="headline font-weight-bold	"> <router-link to="/raspisanie">Сегодняшние события</router-link></div>
+    <div class="headline font-weight-bold	"> <router-link to="/raspisanie" class="mainlink">Сегодняшние события</router-link></div>
     <v-row >
       <v-col class="pt-0">
-        <span class=" subtitle-1  font-weight-bold"> <router-link to="/raspisanie">в Cети</router-link> </span>
+        <span class=" subtitle-1  font-weight-bold"> <router-link to="/raspisanie" class="mainlink">в Cети</router-link> </span>
         <v-card flat>
      
      
-      <v-card-text class="pt-1">
+      <v-card-text >
         
        <v-simple-table dense >
          <tbody>
            <tr > 
-             <td valign="top"> 12:00</td>
-             <td>Доклад об эксперименте по электронному голосованию на выборах в МГД-2019 </td>
+             <td valign="top"> 20:00</td>
+             <td>ДЕГ: Стрим#11 "Дмитрий Евгеньевич: литератору — ура!" </td>
            </tr>
            <tr > 
-             <td valign="top"> 19:00</td>
-             <td>Шестая лекция «Крестный путь Василия Розанова» </td>
+             <td valign="top"> 21:00</td>
+             <td>Экономика России в нулевые </td>
            </tr>
          </tbody>
       </v-simple-table>
@@ -167,7 +167,7 @@
     </v-card>
       </v-col>
         <v-col  class="pt-0">
-         <span class=" subtitle-1  font-weight-bold"><router-link to="/raspisanie">в Москве</router-link></span>
+         <span class=" subtitle-1  font-weight-bold"><router-link to="/raspisanie" class="mainlink">в Москве</router-link></span>
         <v-card   flat>
       
       <v-card-text>
@@ -188,19 +188,19 @@
     </v-card>
       </v-col>
         <v-col  class="pt-0">
-           <span class=" subtitle-1  font-weight-bold"><router-link to="/raspisanie">в Санкт-Петербурге</router-link></span>
+           <span class=" subtitle-1  font-weight-bold"><router-link to="/raspisanie" class="mainlink">в Санкт-Петербурге</router-link></span>
         <v-card flat>
      
       <v-card-text>
      <v-simple-table dense>
          <tbody>
            <tr > 
-             <td valign="top"> 12:00</td>
-             <td>Доклад об эксперименте по электронному голосованию на выборах в МГД-2019 </td>
+             <td valign="top"> 19:00</td>
+             <td>Михаил Виряскин и Борис Гидаспов: "Правосудие от товарища майора" </td>
            </tr>
            <tr > 
-             <td valign="top"> 19:00</td>
-             <td>Шестая лекция «Крестный путь Василия Розанова» </td>
+             <td valign="top"> 21:00</td>
+             <td>Встреча с Матвеем Цзеном </td>
            </tr>
          </tbody>
       </v-simple-table>
@@ -213,10 +213,26 @@
   <div class="headline font-weight-bold	">Поддержать</div>
       <v-row>
      <v-col  class="pt-0">
-           <span class=" subtitle-1  font-weight-bold"><router-link to="/sbori">Дело</router-link></span>
-        <v-card  flat>
-  
      
+           <span class=" subtitle-1  font-weight-bold"><router-link  to="/sbori" class="mainlink">Дело</router-link></span>
+  
+        <v-card  flat  hover>
+             <v-btn
+                 
+                  color="#0a7d9a"
+                  fab
+                  dark
+                  small
+                  absolute
+                  top
+                  right
+                  flat
+                  
+                  style="margin-top:5px;margin-right:-24px"
+                >
+                  <v-icon>mdi-shuffle-variant</v-icon>
+                </v-btn>
+     <router-link class="cardlink" :to="{path: `/predpriyatiya/${sbori[si].id}`}">
       <v-card-text class="pt-1">
         
      <v-img :src="sbori[si].obraz" aspect-ratio="1.5" contain>
@@ -231,13 +247,32 @@
       
  
 </v-card-text>
+     </router-link>
     </v-card>
       </v-col>
          <v-col  class="pt-0">
-           <span class=" subtitle-1  font-weight-bold"><router-link to="/predpriyatiya">Предприятие</router-link></span>
-        <v-card   flat>
-   
-      <v-card-text>
+           <span class=" subtitle-1  font-weight-bold"><router-link to="/predpriyatiya" class="mainlink">Предприятие</router-link></span>
+           
+
+        <v-card   flat hover>
+    <v-btn
+                 
+                  color="#0a7d9a"
+                  fab
+                  dark
+                  small
+                  absolute
+                  top
+                  right
+                  flat
+                  
+                  style="margin-top:5px;margin-right:-24px"
+                  @click="pi=1"
+                >
+                  <v-icon>mdi-shuffle-variant</v-icon>
+                </v-btn>
+    <router-link class="cardlink"  :to="{path: `/predpriyatiya/${predpriyatiya[pi].id}`}" >
+      <v-card-text >
        <v-img :src="predpriyatiya[pi].obraz" aspect-ratio="1.5" contain >
                 <v-layout slot="placeholder" fill-height align-center justify-center ma-0>
                   <v-progress-circular indeterminate color="teal lighten-5"></v-progress-circular>
@@ -248,11 +283,12 @@
               <v-card-text>{{predpriyatiya[pi].kratkoe_opisanie}}</v-card-text>
       
 </v-card-text>
+    </router-link>
     </v-card>
       </v-col>
 
                   <v-col  class="pt-0">
-           <span class=" subtitle-1  font-weight-bold"><router-link to="/prisoedinitsya">Замысел</router-link></span>
+           <span class=" subtitle-1  font-weight-bold"><router-link to="/prisoedinitsya" class="mainlink">Замысел</router-link></span>
         <v-card   flat>
           <v-card-text>
    <v-simple-table dense>
@@ -312,12 +348,20 @@ export default {
 };
 </script>
 <style scoped>
-a {
+.mainlink {
  text-decoration: none;
  color:black!important;
 }
-a:hover {
+.mainlink:hover {
  text-decoration: underline;
+ color:black!important;
+}
+.cardlink {
+ text-decoration: none;
+ color:black!important;
+}
+.cardlink:hover {
+ text-decoration: none;
  color:black!important;
 }
 </style>
