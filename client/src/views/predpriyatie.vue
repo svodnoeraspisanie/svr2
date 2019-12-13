@@ -49,11 +49,11 @@
 </v-navigation-drawer>
 
     <v-content>
-          <v-container fluid >
+          <v-container  >
      <v-row justify="center">
     <v-col cols="auto">
 
-         <v-card class="mb-4" flat max-width="936px" >
+         <v-card class="mb-4" flat >
         <v-row>
           <v-col cols="3">
 <v-img :src="pr.obraz" aspect-ratio="1.5" max-width="500px" contain>
@@ -73,24 +73,24 @@
        
 
     
-        <v-card class="mb-4" max-width="936px" flat>
+        <v-card class="mb-4"  flat>
           <v-card-title>Что мы делаем?</v-card-title>
           <v-card-text v-html="pr.podrobnoe_opisanie"></v-card-text>
         </v-card>
 
-        <v-card class="mb-4" max-width="936px" flat>
+        <v-card class="mb-4" flat>
           <v-card-title>Как нас поддержать?</v-card-title>
           <v-card-text>
-            <ul v-for="(schet,gate) in pr.scheta">
+            <ul v-for="(schet,gate) in pr.scheta" :key="gate">
               <li>{{gate}}: {{schet}}</li>
             </ul>
           </v-card-text>
         </v-card>
 
-        <v-card max-width="936px" flat>
+        <v-card flat>
           <v-card-title>Наши страницы в сети</v-card-title>
           <v-card-text>
-            <ul v-for="(ssilka,servis) in pr.ssilki">
+            <ul v-for="(ssilka,servis) in pr.ssilki" :key="servis">
               <li>
                 <a v-bind:href="ssilka">{{servis}}</a>
               </li>
