@@ -40,7 +40,7 @@
         <h2>Русские национальные предприятия</h2>
         <v-row>
           <v-col lg="3" md="4" sm="6" cols="12" v-for="pr in predpriyatiya" :key="pr.n">
-            <v-card class="flexcard" height="100%" :to="{path: `/predpriyatiya/${pr.id}`}" elevation="1" >
+            <v-card class="flexcard" height="100%" :to="{path: `/predpriyatiya/${pr.id}`}"  elevate="0"  hover>
               <v-img :src="pr.obraz" aspect-ratio="1.5" contain>
                 <v-layout slot="placeholder" fill-height align-center justify-center ma-0>
                   <v-progress-circular indeterminate color="teal lighten-5"></v-progress-circular>
@@ -54,15 +54,15 @@
 
               <v-divider />
 
-              <v-card-actions>
+              <v-card-actions class="pb-0">
                 <b>Место:</b>
 
-                <v-chip v-for="(mesto, nm) in pr.mesto" :key="nm" small>{{mesto}}</v-chip>
+                <v-chip v-for="(mesto, nm) in pr.mesto" :key="nm" small style="height:18px">{{mesto}}</v-chip>
               </v-card-actions>
-              <v-card-actions>
+              <v-card-actions  class="pt-0">
                 <div width="100%">
                   <b>Метки:</b>
-                  <v-chip v-for="(metka, nm) in pr.metki" :key="nm" small>{{metka}}</v-chip>
+                  <v-chip v-for="(metka, nm) in pr.metki" :key="nm" small style="height:18px">{{metka}}</v-chip>
                 </div>
               </v-card-actions>
             </v-card>

@@ -4,7 +4,7 @@
       <v-btn icon to="/statii">
              <v-icon>mdi-book-open</v-icon>
           </v-btn>
-          <v-btn icon to="/predpriyatiya">
+          <v-btn icon to="/predpriyatiya" exact>
              <v-icon>mdi-account-badge-horizontal-outline</v-icon>
           </v-btn>
           <v-btn icon  to="/sbori">

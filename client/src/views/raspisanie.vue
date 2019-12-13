@@ -341,7 +341,7 @@ function dateToYMD(date) {
 
 <style  lang='scss'>
 .fc-head {
-  background-color:#eef5f8;
+  background-color:#fcf8e3;
   
 }
 .fc-day-header.fc-sat{

@@ -28,36 +28,20 @@
           </v-list-item>
 <v-divider></v-divider>
 
-          <v-list-item class="px-1 py-0">
+          <v-list-item link >
             <v-list-item-content>
-              <v-img :src="pr.obraz" aspect-ratio="1.5" max-width="500px" contain>
-                <v-layout slot="placeholder" fill-height align-center justify-center ma-0>
-                  <v-progress-circular indeterminate color="teal lighten-5"></v-progress-circular>
-                </v-layout>
-              </v-img>
-
-              <v-card-title>{{pr.nazvanie}}</v-card-title>
-              <v-card-text>{{pr.kratkoe_opisanie}}</v-card-text>
+              Что мы делаем?
             </v-list-item-content>
           </v-list-item>
-          <v-list-item>
-            <v-btn block color="green">Поддержать</v-btn>
-          </v-list-item>
-
-          <v-list-item>
+           <v-list-item link >
             <v-list-item-content>
-              <v-card-actions class="pb-0">
-                <b>Место:</b>
-
-                <v-chip v-for="(mesto, nm) in pr.mesto" :key="nm" small>{{mesto}}</v-chip>
-              </v-card-actions>
-              <v-card-actions class="pb-0">
-                <div width="100%">
-                  <b>Метки:</b>
-                  <v-chip v-for="(metka, nm) in pr.metki" :key="nm" small>{{metka}}</v-chip>
-                </div>
-              </v-card-actions>
+              Как нас поддеражть?
             </v-list-item-content>
+          </v-list-item>
+      
+
+          <v-list-item>
+           
           </v-list-item>
           <v-divider></v-divider>
         </v-list>
@@ -67,15 +51,34 @@
     <v-content>
           <v-container fluid >
      <v-row justify="center">
-       <v-col cols="auto">
+    <v-col cols="auto">
 
-        <h2>{{pr.nazvanie}}</h2>
-        <v-card class="mb-2" max-width="936px">
+         <v-card class="mb-4" flat max-width="936px" >
+        <v-row>
+          <v-col cols="3">
+<v-img :src="pr.obraz" aspect-ratio="1.5" max-width="500px" contain>
+                <v-layout slot="placeholder" fill-height align-center justify-center ma-0>
+                  <v-progress-circular indeterminate color="teal lighten-5"></v-progress-circular>
+                </v-layout>
+              </v-img>
+          </v-col>
+          <v-col cols="9">
+             <v-card-title>{{pr.nazvanie}}</v-card-title>
+              <v-card-text>{{pr.kratkoe_opisanie}}</v-card-text>
+          </v-col>
+        </v-row>
+           </v-card>
+
+       
+       
+
+    
+        <v-card class="mb-4" max-width="936px" flat>
           <v-card-title>Что мы делаем?</v-card-title>
           <v-card-text v-html="pr.podrobnoe_opisanie"></v-card-text>
         </v-card>
 
-        <v-card class="mb-2" max-width="936px">
+        <v-card class="mb-4" max-width="936px" flat>
           <v-card-title>Как нас поддержать?</v-card-title>
           <v-card-text>
             <ul v-for="(schet,gate) in pr.scheta">
@@ -84,7 +87,7 @@
           </v-card-text>
         </v-card>
 
-        <v-card max-width="936px">
+        <v-card max-width="936px" flat>
           <v-card-title>Наши страницы в сети</v-card-title>
           <v-card-text>
             <ul v-for="(ssilka,servis) in pr.ssilki">
