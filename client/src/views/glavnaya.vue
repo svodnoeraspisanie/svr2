@@ -227,13 +227,13 @@
                   top
                   right
                   flat
-                  
+                  @click="si=anyel(si,sbori)" 
                   style="margin-top:5px;margin-right:-24px"
                 >
                   <v-icon>mdi-shuffle-variant</v-icon>
                 </v-btn>
-     <router-link class="cardlink" :to="{path: `/predpriyatiya/${sbori[si].id}`}">
-      <v-card-text class="pt-1">
+    
+      <v-card-text class="pt-1" @click="openlink(sbori[si].ssilka)">
         
      <v-img :src="sbori[si].obraz" aspect-ratio="1.5" contain>
                 <v-layout slot="placeholder" fill-height align-center justify-center ma-0>
@@ -247,7 +247,7 @@
       
  
 </v-card-text>
-     </router-link>
+  
     </v-card>
       </v-col>
          <v-col  class="pt-0">
@@ -267,13 +267,13 @@
                   flat
                   
                   style="margin-top:5px;margin-right:-24px"
-                  @click="pi=1"
+                  @click="pi=anyel(pi,predpriyatiya)" 
                 >
                   <v-icon>mdi-shuffle-variant</v-icon>
                 </v-btn>
     <router-link class="cardlink"  :to="{path: `/predpriyatiya/${predpriyatiya[pi].id}`}" >
       <v-card-text >
-       <v-img :src="predpriyatiya[pi].obraz" aspect-ratio="1.5" contain >
+       <v-img :src="predpriyatiya[pi].obraz" eager aspect-ratio="1.5" contain >
                 <v-layout slot="placeholder" fill-height align-center justify-center ma-0>
                   <v-progress-circular indeterminate color="teal lighten-5"></v-progress-circular>
                 </v-layout>
@@ -341,6 +341,17 @@ export default {
 
 
   }),
+  methods:{
+    openlink(arg) {
+      window.open(arg, '_blank')
+    },
+    anyel(i,ar){
+
+      let i2 =~~(Math.random() * ar.length); 
+     
+      return (i==i2 ? (i==ar.length-1?i-1:i+1) : i2);
+    }
+  },
   firestore: {
     sbori: db.collection('sbori'),
     predpriyatiya: db.collection('predpriyatiya'),
