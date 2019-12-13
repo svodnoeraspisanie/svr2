@@ -11,9 +11,9 @@
 
 
   <div style="max-width:220px">
-    <v-select flat :items="cals" item-text="title" return-object  label="Место" v-model="events" outlined dense class="pt-7" ></v-select>     
+    <v-select autofocus flat :items="cals" item-text="title" return-object  label="Место" v-model="events" outlined dense class="pt-7 mr-2" ></v-select>     
   </div>
-  
+  <v-divider vertical/>
       <v-btn outlined @click="setToday" class="ml-2">Сегодня</v-btn>
       <v-btn  @click="prev" outlined class="ml-2" min-width="36px" width="36px">
         <v-icon>mdi-chevron-left</v-icon>
@@ -41,9 +41,10 @@
         </v-list-item-content>
       </v-list-item>
 <v-divider></v-divider>
+<minitoolbar/>
       <v-list >
         
-           <v-list-item  link to="/">
+           <v-list-item  link to="/" dense>
             <v-list-item-icon>
               <v-icon>mdi-arrow-left-bold</v-icon>
             </v-list-item-icon>
@@ -144,7 +145,7 @@
 
 <script>
 import appbar from "../components/appbar.vue";
-
+import minitoolbar from "../components/minitoolbar.vue";
 
 
 import FullCalendar from "@fullcalendar/vue";
@@ -158,7 +159,7 @@ import { formatDate } from "@fullcalendar/core";
 export default {
   components: {
     appbar,
- 
+  minitoolbar,
     FullCalendar
   },
 
@@ -292,6 +293,7 @@ export default {
     },
     setToday() {
       this.calendarApi.today();
+      this.focus = dateToYMD(this.calendarApi.getDate());
     },
 
     eventRender(arg) {},
@@ -338,6 +340,16 @@ function dateToYMD(date) {
 </script>
 
 <style  lang='scss'>
+.fc-head {
+  background-color:#eef5f8;
+  
+}
+.fc-day-header.fc-sat{
+  background-color:#f2e1e1;
+}
+.fc-day-header.fc-sun{
+  background-color:#f2e1e1;
+}
 @import "~@fullcalendar/core/main.css";
 @import "~@fullcalendar/daygrid/main.css";
 @import "~@fullcalendar/timegrid/main.css";

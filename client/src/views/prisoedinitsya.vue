@@ -13,8 +13,9 @@ width="300px"
         </v-list-item-content>
       </v-list-item>
 <v-divider></v-divider>
+ <minitoolbar/>
   <v-list>
-       <v-list-item  link to="/">
+       <v-list-item  link to="/" dense>
             <v-list-item-icon>
               <v-icon>mdi-arrow-left-bold</v-icon>
             </v-list-item-icon>
@@ -43,12 +44,12 @@ width="300px"
 
 <script>
 import appbar from "../components/appbar.vue";
-
+import minitoolbar from "../components/minitoolbar.vue";
 
 export default {
   components: {
     appbar,
-  
+  minitoolbar,
   },
   data: () => ({
     drawer: true,
