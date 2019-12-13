@@ -1,6 +1,6 @@
 <template>
-  <v-toolbar dense >
-   <v-spacer/>
+  <v-toolbar dense class="px-1" >
+ 
       <v-btn icon to="/statii">
              <v-icon>mdi-book-open</v-icon>
           </v-btn>
@@ -16,7 +16,10 @@
            <v-btn icon  to="/prisoedinitsya">
          <v-icon>mdi-google-circles-group</v-icon>
           </v-btn>
-            <v-spacer/>
+          <v-btn icon  to="/spravka">
+         <v-icon>mdi-help-circle-outline</v-icon>
+          </v-btn>
+      
     </v-toolbar>
 </template>
 

@@ -4,7 +4,8 @@
    
 <v-navigation-drawer 
   width="300px" 
-  permanent clipped app  >
+  permanent clipped app  
+ >
 
   <v-list-item>
         <v-list-item-content>
@@ -76,6 +77,17 @@
             </v-list-item-content>
            
           </v-list-item>
+           <v-list-item  link to="/spravka">
+            <v-list-item-icon>
+              <v-icon>mdi-help-circle-outline</v-icon>
+            </v-list-item-icon>
+
+            <v-list-item-content>
+              <v-list-item-title>Ответы на вопросы</v-list-item-title>
+              
+            </v-list-item-content>
+           
+          </v-list-item>
           
 
         </v-list>
@@ -107,15 +119,16 @@
     </v-card>
        </v-col>
       <v-col class="pt-0">
-    <div class="headline font-weight-bold pb-1	">Свора</div>
+    <div class="headline font-weight-bold pb-1	"> <router-link to="/spravka">Что такое Свора?</router-link> </div>
     <v-card  flat >
      
       <v-card-text class="pb-1 pt-2">
-         <div class="title " > Центр поддержки русских национальных предприятий</div>
+         <b>Свора - это центр поддержки русских национальных предприятий.</b>
+         <br>
    <p>
         Здесь собраны сведения о русских национальных предприятиях, о том как их
          можно поддержать и о мероприятиях, которые они проводят.
-         <p>
+        
     
    
 
@@ -127,10 +140,10 @@
 
       
     </v-row>
-    <div class="headline font-weight-bold	">Сегодняшние события</div>
+    <div class="headline font-weight-bold	"> <router-link to="/raspisanie">Сегодняшние события</router-link></div>
     <v-row >
       <v-col class="pt-0">
-        <span class=" subtitle-1  font-weight-bold">в Cети </span>
+        <span class=" subtitle-1  font-weight-bold"> <router-link to="/raspisanie">в Cети</router-link> </span>
         <v-card flat>
      
      
@@ -154,7 +167,7 @@
     </v-card>
       </v-col>
         <v-col  class="pt-0">
-         <span class=" subtitle-1  font-weight-bold">в Москве</span>
+         <span class=" subtitle-1  font-weight-bold"><router-link to="/raspisanie">в Москве</router-link></span>
         <v-card   flat>
       
       <v-card-text>
@@ -175,7 +188,7 @@
     </v-card>
       </v-col>
         <v-col  class="pt-0">
-           <span class=" subtitle-1  font-weight-bold">в Санкт-Петербурге</span>
+           <span class=" subtitle-1  font-weight-bold"><router-link to="/raspisanie">в Санкт-Петербурге</router-link></span>
         <v-card flat>
      
       <v-card-text>
@@ -200,7 +213,7 @@
   <div class="headline font-weight-bold	">Поддержать</div>
       <v-row>
      <v-col  class="pt-0">
-           <span class=" subtitle-1  font-weight-bold">Дело</span>
+           <span class=" subtitle-1  font-weight-bold"><router-link to="/sbori">Дело</router-link></span>
         <v-card  flat>
   
      
@@ -212,7 +225,7 @@
                 </v-layout>
               </v-img>
 
-              <v-card-title class="subtitle-1">{{sbori[si].nazvanie}}</v-card-title>
+              <v-card-title >{{sbori[si].nazvanie}}</v-card-title>
               <v-card-text>{{sbori[si].kratkoe_opisanie}}</v-card-text>
 
       
@@ -221,7 +234,7 @@
     </v-card>
       </v-col>
          <v-col  class="pt-0">
-           <span class=" subtitle-1  font-weight-bold">Предприятие</span>
+           <span class=" subtitle-1  font-weight-bold"><router-link to="/predpriyatiya">Предприятие</router-link></span>
         <v-card   flat>
    
       <v-card-text>
@@ -231,7 +244,7 @@
                 </v-layout>
               </v-img>
 
-              <v-card-title class="subtitle-1">{{predpriyatiya[pi].nazvanie}}</v-card-title>
+              <v-card-title >{{predpriyatiya[pi].nazvanie}}</v-card-title>
               <v-card-text>{{predpriyatiya[pi].kratkoe_opisanie}}</v-card-text>
       
 </v-card-text>
@@ -239,7 +252,7 @@
       </v-col>
 
                   <v-col  class="pt-0">
-           <span class=" subtitle-1  font-weight-bold">Замысел</span>
+           <span class=" subtitle-1  font-weight-bold"><router-link to="/prisoedinitsya">Замысел</router-link></span>
         <v-card   flat>
           <v-card-text>
    <v-simple-table dense>
@@ -298,3 +311,13 @@ export default {
   },
 };
 </script>
+<style scoped>
+a {
+ text-decoration: none;
+ color:black!important;
+}
+a:hover {
+ text-decoration: underline;
+ color:black!important;
+}
+</style>
