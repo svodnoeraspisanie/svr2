@@ -5,7 +5,7 @@
     
     app
     elevation="0"
-    color="#eef5f8"
+   
   
   >
 
