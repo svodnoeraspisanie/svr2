@@ -13,7 +13,7 @@
       </v-list-item>
 <v-divider></v-divider>
 <minitoolbar/>
-        <v-list>
+        <v-list class="my-0 py-0">
 
             <v-list-item  link to="/predpriyatiya" exact dense>
             <v-list-item-icon>

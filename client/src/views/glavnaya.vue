@@ -7,16 +7,16 @@
   permanent clipped app  
  >
 
-  <v-list-item>
-        <v-list-item-content>
+  <v-list-item >
+        <v-list-item-content >
 
-         <v-img src="/svora.png" contain></v-img>
+         <v-img src="/svora.png" contain ></v-img>
     
 
         </v-list-item-content>
       </v-list-item>
-<v-divider></v-divider>
-      <v-list  >
+<v-divider ></v-divider>
+      <v-list  class="my-0 py-0">
 
                   
           <v-list-item  link to="/statii">
@@ -216,7 +216,7 @@
      
            <span class=" subtitle-1  font-weight-bold"><router-link  to="/sbori" class="mainlink">Дело</router-link></span>
   
-        <v-card  flat  hover>
+        <v-card  flat  >
              <v-btn
                  
                   color="#0a7d9a"
@@ -233,7 +233,7 @@
                   <v-icon>mdi-shuffle-variant</v-icon>
                 </v-btn>
     
-      <v-card-text class="pt-1" @click="openlink(sbori[si].ssilka)">
+      <v-card-text  class="cardhov" @click="openlink(sbori[si].ssilka)">
         
      <v-img :src="sbori[si].obraz" aspect-ratio="1.5" contain>
                 <v-layout slot="placeholder" fill-height align-center justify-center ma-0>
@@ -254,7 +254,7 @@
            <span class=" subtitle-1  font-weight-bold"><router-link to="/predpriyatiya" class="mainlink">Предприятие</router-link></span>
            
 
-        <v-card   flat hover>
+        <v-card   flat >
     <v-btn
                  
                   color="#0a7d9a"
@@ -272,7 +272,7 @@
                   <v-icon>mdi-shuffle-variant</v-icon>
                 </v-btn>
     <router-link class="cardlink"  :to="{path: `/predpriyatiya/${predpriyatiya[pi].id}`}" >
-      <v-card-text >
+      <v-card-text class="cardhov">
        <v-img :src="predpriyatiya[pi].obraz" eager aspect-ratio="1.5" contain >
                 <v-layout slot="placeholder" fill-height align-center justify-center ma-0>
                   <v-progress-circular indeterminate color="teal lighten-5"></v-progress-circular>
@@ -374,5 +374,9 @@ export default {
 .cardlink:hover {
  text-decoration: none;
  color:#1f2020!important;
+}
+.cardhov:hover{
+
+  background-color:#eeeeee;
 }
 </style>

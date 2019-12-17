@@ -1,5 +1,5 @@
 <template>
-  <v-toolbar dense class="px-1" >
+  <v-toolbar dense class="px-1" elevation="3" >
  
       <v-btn icon to="/statii">
              <v-icon>mdi-book-open</v-icon>
