@@ -202,7 +202,7 @@ export default {
 
        
     events:{
-      title:"Сеть",
+      title:"СЕТЬ",
       googleCalendarId:
           "2kpu7kvisrlvmgkiheabippc20@group.calendar.google.com",
         color: "#c5dde8",
@@ -212,7 +212,7 @@ export default {
 
     cals:[
     {
-      title:"Сеть",
+      title:"СЕТЬ",
       googleCalendarId:
           "2kpu7kvisrlvmgkiheabippc20@group.calendar.google.com",
         color: "#c5dde8",
@@ -220,7 +220,7 @@ export default {
     },
 
     {
-      title:"Москва",
+      title:"МОСКВА",
       googleCalendarId:
           "ct8a4t3tuim1jjnkno2d6skkck@group.calendar.google.com",
           color: "#cde6bb",
@@ -228,7 +228,7 @@ export default {
     },
 
     {
-      title:"Санкт-Петербург",
+      title:"САНКТ-ПЕТЕРБУРО",
       googleCalendarId:
           "uq550s4cd42vsoojk09patvfvk@group.calendar.google.com",
         color: "#e9ddbb",

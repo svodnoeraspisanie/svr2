@@ -32,11 +32,11 @@
           </v-list-item>
            <v-list-item  link to="/predpriyatiya">
             <v-list-item-icon>
-              <v-icon>mdi-account-badge-horizontal-outline</v-icon>
+              <v-icon>mdi-account-group</v-icon>
             </v-list-item-icon>
 
             <v-list-item-content>
-              <v-list-item-title>Список предприятий</v-list-item-title>
+              <v-list-item-title>Предприятия</v-list-item-title>
               
             </v-list-item-content>
            
@@ -68,7 +68,7 @@
 
            <v-list-item  link to="/prisoedinitsya">
             <v-list-item-icon>
-              <v-icon>mdi-google-circles-group</v-icon>
+              <v-icon>mdi-account-multiple-plus</v-icon>
             </v-list-item-icon>
 
             <v-list-item-content>
@@ -361,18 +361,18 @@ export default {
 <style scoped>
 .mainlink {
  text-decoration: none;
- color:black!important;
+ color:#1f2020!important;
 }
 .mainlink:hover {
  text-decoration: underline;
- color:black!important;
+ color:#1f2020!important;
 }
 .cardlink {
  text-decoration: none;
- color:black!important;
+ color:#1f2020!important;
 }
 .cardlink:hover {
  text-decoration: none;
- color:black!important;
+ color:#1f2020!important;
 }
 </style>

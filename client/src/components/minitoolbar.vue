@@ -5,7 +5,7 @@
              <v-icon>mdi-book-open</v-icon>
           </v-btn>
           <v-btn icon to="/predpriyatiya" exact>
-             <v-icon>mdi-account-badge-horizontal-outline</v-icon>
+             <v-icon>mdi-account-group</v-icon>
           </v-btn>
           <v-btn icon  to="/sbori">
             <v-icon>mdi-cash-100</v-icon>
