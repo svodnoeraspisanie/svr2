@@ -95,8 +95,8 @@
     </v-navigation-drawer>
 
 
-<v-content>
-  <v-container  >
+<v-content >
+  <v-container class="px-6" >
     <v-row >
        <v-col class="pt-0">
          <div class="headline font-weight-bold pb-1	">Новости</div>

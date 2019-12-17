@@ -35,10 +35,11 @@
 
 
     <v-content  >
-      <v-container fluid >
+      <v-container  class="px-6" >
+        <h2>Статьи</h2>
      <v-row justify="center">
        <v-col cols="auto">
-        <h2>Статьи</h2>
+        
           <v-card v-for="(statia,i) in statii" :key="i" elevation="1" class="mb-6" max-width="936px">
               <v-card-title>{{statia.nazvanie}} </v-card-title>
               <v-card-text>{{statia.text}}</v-card-text>

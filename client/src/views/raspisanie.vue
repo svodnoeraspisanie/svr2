@@ -75,7 +75,7 @@
     
 
     <v-content class="fill-height">
-      <v-container style="height:99%" class="pa-0 ma-0" fluid>
+      <v-container style="height:99%" class="pa-0 ma-0" fluid >
         <FullCalendar
           height="parent"
           ref="fullCalendar"

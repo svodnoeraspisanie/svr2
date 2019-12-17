@@ -34,7 +34,7 @@
 
 
     <v-content >
-       <v-container >
+       <v-container  class="px-6" >
     
 
         <h2>Русские национальные предприятия</h2>

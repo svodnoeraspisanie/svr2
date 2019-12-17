@@ -21,7 +21,7 @@
             </v-list-item-icon>
 
             <v-list-item-content>
-              <v-list-item-title>Назад</v-list-item-title>
+              <v-list-item-title>Список предприятий</v-list-item-title>
               
             </v-list-item-content>
             
@@ -49,7 +49,7 @@
 </v-navigation-drawer>
 
     <v-content>
-          <v-container  >
+          <v-container  class="px-6"  >
      <v-row justify="center">
     <v-col cols="auto">
 
