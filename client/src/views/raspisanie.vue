@@ -5,7 +5,7 @@
     
     app
     elevation="0"
-    
+    color="#eef5f8"
   
   >
 
@@ -24,11 +24,9 @@
       
       <v-toolbar-title class="ml-2">{{title}}</v-toolbar-title>
       <v-spacer></v-spacer>
-
-      <v-btn outlined @click="changeView('dayGridMonth')">Месяц</v-btn>
-      <v-btn outlined class="ml-2" @click="changeView('timeGridWeek')">Неделя</v-btn>
-      <v-btn outlined class="ml-2" @click="changeView('timeGridDay')">День</v-btn>
-      <v-btn outlined class="ml-2" @click="changeView('listMonth')">Расписание</v-btn>
+<div style="max-width:150px">
+      <v-select :items="vidi" item-text="title" return-object label="Вид" v-model="caltype" outlined dense class="pt-7 mr-2" @change="changeView(caltype.value)"></v-select>
+</div>
    
    </v-app-bar>
    <v-navigation-drawer  permanent  app width="300px"  >
@@ -200,7 +198,30 @@ export default {
     selectedElement: null,
     selectedOpen: false,
 
-       
+    caltype:{
+        title:"МЕСЯЦ",
+        value:"dayGridMonth",
+      },
+    vidi:[
+      {
+        title:"МЕСЯЦ",
+        value:"dayGridMonth",
+      },
+      {
+        title:"НЕДЕЛЯ",
+        value:"timeGridWeek",
+      },
+       {
+        title:"ДЕНЬ",
+        value:"timeGridDay",
+      },
+      {
+        title:"РАСПИСАНИЕ",
+        value:"listMonth",
+      },
+    ],
+
+ 
     events:{
       title:"СЕТЬ",
       googleCalendarId:
