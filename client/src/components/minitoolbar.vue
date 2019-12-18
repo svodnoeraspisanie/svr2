@@ -1,24 +1,65 @@
 <template>
   <v-toolbar dense class="px-1" elevation="3" >
  
-      <v-btn icon to="/statii">
+ <v-tooltip bottom>
+      <template v-slot:activator="{ on }">
+       <v-btn icon to="/statii" v-on="on">
              <v-icon>mdi-book-open</v-icon>
           </v-btn>
-          <v-btn icon to="/predpriyatiya" exact>
+      </template>
+      <span>Статьи</span>
+    </v-tooltip>
+      
+
+<v-tooltip bottom>
+      <template v-slot:activator="{ on }">
+     <v-btn icon to="/predpriyatiya" exact v-on="on">
              <v-icon>mdi-account-group</v-icon>
           </v-btn>
-          <v-btn icon  to="/sbori">
+      </template>
+      <span>Предприятия</span>
+    </v-tooltip>
+
+
+<v-tooltip bottom>
+      <template v-slot:activator="{ on }">
+      <v-btn icon  to="/sbori" v-on="on">
             <v-icon>mdi-cash-100</v-icon>
           </v-btn>
-          <v-btn icon to="/raspisanie">
+      </template>
+      <span>Сборы</span>
+    </v-tooltip>
+
+    <v-tooltip bottom>
+      <template v-slot:activator="{ on }">
+        <v-btn icon to="/raspisanie" v-on="on">
            <v-icon>mdi-calendar</v-icon>
           </v-btn>
-           <v-btn icon  to="/prisoedinitsya">
-         <v-icon>mdi-google-circles-group</v-icon>
+      </template>
+      <span>Расписание</span>
+    </v-tooltip>
+
+      <v-tooltip bottom>
+      <template v-slot:activator="{ on }">
+       <v-btn icon  to="/prisoedinitsya" v-on="on">
+         <v-icon>mdi-account-multiple-plus</v-icon>
           </v-btn>
-          <v-btn icon  to="/spravka">
+      </template>
+      <span>Присоединиться</span>
+    </v-tooltip>
+         
+             <v-tooltip bottom>
+      <template v-slot:activator="{ on }">
+        <v-btn icon  to="/spravka" v-on="on">
          <v-icon>mdi-help-circle-outline</v-icon>
           </v-btn>
+      </template>
+      <span>Справка</span>
+    </v-tooltip>
+         
+        
+           
+         
       
     </v-toolbar>
 </template>

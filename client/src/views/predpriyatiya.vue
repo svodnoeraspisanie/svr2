@@ -55,15 +55,15 @@
               <v-divider />
 
               <v-card-actions class="pb-0">
-                <b>Место:</b>
+                Место: 
 
-                <v-chip v-for="(mesto, nm) in pr.mesto" :key="nm" small style="height:18px">{{mesto}}</v-chip>
+                <v-chip v-for="(mesto, nm) in pr.mesto" :key="nm" small style="height:18px; margin-left:2px">{{mesto}}</v-chip>
               </v-card-actions>
               <v-card-actions  class="pt-0">
-                <div width="100%">
-                  <b>Метки:</b>
-                  <v-chip v-for="(metka, nm) in pr.metki" :key="nm" small style="height:18px">{{metka}}</v-chip>
-                </div>
+               
+                  Метки: 
+                  <v-chip v-for="(metka, nm) in pr.metki" :key="nm" small style="height:18px; margin-left:2px">{{metka}}</v-chip>
+                
               </v-card-actions>
             </v-card>
           </v-col>

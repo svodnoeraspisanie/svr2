@@ -88,7 +88,7 @@ export default {
     openlink(arg) {
       window.open(arg, '_blank')
     },
-  }
+  },
 };
 </script>
 
