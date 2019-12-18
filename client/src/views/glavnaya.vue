@@ -5,6 +5,7 @@
 <v-navigation-drawer 
   width="300px" 
   permanent clipped app  
+  
  >
 
   <v-list-item >

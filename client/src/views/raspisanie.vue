@@ -29,7 +29,7 @@
 </div>
    
    </v-app-bar>
-   <v-navigation-drawer  permanent  app width="300px"  >
+   <v-navigation-drawer  permanent  app width="300px" clipped >
            <v-list-item to="/">
         <v-list-item-content>
 
@@ -71,7 +71,7 @@
 
         
       </v-list>
-   </v-navigation-drawer>
+   </v-navigation-drawer >
     
 
     <v-content class="fill-height">

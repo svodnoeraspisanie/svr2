@@ -2,18 +2,9 @@
   <div class="fill-height">
   
 
-   <v-navigation-drawer  permanent  app  width="300px"  >
+   <v-navigation-drawer  permanent  app  clipped width="300px"  >
 
-    <v-list-item to="/" >
-        <v-list-item-content>
-
-         <v-img src="/svora.png" contain></v-img>
-    
-
-        </v-list-item-content>
-      </v-list-item>
-<v-divider></v-divider>
-<minitoolbar/>
+   
 <v-list class="my-0 py-0">
       <v-list-item  link to="/" dense>
             <v-list-item-icon>

@@ -1,15 +1,23 @@
 <template>
   <v-app style="background-color:#eef5f8">
-   
+   <appbar />
       <router-view />
     
   </v-app>
 </template>
 
 <script>
-export default {
-  name: 'App',
+import appbar from './components/appbar.vue';
 
+export default {
+  
+  name: 'App',
+components: {
+
+    appbar,
+
+
+  },
   data: () => ({
     //
   }),
