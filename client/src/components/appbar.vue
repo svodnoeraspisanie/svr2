@@ -4,7 +4,7 @@
     clipped-left
     app
     elevation="1"
-    width="300px"
+    width="299px"
     height="150px"
     class="mainbar"
    
@@ -24,8 +24,8 @@
         </v-list-item-content>
       </v-list-item>
 
-<v-divider></v-divider>
-<v-toolbar dense class="px-1" elevation="3" >
+<v-divider />
+<v-toolbar dense class="px-5" elevation="3" >
  
  <v-tooltip bottom>
       <template v-slot:activator="{ on }">
@@ -53,7 +53,7 @@
             <v-icon>mdi-cash-100</v-icon>
           </v-btn>
       </template>
-      <span>Сборы</span>
+      <span>Сборы средств</span>
     </v-tooltip>
 
     <v-tooltip bottom>
@@ -88,6 +88,7 @@
          
       
     </v-toolbar>
+  
 </v-list>
   </v-app-bar>
 </template>
@@ -97,13 +98,10 @@ export default {};
 </script>
 
 <style scoped>
-.toolbar-title {
-  color: inherit;
-  text-decoration: inherit;
-}
 
  ::v-deep .v-toolbar__content {
  padding: 0px;
+
 }
 
 

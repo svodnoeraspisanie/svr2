@@ -4,16 +4,7 @@
    <v-navigation-drawer 
 width="300px" 
   permanent clipped app  >
-        <v-list-item to="/">
-        <v-list-item-content>
 
-         <v-img src="/svora.png" contain></v-img>
-    
-
-        </v-list-item-content>
-      </v-list-item>
-<v-divider></v-divider>
- <minitoolbar/>
   <v-list>
        <v-list-item  link to="/" dense>
             <v-list-item-icon>
@@ -34,7 +25,7 @@ width="300px"
 
  
 
-    <v-content class="fill-height">
+    <v-content class="fill-height pt-0">
       <v-container fluid>
        
       </v-container>

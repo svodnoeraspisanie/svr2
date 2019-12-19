@@ -7,17 +7,7 @@
   permanent clipped app  
   
  >
-
-  <v-list-item >
-        <v-list-item-content >
-
-         <v-img src="/svora.png" contain ></v-img>
-    
-
-        </v-list-item-content>
-      </v-list-item>
-<v-divider ></v-divider>
-      <v-list  class="my-0 py-0">
+      <v-list >
 
                   
           <v-list-item  link to="/statii">
@@ -96,7 +86,7 @@
     </v-navigation-drawer>
 
 
-<v-content >
+<v-content class="pt-0">
   <v-container class="px-6" >
     <v-row >
        <v-col class="pt-0">

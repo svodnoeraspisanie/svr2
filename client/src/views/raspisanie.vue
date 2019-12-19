@@ -1,46 +1,12 @@
 <template>
   <div class="fill-height">
    
-   <v-app-bar
-    
-    app
-    elevation="0"
-   
-  
-  >
+ 
 
 
-  <div style="max-width:220px">
-    <v-select autofocus flat :items="cals" item-text="title" return-object  label="Место" v-model="events" outlined dense class="pt-7 mr-2" ></v-select>     
-  </div>
-  <v-divider vertical/>
-      <v-btn outlined @click="setToday" class="ml-2">Сегодня</v-btn>
-      <v-btn  @click="prev" outlined class="ml-2" min-width="36px" width="36px">
-        <v-icon>mdi-chevron-left</v-icon>
-      </v-btn>
-      <v-btn  @click="next" outlined class="ml-2" min-width="36px" width="36px">
-        <v-icon>mdi-chevron-right</v-icon>
-      </v-btn>
-      
-      <v-toolbar-title class="ml-2">{{title}}</v-toolbar-title>
-      <v-spacer></v-spacer>
-<div style="max-width:150px">
-      <v-select :items="vidi" item-text="title" return-object label="Вид" v-model="caltype" outlined dense class="pt-7 mr-2" @change="changeView(caltype.value)"></v-select>
-</div>
-   
-   </v-app-bar>
    <v-navigation-drawer  permanent  app width="300px" clipped >
-           <v-list-item to="/">
-        <v-list-item-content>
 
-         <v-img src="/svora.png" contain></v-img>
-    
-
-        </v-list-item-content>
-      </v-list-item>
-<v-divider></v-divider>
-<minitoolbar/>
-      <v-list class="my-0 py-0" >
+      <v-list >
         
            <v-list-item  link to="/" dense>
             <v-list-item-icon>
@@ -74,8 +40,36 @@
    </v-navigation-drawer >
     
 
-    <v-content class="fill-height">
+    <v-content class="fill-height pt-0">
       <v-container style="height:99%" class="pa-0 ma-0" fluid >
+          <v-toolbar
+    
+    
+    elevation="0"
+   
+  
+  >
+
+
+  <div style="max-width:220px">
+    <v-select autofocus flat :items="cals" item-text="title" return-object  label="Место" v-model="events" outlined dense class="pt-7 mr-2" ></v-select>     
+  </div>
+  <v-divider vertical/>
+      <v-btn outlined @click="setToday" class="ml-2">Сегодня</v-btn>
+      <v-btn  @click="prev" outlined class="ml-2" min-width="36px" width="36px">
+        <v-icon>mdi-chevron-left</v-icon>
+      </v-btn>
+      <v-btn  @click="next" outlined class="ml-2" min-width="36px" width="36px">
+        <v-icon>mdi-chevron-right</v-icon>
+      </v-btn>
+      
+      <v-toolbar-title class="ml-2">{{title}}</v-toolbar-title>
+      <v-spacer></v-spacer>
+<div style="max-width:150px">
+      <v-select :items="vidi" item-text="title" return-object label="Вид" v-model="caltype" outlined dense class="pt-7 mr-2" @change="changeView(caltype.value)"></v-select>
+</div>
+   
+   </v-toolbar>
         <FullCalendar
           height="parent"
           ref="fullCalendar"
@@ -249,7 +243,7 @@ export default {
     },
 
     {
-      title:"САНКТ-ПЕТЕРБУРО",
+      title:"САНКТ-ПЕТЕРБУРГ",
       googleCalendarId:
           "uq550s4cd42vsoojk09patvfvk@group.calendar.google.com",
         color: "#e9ddbb",

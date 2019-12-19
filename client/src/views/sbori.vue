@@ -4,17 +4,8 @@
    <v-navigation-drawer 
  width="300px" 
   permanent clipped app  >
-        <v-list-item to="/">
-        <v-list-item-content>
 
-         <v-img src="/svora.png" contain></v-img>
-    
-
-        </v-list-item-content>
-      </v-list-item>
-<v-divider></v-divider>
-<minitoolbar/>
-  <v-list class="my-0 py-0">
+  <v-list >
        <v-list-item  link to="/" dense>
             <v-list-item-icon>
               <v-icon>mdi-arrow-left-bold</v-icon>
@@ -34,13 +25,13 @@
 
  
 
-    <v-content>
-      <v-container >
+    <v-content  class="pt-0">
+      <v-container  class="px-6" >
        <h2>Сборы средств</h2>
 
               <v-row>
           <v-col lg="3" md="4" sm="6" cols="12" v-for="(sbor,i) in sbori" :key="i">
-            <v-card class="flexcard" height="100%" elevation="1" @click="openlink(sbor.ssilka)" >
+            <v-card class="flexcard cardhov" height="100%"  elevate="0"  flat @click="openlink(sbor.ssilka)" >
               <v-img :src="sbor.obraz" aspect-ratio="1.5" contain>
                 <v-layout slot="placeholder" fill-height align-center justify-center ma-0>
                   <v-progress-circular indeterminate color="teal lighten-5"></v-progress-circular>
@@ -96,5 +87,9 @@ export default {
 .flexcard {
   display: flex;
   flex-direction: column;
+}
+.cardhov:hover{
+
+  background-color:#eeeeee;
 }
 </style>

@@ -1,19 +1,8 @@
 <template>
   <div class="fill-height">
+<v-navigation-drawer permanent  app  clipped width="300px" >
 
-
-    <v-navigation-drawer permanent clipped app width="300px"   >
-         <v-list-item to="/">
-        <v-list-item-content>
-
-         <v-img src="/svora.png" contain></v-img>
-    
-
-        </v-list-item-content>
-      </v-list-item>
-<v-divider></v-divider>
-<minitoolbar/>
-        <v-list class="my-0 py-0">
+        <v-list >
 
             <v-list-item  link to="/predpriyatiya" exact dense>
             <v-list-item-icon>
@@ -48,12 +37,12 @@
 
 </v-navigation-drawer>
 
-    <v-content>
+    <v-content class="pt-0">
           <v-container  class="px-6"  >
      <v-row justify="center">
-    <v-col cols="auto">
+    <v-col cols="auto" >
 
-         <v-card class="mb-4" flat >
+         <v-card class="mb-4" flat  max-width="936px" >
         <v-row>
           <v-col cols="3">
 <v-img :src="pr.obraz" aspect-ratio="1.5" max-width="500px" contain>
@@ -73,7 +62,7 @@
        
 
     
-        <v-card class="mb-4"  flat>
+        <v-card class="mb-4"  flat  max-width="936px">
           <v-card-title>Что мы делаем?</v-card-title>
           <v-card-text v-html="pr.podrobnoe_opisanie"></v-card-text>
         </v-card>
@@ -87,7 +76,7 @@
           </v-card-text>
         </v-card>
 
-        <v-card flat>
+        <v-card flat  max-width="936px">
           <v-card-title>Наши страницы в сети</v-card-title>
           <v-card-text>
             <ul v-for="(ssilka,servis) in pr.ssilki" :key="servis">

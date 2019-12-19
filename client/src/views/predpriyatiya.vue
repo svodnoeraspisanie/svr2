@@ -5,7 +5,7 @@
    <v-navigation-drawer  permanent  app  clipped width="300px"  >
 
    
-<v-list class="my-0 py-0">
+<v-list >
       <v-list-item  link to="/" dense>
             <v-list-item-icon>
               <v-icon>mdi-arrow-left-bold</v-icon>
@@ -24,7 +24,7 @@
 
 
 
-    <v-content >
+    <v-content class="pt-0">
        <v-container  class="px-6" >
     
 

@@ -4,18 +4,9 @@
    <v-navigation-drawer 
   width="300px" 
   permanent clipped app  >
-           <v-list-item to="/">
-        <v-list-item-content>
 
-         <v-img src="/svora.png" contain></v-img>
-    
-
-        </v-list-item-content>
-      </v-list-item>
-<v-divider></v-divider>
- <minitoolbar/>
  
-<v-list class="my-0 py-0">
+<v-list>
   
       <v-list-item  link to="/" dense>
             <v-list-item-icon>
@@ -34,12 +25,14 @@
 
 
 
-    <v-content  >
+    <v-content class="pt-0"  >
       <v-container  class="px-6" >
-        <h2>Статьи</h2>
-     <v-row justify="center">
-       <v-col cols="auto">
         
+     <v-row justify="center">
+       <v-col cols="auto" class="pt-0">
+        <div style="max-width:936px" class="pb-3">
+        <h2>Статьи</h2>
+        </div>
           <v-card v-for="(statia,i) in statii" :key="i" elevation="1" class="mb-6" max-width="936px">
               <v-card-title>{{statia.nazvanie}} </v-card-title>
               <v-card-text>{{statia.text}}</v-card-text>
