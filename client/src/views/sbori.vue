@@ -34,11 +34,11 @@
             <v-card class="flexcard cardhov" height="100%"  elevate="0"  flat @click="openlink(sbor.ssilka)" >
               <v-img :src="sbor.obraz" aspect-ratio="1.5" contain>
                 <v-layout slot="placeholder" fill-height align-center justify-center ma-0>
-                  <v-progress-circular indeterminate color="teal lighten-5"></v-progress-circular>
+                  <v-progress-circular indeterminate color="#0a7d9a"></v-progress-circular>
                 </v-layout>
               </v-img>
 
-              <v-card-title>{{sbor.nazvanie}}</v-card-title>
+              <v-card-title class="subtitle-2">{{sbor.nazvanie}}</v-card-title>
               <v-card-text>{{sbor.kratkoe_opisanie}}</v-card-text>
 
               <v-spacer />

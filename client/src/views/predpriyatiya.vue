@@ -34,11 +34,11 @@
             <v-card class="flexcard cardhov" height="100%" :to="{path: `/predpriyatiya/${pr.id}`}"  elevate="0"  flat>
               <v-img :src="pr.obraz" aspect-ratio="1.5" contain>
                 <v-layout slot="placeholder" fill-height align-center justify-center ma-0>
-                  <v-progress-circular indeterminate color="teal lighten-5"></v-progress-circular>
+                  <v-progress-circular indeterminate color="#0a7d9a"></v-progress-circular>
                 </v-layout>
               </v-img>
 
-              <v-card-title>{{pr.nazvanie}}</v-card-title>
+              <v-card-title class="subtitle-2">{{pr.nazvanie}}</v-card-title>
               <v-card-text>{{pr.kratkoe_opisanie}}</v-card-text>
 
               <v-spacer />
@@ -46,13 +46,13 @@
               <v-divider />
 
               <v-card-actions class="pb-0">
-                Место: 
+               <span class="subtitle-2"> Место: </span>
 
                 <v-chip v-for="(mesto, nm) in pr.mesto" :key="nm" small style="height:18px; margin-left:2px">{{mesto}}</v-chip>
               </v-card-actions>
-              <v-card-actions  class="pt-0">
+              <v-card-actions  class="pt-0" >
                
-                  Метки: 
+                  <span class="subtitle-2">Метки: </span>
                   <v-chip v-for="(metka, nm) in pr.metki" :key="nm" small style="height:18px; margin-left:2px">{{metka}}</v-chip>
                 
               </v-card-actions>

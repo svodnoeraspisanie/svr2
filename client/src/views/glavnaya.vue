@@ -225,7 +225,7 @@
         
      <v-img :src="sbori[si].obraz" aspect-ratio="1.5" contain>
                 <v-layout slot="placeholder" fill-height align-center justify-center ma-0>
-                  <v-progress-circular indeterminate color="teal lighten-5"></v-progress-circular>
+                  <v-progress-circular indeterminate color="#0a7d9a"></v-progress-circular>
                 </v-layout>
               </v-img>
 
@@ -263,7 +263,7 @@
       <v-card-text class="cardhov">
        <v-img :src="predpriyatiya[pi].obraz" eager aspect-ratio="1.5" contain >
                 <v-layout slot="placeholder" fill-height align-center justify-center ma-0>
-                  <v-progress-circular indeterminate color="teal lighten-5"></v-progress-circular>
+                  <v-progress-circular indeterminate color="#0a7d9a"></v-progress-circular>
                 </v-layout>
               </v-img>
 
