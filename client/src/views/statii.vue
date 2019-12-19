@@ -35,7 +35,7 @@
         </div>
           <v-card v-for="(statia,i) in statii" :key="i" elevation="1" class="mb-6" max-width="936px">
               <v-card-title>{{statia.nazvanie}} </v-card-title>
-              <v-card-text>{{statia.text}}</v-card-text>
+              <v-card-text v-html="statia.text"></v-card-text>
           </v-card>
        </v-col></v-row>
       </v-container>

@@ -96,14 +96,11 @@
       <v-card-text class="pb-1 pt-2">
           <v-simple-table dense>
          <tbody>
-           <tr > 
-             <td valign="top"> 13.12.19</td>
-             <td>Статья о чём-то хорошем </td>
+           <tr v-for="(novost,i) in novosti" :key="i"  > 
+             <td valign="top">{{novost.data}}</td>
+             <td>{{novost.soobshenie}} </td>
            </tr>
-           <tr > 
-             <td valign="top"> 12.12.19</td>
-             <td>Добавлено предриятие "Чёрная Сотня" </td>
-           </tr>
+           
          </tbody>
       </v-simple-table>
 </v-card-text>
@@ -327,6 +324,7 @@ export default {
     drawer: true,
     sbori:[],
     predpriyatiya:[],
+    novosti:[],
     si:0,
     pi:0,
 
@@ -346,6 +344,7 @@ export default {
   firestore: {
     sbori: db.collection('sbori'),
     predpriyatiya: db.collection('predpriyatiya'),
+    novosti: db.collection('novosti'),
   },
 };
 </script>
