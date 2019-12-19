@@ -105,6 +105,6 @@ export default {};
  ::v-deep .v-toolbar__content {
  padding: 0px;
 }
-}
+
 
 </style>
