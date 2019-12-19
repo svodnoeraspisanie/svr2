@@ -223,7 +223,7 @@
     
       <v-card-text  class="cardhov" @click="openlink(sbori[si].ssilka)">
         
-     <v-img :src="sbori[si].obraz" aspect-ratio="1.5" contain>
+     <v-img :src="sbori[si].obraz" aspect-ratio="1.5" contain eager>
                 <v-layout slot="placeholder" fill-height align-center justify-center ma-0>
                   <v-progress-circular indeterminate color="#0a7d9a"></v-progress-circular>
                 </v-layout>
