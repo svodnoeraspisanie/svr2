@@ -330,7 +330,10 @@ export default {
 
 
   }),
+  
   methods:{
+  
+
     openlink(arg) {
       window.open(arg, '_blank')
     },
@@ -339,7 +342,8 @@ export default {
       let i2 =~~(Math.random() * ar.length); 
      
       return (i==i2 ? (i==ar.length-1?i-1:i+1) : i2);
-    }
+    },
+
   },
   firestore: {
     sbori: db.collection('sbori'),

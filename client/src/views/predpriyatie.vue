@@ -109,13 +109,10 @@ export default {
     pr: null
   }),
   created() {
-    // fetch the data when the view is created and the data is
-    // already being observed
     this.fetchData();
   },
   watch: {
-    // call again the method if the route changes
-    $route: "fetchData"
+      $route: "fetchData"
   },
   methods: {
     fetchData() {
