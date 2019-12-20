@@ -108,9 +108,29 @@
               <v-card-text>
                 <v-simple-table dense>
                   <tbody>
-                    <tr v-for="(sob,i) in rasps[0]" :key="i" >
-                      <td valign="top">{{sob.start.dateTime}}</td>
-                      <td>{{sob.summary}}</td>
+                    <tr v-for="(sob,i) in rasps[0]" :key="i">
+                     
+                      <v-menu :close-on-content-click="false" max-width="400px" offset-x>
+
+                        <template v-slot:activator="{ on }">
+                          <td valign="top" v-on="on">{{sob.start.dateTime}}</td>
+                          <td v-on="on">{{sob.summary}}</td>
+                        </template>
+
+                        <v-card>
+                                              <v-sheet
+                            class="overflow-y-auto mt-1"
+                            min-width="150px"
+                            max-width="400px"
+                            max-height="500px"
+                          >
+                            <v-card-text>
+                              <h3>{{sob.summary}}</h3>
+                              <div v-html="sob.description"></div>
+                            </v-card-text>
+                          </v-sheet>
+                        </v-card>
+                      </v-menu>
                     </tr>
                   </tbody>
                 </v-simple-table>
@@ -125,9 +145,29 @@
               <v-card-text>
                 <v-simple-table dense>
                   <tbody>
-                    <tr v-for="(sob,i) in rasps[1]" :key="i">
-                      <td valign="top">{{sob.start.dateTime}}</td>
-                      <td>{{sob.summary}}</td>
+                   <tr v-for="(sob,i) in rasps[1]" :key="i">
+                     
+                      <v-menu :close-on-content-click="false" max-width="400px" offset-x>
+
+                        <template v-slot:activator="{ on }">
+                          <td valign="top" v-on="on">{{sob.start.dateTime}}</td>
+                          <td v-on="on">{{sob.summary}}</td>
+                        </template>
+
+                        <v-card>
+                                              <v-sheet
+                            class="overflow-y-auto mt-1"
+                            min-width="150px"
+                            max-width="400px"
+                            max-height="500px"
+                          >
+                            <v-card-text>
+                              <h3>{{sob.summary}}</h3>
+                              <div v-html="sob.description"></div>
+                            </v-card-text>
+                          </v-sheet>
+                        </v-card>
+                      </v-menu>
                     </tr>
                   </tbody>
                 </v-simple-table>
@@ -142,9 +182,29 @@
               <v-card-text>
                 <v-simple-table dense>
                   <tbody>
-                  <tr v-for="(sob,i) in rasps[2]" :key="i">
-                      <td valign="top">{{sob.start.dateTime}}</td>
-                      <td>{{sob.summary}}</td>
+                   <tr v-for="(sob,i) in rasps[2]" :key="i">
+                     
+                      <v-menu :close-on-content-click="false" max-width="400px" offset-x>
+
+                        <template v-slot:activator="{ on }">
+                          <td valign="top" v-on="on">{{sob.start.dateTime}}</td>
+                          <td v-on="on">{{sob.summary}}</td>
+                        </template>
+
+                        <v-card>
+                                              <v-sheet
+                            class="overflow-y-auto mt-1"
+                            min-width="150px"
+                            max-width="400px"
+                            max-height="500px"
+                          >
+                            <v-card-text>
+                              <h3>{{sob.summary}}</h3>
+                              <div v-html="sob.description"></div>
+                            </v-card-text>
+                          </v-sheet>
+                        </v-card>
+                      </v-menu>
                     </tr>
                   </tbody>
                 </v-simple-table>
@@ -265,65 +325,55 @@ export default {
     setrasp: [],
     mskrasp: [],
     spbrasp: [],
-    rasps:[],
+    rasps: []
   }),
   created() {
     this.zagruzkaraspisaniya();
   },
   methods: {
-    normtime(arg){
-      var d= new Date(arg);
-      return d.getHours+":"+d.getMinutes;
+    normtime(arg) {
+      var d = new Date(arg);
+      return d.getHours + ":" + d.getMinutes;
     },
 
     async zagruzkaraspisaniya() {
-     
-     
       const googleCalendarApiKey = "AIzaSyCSV5kxpkQN3Vfvg_9D_vyBN2DQ7AiBzr4";
       const caladr = "https://www.googleapis.com/calendar/v3/calendars/";
       const today = new Date();
-      const tomorrow = new Date(today.getTime() + (24 * 60 * 60 * 1000));
+      const tomorrow = new Date(today.getTime() + 24 * 60 * 60 * 1000);
 
       let cals = [
         "2kpu7kvisrlvmgkiheabippc20@group.calendar.google.com",
         "ct8a4t3tuim1jjnkno2d6skkck@group.calendar.google.com",
-        "uq550s4cd42vsoojk09patvfvk@group.calendar.google.com",
-         ];
- 
+        "uq550s4cd42vsoojk09patvfvk@group.calendar.google.com"
+      ];
 
-      for  (var i = 0; i < cals.length; i++){
-       
-var url =
-        caladr +
-        encodeURIComponent(cals[i]) +
-        "/events?timeMin=" +
-        encodeURIComponent(today.toISOString()) +
-        "&timeMax="+
-        encodeURIComponent(tomorrow.toISOString()) +
-        "&key=" +
-        googleCalendarApiKey;
-     
+      for (var i = 0; i < cals.length; i++) {
+        var url =
+          caladr +
+          encodeURIComponent(cals[i]) +
+          "/events?timeMin=" +
+          encodeURIComponent(today.toISOString()) +
+          "&timeMax=" +
+          encodeURIComponent(tomorrow.toISOString()) +
+          "&key=" +
+          googleCalendarApiKey;
 
-      let response = await fetch(url);
-      if (response.ok) {
-        var data = await response.json();
+        let response = await fetch(url);
+        if (response.ok) {
+          var data = await response.json();
 
-        for (var j =0; j< data.items.length;j++)
-        {
-        
-          data.items[j].start.dateTime =  new Date(data.items[j].start.dateTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+          for (var j = 0; j < data.items.length; j++) {
+            data.items[j].start.dateTime = new Date(
+              data.items[j].start.dateTime
+            ).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+          }
+
+          this.rasps[i] = data.items;
         }
-        
-        this.rasps[i] = data.items;
-     
       }
 
-      }
-
-      
-console.log( this.rasps);
-    
-
+      console.log(this.rasps);
     },
 
     openlink(arg) {
