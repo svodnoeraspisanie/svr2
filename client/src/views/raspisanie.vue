@@ -137,7 +137,7 @@
 
 <script>
 import appbar from "../components/appbar.vue";
-import minitoolbar from "../components/minitoolbar.vue";
+
 
 
 import FullCalendar from "@fullcalendar/vue";
@@ -151,7 +151,7 @@ import { formatDate } from "@fullcalendar/core";
 export default {
   components: {
     appbar,
-  minitoolbar,
+  
     FullCalendar
   },
 
