@@ -330,9 +330,33 @@ export default {
 
 
   }),
-  
+   created() {
+    this.zagruzkasobitiy();
+  },
   methods:{
-  
+  zagruzkasobitiy(){
+    const googleCalendarApiKey = "AIzaSyCSV5kxpkQN3Vfvg_9D_vyBN2DQ7AiBzr4";
+    const calset="2kpu7kvisrlvmgkiheabippc20%40group.calendar.google.com";
+ 
+    const calmsk="ct8a4t3tuim1jjnkno2d6skkck@group.calendar.google.com";
+    const calspb="uq550s4cd42vsoojk09patvfvk@group.calendar.google.com";
+console.log("запрос");
+
+    const userAction = async () => {
+      const url="https://www.googleapis.com/calendar/v3/calendars/"+calset+"/events?key="+googleCalendarApiKey;
+      console.log(url);
+      const response = await fetch(url, {
+      method: 'POST',
+      body: myBody, // string or object
+      headers: {'Content-Type': 'application/json'}
+      });
+      console.log("resp");
+      const myJson = await response.json(); //extract JSON from the http response
+      console.log("13",myJson);
+  // do something with myJson
+  }
+userAction();
+  },
 
     openlink(arg) {
       window.open(arg, '_blank')
