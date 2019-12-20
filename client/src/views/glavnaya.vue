@@ -106,6 +106,8 @@
             </span>
             <v-card flat>
               <v-card-text>
+                <div v-if="!rasps[0].length"> В нашем расписании событий в этот день нет</div>
+
                 <v-simple-table dense>
                   <tbody>
                     <tr v-for="(sob,i) in rasps[0]" :key="i">
@@ -143,7 +145,8 @@
             </span>
             <v-card flat>
               <v-card-text>
-                <v-simple-table dense>
+                <div v-if="!rasps[1].length"> В нашем расписании событий в этот день нет</div>
+                <v-simple-table dense >
                   <tbody>
                    <tr v-for="(sob,i) in rasps[1]" :key="i">
                      
@@ -156,7 +159,7 @@
 
                         <v-card>
                                               <v-sheet
-                            class="overflow-y-auto mt-1"
+                            class="overflow-y-auto"
                             min-width="150px"
                             max-width="400px"
                             max-height="500px"
@@ -180,6 +183,7 @@
             </span>
             <v-card flat>
               <v-card-text>
+                <div v-if="!rasps[2].length"> В нашем расписании событий в этот день нет</div>
                 <v-simple-table dense>
                   <tbody>
                    <tr v-for="(sob,i) in rasps[2]" :key="i">
@@ -193,7 +197,7 @@
 
                         <v-card>
                                               <v-sheet
-                            class="overflow-y-auto mt-1"
+                            class="overflow-y-auto"
                             min-width="150px"
                             max-width="400px"
                             max-height="500px"
@@ -322,13 +326,18 @@ export default {
     novosti: [],
     si: 0,
     pi: 0,
-    setrasp: [],
-    mskrasp: [],
-    spbrasp: [],
-    rasps: []
+
+    rasps: [[],[],[]],
   }),
   created() {
     this.zagruzkaraspisaniya();
+  },
+  mounted(){
+    window.setInterval(()=>{
+      this.si=this.anyel(this.si,this.sbori);
+      this.pi=this.anyel(this.pi,this.predpriyatiya);
+    }, 10000);
+    
   },
   methods: {
     normtime(arg) {

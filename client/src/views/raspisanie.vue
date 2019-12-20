@@ -116,15 +116,9 @@
           offset-x
         >
           <v-card>
-            <v-toolbar :color="selectedEvent.color" height="32" elevation="1">
-              <v-spacer />
-              <v-btn icon small @click="selectedOpen = false">
-                <v-icon>mdi-close</v-icon>
-              </v-btn>
-            </v-toolbar>
-
+          
             <v-sheet
-              class="overflow-y-auto mt-1"
+              class="overflow-y-auto"
               min-width="150px"
               max-width="400px"
               max-height="500px"
