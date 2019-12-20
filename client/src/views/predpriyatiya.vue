@@ -32,7 +32,8 @@
         <v-row>
           <v-col lg="3" md="4" sm="6" cols="12" v-for="pr in predpriyatiya" :key="pr.n">
             <v-card class="flexcard cardhov" height="100%" :to="{path: `/predpriyatiya/${pr.id}`}"  elevate="0"  flat>
-              <v-img :src="pr.obraz" aspect-ratio="1.5" contain>
+            
+              <v-img :src="pr.obraz" aspect-ratio="1.5" contain class="ma-2">
                 <v-layout slot="placeholder" fill-height align-center justify-center ma-0>
                   <v-progress-circular indeterminate color="#0a7d9a"></v-progress-circular>
                 </v-layout>

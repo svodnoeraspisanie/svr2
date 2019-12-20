@@ -27,7 +27,23 @@ width="300px"
 
     <v-content class="pt-0">
       <v-container fluid>
-       
+        <v-menu >
+          <template v-slot:activator="{ on }">
+        <v-btn
+          color="primary"
+          dark
+          v-on="on"
+        >
+          Dropdown
+        </v-btn>
+      </template>
+      
+            
+           
+          
+       <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSftCUO1HtFoRnSXUYCraKmHCL6ow0BpR2064TxJUb_zWR6L-g/viewform?embedded=true" width="640" height="471" frameborder="0" marginheight="0" marginwidth="0">Загрузка…</iframe>
+      
+        </v-menu>
       </v-container>
     </v-content>
   </div>

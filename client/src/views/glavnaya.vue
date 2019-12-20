@@ -240,14 +240,15 @@
               </v-btn>
 
               <v-card-text class="cardhov" @click="openlink(sbori[si].ssilka)">
-                <v-img :src="sbori[si].obraz" aspect-ratio="1.5" contain eager>
+
+                <v-img :src="sbori[si].obraz" aspect-ratio="1.5" contain eager class="ma-2">
                   <v-layout slot="placeholder" fill-height align-center justify-center ma-0>
                     <v-progress-circular indeterminate color="#0a7d9a"></v-progress-circular>
                   </v-layout>
                 </v-img>
 
-                <v-card-title>{{sbori[si].nazvanie}}</v-card-title>
-                <v-card-text>{{sbori[si].kratkoe_opisanie}}</v-card-text>
+                <v-card-title class="subtitle-2 font-weight-bold" style="color:#1f2020" >{{sbori[si].nazvanie}}</v-card-title>
+              
               </v-card-text>
             </v-card>
           </v-col>
@@ -272,14 +273,15 @@
               </v-btn>
               <router-link class="cardlink" :to="{path: `/predpriyatiya/${predpriyatiya[pi].id}`}">
                 <v-card-text class="cardhov">
-                  <v-img :src="predpriyatiya[pi].obraz" eager aspect-ratio="1.5" contain>
+                  <v-img :src="predpriyatiya[pi].obraz" eager aspect-ratio="1.5" contain class="ma-2">
                     <v-layout slot="placeholder" fill-height align-center justify-center ma-0>
                       <v-progress-circular indeterminate color="#0a7d9a"></v-progress-circular>
                     </v-layout>
                   </v-img>
 
-                  <v-card-title>{{predpriyatiya[pi].nazvanie}}</v-card-title>
-                  <v-card-text>{{predpriyatiya[pi].kratkoe_opisanie}}</v-card-text>
+                  <v-card-title class="subtitle-2 font-weight-bold">{{predpriyatiya[pi].nazvanie}}</v-card-title>
+        
+                 
                 </v-card-text>
               </router-link>
             </v-card>
@@ -337,7 +339,7 @@ export default {
       this.si=this.anyel(this.si,this.sbori);
       this.pi=this.anyel(this.pi,this.predpriyatiya);
     }, 10000);
-    
+
   },
   methods: {
     normtime(arg) {
