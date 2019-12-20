@@ -1,26 +1,18 @@
 <template>
   <div class="fill-height">
-   
- 
+    <v-navigation-drawer permanent app width="300px" clipped>
+      <v-list>
+        <v-list-item link to="/" dense>
+          <v-list-item-icon>
+            <v-icon>mdi-arrow-left-bold</v-icon>
+          </v-list-item-icon>
 
+          <v-list-item-content>
+            <v-list-item-title>Назад</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        <v-divider></v-divider>
 
-   <v-navigation-drawer  permanent  app width="300px" clipped >
-
-      <v-list >
-        
-           <v-list-item  link to="/" dense>
-            <v-list-item-icon>
-              <v-icon>mdi-arrow-left-bold</v-icon>
-            </v-list-item-icon>
-
-            <v-list-item-content>
-              <v-list-item-title>Назад</v-list-item-title>
-              
-            </v-list-item-content>
-            
-          </v-list-item>
-          <v-divider></v-divider>
- 
         <v-list-item class="px-0 py-0">
           <v-date-picker
             first-day-of-week="1"
@@ -34,42 +26,54 @@
           ></v-date-picker>
         </v-list-item>
         <v-divider></v-divider>
-
-        
       </v-list>
-   </v-navigation-drawer >
-    
+    </v-navigation-drawer>
 
     <v-content class="fill-height pt-0">
-      <v-container style="height:99%" class="pa-0 ma-0" fluid >
-          <v-toolbar
-    
-    
-    elevation="0"
-   
-  
-  >
+      <v-container  class="cont pa-0 ma-0" fluid>
+     
+        <v-toolbar elevation="0">
+          <div style="max-width:220px">
+            <v-select
+              autofocus
+              flat
+              :items="cals"
+              item-text="title"
+              return-object
+              label="Место"
+              v-model="events"
+              outlined
+              dense
+              class="pt-7 mr-2"
+            ></v-select>
+          </div>
+          <v-divider vertical />
+          <v-btn outlined @click="setToday" class="ml-2">Сегодня</v-btn>
+          <v-btn @click="prev" outlined class="ml-2" min-width="36px" width="36px">
+            <v-icon>mdi-chevron-left</v-icon>
+          </v-btn>
+          <v-btn @click="next" outlined class="ml-2" min-width="36px" width="36px">
+            <v-icon>mdi-chevron-right</v-icon>
+          </v-btn>
 
+          <v-toolbar-title class="ml-2">{{title}}</v-toolbar-title>
+          <v-spacer></v-spacer>
+          <div style="max-width:150px">
+            <v-select
+              :items="vidi"
+              item-text="title"
+              return-object
+              label="Вид"
+              v-model="caltype"
+              outlined
+              dense
+              class="pt-7 mr-2"
+              @change="changeView(caltype.value)"
+            ></v-select>
+          </div>
+        </v-toolbar>
 
-  <div style="max-width:220px">
-    <v-select autofocus flat :items="cals" item-text="title" return-object  label="Место" v-model="events" outlined dense class="pt-7 mr-2" ></v-select>     
-  </div>
-  <v-divider vertical/>
-      <v-btn outlined @click="setToday" class="ml-2">Сегодня</v-btn>
-      <v-btn  @click="prev" outlined class="ml-2" min-width="36px" width="36px">
-        <v-icon>mdi-chevron-left</v-icon>
-      </v-btn>
-      <v-btn  @click="next" outlined class="ml-2" min-width="36px" width="36px">
-        <v-icon>mdi-chevron-right</v-icon>
-      </v-btn>
-      
-      <v-toolbar-title class="ml-2">{{title}}</v-toolbar-title>
-      <v-spacer></v-spacer>
-<div style="max-width:150px">
-      <v-select :items="vidi" item-text="title" return-object label="Вид" v-model="caltype" outlined dense class="pt-7 mr-2" @change="changeView(caltype.value)"></v-select>
-</div>
-   
-   </v-toolbar>
+<div class="fill-height">
         <FullCalendar
           height="parent"
           ref="fullCalendar"
@@ -100,8 +104,10 @@
           @eventClick="showevent"
           @datesRender="update"
         />
-
-        <v-menu
+</div>
+        
+      </v-container>
+      <v-menu
           v-model="selectedOpen"
           :close-on-content-click="false"
           :position-x="cardposX"
@@ -130,15 +136,12 @@
             </v-sheet>
           </v-card>
         </v-menu>
-      </v-container>
     </v-content>
   </div>
 </template>
 
 <script>
 import appbar from "../components/appbar.vue";
-
-
 
 import FullCalendar from "@fullcalendar/vue";
 import dayGridPlugin from "@fullcalendar/daygrid";
@@ -151,7 +154,7 @@ import { formatDate } from "@fullcalendar/core";
 export default {
   components: {
     appbar,
-  
+
     FullCalendar
   },
 
@@ -178,11 +181,10 @@ export default {
 
     mesta: ["Сеть", "Москва", "Санкт-Петербург"],
     mesto: "Сеть",
-   
+
     loading: false,
-    
+
     showTooltip: false,
-    
 
     today: "",
     focus: "",
@@ -192,63 +194,61 @@ export default {
     selectedElement: null,
     selectedOpen: false,
 
-    caltype:{
-        title:"МЕСЯЦ",
-        value:"dayGridMonth",
-      },
-    vidi:[
+    caltype: {
+      title: "МЕСЯЦ",
+      value: "dayGridMonth"
+    },
+    vidi: [
       {
-        title:"МЕСЯЦ",
-        value:"dayGridMonth",
-      },
-      {
-        title:"НЕДЕЛЯ",
-        value:"timeGridWeek",
-      },
-       {
-        title:"ДЕНЬ",
-        value:"timeGridDay",
+        title: "МЕСЯЦ",
+        value: "dayGridMonth"
       },
       {
-        title:"РАСПИСАНИЕ",
-        value:"listMonth",
+        title: "НЕДЕЛЯ",
+        value: "timeGridWeek"
       },
+      {
+        title: "ДЕНЬ",
+        value: "timeGridDay"
+      },
+      {
+        title: "РАСПИСАНИЕ",
+        value: "listMonth"
+      }
     ],
 
- 
-    events:{
-      title:"СЕТЬ",
-      googleCalendarId:
+    events: {
+      title: "СЕТЬ",
+      googleCalendarId: "2kpu7kvisrlvmgkiheabippc20@group.calendar.google.com",
+      color: "#c5dde8",
+      className: "set"
+    },
+
+    cals: [
+      {
+        title: "СЕТЬ",
+        googleCalendarId:
           "2kpu7kvisrlvmgkiheabippc20@group.calendar.google.com",
         color: "#c5dde8",
         className: "set"
-    },
+      },
 
-
-    cals:[
-    {
-      title:"СЕТЬ",
-      googleCalendarId:
-          "2kpu7kvisrlvmgkiheabippc20@group.calendar.google.com",
-        color: "#c5dde8",
-        className: "set"
-    },
-
-    {
-      title:"МОСКВА",
-      googleCalendarId:
+      {
+        title: "МОСКВА",
+        googleCalendarId:
           "ct8a4t3tuim1jjnkno2d6skkck@group.calendar.google.com",
-          color: "#cde6bb",
+        color: "#cde6bb",
         className: "moskva"
-    },
+      },
 
-    {
-      title:"САНКТ-ПЕТЕРБУРГ",
-      googleCalendarId:
+      {
+        title: "САНКТ-ПЕТЕРБУРГ",
+        googleCalendarId:
           "uq550s4cd42vsoojk09patvfvk@group.calendar.google.com",
         color: "#e9ddbb",
         className: "piter"
-    }]
+      }
+    ]
   }),
 
   computed: {
@@ -356,14 +356,17 @@ function dateToYMD(date) {
 
 <style  lang='scss'>
 .fc-head {
-  background-color:#fcf8e3;
-  
+  background-color: #fcf8e3;
 }
-.fc-day-header.fc-sat{
-  background-color:#f2e1e1;
+.fc-day-header.fc-sat {
+  background-color: #f2e1e1;
 }
-.fc-day-header.fc-sun{
-  background-color:#f2e1e1;
+.fc-day-header.fc-sun {
+  background-color: #f2e1e1;
+}
+
+.cont {
+  height: calc(100vh - 64px);
 }
 @import "~@fullcalendar/core/main.css";
 @import "~@fullcalendar/daygrid/main.css";
