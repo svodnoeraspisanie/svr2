@@ -16,23 +16,45 @@
             
           </v-list-item>
 <v-divider></v-divider>
+<v-list-item link @click="$vuetify.goTo(0);" >
+  <v-list-item-icon>
+            <v-icon>mdi-account-group</v-icon>
+          </v-list-item-icon>
 
-          <v-list-item link >
-            <v-list-item-content>
+            <v-list-item-content  >
+              Кто мы?
+            </v-list-item-content>
+          </v-list-item>
+          <v-list-item link @click="$vuetify.goTo('#chtomidelaem',{offset:-150});" >
+             <v-list-item-icon>
+            <v-icon>mdi-trending-up</v-icon>
+          </v-list-item-icon>
+            <v-list-item-content  >
               Что мы делаем?
             </v-list-item-content>
           </v-list-item>
-           <v-list-item link >
+           <v-list-item link @click="$vuetify.goTo('#kakpoddergat',{offset:-150});">
+              <v-list-item-icon>
+            <v-icon>mdi-cash-multiple</v-icon>
+          </v-list-item-icon>
             <v-list-item-content>
               Как нас поддержать?
+
+            </v-list-item-content>
+   </v-list-item>
+
+             <v-list-item link @click="$vuetify.goTo('#stranici',{offset:-150});">
+              <v-list-item-icon>
+            <v-icon>mdi-web</v-icon>
+          </v-list-item-icon>
+            <v-list-item-content>
+              Наши страницы в сети
             </v-list-item-content>
           </v-list-item>
       
 
-          <v-list-item>
-           
-          </v-list-item>
        
+           
         </v-list>
 
 </v-navigation-drawer>
@@ -57,19 +79,19 @@
             
           </v-col>
         </v-row>
-         <v-card-actions> <v-btn color="#f9e176" block depressed @click="openlink('')" >Поддержать</v-btn></v-card-actions>
+         <v-card-actions> <v-btn color="#f9e176" block depressed @click="$vuetify.goTo('#kakpoddergat',{offset:-150});"" >Поддержать</v-btn></v-card-actions>
            </v-card>
 
        
        
 
     
-        <v-card class="mb-4"  flat  max-width="936px">
+        <v-card class="mb-4"  flat  max-width="936px"  id="chtomidelaem">
           <v-card-title>Что мы делаем?</v-card-title>
           <v-card-text v-html="pr.podrobnoe_opisanie"></v-card-text>
         </v-card>
 
-        <v-card class="mb-4" flat>
+        <v-card class="mb-4" flat id="kakpoddergat" >
           <v-card-title>Как нас поддержать?</v-card-title>
           <v-card-text>
             <ul v-for="(schet,gate) in pr.scheta" :key="gate">
@@ -78,7 +100,7 @@
           </v-card-text>
         </v-card>
 
-        <v-card flat  max-width="936px">
+        <v-card flat  max-width="936px" id="stranici">
           <v-card-title>Наши страницы в сети</v-card-title>
           <v-card-text>
             <ul v-for="(ssilka,servis) in pr.ssilki" :key="servis">
@@ -95,15 +117,15 @@
 </template>
 
 <script>
-import appbar from "../components/appbar.vue";
-import minitoolbar from "../components/minitoolbar.vue";
+
+
 import { db } from "../db";
 
 
 export default {
   components: {
-    appbar,
- minitoolbar,
+    
+
   },
   data: () => ({
     drawer: true,

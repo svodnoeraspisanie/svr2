@@ -1,0 +1,1105 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700' rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@1.x/dist/vuetify.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+
+    <style type="text/css">
+        .flexcard {
+            display: flex;
+            flex-direction: column;
+        }
+
+        a,
+        a:visited .ll {
+            color: #90caf9 !important;
+        }
+
+
+
+
+        .fade-enter-active,
+        .fade-leave-active {
+            transition: opacity .2s;
+        }
+
+        .fade-enter,
+        .fade-leave-to {
+            opacity: 0;
+        }
+
+        .fade-move {
+            transition: transform 1s;
+        }
+
+
+
+
+        .manual-v-layout {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-flex: 1;
+            -ms-flex: 1 1 auto;
+            flex: 1 1 auto;
+            -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+            -webkit-box-orient: horizontal;
+            -webkit-box-direction: normal;
+            -ms-flex-direction: row;
+            flex-direction: row;
+            padding-bottom: 8px !important;
+            padding-top: 8px !important;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div id="app">
+        <v-app dark>
+            <v-toolbar app fixed>
+                <v-progress-circular indeterminate color="white" v-show="loading"></v-progress-circular>
+
+                <v-btn flat round @click="showpage('list')">
+                    <svg width="170.561" height="30.68" viewBox="0 0 170.561 30.68">
+                        <g id="svgGroup" stroke-linecap="round" fill-rule="evenodd" style="stroke:#fff;stroke-width:0mm;fill:#fff">
+                            <path d="M 39.841 10 L 45.721 10 L 43.601 19.92 Q 43.326 21.103 43.107 22.077 A 173.323 173.323 0 0 0 42.921 22.92 Q 42.678 24.028 42.646 24.536 A 2.263 2.263 0 0 0 42.641 24.68 A 2.547 2.547 0 0 0 42.717 25.335 Q 42.94 26.171 43.812 26.325 A 2.461 2.461 0 0 0 44.241 26.36 A 2.673 2.673 0 0 0 45.078 26.235 A 2.189 2.189 0 0 0 46.041 25.6 A 4.597 4.597 0 0 0 46.427 25.092 Q 46.625 24.795 46.838 24.409 A 16.536 16.536 0 0 0 47.081 23.948 A 11.91 11.91 0 0 1 47.081 23.8 Q 47.081 20.84 48.261 17.58 Q 49.441 14.32 51.781 12.06 Q 54.121 9.8 57.361 9.8 A 7.702 7.702 0 0 1 58.217 9.844 Q 59.132 9.947 59.69 10.288 A 2.109 2.109 0 0 1 59.801 10.36 Q 60.601 10.92 60.601 11.84 L 60.601 12.12 L 61.041 10 L 66.801 10 L 63.921 23.6 A 4.802 4.802 0 0 0 63.768 24.586 A 5.566 5.566 0 0 0 63.761 24.88 A 2.605 2.605 0 0 0 63.839 25.55 Q 64.068 26.408 64.964 26.565 A 2.529 2.529 0 0 0 65.401 26.6 A 2.248 2.248 0 0 0 66.939 25.991 A 3.394 3.394 0 0 0 67.341 25.56 A 6.279 6.279 0 0 0 67.88 24.742 A 5.601 5.601 0 0 1 67.955 24.375 A 4.464 4.464 0 0 1 68.461 23.14 A 7.111 7.111 0 0 1 68.634 22.862 A 11.528 11.528 0 0 0 68.641 22.84 L 68.649 22.84 A 7.111 7.111 0 0 1 69.544 21.745 A 6.369 6.369 0 0 1 70.041 21.3 A 17.741 17.741 0 0 1 70.779 20.74 Q 71.507 20.215 72.481 19.6 A 25.713 25.713 0 0 0 73.585 18.896 Q 74.597 18.212 75.223 17.614 A 6.965 6.965 0 0 0 75.341 17.5 A 3.167 3.167 0 0 0 76.28 15.209 A 4.135 4.135 0 0 0 76.281 15.16 A 2.713 2.713 0 0 0 76.226 14.6 Q 76.152 14.25 75.979 13.983 A 1.548 1.548 0 0 0 75.821 13.78 A 1.452 1.452 0 0 0 75.169 13.379 Q 74.85 13.28 74.441 13.28 A 3.247 3.247 0 0 0 72.311 14.073 A 4.31 4.31 0 0 0 72.081 14.28 A 5.882 5.882 0 0 0 71.38 15.105 Q 70.745 15.994 70.158 17.352 A 19.254 19.254 0 0 0 70.121 17.44 L 68.201 17.44 A 20.817 20.817 0 0 1 69.267 14.913 Q 70.27 12.938 71.561 11.66 A 6.864 6.864 0 0 1 75.435 9.751 A 9.59 9.59 0 0 1 76.921 9.64 A 7.92 7.92 0 0 1 78.677 9.825 A 5.666 5.666 0 0 1 80.781 10.76 A 3.618 3.618 0 0 1 82.224 13.093 A 5.619 5.619 0 0 1 82.321 14.16 A 6.955 6.955 0 0 1 82.162 15.676 A 5.409 5.409 0 0 1 81.601 17.16 A 7.451 7.451 0 0 1 80.576 18.58 A 6.43 6.43 0 0 1 79.841 19.26 A 20.279 20.279 0 0 1 78.987 19.895 Q 78.505 20.236 77.943 20.598 A 39.574 39.574 0 0 1 77.241 21.04 A 28.144 28.144 0 0 0 76.326 21.624 Q 75.256 22.339 74.681 22.9 A 2.651 2.651 0 0 0 74.068 23.784 A 2.523 2.523 0 0 0 73.881 24.76 Q 73.881 26.599 76.017 26.843 A 6.218 6.218 0 0 0 76.721 26.88 Q 78.521 26.88 80.141 25.96 A 9.052 9.052 0 0 0 81.339 25.133 Q 81.922 24.664 82.535 24.046 A 22.025 22.025 0 0 0 83.087 23.466 A 15.579 15.579 0 0 1 83.327 21.158 Q 83.553 19.863 83.989 18.455 A 27.145 27.145 0 0 1 84.201 17.8 Q 85.321 14.48 87.801 12.06 A 8.424 8.424 0 0 1 93.347 9.661 A 11.151 11.151 0 0 1 94.041 9.64 Q 99.161 9.64 99.161 16.04 L 99.161 16.08 Q 99.276 16.119 99.579 16.12 A 4.967 4.967 0 0 0 99.601 16.12 Q 100.627 16.12 101.894 15.697 A 12.355 12.355 0 0 0 102.641 15.42 A 15.556 15.556 0 0 0 102.784 15.361 L 103.921 10 L 109.681 10 L 109.241 12.08 A 7.185 7.185 0 0 1 111.104 10.562 A 6.117 6.117 0 0 1 114.121 9.8 Q 117.149 9.8 118.016 12.347 A 5.937 5.937 0 0 1 118.241 13.24 A 9.109 9.109 0 0 1 119.719 11.456 A 5.862 5.862 0 0 1 123.801 9.84 A 6.014 6.014 0 0 1 125.158 9.985 Q 126.246 10.236 127.004 10.927 A 3.866 3.866 0 0 1 127.041 10.96 A 3.504 3.504 0 0 1 127.972 12.464 Q 128.157 13.027 128.214 13.712 A 7.743 7.743 0 0 1 128.241 14.36 Q 128.241 15.52 127.961 16.94 Q 127.768 17.916 127.462 19.186 A 95.936 95.936 0 0 1 127.161 20.4 Q 126.841 21.64 126.581 22.82 A 16.205 16.205 0 0 0 126.449 23.477 Q 126.339 24.1 126.323 24.54 A 3.962 3.962 0 0 0 126.321 24.68 Q 126.321 25.48 126.681 25.92 A 1.059 1.059 0 0 0 127.114 26.228 Q 127.294 26.301 127.523 26.334 A 2.831 2.831 0 0 0 127.921 26.36 A 2.703 2.703 0 0 0 128.832 26.213 A 2.309 2.309 0 0 0 129.841 25.5 A 5.598 5.598 0 0 0 130.291 24.871 A 9.603 9.603 0 0 0 130.723 24.093 A 10.885 10.885 0 0 1 130.721 23.84 Q 130.721 21.391 131.629 18.455 A 27.145 27.145 0 0 1 131.841 17.8 Q 132.961 14.48 135.441 12.06 A 8.424 8.424 0 0 1 140.987 9.661 A 11.151 11.151 0 0 1 141.681 9.64 Q 146.801 9.64 146.801 16.04 L 146.801 16.08 Q 146.916 16.119 147.219 16.12 A 4.967 4.967 0 0 0 147.241 16.12 Q 148.267 16.12 149.534 15.697 A 12.355 12.355 0 0 0 150.281 15.42 A 15.556 15.556 0 0 0 150.456 15.348 L 151.601 10 L 157.361 10 L 155.641 17.92 Q 158.361 14.72 159.961 13.04 A 23.63 23.63 0 0 1 161.1 11.917 Q 161.666 11.399 162.194 10.996 A 10.809 10.809 0 0 1 162.901 10.5 Q 164.241 9.64 165.521 9.64 A 3.348 3.348 0 0 1 166.517 9.776 Q 167.612 10.117 167.899 11.319 A 4.153 4.153 0 0 1 168.001 12.28 A 3.524 3.524 0 0 1 167.916 13.076 Q 167.774 13.689 167.394 14.121 A 2.237 2.237 0 0 1 167.341 14.18 A 2.153 2.153 0 0 1 166.246 14.796 Q 165.898 14.879 165.487 14.88 A 4.033 4.033 0 0 1 165.481 14.88 A 3.216 3.216 0 0 1 164.835 14.819 Q 164.455 14.741 164.165 14.563 A 1.666 1.666 0 0 1 163.801 14.26 A 2.045 2.045 0 0 1 163.401 13.622 Q 163.278 13.302 163.278 12.946 A 2.12 2.12 0 0 1 163.281 12.84 Q 162.521 13.32 161.921 13.92 Q 161.321 14.52 160.601 15.48 A 21.077 21.077 0 0 1 159.783 16.505 Q 159.368 16.992 158.964 17.397 A 11.878 11.878 0 0 1 158.961 17.4 Q 159.761 17.24 160.641 17.24 A 9.325 9.325 0 0 1 160.672 17.24 Q 162.629 17.247 163.496 18.075 A 2.11 2.11 0 0 1 163.581 18.16 A 2.853 2.853 0 0 1 164.18 19.18 Q 164.441 19.925 164.441 20.96 Q 164.441 21.382 164.304 22.214 A 26.316 26.316 0 0 1 164.201 22.8 Q 164.003 23.918 163.968 24.604 A 5.425 5.425 0 0 0 163.961 24.88 Q 163.961 26.36 165.561 26.36 A 2.662 2.662 0 0 0 166.365 26.244 A 2.113 2.113 0 0 0 167.341 25.6 A 4.749 4.749 0 0 0 167.718 25.092 Q 168.241 24.293 168.881 22.84 L 170.561 22.84 A 20.716 20.716 0 0 1 169.351 25.723 Q 166.999 30.24 163.281 30.24 A 7.776 7.776 0 0 1 161.904 30.126 Q 160.502 29.874 159.661 29.06 A 3.883 3.883 0 0 1 158.572 27.068 A 5.79 5.79 0 0 1 158.441 25.8 Q 158.441 25.343 158.627 24.138 A 51.979 51.979 0 0 1 158.721 23.56 Q 158.921 22.56 158.921 22 A 3.559 3.559 0 0 0 158.858 21.299 Q 158.637 20.206 157.64 20.093 A 2.132 2.132 0 0 0 157.401 20.08 A 1.756 1.756 0 0 0 156.449 20.362 A 2.101 2.101 0 0 0 156.421 20.38 Q 155.961 20.68 154.841 21.56 L 153.081 30 L 147.321 30 L 150.062 17.192 A 15.268 15.268 0 0 1 147.494 17.967 A 17.566 17.566 0 0 1 146.681 18.12 A 21.132 21.132 0 0 1 146.136 21.43 A 15.805 15.805 0 0 1 145.041 24.48 A 12.581 12.581 0 0 1 143.636 26.758 A 9.625 9.625 0 0 1 141.641 28.68 Q 139.561 30.16 137.121 30.16 Q 134.161 30.16 132.441 28.64 A 4.666 4.666 0 0 1 131.194 26.803 A 8.518 8.518 0 0 1 130.148 28.187 A 5.398 5.398 0 0 1 129.541 28.74 A 7.8 7.8 0 0 1 127.879 29.739 A 5.873 5.873 0 0 1 125.521 30.24 Q 123.925 30.24 122.885 29.684 A 3.334 3.334 0 0 1 121.941 28.94 A 4.563 4.563 0 0 1 120.828 26.305 A 6.013 6.013 0 0 1 120.801 25.72 A 8.469 8.469 0 0 1 120.844 24.884 Q 120.887 24.461 120.969 23.994 A 14.512 14.512 0 0 1 121.001 23.82 Q 121.201 22.76 121.421 21.76 A 94.62 94.62 0 0 1 121.498 21.41 Q 121.65 20.734 121.716 20.498 A 2.994 2.994 0 0 1 121.721 20.48 Q 122.041 19.08 122.321 17.72 Q 122.588 16.422 122.6 15.598 A 5.257 5.257 0 0 0 122.601 15.52 A 4.28 4.28 0 0 0 122.546 14.801 Q 122.319 13.48 121.161 13.48 A 2.057 2.057 0 0 0 119.851 13.957 A 3.263 3.263 0 0 0 119.321 14.5 A 6.297 6.297 0 0 0 118.641 15.592 Q 118.296 16.289 118.041 17.16 L 115.321 30 L 109.561 30 L 112.481 16.2 Q 112.601 15.72 112.601 15.2 A 3.82 3.82 0 0 0 112.555 14.58 Q 112.373 13.482 111.471 13.442 A 1.566 1.566 0 0 0 111.401 13.44 A 2.28 2.28 0 0 0 109.834 14.063 A 3.39 3.39 0 0 0 109.461 14.46 Q 108.641 15.48 108.161 17.16 L 105.441 30 L 99.681 30 L 102.394 17.203 A 15.268 15.268 0 0 1 99.854 17.967 A 17.566 17.566 0 0 1 99.041 18.12 A 21.132 21.132 0 0 1 98.496 21.43 A 15.805 15.805 0 0 1 97.401 24.48 A 12.581 12.581 0 0 1 95.996 26.758 A 9.625 9.625 0 0 1 94.001 28.68 Q 91.921 30.16 89.481 30.16 Q 86.521 30.16 84.801 28.64 A 4.666 4.666 0 0 1 83.497 26.642 A 7.425 7.425 0 0 1 83.186 25.365 A 23.341 23.341 0 0 1 82.866 25.744 A 17.084 17.084 0 0 1 80.181 28.26 A 10.014 10.014 0 0 1 74.274 30.237 A 12.34 12.34 0 0 1 74.001 30.24 Q 71.041 30.24 69.421 29.12 A 3.644 3.644 0 0 1 68.05 27.351 A 7.685 7.685 0 0 1 67.033 28.412 A 5.617 5.617 0 0 1 66.661 28.7 A 9.301 9.301 0 0 1 64.886 29.697 A 6.71 6.71 0 0 1 62.281 30.24 A 4.878 4.878 0 0 1 61.113 30.108 A 3.428 3.428 0 0 1 59.581 29.3 Q 58.644 28.437 58.399 26.85 A 6.845 6.845 0 0 1 58.361 26.56 A 12.285 12.285 0 0 1 56.973 28.209 A 9.977 9.977 0 0 1 55.781 29.22 A 5.419 5.419 0 0 1 53.175 30.198 A 6.953 6.953 0 0 1 52.401 30.24 Q 50.121 30.24 48.601 28.68 A 4.738 4.738 0 0 1 47.561 26.978 A 7.639 7.639 0 0 1 47.476 26.723 A 10.903 10.903 0 0 1 46.278 28.242 A 6.148 6.148 0 0 1 41.721 30.24 A 6.26 6.26 0 0 1 40.355 30.1 Q 39.117 29.823 38.321 29 Q 37.121 27.76 37.121 26 Q 37.121 24.856 37.708 21.951 A 94.834 94.834 0 0 1 38.001 20.56 L 39.881 12.04 A 5.897 5.897 0 0 0 38.863 12.123 Q 38.298 12.222 37.841 12.439 A 3.158 3.158 0 0 0 37.421 12.68 Q 36.481 13.32 35.841 14.84 A 13.258 13.258 0 0 0 35.448 15.911 Q 35.026 17.223 34.641 19.12 A 173.596 173.596 0 0 1 34.217 21.231 Q 33.62 24.104 33.163 25.702 A 24.725 24.725 0 0 1 33.141 25.78 A 11.4 11.4 0 0 1 32.636 27.192 Q 32.132 28.337 31.441 29.08 A 3.544 3.544 0 0 1 29.513 30.136 A 5.271 5.271 0 0 1 28.441 30.24 A 5.617 5.617 0 0 1 26.961 30.055 A 4.081 4.081 0 0 1 25.021 28.9 Q 23.761 27.56 23.761 25.64 A 4.695 4.695 0 0 1 23.843 24.735 Q 23.949 24.197 24.19 23.774 A 2.632 2.632 0 0 1 24.401 23.46 A 2.064 2.064 0 0 1 25.913 22.651 A 2.851 2.851 0 0 1 26.161 22.64 Q 27.121 22.64 27.721 23.24 A 1.962 1.962 0 0 1 28.32 24.654 A 2.338 2.338 0 0 1 28.321 24.68 Q 28.321 25.64 27.841 26.14 A 1.509 1.509 0 0 1 27.485 26.419 Q 27.21 26.571 26.894 26.571 A 1.398 1.398 0 0 1 26.721 26.56 A 2.127 2.127 0 0 0 26.8 27.168 Q 27.001 27.841 27.712 28.018 A 2.369 2.369 0 0 0 28.281 28.08 A 2.227 2.227 0 0 0 29.954 27.361 A 2.896 2.896 0 0 0 30.081 27.22 A 4.579 4.579 0 0 0 30.552 26.527 Q 30.973 25.781 31.31 24.675 A 14.521 14.521 0 0 0 31.321 24.64 Q 31.841 22.92 32.401 19.92 A 45.363 45.363 0 0 1 32.898 17.592 Q 33.477 15.209 34.181 13.72 Q 35.201 11.56 36.541 10.78 A 5.49 5.49 0 0 1 38.139 10.171 Q 38.824 10.021 39.613 10.003 A 9.581 9.581 0 0 1 39.841 10 Z M 12.081 15.32 L 8.921 30 L 3.161 30 L 8.921 3.28 A 5.655 5.655 0 0 0 7.205 3.585 A 4.436 4.436 0 0 0 5.061 5.2 A 5.335 5.335 0 0 0 4.354 6.612 Q 3.721 8.453 3.721 11.56 Q 3.721 13.04 4.001 13.62 Q 4.232 14.099 4.272 14.237 A 0.174 0.174 0 0 1 4.281 14.28 A 8.344 8.344 0 0 1 3.153 14.209 Q 1.822 14.027 1.061 13.38 Q 0.001 12.48 0.001 10.4 Q 0.001 7.56 1.401 5.22 A 8.665 8.665 0 0 1 3.63 2.773 Q 4.605 2.031 5.861 1.44 A 13.77 13.77 0 0 1 8.826 0.462 Q 10.967 0 13.641 0 Q 14.544 0 16.411 0.193 A 77.42 77.42 0 0 1 16.481 0.2 A 202.824 202.824 0 0 0 18.062 0.316 Q 20.021 0.451 21.073 0.475 A 18.163 18.163 0 0 0 21.481 0.48 Q 23.601 0.48 25.081 0 A 7.779 7.779 0 0 0 25.059 0.117 Q 25.007 0.399 24.868 1.21 A 586.242 586.242 0 0 0 24.801 1.6 Q 24.561 3 23.661 3.9 A 3.021 3.021 0 0 1 21.953 4.749 A 4.258 4.258 0 0 1 21.281 4.8 A 26.098 26.098 0 0 1 18.575 4.65 Q 16.696 4.453 14.521 4 L 12.521 13.28 Q 14.301 12.737 15.717 12.603 A 9.431 9.431 0 0 1 16.601 12.56 Q 19.283 12.56 20.907 13.847 A 5.222 5.222 0 0 1 21.661 14.58 Q 23.273 16.495 23.356 19.616 A 12.879 12.879 0 0 1 23.361 19.96 A 11.789 11.789 0 0 1 23.063 22.53 A 15.91 15.91 0 0 1 22.421 24.66 Q 21.481 27.16 19.561 28.92 A 6.644 6.644 0 0 1 15.411 30.659 A 8.704 8.704 0 0 1 14.801 30.68 Q 12.841 30.68 11.781 29.76 A 2.989 2.989 0 0 1 10.727 27.588 A 3.958 3.958 0 0 1 10.721 27.36 A 4.194 4.194 0 0 1 10.816 26.495 Q 10.899 26.106 11.051 25.684 A 7.713 7.713 0 0 1 11.161 25.4 Q 12.281 26.84 13.841 26.84 A 2.913 2.913 0 0 0 16.243 25.667 A 4.778 4.778 0 0 0 16.821 24.7 A 10.709 10.709 0 0 0 17.685 21.641 A 13.594 13.594 0 0 0 17.801 19.84 A 9.341 9.341 0 0 0 17.644 18.044 Q 17.083 15.195 14.514 14.944 A 5.294 5.294 0 0 0 14.001 14.92 Q 12.921 14.92 12.081 15.32 Z M 91.081 26.56 A 1.88 1.88 0 0 0 91.966 26.326 Q 92.257 26.173 92.548 25.918 A 4.816 4.816 0 0 0 93.001 25.46 A 7.377 7.377 0 0 0 93.768 24.39 Q 94.101 23.831 94.399 23.152 A 14.805 14.805 0 0 0 94.681 22.46 A 17.867 17.867 0 0 0 95.424 19.921 A 22.193 22.193 0 0 0 95.721 18.24 A 1.234 1.234 0 0 1 94.78 17.44 Q 94.684 17.191 94.654 16.868 A 3.335 3.335 0 0 1 94.641 16.56 Q 94.641 15.447 95.212 14.85 A 1.96 1.96 0 0 1 95.881 14.4 Q 95.819 13.386 95.616 12.856 A 1.523 1.523 0 0 0 95.481 12.58 A 1.018 1.018 0 0 0 94.903 12.153 Q 94.726 12.098 94.509 12.085 A 2.349 2.349 0 0 0 94.361 12.08 A 2.044 2.044 0 0 0 93.261 12.422 Q 92.517 12.89 91.801 14 A 14.774 14.774 0 0 0 90.619 16.255 A 19.967 19.967 0 0 0 89.801 18.6 Q 89.041 21.28 89.041 23.32 A 13.178 13.178 0 0 0 89.065 24.151 Q 89.143 25.377 89.471 25.885 A 1.202 1.202 0 0 0 89.481 25.9 A 1.35 1.35 0 0 0 90.151 26.415 Q 90.392 26.506 90.695 26.54 A 3.461 3.461 0 0 0 91.081 26.56 Z M 138.721 26.56 A 1.88 1.88 0 0 0 139.606 26.326 Q 139.897 26.173 140.188 25.918 A 4.816 4.816 0 0 0 140.641 25.46 A 7.377 7.377 0 0 0 141.408 24.39 Q 141.741 23.831 142.039 23.152 A 14.805 14.805 0 0 0 142.321 22.46 A 17.867 17.867 0 0 0 143.064 19.921 A 22.193 22.193 0 0 0 143.361 18.24 A 1.234 1.234 0 0 1 142.42 17.44 Q 142.324 17.191 142.294 16.868 A 3.335 3.335 0 0 1 142.281 16.56 Q 142.281 15.447 142.852 14.85 A 1.96 1.96 0 0 1 143.521 14.4 Q 143.459 13.386 143.256 12.856 A 1.523 1.523 0 0 0 143.121 12.58 A 1.018 1.018 0 0 0 142.543 12.153 Q 142.366 12.098 142.149 12.085 A 2.349 2.349 0 0 0 142.001 12.08 A 2.044 2.044 0 0 0 140.901 12.422 Q 140.157 12.89 139.441 14 A 14.774 14.774 0 0 0 138.259 16.255 A 19.967 19.967 0 0 0 137.441 18.6 Q 136.681 21.28 136.681 23.32 A 13.178 13.178 0 0 0 136.705 24.151 Q 136.783 25.377 137.111 25.885 A 1.202 1.202 0 0 0 137.121 25.9 A 1.35 1.35 0 0 0 137.791 26.415 Q 138.032 26.506 138.335 26.54 A 3.461 3.461 0 0 0 138.721 26.56 Z M 58.321 22.84 L 60.241 13.8 A 1.44 1.44 0 0 0 60.084 13.158 A 2.076 2.076 0 0 0 59.841 12.78 A 1.262 1.262 0 0 0 59.19 12.356 Q 58.929 12.28 58.601 12.28 Q 57.227 12.28 56.089 13.651 A 6.814 6.814 0 0 0 55.721 14.14 A 13.044 13.044 0 0 0 54.458 16.473 A 17.347 17.347 0 0 0 53.721 18.62 A 23.6 23.6 0 0 0 53.282 20.498 Q 53.093 21.5 53.031 22.394 A 12.229 12.229 0 0 0 53.001 23.24 A 10.788 10.788 0 0 0 53.028 24.046 Q 53.121 25.273 53.52 25.736 A 0.96 0.96 0 0 0 53.581 25.8 Q 54.161 26.36 55.001 26.36 A 2.326 2.326 0 0 0 56.057 26.095 Q 56.521 25.861 56.981 25.42 Q 57.961 24.48 58.321 22.84 Z" vector-effect="non-scaling-stroke" />
+                        </g>
+                    </svg>
+                </v-btn>
+                <v-divider vertical></v-divider>
+
+                <transition name='fade' mode="out-in">
+
+                    <div v-if="page=='list'">
+                        <v-btn outline small round v-if="seltags.length==0" color="blue lighten-3" :key="'all'"> Весь список </v-btn>
+                        <v-btn v-for="tag in seltags" outline small round color="blue lighten-3" @click.stop="rmtag(tag)" :key="tag"> {{tag}}</v-btn>
+
+                        <v-menu transition="slide-y-transition" bottom>
+                            <v-btn slot="activator" outline icon small :key="'plus'" color="blue lighten-3"> +</v-btn>
+                            <v-list>
+                                <v-list-tile v-for="(item, i) in elsetags" :key="i" @click="addtag(item)">
+                                    <v-list-tile-title>{{ item}}</v-list-tile-title>
+                                </v-list-tile>
+                            </v-list>
+                        </v-menu>
+                    </div>
+
+
+                    <div v-if="page=='help'">
+                        <h2> &nbsp;&nbsp;&nbsp; Ответы на вопросы </h2>
+                    </div>
+
+                    <div v-if="page=='content'">
+                        <h2> &nbsp;&nbsp;&nbsp; {{content.title}}</h2>
+                    </div>
+                </transition>
+
+
+
+                <v-spacer></v-spacer>
+
+                <v-divider vertical></v-divider>
+
+
+                <v-btn icon @click.stop="showhidden()">
+
+                    <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                        <path v-bind:fill="eyecolor" d="M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9M12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17M12,4.5C7,4.5 2.73,7.61 1,12C2.73,16.39 7,19.5 12,19.5C17,19.5 21.27,16.39 23,12C21.27,7.61 17,4.5 12,4.5Z" />
+                    </svg>
+                </v-btn>
+
+                <v-menu transition="slide-y-transition" :close-on-content-click="false" v-model="downloadmenu">
+                    <v-btn slot="activator" v-if="(new Date(settings.version) > new Date(appversion))||window.location.host!=''" icon>
+                        <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                            <path fill="#F44336" d="M5,20H19V18H5M19,9H15V3H9V9H5L12,16L19,9Z" />
+                        </svg>
+                    </v-btn>
+                    <v-card max-width="350px">
+                        <v-card-title>
+                            Чтобы скачать приложение себе на компьютер, нажмите на ссылку нижу правой кнопкой мышки и в появившемся меню выберите пункт "Сохранить ссылку как"
+                            <a v-bind:href="settings.link"> <span class="text-truncate">{{settings.link}}</span></a>
+                        </v-card-title>
+                    </v-card>
+                </v-menu>
+
+                <v-menu transition="slide-y-transition" :close-on-content-click="false" v-model="settingsmenu">
+                    <v-btn slot="activator" icon>
+                        <svg width="20" height="20" viewBox="0 0 20 20">
+                            <path fill="#fff" d="M15.95 10.78c.03-.25.05-.51.05-.78s-.02-.53-.06-.78l1.69-1.32c.15-.12.19-.34.1-.51l-1.6-2.77c-.1-.18-.31-.24-.49-.18l-1.99.8c-.42-.32-.86-.58-1.35-.78L12 2.34c-.03-.2-.2-.34-.4-.34H8.4c-.2 0-.36.14-.39.34l-.3 2.12c-.49.2-.94.47-1.35.78l-1.99-.8c-.18-.07-.39 0-.49.18l-1.6 2.77c-.1.18-.06.39.1.51l1.69 1.32c-.04.25-.07.52-.07.78s.02.53.06.78L2.37 12.1c-.15.12-.19.34-.1.51l1.6 2.77c.1.18.31.24.49.18l1.99-.8c.42.32.86.58 1.35.78l.3 2.12c.04.2.2.34.4.34h3.2c.2 0 .37-.14.39-.34l.3-2.12c.49-.2.94-.47 1.35-.78l1.99.8c.18.07.39 0 .49-.18l1.6-2.77c.1-.18.06-.39-.1-.51l-1.67-1.32zM10 13c-1.65 0-3-1.35-3-3s1.35-3 3-3 3 1.35 3 3-1.35 3-3 3z" /></svg>
+                    </v-btn>
+                    <v-card style="width:315px">
+                        <v-container>
+                            <v-layout row wrap>
+                                <v-flex xs6>
+                                    <v-text-field label="Код 1" v-model="inputacc1"></v-text-field>
+                                </v-flex xs6>
+                                <v-flex xs6>
+                                    <v-text-field label="Код 2" v-model="inputacc2"></v-text-field>
+                                </v-flex xs6>
+                                <v-flex xs12>
+                                    <v-text-field label="Ключ" v-model="inputkey"></v-text-field>
+                                </v-flex xs12>
+                                <v-flex xs12>
+                                    <v-text-field label="Валюта" v-model="inputassid"></v-text-field>
+                                </v-flex xs12>
+                                <v-flex xs12>
+
+
+                                    <v-btn flat @click="settingsmenu=false;inputacc1=control_acc;inputacc2=data_acc;inputkey=data_wif;inputassid=assetid;">Отменить</v-btn>
+                                    <v-btn color="orange" flat @click="settingsmenu=false;assetid=inputassid;control_acc=inputacc1;data_acc=inputacc2;data_wif=inputkey;load();updatelist();">Установить</v-btn>
+                                </v-flex xs12>
+                            </v-layout>
+                        </v-container>
+
+
+
+
+                    </v-card>
+
+
+                </v-menu>
+
+
+                <v-btn icon @click.stop="window.open('mailto:'+settings.mail)">
+                    <svg style="width:25px;height:25px" viewBox="0 0 24 24">
+                        <path fill="#E0F2F1" d="M20,8L12,13L4,8V6L12,11L20,6M20,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V6C22,4.89 21.1,4 20,4Z" />
+                    </svg>
+                </v-btn>
+
+
+                <v-btn icon @click.stop="showpage('help')">
+                    <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                        <path fill="#FFEB3B" d="M15.07,11.25L14.17,12.17C13.45,12.89 13,13.5 13,15H11V14.5C11,13.39 11.45,12.39 12.17,11.67L13.41,10.41C13.78,10.05 14,9.55 14,9C14,7.89 13.1,7 12,7A2,2 0 0,0 10,9H8A4,4 0 0,1 12,5A4,4 0 0,1 16,9C16,9.88 15.64,10.67 15.07,11.25M13,19H11V17H13M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12C22,6.47 17.5,2 12,2Z" />
+                    </svg>
+                </v-btn>
+
+
+            </v-toolbar>
+
+            <v-window v-model="page">
+                <v-btn fab bottom fixed right @click="app.$vuetify.goTo(0,{})">
+                    <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                        <path fill="#fff" d="M14,20H10V11L6.5,14.5L4.08,12.08L12,4.16L19.92,12.08L17.5,14.5L14,11V20Z"> </path>
+                    </svg></v-btn>
+
+
+                <v-window-item :value="'content'">
+                    <v-content>
+                        <v-container grid-list-md>
+                            <v-layout justify-center row>
+                                <v-flex xs8>
+                                    <v-card>
+                                        <v-card-title class="title grey darken-1 pb-1">{{content.title}}</v-card-title>
+                                        <v-card-title class="subheading grey darken-1 pt-1">{{content.subtitle}}</v-card-title>
+                                        <v-card-text v-html="content.description"></v-card-text>
+                                    </v-card>
+                                </v-flex>
+
+                                <v-flex xs4>
+                                    <v-layout column>
+
+
+                                        <v-flex>
+                                            <v-card>
+                                                <v-img :src="content.imgs[0]" contain aspect-ratio="1.5">
+                                                    <v-layout slot="placeholder" fill-height align-center justify-center ma-0>
+                                                        <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
+                                                    </v-layout>
+
+                                                </v-img>
+                                            </v-card>
+                                        </v-flex>
+
+
+
+                                        <v-flex>
+                                            <v-card>
+                                                <v-card-title v-if="content.btsacc" class="subheading grey darken-1 pt-1 pb-1">Счёт</v-card-title>
+                                                <v-card-title class="headline pt-1">
+                                                    <template v-if="content.btsacc">
+                                                        <a v-bind:href='settings.linktoaccount+content.account ' target="_blank">{{content.account}} </a> : ~{{content.balance}}
+                                                    </template>
+
+
+                                                </v-card-title>
+                                                <v-card-actions style="margin-top: -20px;">
+                                                    <v-btn color="success" block @click="supportdialog=true">Поддержать</v-btn>
+
+
+                                                    <v-dialog v-model="supportdialog " width="700px">
+                                                        <v-card>
+                                                            <v-card-title class="headline grey lighten-2 pt-2 pb-2" primary-title x> <span class="black--text">Как поддержать?</span></v-card-title>
+                                                            <template v-if="content.btsacc">
+                                                                <v-card-text class="pb-1 pt-2">Если у вас уже есть счёт в BitShares, то вы можете: </v-card-text>
+                                                                <v-card-actions>
+
+                                                                    <v-btn color="success" block @click="window.open('https://market.rudex.org/#/transfer?&memo=%D0%91%D0%BB%D0%B0%D0%B3%D0%BE%D1%82%D0%BE%D0%BA')"> Перевести средства на счёт используя RuDEX</v-btn>
+                                                                </v-card-actions>
+                                                                <v-divider></v-divider>
+                                                                <v-card-text class="pb-1 pt-2">Если у вас ещё нет счёта, то его можно завести там же или воспользоваться любым другим сайтом или кошельком BitShares:</v-card-text>
+
+                                                                <v-card-text class="pb-2 pt-0">
+                                                                    <v-btn color="primary" small @click="window.open('https://wallet.bitshares.eu/')">bitshares.eu </v-btn>
+                                                                    <v-btn color="primary" small @click="window.open('https://openledger.io/market/')">OpenLedger </v-btn>
+                                                                    <v-btn color="primary" small @click="window.open('https://exchange.easydex.net/')">GDEX </v-btn>
+                                                                    <v-btn color="primary" small @click="window.open('https://ex.xbts.io')">XBts </v-btn>
+                                                                    <v-btn color="primary" small @click="window.open('https://wallet.crypto-bridge.org/')">CryptoBridge </v-btn>
+                                                                    <v-btn color="primary" small @click="window.open('https://exchange.easydex.net/')">EasyDEX </v-btn>
+                                                                    <v-btn color="primary" small @click="window.open('https://www.deex.exchange/')">DEEX </v-btn>
+                                                                    <v-btn color="primary" small @click="window.open('https://trade.eubx.io/')">EUBX </v-btn>
+                                                                    <v-btn color="primary" small @click="window.open('https://wallet.escodex.com/')">EscoDEX </v-btn>
+                                                                    <v-btn color="primary" small @click="window.open('https://citadel.li/wallet/')">Citadel </v-btn>
+                                                                </v-card-text>
+                                                                <v-divider></v-divider>
+
+                                                                <v-card-text class="pb-1 pt-2">
+                                                                    Если вы не желаете открывать себе счёт, то можете воспользоваться одним из шлюзов для ввода и вывода средств в Bitshares или обменником и внести деньги прямо на счёт. Этим же способом можно пополнить свой счёт. <br>
+                                                                    Сайты:
+                                                                    <v-btn color="primary" small @click="window.open('https://mrkt.cash/offers/RUB/bitRUBLE/')"> mrkt.cash </v-btn>
+                                                                    <v-btn color="primary" small @click="window.open('https://bitruble.io')"> bitruble.io</v-btn>
+                                                                    <v-btn color="primary" small @click="window.open('https://ecurrex.ru')">ecurrex.ru</v-btn>
+                                                                    <br>Телеграм-боты:
+                                                                    <v-btn color="primary" small @click="window.open('https://t.me/mrkt_cash_bot')"> @mrkt_cash_bot</v-btn>
+                                                                    <v-btn color="primary" small @click="window.open('https://t.me/@Bitshares_DEX_p2p_Bot')"> @Bitshares_DEX_p2p_Bot</v-btn>
+                                                                </v-card-text>
+
+                                                                <v-divider v-if="Object.keys(content.gates).length>0"></v-divider>
+                                                                <v-card-text v-if="Object.keys(content.gates).length>0" class="pb-1 pt-1">
+                                                                    Так же вы можете пополнить счёт воспользовавщись шлюзами для различных криптовалют. Для этого переведите средства счета:
+                                                                    <ul style="width:100%">
+                                                                        <li v-for="(adress,gate) in content.gates"> {{gate}} : {{adress}}
+                                                                        </li>
+                                                                    </ul>
+                                                                </v-card-text>
+
+                                                                <v-divider v-if="Object.keys(content.others).length>0"></v-divider>
+                                                                <v-card-text class="subheading" v-if="Object.keys(content.others).length>0" class="pb-1 pt-1">
+                                                                    Или в вы можете воспользоваться прочими счетами и способами
+                                                                    <ul style="width:100%">
+                                                                        <li v-for="(adress,gate) in content.others"> {{gate}} : <span v-html="adress"></span>
+                                                                        </li>
+                                                                    </ul>
+                                                                </v-card-text>
+
+                                                            </template>
+
+                                                            <template v-else>
+                                                                <v-card-text class="pt-2" v-if="Object.keys(content.others).length>0">
+
+                                                                    Вы можете перевести средства на один из счетов относящихся к данному делу, сообществу или человеку.
+                                                                    <ul style="width:100%" class="pt-2">
+                                                                        <li v-for="(adress,gate) in content.others"> {{gate}} : <span v-html="adress"></span>
+                                                                        </li>
+                                                                    </ul>
+                                                                </v-card-text>
+
+                                                            </template>
+                                                            <v-divider></v-divider>
+
+                                                            <v-card-actions>
+                                                                <v-spacer></v-spacer>
+                                                                <v-btn color="warning" @click="supportdialog = false"> Закрыть </v-btn>
+                                                            </v-card-actions>
+                                                        </v-card>
+                                                    </v-dialog>
+
+
+
+
+
+
+
+
+                                                </v-card-actions>
+                                            </v-card>
+                                        </v-flex>
+
+                                        <v-flex v-if="content.btsacc">
+                                            <v-card>
+                                                <v-card-title class="subheading grey darken-1 pt-1 pb-1">Управители счёта</v-card-title>
+                                                <v-card-title class="pt-1 pb-1">
+                                                    <ul style="width:100%">
+                                                        <li v-for="owner in content.owners.account_auths">
+                                                            <a v-bind:href='settings.linktoaccount+owner[0]' target="_blank"> {{owner[0]}}</a> <b>(вес голоса: {{owner[1]}})</b>
+                                                        </li>
+                                                        <li v-for="owner in content.owners.address_auths" style="word-wrap: break-word;">
+                                                            {{owner[0]}} <b>(вес голоса: {{owner[1]}})</b>
+                                                        </li>
+                                                        <li v-for="owner in content.owners.key_auths" style="word-wrap: break-word;">
+                                                            {{owner[0]}} <b>(вес голоса: {{owner[1]}})</b>
+                                                        </li>
+                                                    </ul>
+                                                    <h3><u>Порог принятия решения:</u> {{content.owners.weight_threshold}} </h3>
+
+                                                </v-card-title>
+                                            </v-card>
+                                        </v-flex>
+
+                                        <v-flex>
+                                            <v-card>
+                                                <v-card-title class="subheading grey darken-1 pt-1 pb-1">Связь и Ссылки</v-card-title>
+                                                <v-card-title class="pt-1 pb-1">
+                                                    <ul style="width:100%">
+                                                        <li v-for="(adress,contact) in content.contacts"> {{contact}} : <span v-html="adress"></span>
+                                                        </li>
+                                                    </ul>
+
+
+                                                </v-card-title>
+                                            </v-card>
+                                        </v-flex>
+
+
+
+
+                                        <v-flex>
+                                            <v-card>
+
+                                                <v-card-title class="subheading grey darken-1 pt-1 pb-1">Метки</v-card-title>
+
+                                                <v-card-title class="pt-1 pb-1">
+
+                                                    <template v-for="(tag, index) in content.tags">
+                                                        {{tag}}{{(index+1 < content.tags.length) ? ',' : '' }}
+                                                    </template>
+                                                    </h3>
+
+
+                                                </v-card-title>
+                                            </v-card>
+                                        </v-flex>
+
+                                        <v-flex>
+                                            <v-card>
+                                                <v-card-title>
+                                                    <u>Номер записи:</u> &nbsp; {{content.txid}}
+                                                    <vr>
+                                                        <a v-bind:href="content.confirmation" target="_blank">Ссылка на подтверждение</a>
+
+                                                </v-card-title>
+                                            </v-card>
+                                        </v-flex>
+                                    </v-layout>
+                                </v-flex>
+                                <v-layout>
+                                    <v-container>
+                                        <v-content>
+
+
+
+
+                </v-window-item>
+
+                <v-window-item :value="'list'">
+                    <v-content>
+
+                        <v-container grid-list-lg>
+                            <transition-group name="fade" tag="v-layout" class="manual-v-layout">
+
+                                <v-flex xs12 v-show="showmessage" :key="'msg'">
+
+                                    <v-card color="yellow accent-3" @click.native="showmessage=false" hover>
+                                        <v-card-title primary-title class="pb-2 pt-2 black--text">
+                                            <div v-html="messagetext"></div>
+                                        </v-card-title>
+
+                                    </v-card>
+
+                                </v-flex>
+
+
+                                <v-flex md4 xs12 v-for="item in showlist" :key="item.id">
+
+                                    <v-card :color="item.color" hover height="100%" class="flexcard">
+                                        <v-card-title v-show="item.hidden">
+                                            <h3> Исключено из списка: {{ item.reason}}</h3>
+                                        </v-card-title>
+
+                                        <v-divider v-show="item.hidden"></v-divider>
+
+                                        <v-img :src="item.imgs[0]" aspect-ratio="1.5" contain @click="copyvalues(emptycontent,content);copyvalues(item,content);showpage('content');">
+                                            <v-layout slot="placeholder" fill-height align-center justify-center ma-0>
+                                                <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
+                                            </v-layout>
+
+
+
+
+                                        </v-img>
+                                        <v-card-text class="headline grey darken-1 pt-1 pb-1 text-xs-right headline">
+                                            {{item.balance}}
+                                        </v-card-text>
+
+                                        <v-card-title>
+                                            <div style="width:100%;" @click="copyvalues(emptycontent,content);copyvalues(item,content);showpage('content');">
+                                                <div class="title pb-2">{{item.title}}</div>
+                                                <div class="body-2">{{item.subtitle}}</div>
+
+                                            </div>
+                                        </v-card-title>
+
+                                        <v-spacer></v-spacer>
+                                        <v-divider></v-divider>
+                                        <v-card-text>
+                                            <div>
+                                                <b>Метки: </b>
+                                                <template v-for="(tag, index) in item.tags">
+                                                    <a style="color: #90caf9;padding-left:3px;" @click="addtag(tag)">{{tag}}</a>
+                                                    {{ (index+1 < item.tags.length) ? ', ' : '' }}
+                                                </template>
+
+                                            </div>
+
+
+                                        </v-card-text>
+
+
+                                        <div style="width:100%; text-align:right;color:grey;font-size:10px;margin-top: -15px;">{{item.txid}} &nbsp;</div>
+                                    </v-card>
+                                </v-flex>
+
+
+
+                            </transition-group>
+
+
+
+
+
+
+                        </v-container>
+                    </v-content>
+
+
+
+
+
+                </v-window-item>
+
+
+                <v-window-item :value="'help'">
+                    <v-content>
+                        <v-container grid-list-xl>
+                            <v-layout wrap>
+                                <v-flex md12>
+                                    <v-card>
+                                        <v-card-title class="title grey darken-1">
+                                            Содержание</v-card-title>
+                                        <v-card-title>
+
+                                            <div style="width:100%; text-align:left">
+
+                                                <div v-for="(item, index) in help" :key="item.id">
+
+                                                    <v-btn small flat @click="$vuetify.goTo(document.getElementById('id'+index+1),{offset:-70})">
+                                                        {{index+1}}. {{item.header}}
+                                                    </v-btn>
+                                                </div>
+
+                                            </div>
+
+                                        </v-card-title>
+                                    </v-card>
+                                </v-flex>
+                                <v-flex md12 v-for="(item, index)  in help" :key="item.id" v-bind:id="'id'+index+1">
+                                    <v-card>
+
+                                        <v-card-title class="title grey darken-1">
+                                            {{ item.header}}</v-card-title>
+
+                                        <v-card-title>
+                                            <div v-html="item.text"></div>
+
+
+                                        </v-card-title>
+
+                                    </v-card>
+                                </v-flex>
+
+                            </v-layout>
+
+
+                        </v-container>
+                    </v-content>
+
+                </v-window-item>
+
+
+
+            </v-window>
+
+
+        </v-app>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@1.x/dist/vuetify.min.js"></script>
+    <script type="text/javascript" src="bitsharesjs.min.js"></script>
+
+
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                appversion: "2018-06-13",
+                control_acc: "1.2.1121304",
+                data_acc: "1.2.1121308",
+                data_wif: "5JN2fBZWzvWdq3atPSmKKhtHJDPowtFgnDFxRwaFsqdn86JjdmH",
+                assetid: "1.3.1325",
+                assetname: "",
+                prec: -5,
+
+                page: "list",
+                previouspage: "",
+
+
+                loading: true,
+                showmessage: false,
+                messagetext: "",
+                messageloaded: false,
+
+                contentshow: false,
+                content: {
+                    "imgs": [],
+                    "owners": []
+                },
+                emptycontent: {
+                    "txid": "",
+                    "title": "",
+                    "subtitle": "",
+                    "tags": [],
+                    "description": "",
+                    "account": "",
+                    "gates": {},
+                    "others": {},
+                    "imgs": [],
+                    "contacts": {},
+                    "confirmation": ""
+                },
+
+                settingsmenu: false,
+                inputacc1: "",
+                inputacc2: "",
+                inputassid: "",
+                inputkey: "",
+
+                downloadmenu: false,
+
+                eyecolor: "#4CAF50",
+
+
+                initsettings: true,
+
+                settings: {
+                    "sitename": "Благоток",
+                    "version": "2018-11-15",
+                    "linktoaccount": "https://market.rudex.org/#/account/",
+                    "link": "https://ipfs.io/ipfs/QmU385MRkRkeWx3R3PUsmjrzdot7QQYKjKJLP922TeUyzf"
+                },
+
+                list: [],
+                showlist: [],
+                showh: false,
+                rmlist: [],
+                supportdialog: false,
+
+                seltags: [],
+                elsetags: [],
+                alltags: [],
+
+                scrollbtn: false,
+                scrolllist: 0,
+                scrollhelp: 0,
+                scrollcontent: 0,
+
+
+
+
+
+                help: [{
+                        "header": "Что это Благ-Поток?",
+                        "text": " <div class='pb-1 pt-1'>Благ-Поток - это список благих начинаний и описание того, как их можно поддержать. </div> <div class='pb-1 pt-1'>Но это не простой список в сети, а защищённый.</div> <div class='pb-1 pt-1'>Все данные хранятся в неизменяемой распределённой базе данных (блокчейн Bitshares). Это значит, что любые сведения, которые были внесены в базу данных будут храниться там, пока все компьютеры поддерживающие её не будут отключены. Причём, эти компьютеры расположены в разных странах и никак административно между собой не связаны. </div> <div class='pb-1 pt-1'>Приложение для работы с этими списком исполнено в виде одного html файла со скриптами, который можно и нужно скопировать себе на компьютер и он будет полностью работоспособен при наличии доступа в сеть. </div> <div class='pb-1 pt-1'>Так же блокчейн позволяет хранить в сети ценность. Деньги независимые от банковской системы. Вводить и выводить средства в блокчейн можно пользуясь множеством независимых шлюзов. Переводы между счетами можно скрыть от наблюдения. </div> <div class='pb-1 pt-1'>И ещё, выбранная технология позволяет осуществлять совместное управление счетами. Это значит, что добавление новых данных в список или перевод средств возможен только при согласии всех управляющих счетов. Причём каждому счёту может быть установлен различный вес его решения.</div><div class='pb-1 pt-1'>Вы можете поддержать Благоток подписавшись на <a href='https://www.subscribestar.com/yasnost'>www.subscribestar.com/yasnost</a></div>"
+                    },
+
+                    {
+                        "header": "Описание внешнего вида приложения",
+                        "text": "<div class='pb-1 pt-1 '>Внешне приложение состоит из двух частей: Головы и Рабочей области. </div> <div class='pb-1 pt-2 subheading'>В Голове расположены:</div> <div class='pb-1 pt-1'>&#8226; Знак загрузки приложения - Исчезает, когда всё загруженно;</div> <div class='pb-1 pt-1'>&#8226; Название Благоток - При нажатии показывает список дел и людей. Если список уже показан, то очищает Список выбранных меток; </div> <div class='pb-1 pt-1'>&#8226; Список выбранных меток - В списке дел и людей отображаются только те, у которых имеются данные метки. Нажатие на метку в этом списке убирает её; </div> <div class='pb-1 pt-1'>&#8226; Зелёный или красный глаз - Нажатие переключает отображение исключённых из списка дел и людей. Исключённые дела и люди выделены красным цветом; </div> <div class='pb-1 pt-1'>&#8226; Красная стерлка вниз - При нажатии показывает ссылку на скачивание приложения;</div> <div class='pb-1 pt-1'>&#8226; Зубчатое колесо - При нажатии показывает настройки подключения к блокчейну;</div> <div class='pb-1 pt-1'>&#8226; Конверт - При нажатии запускает почтовое приложении, чтобы написать письмо управляющему;</div> <div class='pb-1 pt-1'>&#8226; Жёлтый вопросительный знак - При нажатии просиходит переход на страницу Справки.</div> <div class='pb-1 pt-2 subheading'>Рабочая области состоит из трёх страниц:</div> <div class='pb-1 pt-1'>&#8226; Список дел и людей - это основная страница. Она состоит из карточек разных цветов. Жёлтая карточка в самом верху - это приветственное и справочное сообщение для пользователей. По нажатию она скрывается. Чёрные карточки - это описания. На них есть изображение относящееся к данному делу или человеку. Сумма на счёту в bitshares (если есть), переведённая в выбранную валюту. По умолчанию это рубли. Название и краткое описание данного дела или человека. Метки данного дела или человка. Нажатие на метку добавляет её в Список выбранных меток в Голове. Серые числа внизу карточки - это номер записи в Блокчейне. Красные карточки - исключённые из списка описания. Так как из Блокчейна невозможно ничего удалить, то карточки с ошибками просто скрываются из списка. Но остаётся возможность их посмотреть и узнать причину скрытия. Нажатие на карточку с описание переключает приложение на страницу с Подробным описанием.</div> <div class='pb-1 pt-1'>	&#8226; Подробное описание. Эта страница состоит из двух частей. Левая часть содержит подробное описание дела или человека. Правая часть - изображение и дополнительные сведения. К ним относится: номер счёта в bitshares (если есть), и сумма на счету переведённая в выбранную валюту. По умолчанию это рубли. Кнопка «Поддержать». При нажатии на неё откроется окно со сведениями о том, как можно поддержать данное дело или человека. Список управителей счёта и вес их голосов. В bitshares существуют счета, которыми могут управлять несколько других счетов или людей. Список ссылок на страницы в сети и данных для связи. Список метока относщихся к данному делу или человеку. Номер записи в блокчейне. Ссылка на подтверждение в сети сведений о данном деле или человеке. </div> <div class='pb-1 pt-1'>&#8226; Ответы на вопросы. Это справочная страница. Здесь собраны ответы на самые частые вопросы связанные с приложением Благоток. Если у вас остались неотвеченные вопросы, то пришлити их по элпочте. Самые частые вопросы будут добавлены в справку.</div> <div class='pb-1 pt-1'>Также в Рабочей области справа внизу расположена Стрелка вверх. При нажатии на неё происходит прокрутка страницы в самый верх. </div> "
+                    },
+
+                    {
+                        "header": "Что такое Bitshares?",
+                        "text": "<div class='pb-1 pt-1'>Лучше всего на это может ответить его создатель Даниэль Лаример. </div> <div class='pb-1 pt-1'><i> Отвечать на вопрос «Что такое BitShares?» для меня, пожалуй, сложнее всего. BitShares означает массу всего для разных людей, и существуют тысячи разных способов понять, что это такое. Это пост расскажет вам о том, чем BitShares является для меня, его основателя. Но, прежде чем мы углубимся в многочисленные ответы на этот вопрос, позвольте дать вам краткий отчёт. BitShares – это один из самых важных инструментов, способный встать на защиту свободы любого сообщества; идея, чьё время пришло. Уверен, что после прочтения этого поста вы согласитесь со мной.</i> </div> <div class='pb-1 pt-1'> <a href='https://golos.io/ru--blokcheijn/@blockchained/chto-takoe-bitshares-daniel-larimer' target='_blank'>Читать дальше...</a> </div> <div class='pb-1 pt-1'> <a href='http://telegra.ph/Podborka-informacii-po-Bitshares-RuDEX-08-01' target='_blank'>Подборка материалов по Bitshares</a></div>"
+                    },
+
+                    {
+                        "header": "Как перевести средства на счёт начинания?",
+                        "text": " <div class='pb-1 pt-1'>Для работы со счетами в Bitshares существует много сетевых приложений. Самым удобным из них является <a href='https://market.rudex.org/' target='_blank'>Rudex</a>. Основные его достоинства - это то, что его разрабатывает и поддерживает русская команда, а так же живое сообщество в телеграме <a href='https://t.me/BitSharesDEX_RU' target='_blank' >BitSharesDEX_RU</a>. Помимо Rudex также можно воспользоваться: <a href='https://wallet.bitshares.eu/' target='_blank'>Bitshares.eu</a> , <a href='https://openledger.io/market/' target='_blank'>OpenLedger</a>, <a href='https://wallet.crypto-bridge.org/' target='_blank'>CryptoBridge</a>, <a href='https://exchange.easydex.net/' target='_blank'>EasyDEX</a>, <a href='https://www.gdex.io/' target='_blank'>GDEX</a>, <a href='https://www.deex.exchange/' target='_blank'>DEEX</a>, <a href='https://ex.xbts.io' target='_blank'>XBts</a>, <a href='https://trade.eubx.io/' target='_blank'>EUBX</a>, <a href='https://wallet.escodex.com/' target='_blank'>EscoDEX</a>, <a href='https://deviantcoin.io/' target='_blank'>DeviantCoin</a>, <a href='https://citadel.li/wallet/' target='_blank'>Citadel</a>. Все эти приложения работают с одним и тем же блокчейном. Счёт созданный в одном приложении доступен и в другом. Почти все эти приложения можно установить на компьютер и работать не открывая браузер.</div> <div class='pb-1 pt-1'> &#8226; В выбранном приложении нужно создать себе счёт (аккаунт). </div> <div class='pb-1 pt-1'> &#8226;  Пополнить его. Об этом ниже. </div> <div class='pb-1 pt-1'> &#8226;  Отправить средства со своего счета на счет выбранного начинания. На RUDEX в верхнем меню выбрать пункт 'Отправить'. В поле 'Кому' указать счёт выбранного начинания. Указать сумму, нажать 'Отправить' и подтвердить отправку.</div>"
+                    },
+
+                    {
+                        "header": "Как ввести рубли на счёт? И как вывести обратно?",
+                        "text": "<div class='pb-1 pt-1'>В Bitshares для ввода и вывода средств есть несколько путей. </div> <div class='pb-1 pt-1'> Наиболее предпочтительный - это воспользоваться <a href='https://mrkt.cash/?lang_ui=ru'  target='_blank'> mkrt.cash </a>. Это доска объявлений о покупке и продаже, а точнее обмене средств. Самые живые и нужные нам пары - это bitUSD к RUB и bitRUBLE к RUB. BitUSD и bitRUBLE - это условные единицы в Bitshares, которые всегда по цене равны настоящему доллару США и рублю РФ и обеспечены залогом в основной условной единице Bitshares. RUB - это обычный рубль РФ. Чтобы ввести рубли, нам нужно выбрать устраивающее нас предложение из списка слева (красного цвета), а чтобы вывести обратно - из правого списка (зелёного цвета), договорться с другой стороной и совершить сделку. Для совершения сделок необходимо зарегистрироваться. Также можно воспользоваться телеграм-ботом <a href='https://t.me/mrkt_cash_bot' target='_blank'>@mrkt_cash_bot</a>. <br><br> Ещё один способ ввода и вывода средств это шлюзы: <a href='https://bitruble.io' target='_blank'>bitruble.io</a> и <a href='https://ecurrex.ru' target='_blank'>ecurrex.ru</a> Порядок работы с ними одинаковый. Рубли они меняют на Escrow.RUBLE (это условные единицы данных шлюзов). Подробное руководство по работе с этими шлюзами можно прочитать <a href='https://wiki.bitruble.io/index.php/Escrow_Wiki' target='_blank'> здесь </a>. Спешить менять Escrow.RUBLE над bitRUBLE не нужно, можно поддержать начинание используя любые условные единицы. </div> <div class='pb-1 pt-1'> Основная сложность в описанных выше путях - это время. Не всегда удаётся быстро заключить сделку, и не всегда шлюзы работают или имеют достаточно средств. На этот случай есть ещё один способ. Это шлюзы для ввода в Bitshares криптовалют. У начинания могут быть указаны адреса для приёма btc (Биткон) и eth (Эфириум). На них можно переводить средства со своего кошелька или воспользоваться одним из множества обменников в сети, чтобы купить криптовалюту сразу на эти счета. Это самый быстрый способ, но и с самой высокой комиссией. </div> <div class='pb-1 pt-1'> Чтобы ввести криптовалюту на свой счёт нужно открыть меню RUDEX (три полоски справа вверху) и выбрать пункт 'Ввод/Вывод'.  Выбрать один из доступных шлюзов, выбрать криптовалюту и получить адрес. Купить в обменнике криптовалюту на этот адрес. На счету Bitshares появятся условные единицы шлюза, являющиеся обязательствами этого шлюза на вывод соответствующей криптовалюты. На внутренней бирже Bitshares можно одни условные единицы поменять на другие. </div> "
+                    },
+
+                    {
+                        "header": "Скрытые переводы. Что это и как это делается?",
+                        "text": "</div> <div class='pb-1 pt-1'>Одной из самых удивительных особенностей технологии, на которой работает Bitshares, являются скрытые переводы. Да! Несмотря на то, что в блокчейне записываются все действия всех пользователей и всё для всех открыто, существует возможность совершать неотслеживаемые переводы средств. Но по неизестному стечению обстоятельств данная возможность не воплощена ни в одном распространённом приложении, хотя разработки велись и следы от их остались. Поэтому у нас есть возможность воспользоваться устаревшим экспериментальным приложеним, которое позволяет совершать скрытые переводы. <a href='https://github.com/cryptonomex/graphene-ui/releases' target='_blank'>Bitshares-stealth</a>  </div> <div class='pb-1 pt-1'>В кратце, порядок действий такой: <br> &#8226; создать публичный счёт или внести свои ключи, <br> &#8226; создать приватный счёт (начинается с символа ~), <br> &#8226; перевести средства с своего публичного на приватный счёт, <br> &#8226; с приватного счёта перевести средства на любой публичный счёт. </div> <div class='pb-1 pt-1'> Всё. Скрытый перевод совершён. Единственный способ отследить движение средств это сопоставить сумму исчезнувших в одном месте и появившихся в другом месте средств. Но никто вам не запрещает не переводить всё и сразу. Подробнее и с картинками о скрытых переводах можно прочитать <a href='https://golos.io/ru--obrazovanie/@vik/anonimnost-i-decentralizaciya-prilozhenie-dlya-stealth-skrytykh-tranzakcii-blokcheinov-graphene-bitshares-rudex' target='_blank'>здесь.</a>"
+                    }
+                ]
+
+
+
+
+            },
+            methods: {
+
+                copyvalues(from, to) {
+                    for (key in from) {
+                        to[key] = from[key]
+                    }
+
+                },
+
+                showpage(gotopage) {
+
+                    if (app.page != gotopage) {
+                        app.previouspage = app.page;
+
+                        switch (app.page) {
+                            case "content":
+                                app.scrollcontent = window.scrollY;
+                                break;
+                            case "list":
+                                app.scrolllist = window.scrollY;
+                                break;
+                            case "help":
+                                app.scrollhelp = window.scrollY;
+                                break;
+
+                        }
+
+                        app.page = gotopage;
+
+                        switch (gotopage) {
+                            case "content":
+
+                                setTimeout(function() {
+                                    app.$vuetify.goTo(0, {})
+                                }, 300);
+                                break;
+                            case "list":
+                                app.updatelist();
+                                setTimeout(function() {
+                                    app.$vuetify.goTo(app.scrolllist, {})
+                                }, 300);
+                                break;
+                            case "help":
+                                setTimeout(function() {
+                                    app.$vuetify.goTo(app.scrollhelp, {})
+                                }, 300);
+                                break;
+                        }
+                    } else {
+
+                        switch (gotopage) {
+                            case "content":
+
+                                break;
+                            case "list":
+                                app.seltags = [];
+                                app.elsetags = app.alltags.slice();
+                                app.$vuetify.goTo(0, {});
+                                app.updatelist();
+                                break;
+                            case "help":
+                                app.page = app.previouspage;
+
+                                if (app.previouspage == 'content') {
+                                    setTimeout(function() {
+                                        app.$vuetify.goTo(app.scrollcontent, {})
+                                    }, 300);
+                                }
+
+                                break;
+                        }
+
+                    } //конец if
+
+
+                },
+
+
+
+
+
+
+
+
+                addtag(tag) {
+                    if (app.seltags.indexOf(tag) == -1) {
+                        app.seltags.push(tag)
+                        app.elsetags.splice(app.elsetags.indexOf(tag), 1)
+
+                    }
+
+
+                    app.updatelist();
+                },
+
+                rmtag(tag) {
+                    app.seltags.splice(app.seltags.indexOf(tag), 1);
+                    app.elsetags.push(tag)
+                    app.elsetags.sort();
+                    app.updatelist();
+                },
+
+
+                updatelist() {
+                    app.showlist = [];
+                    for (i in app.list) {
+                        var c = 0;
+                        for (j in app.list[i].tags) {
+                            for (k in app.seltags) {
+                                if (app.list[i].tags[j] == app.seltags[k]) {
+                                    c++
+                                }
+                            } //end k
+                        } //end j
+
+                        if (c == app.seltags.length) {
+
+
+                            if ((app.showh) || (!app.showh && !app.list[i].hidden)) {
+                                app.showlist.push(app.list[i]);
+                            }
+
+
+
+                        }
+                    } //end i
+                },
+
+                showhidden() {
+                    app.showh = !app.showh;
+                    app.updatelist();
+
+                    if (app.showh) {
+                        app.eyecolor = "#F44336"
+                    } else {
+                        app.eyecolor = "#4CAF50"
+                    }
+                },
+
+                load() {
+                    app.list = [];
+                    app.loading = true;
+                    app.inputacc1 = app.control_acc;
+                    app.inputacc2 = app.data_acc;
+                    app.inputassid = app.assetid;
+                    app.inputkey = app.data_wif;
+                    app.messagetext = "";
+                    app.messageloaded = false;
+                    app.showmessage = false;
+
+
+
+
+                    var Api = bitshares_js.bitshares_ws.Apis;
+
+
+                    function checkrmlist(id) {
+
+                        var index = -1;
+
+                        for (i in app.rmlist) {
+                            if (app.rmlist[i].txid == id) {
+                                index = i;
+                                break;
+                            }
+                        } //end for
+
+                        return index;
+
+                    } //end of func
+
+
+
+
+                    async function getdata() {
+                        const servers = ["wss://bitshares.openledger.info/ws", "wss://openledger.hk/ws", "wss://bitshares.nu/ws", "wss://bit.btsabc.org/ws", "wss://node.btscharts.com/ws", "wss://japan.bitshares.apasia.tech/ws", "wss://bitshares.crypto.fans/ws", "wss://ws.gdex.top", "wss://dex.rnglab.org", "wss://la.dexnode.net/ws", "wss://dexnode.net/ws", "wss://kc-us-dex.xeldal.com/ws", "wss://btsza.co.za:8091/ws", "wss://api.bts.blckchnd.com", "wss://api-ru.bts.blckchnd.com", "wss://node.market.rudex.org", "wss://api.bitsharesdex.com", "wss://api.fr.bitsharesdex.com", "wss://blockzms.xyz/ws", "wss://eu.nodes.bitshares.ws", "wss://us.nodes.bitshares.ws", "wss://sg.nodes.bitshares.ws", "wss://ws.winex.pro", "wss://api.bts.mobi/ws", "wss://api.btsxchng.com", "wss://api.bts.network/", "wss://btsws.roelandp.nl/ws", "wss://api.bitshares.bhuz.info/ws", "wss://bts-api.lafona.net/ws", "wss://kimziv.com/ws", "wss://api.btsgo.net/ws", "wss://bts.proxyhosts.info/wss", "wss://bts.open.icowallet.net/ws", "wss://crazybit.online", "wss://freedom.bts123.cc:15138/", "wss://bitshares.bts123.cc:15138/", "wss://api.bts.ai", "wss://ws.hellobts.com", "wss://bitshares.cyberit.io", "wss://bts-seoul.clockwork.gr", "wss://bts.to0l.cn:4443/ws", "wss://btsfullnode.bangzi.info/ws", "wss://api.dex.trading/"];
+
+                        var sn = 0;
+                        var connected = false;
+                        var listid = 0;
+
+                        var last = false;
+                        var corr = 0;
+                        var st = "1.11.0";
+                        const hz = "1.11.0";
+
+                        while (!connected) {
+                            try {
+
+                                var net = await Api.instance(servers[sn], true, connectTimeout = 10000).init_promise;
+                                connected = true;
+                                console.log("Подключено");
+
+                                var asname = await Api.instance().db_api().exec("get_assets", [
+                                    [app.assetid]
+                                ]);
+                                app.assetname = asname[0].symbol;
+                                app.prec = -1 * asname[0].precision;
+
+                                while (!last) {
+
+                                    var txlist = await Api.instance().history_api().exec("get_account_history", [app.data_acc, hz, "20", st]);
+
+
+                                    for (var i = corr; i < txlist.length; i++) {
+
+                                        if (txlist[i].op[0] == 0 && txlist[i].op[1].hasOwnProperty("memo") && txlist[i].op[1].from == app.control_acc) {
+
+
+
+                                            var memo = bitshares_js.aes.decrypt_with_checksum(
+                                                bitshares_js.PrivateKey.fromWif(app.data_wif),
+                                                bitshares_js.PublicKey.fromPublicKeyString(txlist[i].op[1].memo.from),
+                                                txlist[i].op[1].memo.nonce,
+                                                txlist[i].op[1].memo.message).toString("utf-8");
+
+
+                                            try {
+                                                var parsmemo = JSON.parse(memo);
+
+
+
+                                                switch (parsmemo.type) {
+                                                    case "описание":
+                                                        var ind = checkrmlist(txlist[i].id);
+                                                        if (ind == -1) {
+
+                                                            parsmemo.hidden = false;
+                                                        } else {
+
+                                                            parsmemo.hidden = true;
+                                                            parsmemo.color = "red darken-1";
+                                                            parsmemo.reason = app.rmlist[ind].reason;
+                                                        } // end if
+
+
+                                                        try {
+                                                            var acc = await Api.instance().db_api().exec("get_account_by_name", [parsmemo.account.toLowerCase()]);
+
+                                                            if (acc != null) {
+
+                                                                var bal = await Api.instance().db_api().exec("get_account_balances", [acc.id, []]);
+
+                                                                ////////////////////
+
+
+                                                                var asslist = [];
+
+                                                                ///получаем список ассетов и их свойства
+                                                                for (var i1 = 0; i1 < bal.length; i1++) {
+                                                                    asslist.push(bal[i1].asset_id)
+                                                                }
+                                                                var ass = await Api.instance().db_api().exec("get_assets", [asslist]);
+
+
+                                                                var btssum = 0; //стоимость счёта в бтш
+
+                                                                for (var i2 = 0; i2 < bal.length; i2++) {
+                                                                    if (bal[i2].asset_id != "1.3.0") {
+                                                                        var tic = await Api.instance().db_api().exec("get_ticker", ["1.3.0", bal[i2].asset_id]); //получаем цену ассета в бтш
+                                                                        btssum = btssum + bal[i2].amount / Math.pow(10, ass[i2].precision) * tic.latest;
+
+
+
+                                                                    } else {
+                                                                        //прибавляем сам бтш
+                                                                        btssum = btssum + bal[0].amount / Math.pow(10, ass[i2].precision);
+
+                                                                    }
+
+
+                                                                }
+
+                                                                parsmemo.btsacc = true;
+
+                                                                //перевод в рубли
+                                                                if ((net[0].network_name == "BitShares") && (app.assetid != "1.3.0")) {
+                                                                    var rub = await Api.instance().db_api().exec("get_ticker", ["1.3.0", app.assetid]);
+
+
+                                                                    parsmemo.balance = Math.round(btssum / rub.latest) + ' ' + app.assetname;
+                                                                } else {
+                                                                    parsmemo.balance = Math.round(btssum) + ' ' + app.assetname;
+                                                                }
+
+                                                                //считываем владельцев счёта
+
+                                                                var owners = [];
+
+                                                                for (var ow in acc.owner.account_auths) {
+                                                                    owners.push(acc.owner.account_auths[ow][0]);
+                                                                }
+
+                                                                owners = await Api.instance().db_api().exec("get_accounts", [owners]);
+
+                                                                var status = acc.owner;
+
+                                                                for (var ow in status.account_auths) {
+                                                                    status.account_auths[ow][0] = owners[ow].name;
+
+                                                                }
+
+
+                                                                parsmemo.owners = status;
+
+                                                            } else {
+
+                                                                parsmemo.btsacc = false;
+                                                                parsmemo.owners = {
+                                                                    "weight_threshold": 0,
+                                                                    "account_auths": [],
+                                                                    "key_auths": [],
+                                                                    "address_auths": []
+                                                                };
+
+                                                            }
+                                                            /////////////////////////
+
+
+
+                                                        } catch (e) {
+                                                            console.log(e);
+                                                            parsmemo.btsacc = false;
+                                                        }
+
+
+                                                        parsmemo.txid = txlist[i].id;
+
+
+                                                        parsmemo.showdesc = false;
+                                                        parsmemo.id = listid;
+                                                        listid++;
+
+                                                        //создание общего списка тегов без повторений
+                                                        for (var tagi in parsmemo.tags) {
+                                                            if (app.alltags.indexOf(parsmemo.tags[tagi]) == -1) {
+                                                                app.alltags.push(parsmemo.tags[tagi])
+                                                            }
+
+                                                        }
+                                                        app.alltags.sort();
+                                                        app.elsetags = app.alltags.slice();;
+
+
+                                                        app.list.push(parsmemo);
+
+
+                                                        app.updatelist();
+
+                                                        break;
+
+
+
+
+                                                    case "установки":
+                                                        if (document.title == "") {
+                                                            app.settings = parsmemo;
+                                                            document.title = app.settings.sitename;
+
+                                                        }
+
+                                                        break;
+
+
+                                                    case "сообщение":
+                                                        if (!app.messageloaded) {
+                                                            app.showmessage = true;
+                                                            app.messageloaded = true;
+                                                            app.messagetext = parsmemo.text;
+                                                        }
+                                                        break;
+
+                                                    case "исключения":
+                                                        if (app.rmlist.length == 0) {
+                                                            app.rmlist = parsmemo.list;
+
+                                                        }
+
+                                                } //end of switch
+
+                                            } catch (err) {
+                                                console.log(err);
+                                            }
+                                        }
+                                    }
+
+                                    if (st == txlist[txlist.length - 1].id) {
+                                        last = true;
+                                    }
+                                    st = txlist[txlist.length - 1].id;
+                                    corr = 1;
+
+                                } //end of while
+
+                            } //end of try
+                            catch (err) {
+                                sn++;
+                                if (sn == servers.length) {
+                                    sn = 0;
+                                }
+                                console.log(err);
+
+                            } //end of catch
+                        } // end while connected
+
+                        app.loading = false;
+
+
+                    } //end of getdata
+
+
+                    getdata();
+
+
+
+
+                } //end of load
+
+
+
+            }
+
+        });
+
+
+
+        app.copyvalues(app.emptycontent, app.content);
+
+        app.load();
+
+    </script>
+
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>

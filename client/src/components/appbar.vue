@@ -50,7 +50,7 @@
 <v-tooltip bottom>
       <template v-slot:activator="{ on }">
       <v-btn icon  to="/sbori" v-on="on">
-            <v-icon>mdi-cash-100</v-icon>
+            <v-icon>mdi-cash-multiple</v-icon>
           </v-btn>
       </template>
       <span>Сборы средств</span>

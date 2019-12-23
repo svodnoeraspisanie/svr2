@@ -23,7 +23,7 @@
 
         <v-list-item link to="/sbori">
           <v-list-item-icon>
-            <v-icon>mdi-cash-100</v-icon>
+            <v-icon>mdi-cash-multiple</v-icon>
           </v-list-item-icon>
 
           <v-list-item-content>
@@ -344,12 +344,12 @@
 </template>
 
 <script>
-import appbar from "../components/appbar.vue";
+
 import { db } from "../db";
 
 export default {
   components: {
-    appbar
+   
   },
 
   data: () => ({
@@ -384,9 +384,9 @@ export default {
       const today = new Date();
       today.setHours(0);
       today.setMinutes(0);
-      const tomorrow = new Date(today.getTime() + 24 * 60 * 59 * 1000);
-      console.log(today);
-      console.log(tomorrow);
+      today.setSeconds(0);
+      const tomorrow = new Date(today.getTime() + 24 * 60 * 60 * 1000 - 1000);
+    
       let cals = [
         "2kpu7kvisrlvmgkiheabippc20@group.calendar.google.com",
         "ct8a4t3tuim1jjnkno2d6skkck@group.calendar.google.com",

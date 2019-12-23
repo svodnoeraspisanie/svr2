@@ -34,13 +34,11 @@ width="300px"
 </template>
 
 <script>
-import appbar from "../components/appbar.vue";
-import minitoolbar from "../components/minitoolbar.vue";
+
 
 export default {
   components: {
-    appbar,
-  minitoolbar,
+  
   },
   data: () => ({
     drawer: true,

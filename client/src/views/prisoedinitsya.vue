@@ -127,12 +127,12 @@ width="300px"
 
 <script>
 
-import minitoolbar from "../components/minitoolbar.vue";
+
 import { db } from "../db";
 export default {
   components: {
    
-  minitoolbar,
+  
   },
   data: () => ({
     drawer: true,

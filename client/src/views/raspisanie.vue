@@ -138,7 +138,7 @@
 </template>
 
 <script>
-import appbar from "../components/appbar.vue";
+
 
 import FullCalendar from "@fullcalendar/vue";
 import dayGridPlugin from "@fullcalendar/daygrid";
@@ -150,7 +150,7 @@ import { formatDate } from "@fullcalendar/core";
 
 export default {
   components: {
-    appbar,
+  
 
     FullCalendar
   },

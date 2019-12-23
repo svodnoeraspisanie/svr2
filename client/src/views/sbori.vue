@@ -29,7 +29,7 @@
       <v-container  class="px-6" >
        <h2><v-icon class="mr-2" color="#0a7d9a">mdi-cash-100</v-icon>Сборы средств</h2>
 
-              <v-row class="ml-1">
+              <v-row class="ml-0">
           <v-col lg="3" md="4" sm="6" cols="12" v-for="(sbor,i) in sbori" :key="i">
             <v-card class="flexcard cardhov" height="100%"  elevate="0"  flat @click="openlink(sbor.ssilka)" >
               <v-img :src="sbor.obraz" aspect-ratio="1.5" contain class="ma-2">
@@ -57,14 +57,12 @@
 </template>
 
 <script>
-import appbar from "../components/appbar.vue";
-import minitoolbar from "../components/minitoolbar.vue";
+
 import { db } from '../db'
 
 export default {
   components: {
-    appbar,
-   minitoolbar,
+  
   },
   data: () => ({
     drawer: true,

@@ -22,11 +22,11 @@
             <div style="max-width:936px" class="pb-3">
               <h2>Статьи</h2>
             </div>
-            <v-card
+            <v-card 
               v-for="(statia,i) in statii"
               :key="i"
               elevation="1"
-              class="mb-6"
+              class="mb-6 ml-2"
               max-width="936px"
             >
               <v-card-title>{{statia.nazvanie}}</v-card-title>
@@ -40,12 +40,12 @@
 </template>
 
 <script>
-import appbar from "../components/appbar.vue";
+
 import { db } from "../db";
 
 export default {
   components: {
-    appbar
+ 
   },
   data: () => ({
     drawer: true,
