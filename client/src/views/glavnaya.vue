@@ -352,7 +352,7 @@
                 </v-img>
 
                 <v-card-title
-                  class="subtitle-2 font-weight-bold"
+                  class="subtitle-1 font-weight-bold"
                   style="color:#1f2020"
                 >{{sbori[si].nazvanie}}</v-card-title>
               </v-card-text>
@@ -394,7 +394,7 @@
                     </v-layout>
                   </v-img>
 
-                  <v-card-title class="subtitle-2 font-weight-bold">{{predpriyatiya[pi].nazvanie}}</v-card-title>
+                  <v-card-title class="subtitle-1 font-weight-bold">{{predpriyatiya[pi].nazvanie}}</v-card-title>
                 </v-card-text>
               </router-link>
             </v-card>

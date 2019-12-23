@@ -39,7 +39,7 @@
                 </v-layout>
               </v-img>
 
-              <v-card-title class="subtitle-2">{{pr.nazvanie}}</v-card-title>
+              <v-card-title class="subtitle-1 font-weight-bold">{{pr.nazvanie}}</v-card-title>
               <v-card-text>{{pr.kratkoe_opisanie}}</v-card-text>
 
               <v-spacer />
