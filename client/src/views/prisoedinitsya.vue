@@ -19,7 +19,7 @@ width="300px"
           </v-list-item>
           <v-divider></v-divider>
 
-       <v-list-item  link to="/" >
+       <v-list-item  link  @click="$vuetify.goTo(0);" >
               <v-list-item-icon>
               <v-icon>mdi-lightbulb-on-outline</v-icon>
             </v-list-item-icon>
@@ -29,7 +29,7 @@ width="300px"
             </v-list-item-content>
             
           </v-list-item>
-               <v-list-item  link to="/" >
+               <v-list-item  link  @click="$vuetify.goTo('#deyateli',{offset:-150});" >
               <v-list-item-icon>
               <v-icon>mdi-account-multiple</v-icon>
             </v-list-item-icon>
@@ -47,7 +47,7 @@ width="300px"
 
     <v-content class="pt-0">
       <v-container class="px-6">
-        <h2><v-icon class="mr-2" color="#0a7d9a">mdi-lightbulb-on-outline</v-icon>Замыслы</h2>
+        <h2 id="zamisli"><v-icon class="mr-2" color="#0a7d9a">mdi-lightbulb-on-outline</v-icon>Замыслы</h2>
         <v-row>
           <v-col  class="ml-2 ">
             <v-card flat class="mb-6">
@@ -83,7 +83,7 @@ width="300px"
         </v-row>
 
 
-         <h2><v-icon class="mr-2" color="#0a7d9a">mdi-account-multiple</v-icon>Деятели</h2>
+         <h2 id="deyateli"><v-icon class="mr-2" color="#0a7d9a">mdi-account-multiple</v-icon>Деятели</h2>
         <v-row>
           <v-col class="ml-2 ">
             <v-card flat class="mb-6">

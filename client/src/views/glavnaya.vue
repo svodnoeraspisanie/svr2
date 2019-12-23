@@ -64,11 +64,11 @@
       <template v-slot:append>
         <div class="pa-2">
           <v-btn
-            color="#f9e176"
+            
             block
             depressed
             @click="openlink('/svora1/')"
-          >Открыть старую версию сайта</v-btn>
+          > Открыть прошлую версию</v-btn>
         </div>
       </template>
     </v-navigation-drawer>
@@ -96,19 +96,13 @@
           <v-col class="pt-0">
             <div class="headline font-weight-bold pb-1">
               <router-link class="mainlink" to="/spravka">
-                <v-icon class="mr-2" color="#0a7d9a">mdi-help-circle-outline</v-icon>Что такое Свора?
+                <v-icon class="mr-2" color="#0a7d9a">mdi-help-circle-outline</v-icon>{{tekst.nazvanie}}
               </router-link>
             </div>
 
             <v-card class="cardhov ml-2" flat :to="{path: `/predpriyatiya/svora`}">
-              <v-card-text class="pb-1 pt-2">
-                <b>Свора - это дом русского национального предпринимательства и благотворительности.</b>
-                <br />
-                <p>
-                  Здесь собраны сведения о русских национальных предприятиях, о том как их
-                  можно поддержать и о мероприятиях, которые они проводят.
-                </p>
-                <p>Свора существует и развивается благодаря вашей поддержке</p>
+              <v-card-text class="pb-1 pt-2" v-html="tekst.tekst">
+                
               </v-card-text>
             </v-card>
           </v-col>
@@ -360,11 +354,19 @@ export default {
     zamisli: [{ nazvanie: "" }],
     si: 0,
     pi: 0,
+    tekst:{},
 
     rasps: [[], [], []]
   }),
-  created() {},
+  created() {
+  this.fetchData();
+
+  },
+  watch: {
+      $route: "fetchData"
+  },
   mounted() {
+  
     this.zagruzkaraspisaniya();
 
     window.setInterval(() => {
@@ -373,6 +375,16 @@ export default {
     }, 12000);
   },
   methods: {
+      fetchData() {
+      
+      db.collection("teksti")
+        .doc("glavnaya")
+        .get()
+        .then(snapshot => {
+          this.tekst = snapshot.data();
+       
+        });
+    },
     normtime(arg) {
       var d = new Date(arg);
       return d.getHours + ":" + d.getMinutes;

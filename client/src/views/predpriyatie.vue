@@ -65,7 +65,7 @@
     <v-col cols="auto" >
 
          <v-card class="mb-4" flat  max-width="936px" >
-        <v-row>
+        <v-row >
           <v-col cols="3">
 <v-img :src="pr.obraz" aspect-ratio="1.5" max-width="500px" contain>
                 <v-layout slot="placeholder" fill-height align-center justify-center ma-0>
@@ -73,13 +73,13 @@
                 </v-layout>
               </v-img>
           </v-col>
-          <v-col cols="9">
+          <v-col cols="9" class="pb-0">
              <v-card-title>{{pr.nazvanie}}</v-card-title>
               <v-card-text>{{pr.kratkoe_opisanie}}</v-card-text>
-            
+         
           </v-col>
         </v-row>
-         <v-card-actions> <v-btn color="#f9e176" block depressed @click="$vuetify.goTo('#kakpoddergat',{offset:-150});"" >Поддержать</v-btn></v-card-actions>
+            <v-card-actions> <v-btn color="#f9e176" block depressed @click="$vuetify.goTo('#kakpoddergat',{offset:-150});" >Поддержать</v-btn></v-card-actions>
            </v-card>
 
        
