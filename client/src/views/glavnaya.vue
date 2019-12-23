@@ -72,15 +72,10 @@
       <v-container class="px-6">
         <v-row>
           <v-col class="pt-0">
-<<<<<<< HEAD
             <div class="headline font-weight-bold pb-1"> <v-icon class="mr-2" color="#0a7d9a"> mdi-message-text </v-icon>Новости</div>
             <v-card flat class="ml-2">
               <v-card-text class="pb-1 pt-2">
-=======
-            <div class="headline font-weight-bold pb-1">Новости</div>
-            <v-card flat>
-              <v-card-text >
->>>>>>> 5dff22d4542578acdd400fd08d9b7c201b850915
+
                 <v-simple-table dense>
                   <tbody>
                     <tr v-for="(novost,i) in novosti.slice().reverse()" :key="i">
@@ -96,11 +91,10 @@
             <div class="headline font-weight-bold pb-1">
               <router-link class="mainlink" to="/spravka"><v-icon class="mr-2" color="#0a7d9a">mdi-alert-circle-outline</v-icon>Что такое Свора?</router-link>
             </div>
-<<<<<<< HEAD
-            <v-card flat  class="ml-2">
-=======
+
+
             <v-card class="cardhov" flat :to="{path: `/predpriyatiya/svora`}">
->>>>>>> 5dff22d4542578acdd400fd08d9b7c201b850915
+
               <v-card-text class="pb-1 pt-2">
                 <b>Свора - это дом русского национального предпринимательства и благотворительности.</b>
                 <br />
