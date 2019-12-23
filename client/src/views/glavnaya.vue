@@ -63,12 +63,7 @@
 
       <template v-slot:append>
         <div class="pa-2">
-          <v-btn
-            
-            block
-            depressed
-            @click="openlink('/svora1/')"
-          > Открыть прошлую версию</v-btn>
+          <v-btn block depressed @click="openlink('/svora1/')">Открыть прошлую версию</v-btn>
         </div>
       </template>
     </v-navigation-drawer>
@@ -96,20 +91,19 @@
           <v-col class="pt-0">
             <div class="headline font-weight-bold pb-1">
               <router-link class="mainlink" to="/spravka">
-                <v-icon class="mr-2" color="#0a7d9a">mdi-help-circle-outline</v-icon>{{tekst.nazvanie}}
+                <v-icon class="mr-2" color="#0a7d9a">mdi-help-circle-outline</v-icon>
+                {{tekst.nazvanie}}
               </router-link>
             </div>
 
             <v-card class="cardhov ml-2" flat :to="{path: `/predpriyatiya/svora`}">
-              <v-card-text class="pb-1 pt-2" v-html="tekst.tekst">
-                
-              </v-card-text>
+              <v-card-text class="pb-1 pt-2" v-html="tekst.tekst"></v-card-text>
             </v-card>
           </v-col>
         </v-row>
         <div class="headline font-weight-bold">
           <router-link to="/raspisanie" class="mainlink">
-            <v-icon class="mr-2" color="#0a7d9a">mdi-calendar</v-icon>Ближайшие события 
+            <v-icon class="mr-2" color="#0a7d9a">mdi-calendar</v-icon>Ближайшие события
           </router-link>
         </div>
         <v-row>
@@ -122,14 +116,14 @@
             <v-card flat class="ml-2 mt-2">
               <v-card-text class="pt-2">
                 <span class="subtitle-2">Сегодня</span>
-                <div v-if="!raspsegondya[0].length"  class="pl-2">нет сведений</div>
+                <div v-if="!raspsegondya[0].length" class="pl-2">нет сведений</div>
 
                 <v-simple-table dense>
                   <tbody>
                     <tr v-for="(sob,i) in raspsegondya[0]" :key="i">
                       <v-menu :close-on-content-click="false" max-width="400px" offset-x>
                         <template v-slot:activator="{ on }">
-                          <td valign="top" v-on="on">{{sob.start.time}}</td>
+                          <td valign="top" v-on="on" class="font-weight-bold">{{sob.start.time}}</td>
                           <td v-on="on">{{sob.summary}}</td>
                         </template>
 
@@ -150,16 +144,16 @@
                     </tr>
                   </tbody>
                 </v-simple-table>
-                <v-divider/>
-                 <span class="subtitle-2">Завтра</span>
-                  <div v-if="!raspzavtra[0].length"  class="pl-2">нет сведений</div>
+                <v-divider />
+                <span class="subtitle-2">Завтра</span>
+                <div v-if="!raspzavtra[0].length" class="pl-2">нет сведений</div>
 
                 <v-simple-table dense>
                   <tbody>
                     <tr v-for="(sob,i) in raspzavtra[0]" :key="i">
                       <v-menu :close-on-content-click="false" max-width="400px" offset-x>
                         <template v-slot:activator="{ on }">
-                          <td valign="top" v-on="on">{{sob.start.time}}</td>
+                          <td valign="top" v-on="on" class="font-weight-bold">{{sob.start.time}}</td>
                           <td v-on="on">{{sob.summary}}</td>
                         </template>
 
@@ -192,13 +186,13 @@
             <v-card flat class="ml-2 mt-2">
               <v-card-text class="pt-2">
                 <span class="subtitle-2">Сегодня</span>
-                <div v-if="!raspsegondya[1].length"  class="pl-2">нет сведений</div>
+                <div v-if="!raspsegondya[1].length" class="pl-2">нет сведений</div>
                 <v-simple-table dense>
                   <tbody>
                     <tr v-for="(sob,i) in raspsegondya[1]" :key="i">
                       <v-menu :close-on-content-click="false" max-width="400px" offset-x>
                         <template v-slot:activator="{ on }">
-                          <td valign="top" v-on="on">{{sob.start.time}}</td>
+                          <td valign="top" v-on="on" class="font-weight-bold">{{sob.start.time}}</td>
                           <td v-on="on">{{sob.summary}}</td>
                         </template>
 
@@ -219,16 +213,16 @@
                     </tr>
                   </tbody>
                 </v-simple-table>
-                <v-divider/>
-                 <span class="subtitle-2">Завтра</span>
-                 <div v-if="!raspzavtra[1].length"  class="pl-2">нет сведений</div>
+                <v-divider />
+                <span class="subtitle-2">Завтра</span>
+                <div v-if="!raspzavtra[1].length" class="pl-2">нет сведений</div>
 
                 <v-simple-table dense>
                   <tbody>
                     <tr v-for="(sob,i) in raspzavtra[1]" :key="i">
                       <v-menu :close-on-content-click="false" max-width="400px" offset-x>
                         <template v-slot:activator="{ on }">
-                          <td valign="top" v-on="on">{{sob.start.time}}</td>
+                          <td valign="top" v-on="on" class="font-weight-bold">{{sob.start.time}}</td>
                           <td v-on="on">{{sob.summary}}</td>
                         </template>
 
@@ -261,13 +255,13 @@
             <v-card flat class="ml-2 mt-2">
               <v-card-text class="pt-2">
                 <span class="subtitle-2">Сегодня</span>
-                <div v-if="!raspsegondya[2].length"  class="pl-2">нет сведений</div>
+                <div v-if="!raspsegondya[2].length" class="pl-2">нет сведений</div>
                 <v-simple-table dense>
                   <tbody>
                     <tr v-for="(sob,i) in raspsegondya[2]" :key="i">
                       <v-menu :close-on-content-click="false" max-width="400px" offset-x>
                         <template v-slot:activator="{ on }">
-                          <td valign="top" v-on="on">{{sob.start.time}}</td>
+                          <td valign="top" v-on="on" class="font-weight-bold">{{sob.start.time}}</td>
                           <td v-on="on">{{sob.summary}}</td>
                         </template>
 
@@ -288,16 +282,16 @@
                     </tr>
                   </tbody>
                 </v-simple-table>
-                <v-divider/>
-                 <span class="subtitle-2">Завтра</span>
-                 <div v-if="!raspzavtra[2].length"  class="pl-2">нет сведений</div>
+                <v-divider />
+                <span class="subtitle-2">Завтра</span>
+                <div v-if="!raspzavtra[2].length" class="pl-2">нет сведений</div>
 
                 <v-simple-table dense>
                   <tbody>
                     <tr v-for="(sob,i) in raspzavtra[2]" :key="i">
                       <v-menu :close-on-content-click="false" max-width="400px" offset-x>
                         <template v-slot:activator="{ on }">
-                          <td valign="top" v-on="on">{{sob.start.time}}</td>
+                          <td valign="top" v-on="on" class="font-weight-bold">{{sob.start.time}}</td>
                           <td v-on="on">{{sob.summary}}</td>
                         </template>
 
@@ -431,13 +425,10 @@
 </template>
 
 <script>
-
 import { db } from "../db";
 
 export default {
-  components: {
-   
-  },
+  components: {},
 
   data: () => ({
     drawer: true,
@@ -447,20 +438,18 @@ export default {
     zamisli: [{ nazvanie: "" }],
     si: 0,
     pi: 0,
-    tekst:{},
+    tekst: {},
 
     raspsegondya: [[], [], []],
-    raspzavtra: [[], [], []],
+    raspzavtra: [[], [], []]
   }),
   created() {
-  this.fetchData();
-
+    this.fetchData();
   },
   watch: {
-      $route: "fetchData"
+    $route: "fetchData"
   },
   mounted() {
-  
     this.zagruzkaraspisaniya();
 
     window.setInterval(() => {
@@ -469,14 +458,12 @@ export default {
     }, 12000);
   },
   methods: {
-      fetchData() {
-      
+    fetchData() {
       db.collection("teksti")
         .doc("glavnaya")
         .get()
         .then(snapshot => {
           this.tekst = snapshot.data();
-       
         });
     },
     normtime(arg) {
@@ -492,7 +479,7 @@ export default {
       today.setMinutes(0);
       today.setSeconds(0);
       const tomorrow = new Date(today.getTime() + 48 * 60 * 60 * 1000 - 1000);
-    console.log(today,tomorrow);
+      console.log(today, tomorrow);
       let cals = [
         "2kpu7kvisrlvmgkiheabippc20@group.calendar.google.com",
         "ct8a4t3tuim1jjnkno2d6skkck@group.calendar.google.com",
@@ -520,12 +507,14 @@ export default {
               data.items[j].start.dateTime
             ).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
 
-            if (new Date(data.items[j].start.dateTime).getDay() == new Date().getDay()){
+            if (
+              new Date(data.items[j].start.dateTime).getDay() ==
+              new Date().getDay()
+            ) {
               this.raspsegondya[i].push(data.items[j]);
             } else {
-                this.raspzavtra[i].push(data.items[j]);
+              this.raspzavtra[i].push(data.items[j]);
             }
-
           }
 
           //this.raspsegondya[i] =  datasegodnya;
@@ -534,7 +523,7 @@ export default {
       }
 
       console.log(this.raspsegondya);
-       console.log(this.raspzavtra);
+      console.log(this.raspzavtra);
     },
 
     openlink(arg) {
