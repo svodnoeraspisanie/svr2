@@ -109,7 +109,7 @@
         </v-row>
         <div class="headline font-weight-bold">
           <router-link to="/raspisanie" class="mainlink">
-            <v-icon class="mr-2" color="#0a7d9a">mdi-calendar</v-icon>События сегодня
+            <v-icon class="mr-2" color="#0a7d9a">mdi-calendar</v-icon>Ближайшие события 
           </router-link>
         </div>
         <v-row>
@@ -120,15 +120,46 @@
               </router-link>
             </span>
             <v-card flat class="ml-2 mt-2">
-              <v-card-text>
-                <div v-if="!rasps[0].length">В нашем расписании событий в этот день нет</div>
+              <v-card-text class="pt-2">
+                <span class="subtitle-2">Сегодня</span>
+                <div v-if="!raspsegondya[0].length"  class="pl-2">нет сведений</div>
 
                 <v-simple-table dense>
                   <tbody>
-                    <tr v-for="(sob,i) in rasps[0]" :key="i">
+                    <tr v-for="(sob,i) in raspsegondya[0]" :key="i">
                       <v-menu :close-on-content-click="false" max-width="400px" offset-x>
                         <template v-slot:activator="{ on }">
-                          <td valign="top" v-on="on">{{sob.start.dateTime}}</td>
+                          <td valign="top" v-on="on">{{sob.start.time}}</td>
+                          <td v-on="on">{{sob.summary}}</td>
+                        </template>
+
+                        <v-card>
+                          <v-sheet
+                            class="overflow-y-auto mt-1"
+                            min-width="150px"
+                            max-width="400px"
+                            max-height="500px"
+                          >
+                            <v-card-text>
+                              <h3>{{sob.summary}}</h3>
+                              <div v-html="sob.description"></div>
+                            </v-card-text>
+                          </v-sheet>
+                        </v-card>
+                      </v-menu>
+                    </tr>
+                  </tbody>
+                </v-simple-table>
+                <v-divider/>
+                 <span class="subtitle-2">Завтра</span>
+                  <div v-if="!raspzavtra[0].length"  class="pl-2">нет сведений</div>
+
+                <v-simple-table dense>
+                  <tbody>
+                    <tr v-for="(sob,i) in raspzavtra[0]" :key="i">
+                      <v-menu :close-on-content-click="false" max-width="400px" offset-x>
+                        <template v-slot:activator="{ on }">
+                          <td valign="top" v-on="on">{{sob.start.time}}</td>
                           <td v-on="on">{{sob.summary}}</td>
                         </template>
 
@@ -159,20 +190,51 @@
               </router-link>
             </span>
             <v-card flat class="ml-2 mt-2">
-              <v-card-text>
-                <div v-if="!rasps[1].length">В нашем расписании событий в этот день нет</div>
+              <v-card-text class="pt-2">
+                <span class="subtitle-2">Сегодня</span>
+                <div v-if="!raspsegondya[1].length"  class="pl-2">нет сведений</div>
                 <v-simple-table dense>
                   <tbody>
-                    <tr v-for="(sob,i) in rasps[1]" :key="i">
+                    <tr v-for="(sob,i) in raspsegondya[1]" :key="i">
                       <v-menu :close-on-content-click="false" max-width="400px" offset-x>
                         <template v-slot:activator="{ on }">
-                          <td valign="top" v-on="on">{{sob.start.dateTime}}</td>
+                          <td valign="top" v-on="on">{{sob.start.time}}</td>
                           <td v-on="on">{{sob.summary}}</td>
                         </template>
 
                         <v-card>
                           <v-sheet
                             class="overflow-y-auto"
+                            min-width="150px"
+                            max-width="400px"
+                            max-height="500px"
+                          >
+                            <v-card-text>
+                              <h3>{{sob.summary}}</h3>
+                              <div v-html="sob.description"></div>
+                            </v-card-text>
+                          </v-sheet>
+                        </v-card>
+                      </v-menu>
+                    </tr>
+                  </tbody>
+                </v-simple-table>
+                <v-divider/>
+                 <span class="subtitle-2">Завтра</span>
+                 <div v-if="!raspzavtra[1].length"  class="pl-2">нет сведений</div>
+
+                <v-simple-table dense>
+                  <tbody>
+                    <tr v-for="(sob,i) in raspzavtra[1]" :key="i">
+                      <v-menu :close-on-content-click="false" max-width="400px" offset-x>
+                        <template v-slot:activator="{ on }">
+                          <td valign="top" v-on="on">{{sob.start.time}}</td>
+                          <td v-on="on">{{sob.summary}}</td>
+                        </template>
+
+                        <v-card>
+                          <v-sheet
+                            class="overflow-y-auto mt-1"
                             min-width="150px"
                             max-width="400px"
                             max-height="500px"
@@ -197,20 +259,51 @@
               </router-link>
             </span>
             <v-card flat class="ml-2 mt-2">
-              <v-card-text>
-                <div v-if="!rasps[2].length">В нашем расписании событий в этот день нет</div>
+              <v-card-text class="pt-2">
+                <span class="subtitle-2">Сегодня</span>
+                <div v-if="!raspsegondya[2].length"  class="pl-2">нет сведений</div>
                 <v-simple-table dense>
                   <tbody>
-                    <tr v-for="(sob,i) in rasps[2]" :key="i">
+                    <tr v-for="(sob,i) in raspsegondya[2]" :key="i">
                       <v-menu :close-on-content-click="false" max-width="400px" offset-x>
                         <template v-slot:activator="{ on }">
-                          <td valign="top" v-on="on">{{sob.start.dateTime}}</td>
+                          <td valign="top" v-on="on">{{sob.start.time}}</td>
                           <td v-on="on">{{sob.summary}}</td>
                         </template>
 
                         <v-card>
                           <v-sheet
                             class="overflow-y-auto"
+                            min-width="150px"
+                            max-width="400px"
+                            max-height="500px"
+                          >
+                            <v-card-text>
+                              <h3>{{sob.summary}}</h3>
+                              <div v-html="sob.description"></div>
+                            </v-card-text>
+                          </v-sheet>
+                        </v-card>
+                      </v-menu>
+                    </tr>
+                  </tbody>
+                </v-simple-table>
+                <v-divider/>
+                 <span class="subtitle-2">Завтра</span>
+                 <div v-if="!raspzavtra[2].length"  class="pl-2">нет сведений</div>
+
+                <v-simple-table dense>
+                  <tbody>
+                    <tr v-for="(sob,i) in raspzavtra[2]" :key="i">
+                      <v-menu :close-on-content-click="false" max-width="400px" offset-x>
+                        <template v-slot:activator="{ on }">
+                          <td valign="top" v-on="on">{{sob.start.time}}</td>
+                          <td v-on="on">{{sob.summary}}</td>
+                        </template>
+
+                        <v-card>
+                          <v-sheet
+                            class="overflow-y-auto mt-1"
                             min-width="150px"
                             max-width="400px"
                             max-height="500px"
@@ -356,7 +449,8 @@ export default {
     pi: 0,
     tekst:{},
 
-    rasps: [[], [], []]
+    raspsegondya: [[], [], []],
+    raspzavtra: [[], [], []],
   }),
   created() {
   this.fetchData();
@@ -397,8 +491,8 @@ export default {
       today.setHours(0);
       today.setMinutes(0);
       today.setSeconds(0);
-      const tomorrow = new Date(today.getTime() + 24 * 60 * 60 * 1000 - 1000);
-    
+      const tomorrow = new Date(today.getTime() + 48 * 60 * 60 * 1000 - 1000);
+    console.log(today,tomorrow);
       let cals = [
         "2kpu7kvisrlvmgkiheabippc20@group.calendar.google.com",
         "ct8a4t3tuim1jjnkno2d6skkck@group.calendar.google.com",
@@ -419,18 +513,28 @@ export default {
         let response = await fetch(url);
         if (response.ok) {
           var data = await response.json();
-
+          var datasegodnya = [];
+          var datazavtra = [];
           for (var j = 0; j < data.items.length; j++) {
-            data.items[j].start.dateTime = new Date(
+            data.items[j].start.time = new Date(
               data.items[j].start.dateTime
             ).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+
+            if (new Date(data.items[j].start.dateTime).getDay() == new Date().getDay()){
+              this.raspsegondya[i].push(data.items[j]);
+            } else {
+                this.raspzavtra[i].push(data.items[j]);
+            }
+
           }
 
-          this.rasps[i] = data.items;
+          //this.raspsegondya[i] =  datasegodnya;
+          //this.raspzavtra[i] =  datazavtra;
         }
       }
 
-      console.log(this.rasps);
+      console.log(this.raspsegondya);
+       console.log(this.raspzavtra);
     },
 
     openlink(arg) {
