@@ -79,7 +79,7 @@
          
           </v-col>
         </v-row>
-            <v-card-actions> <v-btn color="#f9e176" block depressed @click="$vuetify.goTo('#kakpoddergat',{offset:-150});" >Поддержать</v-btn></v-card-actions>
+           
            </v-card>
 
        
