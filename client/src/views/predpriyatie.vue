@@ -24,7 +24,7 @@
           </v-list-item>
            <v-list-item link >
             <v-list-item-content>
-              Как нас поддеражть?
+              Как нас поддержать?
             </v-list-item-content>
           </v-list-item>
       
@@ -32,7 +32,7 @@
           <v-list-item>
            
           </v-list-item>
-          <v-divider></v-divider>
+       
         </v-list>
 
 </v-navigation-drawer>

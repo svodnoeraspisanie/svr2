@@ -33,6 +33,7 @@
       <v-container  class="cont pa-0 ma-0" fluid>
      
         <v-toolbar elevation="0">
+          <v-icon class="mr-2" color="#0a7d9a"> mdi-calendar </v-icon>
           <div style="max-width:220px">
             <v-select
               autofocus
@@ -59,6 +60,7 @@
 
           <v-toolbar-title class="ml-2">{{title}}</v-toolbar-title>
           <v-spacer></v-spacer>
+   
           <div style="max-width:150px">
             <v-select
               :items="vidi"
