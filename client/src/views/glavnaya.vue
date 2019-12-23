@@ -60,15 +60,27 @@
           </v-list-item-content>
         </v-list-item>
       </v-list>
+
+    <template v-slot:append>
+        <div class="pa-2">
+          <v-btn color="#f9e176" block depressed @click="openlink('/svora1/')" >Открыть старую версию сайта</v-btn>
+        </div>
+      </template>
     </v-navigation-drawer>
 
     <v-content class="pt-0">
       <v-container class="px-6">
         <v-row>
           <v-col class="pt-0">
+<<<<<<< HEAD
             <div class="headline font-weight-bold pb-1"> <v-icon class="mr-2" color="#0a7d9a"> mdi-message-text </v-icon>Новости</div>
             <v-card flat class="ml-2">
               <v-card-text class="pb-1 pt-2">
+=======
+            <div class="headline font-weight-bold pb-1">Новости</div>
+            <v-card flat>
+              <v-card-text >
+>>>>>>> 5dff22d4542578acdd400fd08d9b7c201b850915
                 <v-simple-table dense>
                   <tbody>
                     <tr v-for="(novost,i) in novosti.slice().reverse()" :key="i">
@@ -84,7 +96,11 @@
             <div class="headline font-weight-bold pb-1">
               <router-link class="mainlink" to="/spravka"><v-icon class="mr-2" color="#0a7d9a">mdi-alert-circle-outline</v-icon>Что такое Свора?</router-link>
             </div>
+<<<<<<< HEAD
             <v-card flat  class="ml-2">
+=======
+            <v-card class="cardhov" flat :to="{path: `/predpriyatiya/svora`}">
+>>>>>>> 5dff22d4542578acdd400fd08d9b7c201b850915
               <v-card-text class="pb-1 pt-2">
                 <b>Свора - это дом русского национального предпринимательства и благотворительности.</b>
                 <br />
@@ -92,6 +108,10 @@
                   Здесь собраны сведения о русских национальных предприятиях, о том как их
                   можно поддержать и о мероприятиях, которые они проводят.
                 </p>
+                <p>Свора существует и развивается благодаря вашей поддержке
+                  
+                </p>
+
               </v-card-text>
             </v-card>
           </v-col>
@@ -330,13 +350,15 @@ export default {
     rasps: [[],[],[]],
   }),
   created() {
-    this.zagruzkaraspisaniya();
+    
   },
   mounted(){
+    this.zagruzkaraspisaniya();
+
     window.setInterval(()=>{
       this.si=this.anyel(this.si,this.sbori);
       this.pi=this.anyel(this.pi,this.predpriyatiya);
-    }, 10000);
+    }, 12000);
 
   },
   methods: {
@@ -348,10 +370,13 @@ export default {
     async zagruzkaraspisaniya() {
       const googleCalendarApiKey = "AIzaSyCSV5kxpkQN3Vfvg_9D_vyBN2DQ7AiBzr4";
       const caladr = "https://www.googleapis.com/calendar/v3/calendars/";
-      const today = new Date();
-      const tomorrow = new Date(today.getTime() + 24 * 60 * 60 * 1000);
-
-      let cals = [
+      const today=new Date();
+      today.setHours(0);
+      today.setMinutes(0);
+      const tomorrow = new Date(today.getTime() + 24 * 60 * 59 * 1000);
+      console.log(today);
+      console.log(tomorrow);
+            let cals = [
         "2kpu7kvisrlvmgkiheabippc20@group.calendar.google.com",
         "ct8a4t3tuim1jjnkno2d6skkck@group.calendar.google.com",
         "uq550s4cd42vsoojk09patvfvk@group.calendar.google.com"

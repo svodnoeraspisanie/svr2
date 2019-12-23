@@ -54,8 +54,10 @@
           <v-col cols="9">
              <v-card-title>{{pr.nazvanie}}</v-card-title>
               <v-card-text>{{pr.kratkoe_opisanie}}</v-card-text>
+            
           </v-col>
         </v-row>
+         <v-card-actions> <v-btn color="#f9e176" block depressed @click="openlink('')" >Поддержать</v-btn></v-card-actions>
            </v-card>
 
        
