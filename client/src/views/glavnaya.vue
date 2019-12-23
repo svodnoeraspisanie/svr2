@@ -37,7 +37,7 @@
           </v-list-item-icon>
 
           <v-list-item-content>
-            <v-list-item-title>Расписание событий</v-list-item-title>
+            <v-list-item-title>Расписание</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
 
@@ -66,12 +66,12 @@
       <v-container class="px-6">
         <v-row>
           <v-col class="pt-0">
-            <div class="headline font-weight-bold pb-1">Новости</div>
-            <v-card flat>
+            <div class="headline font-weight-bold pb-1"> <v-icon class="mr-2" color="#0a7d9a"> mdi-message-text </v-icon>Новости</div>
+            <v-card flat class="ml-2">
               <v-card-text class="pb-1 pt-2">
                 <v-simple-table dense>
                   <tbody>
-                    <tr v-for="(novost,i) in novosti" :key="i">
+                    <tr v-for="(novost,i) in novosti.slice().reverse()" :key="i">
                       <td valign="top">{{novost.data}}</td>
                       <td>{{novost.soobshenie}}</td>
                     </tr>
@@ -82,9 +82,9 @@
           </v-col>
           <v-col class="pt-0">
             <div class="headline font-weight-bold pb-1">
-              <router-link class="mainlink" to="/spravka">Что такое Свора?</router-link>
+              <router-link class="mainlink" to="/spravka"><v-icon class="mr-2" color="#0a7d9a">mdi-alert-circle-outline</v-icon>Что такое Свора?</router-link>
             </div>
-            <v-card flat>
+            <v-card flat  class="ml-2">
               <v-card-text class="pb-1 pt-2">
                 <b>Свора - это дом русского национального предпринимательства и благотворительности.</b>
                 <br />
@@ -97,14 +97,14 @@
           </v-col>
         </v-row>
         <div class="headline font-weight-bold">
-          <router-link to="/raspisanie" class="mainlink">Сегодняшние события</router-link>
+          <router-link to="/raspisanie" class="mainlink"> <v-icon class="mr-2" color="#0a7d9a"> mdi-calendar </v-icon>События сегодня</router-link>
         </div>
-        <v-row>
-          <v-col class="pt-0">
+        <v-row >
+          <v-col class="pt-1 ml-2" >
             <span class="subtitle-1 font-weight-bold">
-              <router-link to="/raspisanie" class="mainlink">в Cети</router-link>
+              <router-link to="/raspisanie" class="mainlink"> <v-icon class="mr-2" color="#0a7d9a">mdi-web</v-icon>в Cети</router-link>
             </span>
-            <v-card flat>
+            <v-card flat  class="ml-2  mt-2">
               <v-card-text>
                 <div v-if="!rasps[0].length"> В нашем расписании событий в этот день нет</div>
 
@@ -139,11 +139,11 @@
               </v-card-text>
             </v-card>
           </v-col>
-          <v-col class="pt-0">
+          <v-col class="pt-1">
             <span class="subtitle-1 font-weight-bold">
-              <router-link to="/raspisanie" class="mainlink">в Москве</router-link>
+              <router-link to="/raspisanie" class="mainlink"> <v-icon class="mr-2" color="#0a7d9a"> mdi-city</v-icon>в Москве</router-link>
             </span>
-            <v-card flat>
+            <v-card flat  class="ml-2  mt-2">
               <v-card-text>
                 <div v-if="!rasps[1].length"> В нашем расписании событий в этот день нет</div>
                 <v-simple-table dense >
@@ -177,11 +177,11 @@
               </v-card-text>
             </v-card>
           </v-col>
-          <v-col class="pt-0">
+          <v-col class="pt-1">
             <span class="subtitle-1 font-weight-bold">
-              <router-link to="/raspisanie" class="mainlink">в Санкт-Петербурге</router-link>
+              <router-link to="/raspisanie" class="mainlink"> <v-icon class="mr-2" color="#0a7d9a"> mdi-anchor</v-icon>в Санкт-Петербурге</router-link>
             </span>
-            <v-card flat>
+            <v-card flat  class="ml-2 mt-2">
               <v-card-text>
                 <div v-if="!rasps[2].length"> В нашем расписании событий в этот день нет</div>
                 <v-simple-table dense>
@@ -217,14 +217,14 @@
           </v-col>
         </v-row>
 
-        <div class="headline font-weight-bold">Поддержать</div>
+        <div class="headline font-weight-bold"><v-icon class="mr-2" color="#0a7d9a">mdi-tab-plus</v-icon>Поддержать</div>
         <v-row>
-          <v-col class="pt-0">
+          <v-col class="pt-0 ml-2">
             <span class="subtitle-1 font-weight-bold">
-              <router-link to="/sbori" class="mainlink">Дело</router-link>
+              <router-link to="/sbori" class="mainlink"><v-icon class="mr-2" color="#0a7d9a">mdi-cash-100</v-icon>Дело</router-link>
             </span>
 
-            <v-card flat>
+            <v-card flat  class="ml-2 mt-2">
               <v-btn
                 color="#0a7d9a"
                 fab
@@ -254,10 +254,10 @@
           </v-col>
           <v-col class="pt-0">
             <span class="subtitle-1 font-weight-bold">
-              <router-link to="/predpriyatiya" class="mainlink">Предприятие</router-link>
+              <router-link to="/predpriyatiya" class="mainlink"><v-icon class="mr-2" color="#0a7d9a">mdi-account-group</v-icon>Предприятие</router-link>
             </span>
 
-            <v-card flat>
+            <v-card flat  class="ml-2 mt-2">
               <v-btn
                 color="#0a7d9a"
                 fab
@@ -289,18 +289,15 @@
 
           <v-col class="pt-0">
             <span class="subtitle-1 font-weight-bold">
-              <router-link to="/prisoedinitsya" class="mainlink">Замысел</router-link>
+              <router-link to="/prisoedinitsya" class="mainlink"><v-icon class="mr-2" color="#0a7d9a">mdi-lightbulb-on-outline</v-icon>Замысел</router-link>
             </span>
-            <v-card flat>
+            <v-card flat  class="ml-2 mt-2" to="/prisoedinitsya">
               <v-card-text>
                 <v-simple-table dense>
                   <tbody>
-                    <tr>
-                      <td>Сделать нашим хорошо</td>
-                    </tr>
-                    <tr>
-                      <td>А чужим сделать плохо</td>
-                    </tr>
+                     <tr v-for="(zam,i) in zamisli" :key="i">
+                       <td>{{zam.nazvanie}}</td>
+                     </tr>
                   </tbody>
                 </v-simple-table>
               </v-card-text>
@@ -323,9 +320,10 @@ export default {
 
   data: () => ({
     drawer: true,
-    sbori: [],
-    predpriyatiya: [],
+    sbori: [{id:"1",obraz:""}],
+    predpriyatiya: [{id:"1",obraz:""}],
     novosti: [],
+    zamisli:[{nazvanie:""}],
     si: 0,
     pi: 0,
 
@@ -397,10 +395,12 @@ export default {
     }
   },
 
+
   firestore: {
     sbori: db.collection("sbori"),
     predpriyatiya: db.collection("predpriyatiya"),
-    novosti: db.collection("novosti")
+    novosti: db.collection("novosti"),
+    zamisli: db.collection("zamisli")
   }
 };
 </script>

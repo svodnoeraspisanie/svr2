@@ -45,14 +45,15 @@
               outlined
               dense
               class="pt-7 mr-2"
+              
             ></v-select>
           </div>
           <v-divider vertical />
-          <v-btn outlined @click="setToday" class="ml-2">Сегодня</v-btn>
-          <v-btn @click="prev" outlined class="ml-2" min-width="36px" width="36px">
+          <v-btn outlined @click="setToday" class="ml-2" elevation="3">Сегодня</v-btn>
+          <v-btn @click="prev" outlined class="ml-2" min-width="36px" width="36px" elevation="3">
             <v-icon>mdi-chevron-left</v-icon>
           </v-btn>
-          <v-btn @click="next" outlined class="ml-2" min-width="36px" width="36px">
+          <v-btn @click="next" outlined class="ml-2" min-width="36px" width="36px" elevation="3">
             <v-icon>mdi-chevron-right</v-icon>
           </v-btn>
 
