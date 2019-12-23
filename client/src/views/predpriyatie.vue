@@ -95,7 +95,8 @@
           <v-card-title>Как нас поддержать?</v-card-title>
           <v-card-text>
             <ul v-for="(schet,gate) in pr.scheta" :key="gate">
-              <li>{{gate}}: {{schet}}</li>
+              <li><b>{{gate}}</b>:  <a v-if="schet.slice(0,5)=='https'" :href="schet">{{schet}}</a>  <span v-else>{{schet}}</span>
+          </li>
             </ul>
           </v-card-text>
         </v-card>
