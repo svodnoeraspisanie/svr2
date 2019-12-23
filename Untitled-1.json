@@ -56,3 +56,27 @@
     metki: [],
     mesto: []
   }
+
+
+  {
+    nazvanie: "Сетевой журнал «Искра́»",
+    sozdano: "",
+    kratkoe_opisanie: "Строим русское национальное медиа",
+    podrobnoe_opisanie: "",
+    obraz: "/obrazy/iskra.jpg",
+    ssilki: {
+      
+      "вКонтакте":"https://vk.com/iskrapress",
+      "SubscribeStar":"https://www.subscribestar.com/iskra",
+      "Яндекс.Кью":"https://yandex.ru/znatoki/org/iskra/answers/",
+      "Youtube":"https://www.youtube.com/channel/UCJl3qzjljHA8-Nxiep2fMqA",
+      "Telegram":"https://t.me/iskra_press"
+      
+    },
+    scheta: {
+      "SubscribeStar":"https://www.subscribestar.com/iskra",
+    },
+    meropriyatiya: [],
+    metki: [],
+    mesto: []
+  }
