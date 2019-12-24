@@ -22,7 +22,7 @@
             <div style="max-width:936px" class="pb-3">
               <h2>Справка</h2>
             </div>
-            <v-card 
+            <v-card
               v-for="(spravka,i) in spravki"
               :key="i"
               elevation="1"
@@ -41,20 +41,20 @@
 
 <script>
 
-import { db } from "../db";
+import { db } from '../db';
 
 export default {
   components: {
- 
+
   },
   data: () => ({
     drawer: true,
-    spravki: []
+    spravki: [],
   }),
 
   firestore: {
-    spravki: db.collection("spravki")
-  }
+    spravki: db.collection('spravki'),
+  },
 };
 </script>
 

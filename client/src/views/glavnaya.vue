@@ -425,29 +425,29 @@
 </template>
 
 <script>
-import { db } from "../db";
+import { db } from '../db';
 
 export default {
   components: {},
 
   data: () => ({
     drawer: true,
-    sbori: [{ id: "1", obraz: "" }],
-    predpriyatiya: [{ id: "1", obraz: "" }],
+    sbori: [{ id: '1', obraz: '' }],
+    predpriyatiya: [{ id: '1', obraz: '' }],
     novosti: [],
-    zamisli: [{ nazvanie: "" }],
+    zamisli: [{ nazvanie: '' }],
     si: 0,
     pi: 0,
     tekst: {},
 
     raspsegondya: [[], [], []],
-    raspzavtra: [[], [], []]
+    raspzavtra: [[], [], []],
   }),
   created() {
     this.fetchData();
   },
   watch: {
-    $route: "fetchData"
+    $route: 'fetchData',
   },
   mounted() {
     this.zagruzkaraspisaniya();
@@ -459,57 +459,56 @@ export default {
   },
   methods: {
     fetchData() {
-      db.collection("teksti")
-        .doc("glavnaya")
+      db.collection('teksti')
+        .doc('glavnaya')
         .get()
-        .then(snapshot => {
+        .then((snapshot) => {
           this.tekst = snapshot.data();
         });
     },
     normtime(arg) {
-      var d = new Date(arg);
-      return d.getHours + ":" + d.getMinutes;
+      const d = new Date(arg);
+      return `${d.getHours}:${d.getMinutes}`;
     },
 
     async zagruzkaraspisaniya() {
-      const googleCalendarApiKey = "AIzaSyCSV5kxpkQN3Vfvg_9D_vyBN2DQ7AiBzr4";
-      const caladr = "https://www.googleapis.com/calendar/v3/calendars/";
+      const googleCalendarApiKey = 'AIzaSyCSV5kxpkQN3Vfvg_9D_vyBN2DQ7AiBzr4';
+      const caladr = 'https://www.googleapis.com/calendar/v3/calendars/';
       const today = new Date();
       today.setHours(0);
       today.setMinutes(0);
       today.setSeconds(0);
       const tomorrow = new Date(today.getTime() + 48 * 60 * 60 * 1000 - 1000);
       console.log(today, tomorrow);
-      let cals = [
-        "2kpu7kvisrlvmgkiheabippc20@group.calendar.google.com",
-        "ct8a4t3tuim1jjnkno2d6skkck@group.calendar.google.com",
-        "uq550s4cd42vsoojk09patvfvk@group.calendar.google.com"
+      const cals = [
+        '2kpu7kvisrlvmgkiheabippc20@group.calendar.google.com',
+        'ct8a4t3tuim1jjnkno2d6skkck@group.calendar.google.com',
+        'uq550s4cd42vsoojk09patvfvk@group.calendar.google.com',
       ];
 
-      for (var i = 0; i < cals.length; i++) {
-        var url =
-          caladr +
-          encodeURIComponent(cals[i]) +
-          "/events?timeMin=" +
-          encodeURIComponent(today.toISOString()) +
-          "&timeMax=" +
-          encodeURIComponent(tomorrow.toISOString()) +
-          "&key=" +
-          googleCalendarApiKey;
+      for (let i = 0; i < cals.length; i++) {
+        const url = `${caladr
+          + encodeURIComponent(cals[i])
+        }/events?timeMin=${
+          encodeURIComponent(today.toISOString())
+        }&timeMax=${
+          encodeURIComponent(tomorrow.toISOString())
+        }&key=${
+          googleCalendarApiKey}`;
 
-        let response = await fetch(url);
+        const response = await fetch(url);
         if (response.ok) {
-          var data = await response.json();
-          var datasegodnya = [];
-          var datazavtra = [];
-          for (var j = 0; j < data.items.length; j++) {
+          const data = await response.json();
+          const datasegodnya = [];
+          const datazavtra = [];
+          for (let j = 0; j < data.items.length; j++) {
             data.items[j].start.time = new Date(
-              data.items[j].start.dateTime
-            ).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+              data.items[j].start.dateTime,
+            ).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
             if (
-              new Date(data.items[j].start.dateTime).getDay() ==
-              new Date().getDay()
+              new Date(data.items[j].start.dateTime).getDay()
+              == new Date().getDay()
             ) {
               this.raspsegondya[i].push(data.items[j]);
             } else {
@@ -517,8 +516,8 @@ export default {
             }
           }
 
-          //this.raspsegondya[i] =  datasegodnya;
-          //this.raspzavtra[i] =  datazavtra;
+          // this.raspsegondya[i] =  datasegodnya;
+          // this.raspzavtra[i] =  datazavtra;
         }
       }
 
@@ -527,21 +526,21 @@ export default {
     },
 
     openlink(arg) {
-      window.open(arg, "_blank");
+      window.open(arg, '_blank');
     },
     anyel(i, ar) {
-      let i2 = ~~(Math.random() * ar.length);
+      const i2 = ~~(Math.random() * ar.length);
 
       return i == i2 ? (i == ar.length - 1 ? i - 1 : i + 1) : i2;
-    }
+    },
   },
 
   firestore: {
-    sbori: db.collection("sbori"),
-    predpriyatiya: db.collection("predpriyatiya"),
-    novosti: db.collection("novosti"),
-    zamisli: db.collection("zamisli")
-  }
+    sbori: db.collection('sbori'),
+    predpriyatiya: db.collection('predpriyatiya'),
+    novosti: db.collection('novosti'),
+    zamisli: db.collection('zamisli'),
+  },
 };
 </script>
 <style scoped>

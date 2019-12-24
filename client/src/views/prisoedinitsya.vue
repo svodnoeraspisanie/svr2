@@ -1,8 +1,8 @@
 <template>
   <div class="fill-height">
 
-   <v-navigation-drawer 
-width="300px" 
+   <v-navigation-drawer
+width="300px"
   permanent clipped app  >
 
   <v-list>
@@ -13,9 +13,9 @@ width="300px"
 
             <v-list-item-content>
               <v-list-item-title>Назад</v-list-item-title>
-              
+
             </v-list-item-content>
-            
+
           </v-list-item>
           <v-divider></v-divider>
 
@@ -25,9 +25,9 @@ width="300px"
             </v-list-item-icon>
             <v-list-item-content>
               <v-list-item-title>Замыслы</v-list-item-title>
-              
+
             </v-list-item-content>
-            
+
           </v-list-item>
                <v-list-item  link  @click="$vuetify.goTo('#deyateli',{offset:-150});" >
               <v-list-item-icon>
@@ -35,15 +35,14 @@ width="300px"
             </v-list-item-icon>
             <v-list-item-content>
               <v-list-item-title>Деятели</v-list-item-title>
-              
+
             </v-list-item-content>
-            
+
           </v-list-item>
   </v-list>
-  
+
   </v-navigation-drawer>
 
- 
 
     <v-content class="pt-0">
       <v-container class="px-6">
@@ -52,10 +51,10 @@ width="300px"
           <v-col  class="ml-2 ">
             <v-card flat class="mb-6">
               <v-card-title class= "subtitle-1 font-weight-bold">
-              Свора занимается не только поддержкой уже существующих предприятий, но и помогает создавать новые. 
+              Свора занимается не только поддержкой уже существующих предприятий, но и помогает создавать новые.
               </v-card-title>
               <v-card-text>
-   
+
                Что мешает людям заняться делом? <br>
                Обычно они не знают что делать, как делать, не могут собрать команду и наладить взаимодействие. Свора будет помогать проробатывать все эти вопросы.
                 И начнём мы со сборы достойных идей, которые стоит воплотить. <br>
@@ -88,13 +87,13 @@ width="300px"
           <v-col class="ml-2 ">
             <v-card flat class="mb-6">
               <v-card-title class= "subtitle-1 font-weight-bold">
-              Каким бы хорошим ни был замысел, без людей, которые его воплотят, это всего лишь слова. 
+              Каким бы хорошим ни был замысел, без людей, которые его воплотят, это всего лишь слова.
               </v-card-title>
               <v-card-text>
-   
+
                Если вы не можете сидеть сложа руки, чувствуете внутреннюю потребность действовать, хотите воплотить свой замысел или присоединиться к другому начинанию, то пишите нам. <br>
-              
-               
+
+
               </v-card-text>
             </v-card>
      <v-card flat class="mb-6">
@@ -111,10 +110,10 @@ width="300px"
                   <li>Поддерживать и продвигать данные предприятия.</li>
 
                 </ul>
-           
+
               </v-card-text>
             </v-card>
-     
+
           </v-col>
 <v-col >
         <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSczQ3M4UVMdbiL5v7dvOIPyE_QzgnZV8GG3jTkAOcAyLOCWSg/viewform?embedded=true" width="100%" height="627" frameborder="0" marginheight="0" marginwidth="0">Загрузка…</iframe>
@@ -128,21 +127,22 @@ width="300px"
 <script>
 
 
-import { db } from "../db";
+import { db } from '../db';
+
 export default {
   components: {
-   
-  
+
+
   },
   data: () => ({
     drawer: true,
-    zamisli:[{nazvanie:""}]
-    
+    zamisli: [{ nazvanie: '' }],
+
   }),
   firestore: {
-  
-    zamisli: db.collection("zamisli")
-  }
+
+    zamisli: db.collection('zamisli'),
+  },
 };
 </script>
 

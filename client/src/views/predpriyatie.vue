@@ -11,9 +11,9 @@
 
             <v-list-item-content>
               <v-list-item-title>Список предприятий</v-list-item-title>
-              
+
             </v-list-item-content>
-            
+
           </v-list-item>
 <v-divider></v-divider>
 <v-list-item link @click="$vuetify.goTo(0);" >
@@ -51,10 +51,8 @@
               Наши страницы в сети
             </v-list-item-content>
           </v-list-item>
-      
 
-       
-           
+
         </v-list>
 
 </v-navigation-drawer>
@@ -76,16 +74,13 @@
           <v-col cols="9" class="pb-0">
              <v-card-title>{{pr.nazvanie}}</v-card-title>
               <v-card-text>{{pr.kratkoe_opisanie}}</v-card-text>
-         
+
           </v-col>
         </v-row>
-           
+
            </v-card>
 
-       
-       
 
-    
         <v-card class="mb-4"  flat  max-width="936px"  id="chtomidelaem">
           <v-card-title>Что мы делаем?</v-card-title>
           <v-card-text v-html="pr.podrobnoe_opisanie"></v-card-text>
@@ -120,37 +115,35 @@
 <script>
 
 
-import { db } from "../db";
+import { db } from '../db';
 
 
 export default {
   components: {
-    
+
 
   },
   data: () => ({
     drawer: true,
 
-    pr: null
+    pr: null,
   }),
   created() {
     this.fetchData();
   },
   watch: {
-      $route: "fetchData"
+    $route: 'fetchData',
   },
   methods: {
     fetchData() {
-      
-      db.collection("predpriyatiya")
+      db.collection('predpriyatiya')
         .doc(this.$route.params.id)
         .get()
-        .then(snapshot => {
+        .then((snapshot) => {
           this.pr = snapshot.data();
-       
         });
-    }
-  }
+    },
+  },
 };
 </script>
 

@@ -1,8 +1,8 @@
 <template>
   <div class="fill-height">
 
-   <v-navigation-drawer 
- width="300px" 
+   <v-navigation-drawer
+ width="300px"
   permanent clipped app  >
 
   <v-list >
@@ -13,17 +13,16 @@
 
             <v-list-item-content>
               <v-list-item-title>Назад</v-list-item-title>
-              
+
             </v-list-item-content>
-            
+
           </v-list-item>
           <v-divider></v-divider>
 
   </v-list>
-  
+
   </v-navigation-drawer>
 
- 
 
     <v-content  class="pt-0">
       <v-container  class="px-6" >
@@ -43,14 +42,12 @@
 
               <v-spacer />
 
-              
 
-              
             </v-card>
           </v-col>
         </v-row>
-    
-   
+
+
       </v-container>
     </v-content>
   </div>
@@ -58,24 +55,24 @@
 
 <script>
 
-import { db } from '../db'
+import { db } from '../db';
 
 export default {
   components: {
-  
+
   },
   data: () => ({
     drawer: true,
-    sbori:[],
-    
+    sbori: [],
+
   }),
   firestore: {
     sbori: db.collection('sbori'),
   },
-  methods:{
+  methods: {
 
     openlink(arg) {
-      window.open(arg, '_blank')
+      window.open(arg, '_blank');
     },
   },
 };

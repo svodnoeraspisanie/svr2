@@ -31,7 +31,7 @@
 
     <v-content class="fill-height pt-0">
       <v-container  class="cont pa-0 ma-0" fluid>
-     
+
         <v-toolbar elevation="0">
           <v-icon class="mr-2" color="#0a7d9a"> mdi-calendar </v-icon>
           <div style="max-width:220px">
@@ -46,7 +46,7 @@
               outlined
               dense
               class="pt-7 mr-2"
-              
+
             ></v-select>
           </div>
           <v-divider vertical />
@@ -60,7 +60,7 @@
 
           <v-toolbar-title class="ml-2">{{title}}</v-toolbar-title>
           <v-spacer></v-spacer>
-   
+
           <div style="max-width:150px">
             <v-select
               :items="vidi"
@@ -108,7 +108,7 @@
           @datesRender="update"
         />
 </div>
-        
+
       </v-container>
       <v-menu
           v-model="selectedOpen"
@@ -119,7 +119,7 @@
           offset-x
         >
           <v-card>
-          
+
             <v-sheet
               class="overflow-y-auto"
               min-width="150px"
@@ -140,19 +140,19 @@
 <script>
 
 
-import FullCalendar from "@fullcalendar/vue";
-import dayGridPlugin from "@fullcalendar/daygrid";
-import timeGridPlugin from "@fullcalendar/timegrid";
-import interactionPlugin from "@fullcalendar/interaction";
-import listPlugin from "@fullcalendar/list";
-import googleCalendarPlugin from "@fullcalendar/google-calendar";
-import { formatDate } from "@fullcalendar/core";
+import FullCalendar from '@fullcalendar/vue';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import timeGridPlugin from '@fullcalendar/timegrid';
+import interactionPlugin from '@fullcalendar/interaction';
+import listPlugin from '@fullcalendar/list';
+import googleCalendarPlugin from '@fullcalendar/google-calendar';
+import { formatDate } from '@fullcalendar/core';
 
 export default {
   components: {
-  
 
-    FullCalendar
+
+    FullCalendar,
   },
 
   data: () => ({
@@ -160,92 +160,92 @@ export default {
     cardposY: 0,
     calendarApi: null,
 
-    title: "",
+    title: '',
     calendarPlugins: [
       // plugins must be defined in the JS
       dayGridPlugin,
       timeGridPlugin,
       listPlugin,
       googleCalendarPlugin,
-      interactionPlugin // needed for dateClick
+      interactionPlugin, // needed for dateClick
     ],
     calendarWeekends: true,
 
-    googleCalendarApiKey: "AIzaSyCSV5kxpkQN3Vfvg_9D_vyBN2DQ7AiBzr4",
+    googleCalendarApiKey: 'AIzaSyCSV5kxpkQN3Vfvg_9D_vyBN2DQ7AiBzr4',
 
     drawer: true,
     wd: [1, 2, 3, 4, 5, 6, 0],
 
-    mesta: ["Сеть", "Москва", "Санкт-Петербург"],
-    mesto: "Сеть",
+    mesta: ['Сеть', 'Москва', 'Санкт-Петербург'],
+    mesto: 'Сеть',
 
     loading: false,
 
     showTooltip: false,
 
-    today: "",
-    focus: "",
-    type: "dayGridMonth",
+    today: '',
+    focus: '',
+    type: 'dayGridMonth',
 
     selectedEvent: {},
     selectedElement: null,
     selectedOpen: false,
 
     caltype: {
-      title: "МЕСЯЦ",
-      value: "dayGridMonth"
+      title: 'МЕСЯЦ',
+      value: 'dayGridMonth',
     },
     vidi: [
       {
-        title: "МЕСЯЦ",
-        value: "dayGridMonth"
+        title: 'МЕСЯЦ',
+        value: 'dayGridMonth',
       },
       {
-        title: "НЕДЕЛЯ",
-        value: "timeGridWeek"
+        title: 'НЕДЕЛЯ',
+        value: 'timeGridWeek',
       },
       {
-        title: "ДЕНЬ",
-        value: "timeGridDay"
+        title: 'ДЕНЬ',
+        value: 'timeGridDay',
       },
       {
-        title: "РАСПИСАНИЕ",
-        value: "listMonth"
-      }
+        title: 'РАСПИСАНИЕ',
+        value: 'listMonth',
+      },
     ],
 
     events: {
-      title: "СЕТЬ",
-      googleCalendarId: "2kpu7kvisrlvmgkiheabippc20@group.calendar.google.com",
-      color: "#c5dde8",
-      className: "set"
+      title: 'СЕТЬ',
+      googleCalendarId: '2kpu7kvisrlvmgkiheabippc20@group.calendar.google.com',
+      color: '#c5dde8',
+      className: 'set',
     },
 
     cals: [
       {
-        title: "СЕТЬ",
+        title: 'СЕТЬ',
         googleCalendarId:
-          "2kpu7kvisrlvmgkiheabippc20@group.calendar.google.com",
-        color: "#c5dde8",
-        className: "set"
+          '2kpu7kvisrlvmgkiheabippc20@group.calendar.google.com',
+        color: '#c5dde8',
+        className: 'set',
       },
 
       {
-        title: "МОСКВА",
+        title: 'МОСКВА',
         googleCalendarId:
-          "ct8a4t3tuim1jjnkno2d6skkck@group.calendar.google.com",
-        color: "#cde6bb",
-        className: "moskva"
+          'ct8a4t3tuim1jjnkno2d6skkck@group.calendar.google.com',
+        color: '#cde6bb',
+        className: 'moskva',
       },
 
       {
-        title: "САНКТ-ПЕТЕРБУРГ",
+        title: 'САНКТ-ПЕТЕРБУРГ',
         googleCalendarId:
-          "uq550s4cd42vsoojk09patvfvk@group.calendar.google.com",
-        color: "#e9ddbb",
-        className: "piter"
-      }
-    ]
+          'uq550s4cd42vsoojk09patvfvk@group.calendar.google.com',
+        color: '#e9ddbb',
+        className: 'piter',
+      },
+    ],
   }),
 
   computed: {
@@ -259,7 +259,7 @@ export default {
 
       if (!search) return this.items;
 
-      return this.items.filter(item => {
+      return this.items.filter((item) => {
         const text = item.text.toLowerCase();
 
         return text.indexOf(search) > -1;
@@ -273,11 +273,11 @@ export default {
       }
 
       return selections;
-    }
+    },
   },
   methods: {
     clickdate(arg) {
-      this.changeView("timeGridDay");
+      this.changeView('timeGridDay');
       this.calendarApi.gotoDate(arg.date);
     },
 
@@ -312,7 +312,7 @@ export default {
 
     showevent(arg) {
       console.log(arg);
-      console.log("click");
+      console.log('click');
       arg.jsEvent.preventDefault();
 
       const open = () => {
@@ -332,7 +332,7 @@ export default {
         open();
       }
       arg.jsEvent.stopPropagation();
-    }
+    },
   },
 
   mounted() {
@@ -340,14 +340,14 @@ export default {
     this.focus = dateToYMD(this.today);
     this.calendarApi = this.$refs.fullCalendar.getApi();
     console.log(this.focus);
-  }
+  },
 };
 
 function dateToYMD(date) {
-  var d = date.getDate();
-  var m = date.getMonth() + 1; //Month from 0 to 11
-  var y = date.getFullYear();
-  return "" + y + "-" + (m <= 9 ? "0" + m : m) + "-" + (d <= 9 ? "0" + d : d);
+  const d = date.getDate();
+  const m = date.getMonth() + 1; // Month from 0 to 11
+  const y = date.getFullYear();
+  return `${y}-${m <= 9 ? `0${m}` : m}-${d <= 9 ? `0${d}` : d}`;
 }
 </script>
 
