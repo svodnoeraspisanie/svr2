@@ -4,18 +4,17 @@
     clipped-left
     app
     elevation="1"
-    width="299px"
-    height="150px"
-    class="mainbar"
-   
+    :width=" $vuetify.breakpoint.xs? '100%' : '299px'"
+    :height=" $vuetify.breakpoint.xs? '50px' : '161px'"
+    
+ 
   >
 
 
    
-<v-list  width="100%">
+<v-list  width="100%" class="py-0">
  
-
-     <v-list-item to="/" class="pa-0 ma-0">
+     <v-list-item to="/" class="pa-0 ma-0  d-none d-sm-flex">
         <v-list-item-content >
 
          <v-img src="/svora.png" contain width="250px"></v-img>
@@ -24,9 +23,21 @@
         </v-list-item-content>
       </v-list-item>
 
-<v-divider />
-<v-toolbar dense class="px-5" elevation="3" >
- 
+<v-divider class="d-sm-flex" />
+
+<v-toolbar dense class="px-2 py-0" elevation="3" >
+
+  <v-app-bar-nav-icon v-if="$vuetify.breakpoint.xs"></v-app-bar-nav-icon>
+
+ <v-tooltip bottom v-if="$vuetify.breakpoint.xs">
+      <template v-slot:activator="{ on }">
+       <v-btn icon to="/" v-on="on">
+             <v-icon>mdi-view-dashboard</v-icon>
+          </v-btn>
+      </template>
+      <span>Статьи</span>
+    </v-tooltip>
+
  <v-tooltip bottom>
       <template v-slot:activator="{ on }">
        <v-btn icon to="/statii" v-on="on">
@@ -62,7 +73,7 @@
            <v-icon>mdi-calendar</v-icon>
           </v-btn>
       </template>
-      <span>Расписание</span>
+      <span>События</span>
     </v-tooltip>
 
       <v-tooltip bottom>
@@ -101,8 +112,14 @@ export default {};
 
  ::v-deep .v-toolbar__content {
  padding: 0px;
+ height:100%!important;
 
 }
-
+.main1 {
+ height:60px!important;
+}
+.main2 {
+ height:160px!important;
+}
 
 </style>

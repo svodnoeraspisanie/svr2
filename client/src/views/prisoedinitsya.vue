@@ -45,7 +45,7 @@ width="300px"
 
  
 
-    <v-content class="pt-0">
+    <v-content>
       <v-container class="px-6">
         <h2 id="zamisli"><v-icon class="mr-2" color="#0a7d9a">mdi-lightbulb-on-outline</v-icon>Замыслы</h2>
         <v-row>

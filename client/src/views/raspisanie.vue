@@ -29,7 +29,7 @@
       </v-list>
     </v-navigation-drawer>
 
-    <v-content class="fill-height pt-0">
+    <v-content class="fill-height">
       <v-container  class="cont pa-0 ma-0" fluid>
      
         <v-toolbar elevation="0">

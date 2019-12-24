@@ -37,7 +37,7 @@
           </v-list-item-icon>
 
           <v-list-item-content>
-            <v-list-item-title>Расписание</v-list-item-title>
+            <v-list-item-title>События</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
 
@@ -68,7 +68,7 @@
       </template>
     </v-navigation-drawer>
 
-    <v-content class="pt-0">
+    <v-content :style="$vuetify.breakpoint.xs? '': 'padding-top:0px'">
       <v-container class="px-6">
         <v-row>
           <v-col class="pt-0">
@@ -101,7 +101,7 @@
             </v-card>
           </v-col>
         </v-row>
-        <div class="headline font-weight-bold">
+        <div class="headline font-weight-bold  pt-4">
           <router-link to="/raspisanie" class="mainlink">
             <v-icon class="mr-2" color="#0a7d9a">mdi-calendar</v-icon>Ближайшие события
           </router-link>
@@ -317,8 +317,8 @@
           </v-col>
         </v-row>
 
-        <div class="headline font-weight-bold">
-          <v-icon class="mr-2" color="#0a7d9a">mdi-tab-plus</v-icon>Поддержать
+        <div class="headline font-weight-bold pt-4" >
+          <v-icon class="mr-2 " color="#0a7d9a">mdi-tab-plus</v-icon>Поддержать
         </div>
         <v-row>
           <v-col class="pt-0 ml-2">
@@ -576,13 +576,10 @@ export default {
   background-color: #eeeeee;
 }
 
-.fade-enter-active,
-.fade-leave-active {
-    transition: opacity .5s
- }
-
-.fade-enter,
-.fade-leave-active {
-    opacity: 0
+.smtop{
+  padding-top: 56px;
+}
+.bigtop{
+  padding-top: 0px!important;
 }
 </style>

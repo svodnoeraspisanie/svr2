@@ -24,7 +24,7 @@
 
 
 
-    <v-content class="pt-0">
+    <v-content >
        <v-container  class="px-6" >
     
 

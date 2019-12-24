@@ -25,7 +25,7 @@
 
  
 
-    <v-content  class="pt-0">
+    <v-content  >
       <v-container  class="px-6" >
        <h2><v-icon class="mr-2" color="#0a7d9a">mdi-cash-multiple</v-icon>Сборы средств</h2>
 

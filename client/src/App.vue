@@ -1,7 +1,7 @@
 <template>
   <v-app style="background-color:#eef5f8">
    <appbar />
-      <router-view class="fill-height"/>
+      <router-view />
     
   </v-app>
 </template>
@@ -29,4 +29,5 @@ html,
 body {
     height: 100%;
 }
+
 </style>

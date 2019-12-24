@@ -59,7 +59,7 @@
 
 </v-navigation-drawer>
 
-    <v-content class="pt-0">
+    <v-content >
           <v-container  class="px-6"  >
      <v-row justify="center">
     <v-col cols="auto" >
