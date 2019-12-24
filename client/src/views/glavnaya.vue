@@ -558,6 +558,12 @@ export default {
   text-decoration: underline;
   color: #1f2020 !important;
 }
+
+.mainlink i
+{
+    display: inline-block;
+}
+
 .cardlink {
   text-decoration: none;
   color: #1f2020 !important;
