@@ -31,7 +31,7 @@
         <h2><v-icon class="mr-2" color="#0a7d9a">mdi-account-group</v-icon>Русские национальные предприятия</h2>
         <v-row class="ml-0">
           <v-col lg="3" md="4" sm="6" cols="12" v-for="pr in predpriyatiya" :key="pr.n" >
-            <v-card class="flexcard cardhov" height="100%" :to="{path: `/predpriyatiya/${pr.id}`}"  elevate="0"  flat>
+            <v-card class="flexcard cardhov" height="100%" :to="{path: `/predpriyatiya/${prno.id}`}"  elevate="0"  flat>
             
               <v-img :src="pr.obraz" aspect-ratio="1.5" contain class="ma-2">
                 <v-layout slot="placeholder" fill-height align-center justify-center ma-0>
