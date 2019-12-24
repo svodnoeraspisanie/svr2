@@ -31,7 +31,7 @@
         <h2><v-icon class="mr-2" color="#0a7d9a">mdi-account-group</v-icon>Русские национальные предприятия</h2>
         <v-row class="ml-0">
           <v-col lg="3" md="4" sm="6" cols="12" v-for="pr in predpriyatiya" :key="pr.n" >
-            <v-card class="flexcard cardhov" height="100%" :to="{path: `/predpriyatiya/${prno.id}`}"  elevate="0"  flat>
+            <v-card class="flexcard cardhov" height="100%" :to="{path: `/predpriyatiya/${pr.id}`}"  elevate="0"  flat>
             
               <v-img :src="pr.obraz" aspect-ratio="1.5" contain class="ma-2">
                 <v-layout slot="placeholder" fill-height align-center justify-center ma-0>
@@ -46,17 +46,17 @@
 
               <v-divider />
 
-              <v-card-actions class="pb-0">
-               <span class="subtitle-2"> Место: </span>
+              <v-card-text class="pa-2">
+               <div> Место: 
 
                 <v-chip v-for="(mesto, nm) in pr.mesto" :key="nm" small style="height:18px; margin-left:2px">{{mesto}}</v-chip>
-              </v-card-actions>
-              <v-card-actions  class="pt-0" >
+               </div>
+             
                
-                  <span class="subtitle-2">Метки: </span>
-                  <v-chip v-for="(metka, nm) in pr.metki" :key="nm" small style="height:18px; margin-left:2px">{{metka}}</v-chip>
                 
-              </v-card-actions>
+                  <div>Метки: </span><v-chip v-for="(metka, nm) in pr.metki" :key="nm" small style="height:18px; margin-left:2px">{{metka}}</v-chip> </div>
+                </v-card-text>
+           
             </v-card>
           </v-col>
         </v-row>

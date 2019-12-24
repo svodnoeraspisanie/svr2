@@ -63,7 +63,7 @@
 
       <template v-slot:append>
         <div class="pa-2">
-          <v-btn block depressed @click="openlink('/svora1/')">Открыть прошлую версию</v-btn>
+          <v-btn block depressed color="#f4c900" @click="openlink('https://www.subscribestar.com/yasnost')">Поддержать</v-btn>
         </div>
       </template>
     </v-navigation-drawer>
@@ -381,7 +381,9 @@
                 <v-icon>mdi-shuffle-variant</v-icon>
               </v-btn>
               <router-link class="cardlink" :to="{path: `/predpriyatiya/${predpriyatiya[pi].id}`}">
+                
                 <v-card-text class="cardhov">
+                  
                   <v-img
                     :src="predpriyatiya[pi].obraz"
                     eager
@@ -395,9 +397,12 @@
                   </v-img>
 
                   <v-card-title class="subtitle-1 font-weight-bold">{{predpriyatiya[pi].nazvanie}}</v-card-title>
+               
                 </v-card-text>
+               
               </router-link>
             </v-card>
+
           </v-col>
 
           <v-col class="pt-0">
@@ -563,5 +568,15 @@ export default {
 }
 .cardhov:hover {
   background-color: #eeeeee;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+    transition: opacity .5s
+ }
+
+.fade-enter,
+.fade-leave-active {
+    opacity: 0
 }
 </style>
