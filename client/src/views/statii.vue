@@ -22,7 +22,7 @@
             <div style="max-width:936px" class="pb-3">
               <h2>Статьи</h2>
             </div>
-            <v-card 
+            <v-card
               v-for="(statia,i) in statii"
               :key="i"
               elevation="1"
@@ -41,20 +41,20 @@
 
 <script>
 
-import { db } from "../db";
+import { db } from '../db';
 
 export default {
   components: {
- 
+
   },
   data: () => ({
     drawer: true,
-    statii: []
+    statii: [],
   }),
 
   firestore: {
-    statii: db.collection("statii")
-  }
+    statii: db.collection('statii'),
+  },
 };
 </script>
 

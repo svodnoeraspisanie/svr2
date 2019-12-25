@@ -18,7 +18,7 @@
         <v-list-item-content >
 
          <v-img src="/svora.png" contain width="250px"></v-img>
-    
+
 
         </v-list-item-content>
       </v-list-item>
@@ -46,7 +46,7 @@
       </template>
       <span>Статьи</span>
     </v-tooltip>
-      
+
 
 <v-tooltip bottom>
       <template v-slot:activator="{ on }">
@@ -84,7 +84,7 @@
       </template>
       <span>Присоединиться</span>
     </v-tooltip>
-         
+
              <v-tooltip bottom>
       <template v-slot:activator="{ on }">
         <v-btn icon  to="/spravka" v-on="on">
@@ -93,13 +93,10 @@
       </template>
       <span>Справка</span>
     </v-tooltip>
-         
-        
-           
-         
-      
+
+
     </v-toolbar>
-  
+
 </v-list>
   </v-app-bar>
 </template>

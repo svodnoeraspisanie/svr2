@@ -24,31 +24,31 @@
 
 export default {
   components: {
-  
+
   },
 
   data: () => ({
-    org: "",
-    drawer: true
+    org: '',
+    drawer: true,
   }),
   methods: {
     get(arg) {
-      var requestUrl = "https://api.timepad.ru/v1/events?organization_ids=" + this.org;
-      //var requestUrl = "https://api.timepad.ru/v1/events/1124163";
-      var req = new XMLHttpRequest();
-      req.open("GET", requestUrl, true);
-      req.onreadystatechange = function(aEvt) {
+      const requestUrl = `https://api.timepad.ru/v1/events?organization_ids=${this.org}`;
+      // var requestUrl = "https://api.timepad.ru/v1/events/1124163";
+      const req = new XMLHttpRequest();
+      req.open('GET', requestUrl, true);
+      req.onreadystatechange = function (aEvt) {
         if (req.readyState == 4) {
           if (req.status == 200) {
-            var result = JSON.parse(req.responseText);
+            const result = JSON.parse(req.responseText);
             console.log(result);
           } else {
           }
         }
       };
       req.send(null);
-    }
-  }
+    },
+  },
 };
 </script>
 

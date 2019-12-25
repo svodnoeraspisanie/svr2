@@ -25,7 +25,7 @@ export default new Router({
     {
       path: '/statii',
       name: 'statii',
-    
+
       component: () => import('./views/statii.vue'),
     },
     {
@@ -42,7 +42,7 @@ export default new Router({
     },
     {
       path: '/predpriyatiya/:id',
-      
+
 
       component: () => import('./views/predpriyatie.vue'),
     },
@@ -65,7 +65,7 @@ export default new Router({
       component: () => import('./views/prisoedinitsya.vue'),
     },
 
-    
+
   ],
 
 });

@@ -1,7 +1,7 @@
 <template>
   <v-app style="background-color:#eef5f8">
    <appbar />
-      <router-view />
+      <router-view class="fill-height"/>
     
   </v-app>
 </template>
@@ -10,9 +10,9 @@
 import appbar from './components/appbar.vue';
 
 export default {
-  
+
   name: 'App',
-components: {
+  components: {
 
     appbar,
 
@@ -25,7 +25,7 @@ components: {
 </script>
 
 <style scoped>
-html, 
+html,
 body {
     height: 100%;
 }
