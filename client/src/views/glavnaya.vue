@@ -1,6 +1,6 @@
 <template>
   <span>
-    <v-navigation-drawer width="300px"  clipped :permanent="!$vuetify.breakpoint.xs" app v-model="drawer2" >
+    <v-navigation-drawer width="300px"  clipped :permanent="!$vuetify.breakpoint.xs" v-model="drawer2" app >
       <v-list>
         <v-list-item link to="/statii">
           <v-list-item-icon>
@@ -456,10 +456,10 @@ export default {
   },
   watch: {
     $route: 'fetchData',
+
     drawer :function () {
-      this.drawer2=this.drawer;
-      console.log(this.drawer2);
-    },
+      this.drawer2=!this.drawer2;
+     },
   },
   mounted() {
     

@@ -1,6 +1,6 @@
 <template>
   <div class="fill-height">
-    <v-navigation-drawer width="300px" permanent clipped app>
+    <v-navigation-drawer width="300px" :permanent="!$vuetify.breakpoint.xs" v-model="drawer2" clipped app>
       <v-list>
         <v-list-item link to="/" dense>
           <v-list-item-icon>
@@ -15,7 +15,7 @@
       </v-list>
     </v-navigation-drawer>
 
-    <v-content >
+    <v-content :style="$vuetify.breakpoint.xs? '': 'padding-top:0px'">
       <v-container class="px-6">
         <v-row justify="center">
           <v-col cols="auto" class="pt-0">
@@ -47,8 +47,16 @@ export default {
   components: {
 
   },
+   props: ['drawer'],
+
+  watch: {
+    drawer :function () {
+      this.drawer2=!this.drawer2;
+      console.log(this.drawer2);
+     },
+  },
   data: () => ({
-    drawer: true,
+    drawer2: false,
     spravki: [],
   }),
 

@@ -3,7 +3,7 @@
 
    <v-navigation-drawer
  width="300px"
-  permanent clipped app  >
+  :permanent="!$vuetify.breakpoint.xs" v-model="drawer2" clipped app  >
 
   <v-list >
        <v-list-item  link to="/" dense>
@@ -24,7 +24,7 @@
   </v-navigation-drawer>
 
 
-    <v-content  >
+    <v-content  :style="$vuetify.breakpoint.xs? '': 'padding-top:0px'">
       <v-container  class="px-6" >
        <h2><v-icon class="mr-2" color="#0a7d9a">mdi-cash-multiple</v-icon>Сборы средств</h2>
 
@@ -61,8 +61,16 @@ export default {
   components: {
 
   },
+   props: ['drawer'],
+
+  watch: {
+    drawer :function () {
+      this.drawer2=!this.drawer2;
+      console.log(this.drawer2);
+     },
+  },
   data: () => ({
-    drawer: true,
+    drawer2: false,
     sbori: [],
 
   }),

@@ -3,7 +3,7 @@
 
    <v-navigation-drawer
 width="300px"
-  permanent clipped app  >
+  :permanent="!$vuetify.breakpoint.xs" v-model="drawer2" clipped app  >
 
   <v-list>
        <v-list-item  link to="/" dense>
@@ -44,7 +44,7 @@ width="300px"
   </v-navigation-drawer>
 
 
-    <v-content>
+    <v-content :style="$vuetify.breakpoint.xs? '': 'padding-top:0px'">
       <v-container class="px-6">
         <h2 id="zamisli"><v-icon class="mr-2" color="#0a7d9a">mdi-lightbulb-on-outline</v-icon>Замыслы</h2>
         <v-row>
@@ -134,8 +134,16 @@ export default {
 
 
   },
+   props: ['drawer'],
+
+  watch: {
+    drawer :function () {
+      this.drawer2=!this.drawer2;
+      console.log(this.drawer2);
+     },
+  },
   data: () => ({
-    drawer: true,
+    drawer2: false,
     zamisli: [{ nazvanie: '' }],
 
   }),

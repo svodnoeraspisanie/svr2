@@ -1,6 +1,6 @@
 <template>
   <div class="fill-height">
-    <v-navigation-drawer permanent app width="300px" clipped>
+    <v-navigation-drawer :permanent="!$vuetify.breakpoint.xs" v-model="drawer2" app width="300px" clipped>
       <v-list>
         <v-list-item link to="/" dense>
           <v-list-item-icon>
@@ -29,7 +29,7 @@
       </v-list>
     </v-navigation-drawer>
 
-    <v-content class="fill-height">
+    <v-content class="fill-height" :style="$vuetify.breakpoint.xs? '': 'padding-top:0px'">
       <v-container  class="cont pa-0 ma-0" fluid>
 
         <v-toolbar elevation="0">
@@ -63,6 +63,7 @@
 
           <div style="max-width:150px">
             <v-select
+              v-if="!$vuetify.breakpoint.xs"
               :items="vidi"
               item-text="title"
               return-object
@@ -154,7 +155,16 @@ export default {
 
     FullCalendar,
   },
+ props: ['drawer'],
 
+  watch: {
+    drawer :function () {
+      this.drawer2=!this.drawer2;
+      console.log(this.drawer2);
+     },
+
+    
+  },
   data: () => ({
     cardposX: 0,
     cardposY: 0,
@@ -173,7 +183,7 @@ export default {
 
     googleCalendarApiKey: 'AIzaSyCSV5kxpkQN3Vfvg_9D_vyBN2DQ7AiBzr4',
 
-    drawer: true,
+    drawer2: false,
     wd: [1, 2, 3, 4, 5, 6, 0],
 
     mesta: ['Сеть', 'Москва', 'Санкт-Петербург'],
@@ -340,6 +350,11 @@ export default {
     this.focus = dateToYMD(this.today);
     this.calendarApi = this.$refs.fullCalendar.getApi();
     console.log(this.focus);
+     if (window.innerWidth<700) {
+        this.changeView("listMonth") ;
+        console.log(this.type);
+     }
+     
   },
 };
 
