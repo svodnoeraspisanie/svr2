@@ -25,7 +25,7 @@
 
 <v-divider class="d-sm-flex" />
 
-<v-toolbar dense class="px-2 py-0" elevation="3" >
+<v-toolbar dense class="px-3 py-0" elevation="3" >
 
   <v-app-bar-nav-icon v-if="$vuetify.breakpoint.xs"></v-app-bar-nav-icon>
 
