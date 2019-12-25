@@ -7,7 +7,7 @@
     :height=" $vuetify.breakpoint.xs? '50px' : '161px'"
   >
     <v-list width="100%" class="py-0">
-      <v-list-item to="/" class="pa-0 ma-0 d-none d-sm-flex">
+      <v-list-item to="/" class="pa-0 ma-0 d-none d-sm-flex" active-class="act">
         <v-list-item-content>
           <v-img src="/svora.png" contain width="250px"></v-img>
         </v-list-item-content>
@@ -94,10 +94,8 @@ export default {};
   padding: 0px;
   height: 100% !important;
 }
-.main1 {
-  height: 60px !important;
+.theme--light.v-list-item--active:before, .theme--light.v-list-item--active:hover:before, .theme--light.v-list-item:focus:before{ 
+  opacity:0;
 }
-.main2 {
-  height: 160px !important;
-}
+
 </style>
