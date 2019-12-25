@@ -27,7 +27,7 @@
 
 <v-toolbar dense class="px-3 py-0" elevation="3" >
 
-  <v-app-bar-nav-icon v-if="$vuetify.breakpoint.xs"></v-app-bar-nav-icon>
+  <v-app-bar-nav-icon v-if="$vuetify.breakpoint.xs" @click.stop="$emit('toggle-drawer')"></v-app-bar-nav-icon>
 
  <v-tooltip bottom v-if="$vuetify.breakpoint.xs">
       <template v-slot:activator="{ on }">

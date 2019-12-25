@@ -13,6 +13,7 @@ export default new Router({
       path: '/',
       name: 'glavnaya',
       component: glavnaya,
+      props:true,
     },
     {
       path: '/spravka',

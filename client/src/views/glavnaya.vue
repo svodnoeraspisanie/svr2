@@ -1,6 +1,6 @@
 <template>
   <span>
-    <v-navigation-drawer width="300px" permanent clipped app>
+    <v-navigation-drawer width="300px"  clipped :permanent="!$vuetify.breakpoint.xs" app v-model="drawer2" >
       <v-list>
         <v-list-item link to="/statii">
           <v-list-item-icon>
@@ -435,8 +435,11 @@ import { db } from '../db';
 export default {
   components: {},
 
+  props: ['drawer'],
+
+
   data: () => ({
-    drawer: true,
+    drawer2:true,
     sbori: [{ id: '1', obraz: '' }],
     predpriyatiya: [{ id: '1', obraz: '' }],
     novosti: [],
@@ -453,8 +456,13 @@ export default {
   },
   watch: {
     $route: 'fetchData',
+    drawer :function () {
+      this.drawer2=this.drawer;
+      console.log(this.drawer2);
+    },
   },
   mounted() {
+    
     this.zagruzkaraspisaniya();
 
     window.setInterval(() => {

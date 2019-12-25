@@ -54,7 +54,7 @@
              
                
                 
-                  <div>Метки: </span><v-chip v-for="(metka, nm) in pr.metki" :key="nm" small style="height:18px; margin-left:2px">{{metka}}</v-chip> </div>
+                  <div>Метки: <v-chip v-for="(metka, nm) in pr.metki" :key="nm" small style="height:18px; margin-left:2px">{{metka}}</v-chip> </div>
                 </v-card-text>
            
             </v-card>
