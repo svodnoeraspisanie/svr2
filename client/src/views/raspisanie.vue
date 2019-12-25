@@ -50,11 +50,11 @@
             ></v-select>
           </div>
           <v-divider vertical />
-          <v-btn outlined @click="setToday" class="ml-2" elevation="3">Сегодня</v-btn>
-          <v-btn @click="prev" outlined class="ml-2" min-width="36px" width="36px" elevation="3">
+          <v-btn outlined @click="setToday" class="ml-2" elevation="3" v-if="!$vuetify.breakpoint.xs"> Сегодня</v-btn>
+          <v-btn @click="prev" outlined class="ml-2" min-width="36px" width="36px" elevation="3" v-if="!$vuetify.breakpoint.xs">
             <v-icon>mdi-chevron-left</v-icon>
           </v-btn>
-          <v-btn @click="next" outlined class="ml-2" min-width="36px" width="36px" elevation="3">
+          <v-btn @click="next" outlined class="ml-2" min-width="36px" width="36px" elevation="3" v-if="!$vuetify.breakpoint.xs">
             <v-icon>mdi-chevron-right</v-icon>
           </v-btn>
 

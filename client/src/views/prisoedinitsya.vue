@@ -47,8 +47,8 @@ width="300px"
     <v-content :style="$vuetify.breakpoint.xs? '': 'padding-top:0px'">
       <v-container class="px-6">
         <h2 id="zamisli"><v-icon class="mr-2" color="#0a7d9a">mdi-lightbulb-on-outline</v-icon>Замыслы</h2>
-        <v-row>
-          <v-col  class="ml-2 ">
+        <v-row class="ml-1">
+          <v-col    cols="12" sm="6">
             <v-card flat class="mb-6">
               <v-card-title class= "subtitle-1 font-weight-bold">
               Свора занимается не только поддержкой уже существующих предприятий, но и помогает создавать новые.
@@ -83,8 +83,8 @@ width="300px"
 
 
          <h2 id="deyateli"><v-icon class="mr-2" color="#0a7d9a">mdi-account-multiple</v-icon>Деятели</h2>
-        <v-row>
-          <v-col class="ml-2 ">
+        <v-row class="ml-1 ">
+          <v-col  cols="12" sm="6">
             <v-card flat class="mb-6">
               <v-card-title class= "subtitle-1 font-weight-bold">
               Каким бы хорошим ни был замысел, без людей, которые его воплотят, это всего лишь слова.

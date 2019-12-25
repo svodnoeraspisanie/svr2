@@ -88,7 +88,7 @@
               </v-card-text>
             </v-card>
           </v-col>
-          <v-col class="pt-0">
+          <v-col class="pt-0 d-none d-sm-block" >
             <div class="headline font-weight-bold pb-1">
               <router-link class="mainlink" to="/spravka">
                 <v-icon class="mr-2" color="#0a7d9a">mdi-help-circle-outline</v-icon>
@@ -106,8 +106,8 @@
             <v-icon class="mr-2" color="#0a7d9a">mdi-calendar</v-icon>Ближайшие события
           </router-link>
         </div>
-        <v-row>
-          <v-col class="pt-1 ml-2">
+        <v-row class="ml-0">
+          <v-col class="pt-1  "  cols="12" sm="4">
             <span class="subtitle-1 font-weight-bold">
               <router-link to="/raspisanie" class="mainlink">
                 <v-icon class="mr-2" color="#0a7d9a">mdi-web</v-icon>в Cети
@@ -177,7 +177,7 @@
               </v-card-text>
             </v-card>
           </v-col>
-          <v-col class="pt-1">
+          <v-col class="pt-1"  cols="12" sm="4">
             <span class="subtitle-1 font-weight-bold">
               <router-link to="/raspisanie" class="mainlink">
                 <v-icon class="mr-2" color="#0a7d9a">mdi-city</v-icon>в Москве
@@ -246,7 +246,7 @@
               </v-card-text>
             </v-card>
           </v-col>
-          <v-col class="pt-1">
+          <v-col class="pt-1" cols="12" sm="4">
             <span class="subtitle-1 font-weight-bold">
               <router-link to="/raspisanie" class="mainlink">
                 <v-icon class="mr-2" color="#0a7d9a">mdi-anchor</v-icon>в Санкт-Петербурге
@@ -320,8 +320,8 @@
         <div class="headline font-weight-bold pt-4" >
           <v-icon class="mr-2 " color="#0a7d9a">mdi-tab-plus</v-icon>Поддержать
         </div>
-        <v-row>
-          <v-col class="pt-0 ml-2">
+        <v-row class="ml-0">
+          <v-col class="pt-0" cols="12" sm="4">
             <span class="subtitle-1 font-weight-bold">
               <router-link to="/sbori" class="mainlink">
                 <v-icon class="mr-2" color="#0a7d9a">mdi-cash-100</v-icon>Дело
@@ -358,7 +358,7 @@
               </v-card-text>
             </v-card>
           </v-col>
-          <v-col class="pt-0">
+          <v-col class="pt-0" cols="12" sm="4">
             <span class="subtitle-1 font-weight-bold">
               <router-link to="/predpriyatiya" class="mainlink">
                 <v-icon class="mr-2" color="#0a7d9a">mdi-account-group</v-icon>Предприятие
@@ -405,7 +405,7 @@
 
           </v-col>
 
-          <v-col class="pt-0">
+          <v-col class="pt-0" cols="12" sm="4">
             <span class="subtitle-1 font-weight-bold">
               <router-link to="/prisoedinitsya" class="mainlink">
                 <v-icon class="mr-2" color="#0a7d9a">mdi-lightbulb-on-outline</v-icon>Замысел
@@ -439,7 +439,7 @@ export default {
 
 
   data: () => ({
-    drawer2:true,
+    drawer2:false,
     sbori: [{ id: '1', obraz: '' }],
     predpriyatiya: [{ id: '1', obraz: '' }],
     novosti: [],
@@ -529,8 +529,6 @@ export default {
             }
           }
 
-          // this.raspsegondya[i] =  datasegodnya;
-          // this.raspzavtra[i] =  datazavtra;
         }
       }
 
