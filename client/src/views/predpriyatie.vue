@@ -1,6 +1,6 @@
 <template>
   <div class="fill-height">
-<v-navigation-drawer :permanent="!$vuetify.breakpoint.xs" v-model="drawer2" app clipped width="300px" >
+<v-navigation-drawer :permanent="!$vuetify.breakpoint.xs" v-model="drawer2" app clipped width="300px"  >
 
         <v-list >
 
@@ -16,7 +16,7 @@
 
           </v-list-item>
 <v-divider></v-divider>
-<v-list-item link @click="$vuetify.goTo(0);" >
+<v-list-item link @click="$vuetify.goTo(0);drawer2=false;" >
   <v-list-item-icon>
             <v-icon>mdi-account-group</v-icon>
           </v-list-item-icon>
@@ -25,7 +25,7 @@
               Кто мы?
             </v-list-item-content>
           </v-list-item>
-          <v-list-item link @click="$vuetify.goTo('#chtomidelaem',{offset:-150});" >
+          <v-list-item link @click="$vuetify.goTo('#chtomidelaem',{offset:0});drawer2=false;;" >
              <v-list-item-icon>
             <v-icon>mdi-trending-up</v-icon>
           </v-list-item-icon>
@@ -33,7 +33,7 @@
               Что мы делаем?
             </v-list-item-content>
           </v-list-item>
-           <v-list-item link @click="$vuetify.goTo('#kakpoddergat',{offset:-150});">
+           <v-list-item link @click="$vuetify.goTo('#kakpoddergat',{offset:-150});;drawer2=false;">
               <v-list-item-icon>
             <v-icon>mdi-cash-multiple</v-icon>
           </v-list-item-icon>
@@ -43,7 +43,7 @@
             </v-list-item-content>
    </v-list-item>
 
-             <v-list-item link @click="$vuetify.goTo('#stranici',{offset:-150});">
+             <v-list-item link @click="$vuetify.goTo('#stranici',{offset:-150});;drawer2=false;">
               <v-list-item-icon>
             <v-icon>mdi-web</v-icon>
           </v-list-item-icon>
@@ -123,12 +123,7 @@ export default {
 
   props: ['drawer'],
 
-  watch: {
-    drawer :function () {
-      this.drawer2=!this.drawer2;
-      console.log(this.drawer2);
-     },
-  },
+ 
 
   data: () => ({
     drawer2: false,
@@ -140,6 +135,10 @@ export default {
   },
   watch: {
     $route: 'fetchData',
+     drawer :function () {
+      this.drawer2=!this.drawer2;
+      console.log(this.drawer2);
+     },
   },
   methods: {
     fetchData() {
