@@ -1,6 +1,12 @@
 <template>
   <div class="fill-height">
-    <v-navigation-drawer :permanent="!$vuetify.breakpoint.xs" v-model="drawer2" app width="300px" clipped>
+    <v-navigation-drawer
+      :permanent="!$vuetify.breakpoint.xs"
+      v-model="drawer2"
+      app
+      width="300px"
+      clipped
+    >
       <v-list>
         <v-list-item link to="/" dense>
           <v-list-item-icon>
@@ -30,10 +36,9 @@
     </v-navigation-drawer>
 
     <v-content class="fill-height" :style="$vuetify.breakpoint.xs? '': 'padding-top:0px'">
-      <v-container  class="cont pa-0 ma-0" fluid>
-
+      <v-container class="cont pa-0 ma-0" fluid>
         <v-toolbar elevation="0">
-          <v-icon class="mr-2" color="#0a7d9a"> mdi-calendar </v-icon>
+          <v-icon class="mr-2" color="#0a7d9a">mdi-calendar</v-icon>
           <div style="max-width:220px">
             <v-select
               autofocus
@@ -46,15 +51,36 @@
               outlined
               dense
               class="pt-7 mr-2"
-
             ></v-select>
           </div>
           <v-divider vertical />
-          <v-btn outlined @click="setToday" class="ml-2" elevation="3" v-if="!$vuetify.breakpoint.xs"> Сегодня</v-btn>
-          <v-btn @click="prev" outlined class="ml-2" min-width="36px" width="36px" elevation="3" v-if="!$vuetify.breakpoint.xs">
+          <v-btn
+            outlined
+            @click="setToday"
+            class="ml-2"
+            elevation="3"
+            v-if="!$vuetify.breakpoint.xs"
+          >Сегодня</v-btn>
+          <v-btn
+            @click="prev"
+            outlined
+            class="ml-2"
+            min-width="36px"
+            width="36px"
+            elevation="3"
+            v-if="!$vuetify.breakpoint.xs"
+          >
             <v-icon>mdi-chevron-left</v-icon>
           </v-btn>
-          <v-btn @click="next" outlined class="ml-2" min-width="36px" width="36px" elevation="3" v-if="!$vuetify.breakpoint.xs">
+          <v-btn
+            @click="next"
+            outlined
+            class="ml-2"
+            min-width="36px"
+            width="36px"
+            elevation="3"
+            v-if="!$vuetify.breakpoint.xs"
+          >
             <v-icon>mdi-chevron-right</v-icon>
           </v-btn>
 
@@ -77,185 +103,171 @@
           </div>
         </v-toolbar>
 
-<div class="fill-height">
-        <FullCalendar
-          height="parent"
-          ref="fullCalendar"
-          v-model="focus"
-          :defaultView="type"
-          eventTextColor="black"
-          :allDaySlot="false"
-          :eventLimit="true"
-          eventLimitText="ещё"
-          :nowIndicator="true"
-          :header="false"
-          :plugins="calendarPlugins"
-          :weekends="calendarWeekends"
-          :events="events"
-          :googleCalendarApiKey="googleCalendarApiKey"
-          :firstDay="1"
-          locale="ru"
-          :views="{
+        <div class="fill-height">
+          <FullCalendar
+            height="parent"
+            ref="fullCalendar"
+            v-model="focus"
+            :defaultView="type"
+            eventTextColor="black"
+            :allDaySlot="false"
+            :eventLimit="true"
+            eventLimitText="ещё"
+            :nowIndicator="true"
+            :header="false"
+            :plugins="calendarPlugins"
+            :weekends="calendarWeekends"
+            :events="events"
+            :googleCalendarApiKey="googleCalendarApiKey"
+            :firstDay="1"
+            locale="ru"
+            :views="{
       timeGridDay: {
       type: 'timeGrid',
       duration: { days: 1 },
       }}"
-          :listDayFormat="{month: 'long',
+            :listDayFormat="{month: 'long',
     year: 'numeric',
     day: 'numeric',
     weekday: 'long'}"
-          :listDayAltFormat="false"
-          @eventClick="showevent"
-          @datesRender="update"
-        />
-</div>
-
+            :listDayAltFormat="false"
+            @eventClick="showevent"
+            @datesRender="update"
+          />
+        </div>
       </v-container>
       <v-menu
-          v-model="selectedOpen"
-          :close-on-content-click="false"
-          :position-x="cardposX"
-          :position-y="cardposY"
-          max-width="400px"
-          offset-x
-        >
-          <v-card>
-
-            <v-sheet
-              class="overflow-y-auto"
-              min-width="150px"
-              max-width="400px"
-              max-height="500px"
-            >
-              <v-card-text>
-                <h3>{{selectedEvent.title}}</h3>
-                <div v-html="selectedEvent.description"></div>
-              </v-card-text>
-            </v-sheet>
-          </v-card>
-        </v-menu>
+        v-model="selectedOpen"
+        :close-on-content-click="false"
+        :position-x="cardposX"
+        :position-y="cardposY"
+        max-width="400px"
+        offset-x
+      >
+        <v-card>
+          <v-sheet class="overflow-y-auto" min-width="150px" max-width="400px" max-height="500px">
+            <v-card-text>
+              <h3>{{selectedEvent.title}}</h3>
+              <div v-html="selectedEvent.description"></div>
+            </v-card-text>
+          </v-sheet>
+        </v-card>
+      </v-menu>
     </v-content>
   </div>
 </template>
 
 <script>
-
-
-import FullCalendar from '@fullcalendar/vue';
-import dayGridPlugin from '@fullcalendar/daygrid';
-import timeGridPlugin from '@fullcalendar/timegrid';
-import interactionPlugin from '@fullcalendar/interaction';
-import listPlugin from '@fullcalendar/list';
-import googleCalendarPlugin from '@fullcalendar/google-calendar';
-import { formatDate } from '@fullcalendar/core';
+import FullCalendar from "@fullcalendar/vue";
+import dayGridPlugin from "@fullcalendar/daygrid";
+import timeGridPlugin from "@fullcalendar/timegrid";
+import interactionPlugin from "@fullcalendar/interaction";
+import listPlugin from "@fullcalendar/list";
+import googleCalendarPlugin from "@fullcalendar/google-calendar";
+import { formatDate } from "@fullcalendar/core";
 
 export default {
   components: {
-
-
-    FullCalendar,
+    FullCalendar
   },
- props: ['drawer'],
+  props: ["drawer"],
 
   watch: {
-    drawer :function () {
-      this.drawer2=!this.drawer2;
-      console.log(this.drawer2);
-     },
-
-    
+    drawer() {
+      this.drawer2 = !this.drawer2;
+    }
   },
   data: () => ({
     cardposX: 0,
     cardposY: 0,
     calendarApi: null,
 
-    title: '',
+    title: "",
     calendarPlugins: [
       // plugins must be defined in the JS
       dayGridPlugin,
       timeGridPlugin,
       listPlugin,
       googleCalendarPlugin,
-      interactionPlugin, // needed for dateClick
+      interactionPlugin // needed for dateClick
     ],
     calendarWeekends: true,
 
-    googleCalendarApiKey: 'AIzaSyCSV5kxpkQN3Vfvg_9D_vyBN2DQ7AiBzr4',
+    googleCalendarApiKey: "AIzaSyCSV5kxpkQN3Vfvg_9D_vyBN2DQ7AiBzr4",
 
     drawer2: false,
     wd: [1, 2, 3, 4, 5, 6, 0],
 
-    mesta: ['Сеть', 'Москва', 'Санкт-Петербург'],
-    mesto: 'Сеть',
+    mesta: ["Сеть", "Москва", "Санкт-Петербург"],
+    mesto: "Сеть",
 
     loading: false,
 
     showTooltip: false,
 
-    today: '',
-    focus: '',
-    type: 'dayGridMonth',
+    today: "",
+    focus: "",
+    type: "dayGridMonth",
 
     selectedEvent: {},
     selectedElement: null,
     selectedOpen: false,
 
     caltype: {
-      title: 'МЕСЯЦ',
-      value: 'dayGridMonth',
+      title: "МЕСЯЦ",
+      value: "dayGridMonth"
     },
     vidi: [
       {
-        title: 'МЕСЯЦ',
-        value: 'dayGridMonth',
+        title: "МЕСЯЦ",
+        value: "dayGridMonth"
       },
       {
-        title: 'НЕДЕЛЯ',
-        value: 'timeGridWeek',
+        title: "НЕДЕЛЯ",
+        value: "timeGridWeek"
       },
       {
-        title: 'ДЕНЬ',
-        value: 'timeGridDay',
+        title: "ДЕНЬ",
+        value: "timeGridDay"
       },
       {
-        title: 'РАСПИСАНИЕ',
-        value: 'listMonth',
-      },
+        title: "РАСПИСАНИЕ",
+        value: "listMonth"
+      }
     ],
 
     events: {
-      title: 'СЕТЬ',
-      googleCalendarId: '2kpu7kvisrlvmgkiheabippc20@group.calendar.google.com',
-      color: '#c5dde8',
-      className: 'set',
+      title: "СЕТЬ",
+      googleCalendarId: "2kpu7kvisrlvmgkiheabippc20@group.calendar.google.com",
+      color: "#c5dde8",
+      className: "set"
     },
 
     cals: [
       {
-        title: 'СЕТЬ',
+        title: "СЕТЬ",
         googleCalendarId:
-          '2kpu7kvisrlvmgkiheabippc20@group.calendar.google.com',
-        color: '#c5dde8',
-        className: 'set',
+          "2kpu7kvisrlvmgkiheabippc20@group.calendar.google.com",
+        color: "#c5dde8",
+        className: "set"
       },
 
       {
-        title: 'МОСКВА',
+        title: "МОСКВА",
         googleCalendarId:
-          'ct8a4t3tuim1jjnkno2d6skkck@group.calendar.google.com',
-        color: '#cde6bb',
-        className: 'moskva',
+          "ct8a4t3tuim1jjnkno2d6skkck@group.calendar.google.com",
+        color: "#cde6bb",
+        className: "moskva"
       },
 
       {
-        title: 'САНКТ-ПЕТЕРБУРГ',
+        title: "САНКТ-ПЕТЕРБУРГ",
         googleCalendarId:
-          'uq550s4cd42vsoojk09patvfvk@group.calendar.google.com',
-        color: '#e9ddbb',
-        className: 'piter',
-      },
-    ],
+          "uq550s4cd42vsoojk09patvfvk@group.calendar.google.com",
+        color: "#e9ddbb",
+        className: "piter"
+      }
+    ]
   }),
 
   computed: {
@@ -269,7 +281,7 @@ export default {
 
       if (!search) return this.items;
 
-      return this.items.filter((item) => {
+      return this.items.filter(item => {
         const text = item.text.toLowerCase();
 
         return text.indexOf(search) > -1;
@@ -283,16 +295,18 @@ export default {
       }
 
       return selections;
-    },
+    }
   },
   methods: {
     clickdate(arg) {
-      this.changeView('timeGridDay');
+      this.changeView("timeGridDay");
       this.calendarApi.gotoDate(arg.date);
     },
 
     update() {
-      this.title = this.calendarApi.view.title;
+      if (this.hasOwnProperty("calendarApi")) {
+        this.title = this.calendarApi.view.title;
+      }
     },
 
     changeView(view) {
@@ -318,11 +332,7 @@ export default {
       this.focus = dateToYMD(this.calendarApi.getDate());
     },
 
-    
-
     showevent(arg) {
-     
-    
       arg.jsEvent.preventDefault();
 
       const open = () => {
@@ -331,7 +341,7 @@ export default {
         this.selectedElement = arg.el;
         this.cardposX = arg.jsEvent.pageX;
         this.cardposY = arg.jsEvent.pageY;
-        console.log(this.selectedElement);
+
         setTimeout(() => (this.selectedOpen = true), 1);
       };
 
@@ -342,20 +352,18 @@ export default {
         open();
       }
       arg.jsEvent.stopPropagation();
-    },
+    }
   },
 
   mounted() {
     this.today = new Date();
     this.focus = dateToYMD(this.today);
     this.calendarApi = this.$refs.fullCalendar.getApi();
-    console.log(this.focus);
-     if (window.innerWidth<700) {
-        this.changeView("listMonth") ;
-      
-     }
-     
-  },
+
+    if (window.innerWidth < 700) {
+      this.changeView("listMonth");
+    }
+  }
 };
 
 function dateToYMD(date) {

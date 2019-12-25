@@ -1,6 +1,12 @@
 <template>
   <div class="fill-height">
-    <v-navigation-drawer width="300px" :permanent="!$vuetify.breakpoint.xs" v-model="drawer2" clipped app>
+    <v-navigation-drawer
+      width="300px"
+      :permanent="!$vuetify.breakpoint.xs"
+      v-model="drawer2"
+      clipped
+      app
+    >
       <v-list>
         <v-list-item link to="/" dense>
           <v-list-item-icon>
@@ -15,7 +21,7 @@
       </v-list>
     </v-navigation-drawer>
 
-    <v-content :style="$vuetify.breakpoint.xs? '': 'padding-top:0px'" >
+    <v-content :style="$vuetify.breakpoint.xs? '': 'padding-top:0px'">
       <v-container class="px-6">
         <v-row justify="center">
           <v-col cols="auto" class="pt-0">
@@ -40,29 +46,25 @@
 </template>
 
 <script>
-
-import { db } from '../db';
-
+import { db } from "../db";
 export default {
-  components: {
-
-  },
-   props: ['drawer'],
+  components: {},
+  props: ["drawer"],
 
   watch: {
-    drawer :function () {
-      this.drawer2=!this.drawer2;
+    drawer() {
+      this.drawer2 = !this.drawer2;
       console.log(this.drawer2);
-     },
+    }
   },
   data: () => ({
     drawer2: false,
-    statii: [],
+    statii: []
   }),
 
   firestore: {
-    statii: db.collection('statii'),
-  },
+    statii: db.collection("statii")
+  }
 };
 </script>
 

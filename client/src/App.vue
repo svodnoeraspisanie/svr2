@@ -2,7 +2,7 @@
   <v-app style="background-color:#eef5f8">
    <appbar v-on:toggle-drawer="drawer=!drawer"/>
       <router-view class="fill-height" :drawer="drawer"/>
-    
+
   </v-app>
 </template>
 
@@ -19,7 +19,7 @@ export default {
 
   },
   data: () => ({
-    drawer:true,
+    drawer: true,
   }),
 };
 </script>

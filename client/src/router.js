@@ -13,60 +13,60 @@ export default new Router({
       path: '/',
       name: 'glavnaya',
       component: glavnaya,
-      props:true,
+      props: true,
     },
     {
       path: '/spravka',
       name: 'spravka',
-      props:true,
+      props: true,
       // route level code-splitting
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: () => import(/* webpackChunkName: "about" */ './views/spravka.vue'),
-      
+
     },
     {
       path: '/statii',
       name: 'statii',
-      props:true,
+      props: true,
       component: () => import('./views/statii.vue'),
-      
+
     },
     {
       path: '/raspisanie',
       name: 'raspisanie',
-      props:true,
+      props: true,
 
       component: () => import('./views/raspisanie.vue'),
     },
     {
       path: '/predpriyatiya',
       name: 'predpriyatiya',
-      props:true,
+      props: true,
       component: () => import('./views/predpriyatiya.vue'),
     },
     {
       path: '/predpriyatiya/:id',
-      props:true,
+      props: true,
 
       component: () => import('./views/predpriyatie.vue'),
     },
     {
       path: '/sbori',
       name: 'sbori',
-      props:true,
+      props: true,
       component: () => import('./views/sbori.vue'),
     },
     {
       path: '/dob',
       name: 'dob',
-      props:true,
+      props: true,
       component: () => import('./views/dobavlenie.vue'),
     },
     {
       path: '/prisoedinitsya',
       name: 'prisoedinitsya',
-      props:true,
+      props: true,
       component: () => import('./views/prisoedinitsya.vue'),
     },
 

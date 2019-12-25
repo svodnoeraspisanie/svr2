@@ -1,6 +1,12 @@
 <template>
   <span>
-    <v-navigation-drawer width="300px"  clipped :permanent="!$vuetify.breakpoint.xs" v-model="drawer2" app >
+    <v-navigation-drawer
+      width="300px"
+      clipped
+      :permanent="!$vuetify.breakpoint.xs"
+      v-model="drawer2"
+      app
+    >
       <v-list>
         <v-list-item link to="/statii">
           <v-list-item-icon>
@@ -63,7 +69,12 @@
 
       <template v-slot:append>
         <div class="pa-2">
-          <v-btn block depressed color="#f4c900" @click="openlink('https://www.subscribestar.com/yasnost')">Поддержать</v-btn>
+          <v-btn
+            block
+            depressed
+            color="#f4c900"
+            @click="openlink('https://www.subscribestar.com/yasnost')"
+          >Поддержать</v-btn>
         </div>
       </template>
     </v-navigation-drawer>
@@ -88,7 +99,7 @@
               </v-card-text>
             </v-card>
           </v-col>
-          <v-col class="pt-0 d-none d-sm-block" >
+          <v-col class="pt-0 d-none d-sm-block">
             <div class="headline font-weight-bold pb-1">
               <router-link class="mainlink" to="/spravka">
                 <v-icon class="mr-2" color="#0a7d9a">mdi-help-circle-outline</v-icon>
@@ -101,13 +112,13 @@
             </v-card>
           </v-col>
         </v-row>
-        <div class="headline font-weight-bold  pt-4">
+        <div class="headline font-weight-bold pt-4">
           <router-link to="/raspisanie" class="mainlink">
             <v-icon class="mr-2" color="#0a7d9a">mdi-calendar</v-icon>Ближайшие события
           </router-link>
         </div>
         <v-row class="ml-0">
-          <v-col class="pt-1  "  cols="12" sm="4">
+          <v-col class="pt-1" cols="12" sm="4">
             <span class="subtitle-1 font-weight-bold">
               <router-link to="/raspisanie" class="mainlink">
                 <v-icon class="mr-2" color="#0a7d9a">mdi-web</v-icon>в Cети
@@ -177,7 +188,7 @@
               </v-card-text>
             </v-card>
           </v-col>
-          <v-col class="pt-1"  cols="12" sm="4">
+          <v-col class="pt-1" cols="12" sm="4">
             <span class="subtitle-1 font-weight-bold">
               <router-link to="/raspisanie" class="mainlink">
                 <v-icon class="mr-2" color="#0a7d9a">mdi-city</v-icon>в Москве
@@ -317,8 +328,8 @@
           </v-col>
         </v-row>
 
-        <div class="headline font-weight-bold pt-4" >
-          <v-icon class="mr-2 " color="#0a7d9a">mdi-tab-plus</v-icon>Поддержать
+        <div class="headline font-weight-bold pt-4">
+          <v-icon class="mr-2" color="#0a7d9a">mdi-tab-plus</v-icon>Поддержать
         </div>
         <v-row class="ml-0">
           <v-col class="pt-0" cols="12" sm="4">
@@ -381,9 +392,7 @@
                 <v-icon>mdi-shuffle-variant</v-icon>
               </v-btn>
               <router-link class="cardlink" :to="{path: `/predpriyatiya/${predpriyatiya[pi].id}`}">
-                
                 <v-card-text class="cardhov">
-                  
                   <v-img
                     :src="predpriyatiya[pi].obraz"
                     eager
@@ -397,12 +406,9 @@
                   </v-img>
 
                   <v-card-title class="subtitle-1 font-weight-bold">{{predpriyatiya[pi].nazvanie}}</v-card-title>
-               
                 </v-card-text>
-               
               </router-link>
             </v-card>
-
           </v-col>
 
           <v-col class="pt-0" cols="12" sm="4">
@@ -430,39 +436,37 @@
 </template>
 
 <script>
-import { db } from '../db';
+import { db } from "../db";
 
 export default {
   components: {},
 
-  props: ['drawer'],
-
+  props: ["drawer"],
 
   data: () => ({
-    drawer2:false,
-    sbori: [{ id: '1', obraz: '' }],
-    predpriyatiya: [{ id: '1', obraz: '' }],
+    drawer2: false,
+    sbori: [{ id: "1", obraz: "" }],
+    predpriyatiya: [{ id: "1", obraz: "" }],
     novosti: [],
-    zamisli: [{ nazvanie: '' }],
+    zamisli: [{ nazvanie: "" }],
     si: 0,
     pi: 0,
     tekst: {},
 
     raspsegondya: [[], [], []],
-    raspzavtra: [[], [], []],
+    raspzavtra: [[], [], []]
   }),
   created() {
     this.fetchData();
   },
   watch: {
-    $route: 'fetchData',
+    $route: "fetchData",
 
-    drawer :function () {
-      this.drawer2=!this.drawer2;
-     },
+    drawer() {
+      this.drawer2 = !this.drawer2;
+    }
   },
   mounted() {
-    
     this.zagruzkaraspisaniya();
 
     window.setInterval(() => {
@@ -472,10 +476,10 @@ export default {
   },
   methods: {
     fetchData() {
-      db.collection('teksti')
-        .doc('glavnaya')
+      db.collection("teksti")
+        .doc("glavnaya")
         .get()
-        .then((snapshot) => {
+        .then(snapshot => {
           this.tekst = snapshot.data();
         });
     },
@@ -485,8 +489,8 @@ export default {
     },
 
     async zagruzkaraspisaniya() {
-      const googleCalendarApiKey = 'AIzaSyCSV5kxpkQN3Vfvg_9D_vyBN2DQ7AiBzr4';
-      const caladr = 'https://www.googleapis.com/calendar/v3/calendars/';
+      const googleCalendarApiKey = "AIzaSyCSV5kxpkQN3Vfvg_9D_vyBN2DQ7AiBzr4";
+      const caladr = "https://www.googleapis.com/calendar/v3/calendars/";
       const today = new Date();
       today.setHours(0);
       today.setMinutes(0);
@@ -494,20 +498,18 @@ export default {
       const tomorrow = new Date(today.getTime() + 48 * 60 * 60 * 1000 - 1000);
       console.log(today, tomorrow);
       const cals = [
-        '2kpu7kvisrlvmgkiheabippc20@group.calendar.google.com',
-        'ct8a4t3tuim1jjnkno2d6skkck@group.calendar.google.com',
-        'uq550s4cd42vsoojk09patvfvk@group.calendar.google.com',
+        "2kpu7kvisrlvmgkiheabippc20@group.calendar.google.com",
+        "ct8a4t3tuim1jjnkno2d6skkck@group.calendar.google.com",
+        "uq550s4cd42vsoojk09patvfvk@group.calendar.google.com"
       ];
 
       for (let i = 0; i < cals.length; i++) {
-        const url = `${caladr
-          + encodeURIComponent(cals[i])
-        }/events?timeMin=${
-          encodeURIComponent(today.toISOString())
-        }&timeMax=${
-          encodeURIComponent(tomorrow.toISOString())
-        }&key=${
-          googleCalendarApiKey}`;
+        const url = `${caladr +
+          encodeURIComponent(cals[i])}/events?timeMin=${encodeURIComponent(
+          today.toISOString()
+        )}&timeMax=${encodeURIComponent(
+          tomorrow.toISOString()
+        )}&key=${googleCalendarApiKey}`;
 
         const response = await fetch(url);
         if (response.ok) {
@@ -516,19 +518,18 @@ export default {
           const datazavtra = [];
           for (let j = 0; j < data.items.length; j++) {
             data.items[j].start.time = new Date(
-              data.items[j].start.dateTime,
-            ).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+              data.items[j].start.dateTime
+            ).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
 
             if (
-              new Date(data.items[j].start.dateTime).getDay()
-              == new Date().getDay()
+              new Date(data.items[j].start.dateTime).getDay() ==
+              new Date().getDay()
             ) {
               this.raspsegondya[i].push(data.items[j]);
             } else {
               this.raspzavtra[i].push(data.items[j]);
             }
           }
-
         }
       }
 
@@ -537,21 +538,21 @@ export default {
     },
 
     openlink(arg) {
-      window.open(arg, '_blank');
+      window.open(arg, "_blank");
     },
     anyel(i, ar) {
       const i2 = ~~(Math.random() * ar.length);
 
       return i == i2 ? (i == ar.length - 1 ? i - 1 : i + 1) : i2;
-    },
+    }
   },
 
   firestore: {
-    sbori: db.collection('sbori'),
-    predpriyatiya: db.collection('predpriyatiya'),
-    novosti: db.collection('novosti'),
-    zamisli: db.collection('zamisli'),
-  },
+    sbori: db.collection("sbori"),
+    predpriyatiya: db.collection("predpriyatiya"),
+    novosti: db.collection("novosti"),
+    zamisli: db.collection("zamisli")
+  }
 };
 </script>
 <style scoped>
@@ -564,9 +565,8 @@ export default {
   color: #1f2020 !important;
 }
 
-.mainlink i
-{
-    display: inline-block;
+.mainlink i {
+  display: inline-block;
 }
 
 .cardlink {
@@ -581,10 +581,10 @@ export default {
   background-color: #eeeeee;
 }
 
-.smtop{
+.smtop {
   padding-top: 56px;
 }
-.bigtop{
-  padding-top: 0px!important;
+.bigtop {
+  padding-top: 0px !important;
 }
 </style>

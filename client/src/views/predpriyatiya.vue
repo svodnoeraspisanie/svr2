@@ -1,38 +1,40 @@
 <template>
   <div class="fill-height">
+    <v-navigation-drawer
+      :permanent="!$vuetify.breakpoint.xs"
+      v-model="drawer2"
+      app
+      clipped
+      width="300px"
+    >
+      <v-list>
+        <v-list-item link to="/" dense>
+          <v-list-item-icon>
+            <v-icon>mdi-arrow-left-bold</v-icon>
+          </v-list-item-icon>
 
-
-   <v-navigation-drawer  :permanent="!$vuetify.breakpoint.xs" v-model="drawer2"  app  clipped width="300px"  >
-
-
-<v-list >
-      <v-list-item  link to="/" dense>
-            <v-list-item-icon>
-              <v-icon>mdi-arrow-left-bold</v-icon>
-            </v-list-item-icon>
-
-            <v-list-item-content>
-              <v-list-item-title>Назад</v-list-item-title>
-
-            </v-list-item-content>
-
-          </v-list-item>
-          <v-divider></v-divider>
-
-
-</v-list></v-navigation-drawer>
-
-
+          <v-list-item-content>
+            <v-list-item-title>Назад</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        <v-divider></v-divider>
+      </v-list>
+    </v-navigation-drawer>
 
     <v-content :style="$vuetify.breakpoint.xs? '': 'padding-top:0px'">
-       <v-container  class="px-6" >
-
-
-        <h2><v-icon class="mr-2" color="#0a7d9a">mdi-account-group</v-icon>Русские национальные предприятия</h2>
+      <v-container class="px-6">
+        <h2>
+          <v-icon class="mr-2" color="#0a7d9a">mdi-account-group</v-icon>Русские национальные предприятия
+        </h2>
         <v-row class="ml-0">
-          <v-col lg="3" md="4" sm="6" cols="12" v-for="pr in predpriyatiya" :key="pr.n" >
-            <v-card class="flexcard cardhov" height="100%" :to="{path: `/predpriyatiya/${pr.id}`}"  elevate="0"  flat>
-
+          <v-col lg="3" md="4" sm="6" cols="12" v-for="pr in predpriyatiya" :key="pr.n">
+            <v-card
+              class="flexcard cardhov"
+              height="100%"
+              :to="{path: `/predpriyatiya/${pr.id}`}"
+              elevate="0"
+              flat
+            >
               <v-img :src="pr.obraz" aspect-ratio="1.5" contain class="ma-2">
                 <v-layout slot="placeholder" fill-height align-center justify-center ma-0>
                   <v-progress-circular indeterminate color="#0a7d9a"></v-progress-circular>
@@ -47,51 +49,55 @@
               <v-divider />
 
               <v-card-text class="pa-2">
-               <div> Место: 
+                <div>
+                  Место:
+                  <v-chip
+                    v-for="(mesto, nm) in pr.mesto"
+                    :key="nm"
+                    small
+                    style="height:18px; margin-left:2px"
+                  >{{mesto}}</v-chip>
+                </div>
 
-                <v-chip v-for="(mesto, nm) in pr.mesto" :key="nm" small style="height:18px; margin-left:2px">{{mesto}}</v-chip>
-               </div>
-             
-               
-                
-                  <div>Метки: <v-chip v-for="(metka, nm) in pr.metki" :key="nm" small style="height:18px; margin-left:2px">{{metka}}</v-chip> </div>
-                </v-card-text>
-           
+                <div>
+                  Метки:
+                  <v-chip
+                    v-for="(metka, nm) in pr.metki"
+                    :key="nm"
+                    small
+                    style="height:18px; margin-left:2px"
+                  >{{metka}}</v-chip>
+                </div>
+              </v-card-text>
             </v-card>
           </v-col>
         </v-row>
-
       </v-container>
     </v-content>
   </div>
 </template>
 
 <script>
-
-
-import { db } from '../db';
+import { db } from "../db";
 
 export default {
-  components: {
-
-
-  },
-  props: ['drawer'],
+  components: {},
+  props: ["drawer"],
 
   watch: {
-    drawer :function () {
-      this.drawer2=!this.drawer2;
+    drawer() {
+      this.drawer2 = !this.drawer2;
       console.log(this.drawer2);
-     },
+    }
   },
   data: () => ({
     drawer2: false,
-    predpriyatiya: [],
+    predpriyatiya: []
   }),
 
   firestore: {
-    predpriyatiya: db.collection('predpriyatiya'),
-  },
+    predpriyatiya: db.collection("predpriyatiya")
+  }
 };
 </script>
 
@@ -100,8 +106,7 @@ export default {
   display: flex;
   flex-direction: column;
 }
-.cardhov:hover{
-
-  background-color:#eeeeee;
+.cardhov:hover {
+  background-color: #eeeeee;
 }
 </style>

@@ -111,13 +111,12 @@ export default {
   props: ["drawer"],
 
   computed: {
-    corr: function() {
-      console.log('corr');
+    corr() {
+      console.log("corr");
       if (window.width < 600) {
         return { offset: 0 };
-      } else {
-        return { offset: -150 };
       }
+      return { offset: -150 };
     }
   },
   data: () => ({
@@ -130,7 +129,7 @@ export default {
   },
   watch: {
     $route: "fetchData",
-    drawer: function() {
+    drawer() {
       this.drawer2 = !this.drawer2;
       console.log(this.drawer2);
     }
