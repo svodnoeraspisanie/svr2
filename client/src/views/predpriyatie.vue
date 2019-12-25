@@ -64,14 +64,14 @@
 
          <v-card class="mb-4" flat  max-width="936px" >
         <v-row >
-          <v-col cols="3">
+          <v-col  cols="12" sm="3">
 <v-img :src="pr.obraz" aspect-ratio="1.5" max-width="500px" contain>
                 <v-layout slot="placeholder" fill-height align-center justify-center ma-0>
                   <v-progress-circular indeterminate color="teal lighten-5"></v-progress-circular>
                 </v-layout>
               </v-img>
           </v-col>
-          <v-col cols="9" class="pb-0">
+          <v-col cols="12" sm="9" class="pb-0">
              <v-card-title>{{pr.nazvanie}}</v-card-title>
               <v-card-text>{{pr.kratkoe_opisanie}}</v-card-text>
 
