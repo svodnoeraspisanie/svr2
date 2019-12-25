@@ -13,7 +13,7 @@ Vue.config.productionTip = false;
 Vue.use(firestorePlugin);
 
 
-export const app = new Vue({
+export  const app = new Vue({
   router,
   store,
   vuetify,

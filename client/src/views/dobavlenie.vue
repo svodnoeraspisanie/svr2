@@ -32,8 +32,8 @@ export default {
       const req = new XMLHttpRequest();
       req.open("GET", requestUrl, true);
       req.onreadystatechange = function(aEvt) {
-        if (req.readyState == 4) {
-          if (req.status == 200) {
+        if (req.readyState === 4) {
+          if (req.status === 200) {
             const result = JSON.parse(req.responseText);
             console.log(result);
           } else {
