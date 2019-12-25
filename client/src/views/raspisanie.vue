@@ -318,11 +318,11 @@ export default {
       this.focus = dateToYMD(this.calendarApi.getDate());
     },
 
-    eventRender(arg) {},
+    
 
     showevent(arg) {
-      console.log(arg);
-      console.log('click');
+     
+    
       arg.jsEvent.preventDefault();
 
       const open = () => {
@@ -352,7 +352,7 @@ export default {
     console.log(this.focus);
      if (window.innerWidth<700) {
         this.changeView("listMonth") ;
-        console.log(this.type);
+      
      }
      
   },
