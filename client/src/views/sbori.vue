@@ -42,7 +42,8 @@
                 </v-layout>
               </v-img>
 
-              <v-card-title class="subtitle-2">{{sbor.nazvanie}}</v-card-title>
+              <v-card-title class="subtitle-2" style="word-break: normal
+">{{sbor.nazvanie}}</v-card-title>
               <v-card-text>{{sbor.kratkoe_opisanie}}</v-card-text>
 
               <v-spacer />
