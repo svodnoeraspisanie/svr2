@@ -90,7 +90,7 @@
               <v-card-text class="pb-1 pt-2">
                 <v-simple-table dense>
                   <tbody>
-                    <tr v-for="(novost,i) in novosti.slice().reverse()" :key="i">
+                    <tr v-for="(novost,i) in novosti.slice().reverse()" :key="i" @click="$router.push({ path: novost.ssilka })">
                       <td valign="top">{{novost.data}}</td>
                       <td>{{novost.soobshenie}}</td>
                     </tr>

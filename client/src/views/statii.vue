@@ -35,7 +35,7 @@
               class="mb-6 ml-2"
               max-width="936px"
             >
-              <v-card-title>{{statia.nazvanie}}</v-card-title>
+              <v-card-title style="word-break: normal">{{statia.nazvanie}}</v-card-title>
               <v-card-text v-html="statia.text"></v-card-text>
             </v-card>
           </v-col>
