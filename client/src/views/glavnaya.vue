@@ -90,7 +90,11 @@
               <v-card-text class="pb-1 pt-2">
                 <v-simple-table dense>
                   <tbody>
-                    <tr v-for="(novost,i) in novosti.slice().reverse()" :key="i" @click="$router.push({ path: novost.ssilka })">
+                    <tr
+                      v-for="(novost,i) in novosti.slice().reverse()"
+                      :key="i"
+                      @click="$router.push({ path: novost.ssilka })"
+                    >
                       <td valign="top">{{novost.data}}</td>
                       <td>{{novost.soobshenie}}</td>
                     </tr>
@@ -406,7 +410,8 @@
                   </v-img>
 
                   <v-card-title
-                    class="subtitle-1 font-weight-bold" style=" word-break: normal"
+                    class="subtitle-1 font-weight-bold"
+                    style=" word-break: normal"
                   >{{predpriyatiya[pi].nazvanie}}</v-card-title>
                 </v-card-text>
               </router-link>
@@ -516,8 +521,17 @@ export default {
         const response = await fetch(url);
         if (response.ok) {
           const data = await response.json();
-          const datasegodnya = [];
-          const datazavtra = [];
+          data.items.sort(function(a, b) {
+            if (new Date(a.start.dateTime) > new Date(b.start.dateTime)) {
+              return 1;
+            }
+            if (new Date(a.start.dateTime) < new Date(b.start.dateTime)) {
+              return -1;
+            }
+            // a должно быть равным b
+            return 0;
+          });
+
           for (let j = 0; j < data.items.length; j++) {
             data.items[j].start.time = new Date(
               data.items[j].start.dateTime
