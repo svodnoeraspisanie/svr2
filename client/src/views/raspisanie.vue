@@ -356,6 +356,10 @@ export default {
   },
 
   mounted() {
+    if (this.$route.params.hasOwnProperty('id')) {
+      this.events = this.cals[this.$route.params.id];}
+    
+
     this.today = new Date();
     this.focus = dateToYMD(this.today);
     this.calendarApi = this.$refs.fullCalendar.getApi();

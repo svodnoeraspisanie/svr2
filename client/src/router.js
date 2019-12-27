@@ -40,6 +40,12 @@ export default new Router({
       component: () => import('./views/raspisanie.vue'),
     },
     {
+      path: '/raspisanie/:id',
+      props: true,
+
+      component: () => import('./views/raspisanie.vue'),
+    },
+    {
       path: '/predpriyatiya',
       name: 'predpriyatiya',
       props: true,

@@ -124,7 +124,7 @@
         <v-row class="ml-0">
           <v-col class="pt-1" cols="12" sm="4">
             <span class="subtitle-1 font-weight-bold">
-              <router-link to="/raspisanie" class="mainlink">
+              <router-link to="/raspisanie/0" class="mainlink">
                 <v-icon class="mr-2" color="#0a7d9a">mdi-web</v-icon>в Cети
               </router-link>
             </span>
@@ -194,7 +194,7 @@
           </v-col>
           <v-col class="pt-1" cols="12" sm="4">
             <span class="subtitle-1 font-weight-bold">
-              <router-link to="/raspisanie" class="mainlink">
+              <router-link to="/raspisanie/1" class="mainlink">
                 <v-icon class="mr-2" color="#0a7d9a">mdi-city</v-icon>в Москве
               </router-link>
             </span>
@@ -263,7 +263,7 @@
           </v-col>
           <v-col class="pt-1" cols="12" sm="4">
             <span class="subtitle-1 font-weight-bold">
-              <router-link to="/raspisanie" class="mainlink">
+              <router-link to="/raspisanie/2" class="mainlink">
                 <v-icon class="mr-2" color="#0a7d9a">mdi-anchor</v-icon>в Санкт-Петербурге
               </router-link>
             </span>
