@@ -87,7 +87,7 @@
           <v-toolbar-title class="ml-2">{{title}}</v-toolbar-title>
           <v-spacer></v-spacer>
 
-          <div style="max-width:150px">
+          <div style="max-width:200px">
             <v-select
               v-if="!$vuetify.breakpoint.xs"
               :items="vidi"
