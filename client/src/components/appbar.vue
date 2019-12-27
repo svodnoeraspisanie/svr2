@@ -56,7 +56,7 @@
 
         <v-tooltip bottom>
           <template v-slot:activator="{ on }">
-            <v-btn icon to="/raspisanie" v-on="on">
+            <v-btn icon to="/sobitiya" v-on="on">
               <v-icon>mdi-calendar</v-icon>
             </v-btn>
           </template>

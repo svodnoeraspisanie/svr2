@@ -33,17 +33,17 @@ export default new Router({
 
     },
     {
-      path: '/raspisanie',
-      name: 'raspisanie',
+      path: '/sobitiya',
+      name: 'sobitiya',
       props: true,
 
-      component: () => import('./views/raspisanie.vue'),
+      component: () => import('./views/sobitiya.vue'),
     },
     {
-      path: '/raspisanie/:id',
+      path: '/sobitiya/:id',
       props: true,
 
-      component: () => import('./views/raspisanie.vue'),
+      component: () => import('./views/sobitiya.vue'),
     },
     {
       path: '/predpriyatiya',

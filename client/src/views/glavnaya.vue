@@ -37,7 +37,7 @@
           </v-list-item-content>
         </v-list-item>
 
-        <v-list-item link to="/raspisanie">
+        <v-list-item link to="/sobitiya">
           <v-list-item-icon>
             <v-icon>mdi-calendar</v-icon>
           </v-list-item-icon>
@@ -117,14 +117,14 @@
           </v-col>
         </v-row>
         <div class="headline font-weight-bold pt-4">
-          <router-link to="/raspisanie" class="mainlink">
+          <router-link to="/sobitiya" class="mainlink">
             <v-icon class="mr-2" color="#0a7d9a">mdi-calendar</v-icon>Ближайшие события
           </router-link>
         </div>
         <v-row class="ml-0">
           <v-col class="pt-1" cols="12" sm="4">
             <span class="subtitle-1 font-weight-bold">
-              <router-link to="/raspisanie/0" class="mainlink">
+              <router-link to="/sobitiya/set" class="mainlink">
                 <v-icon class="mr-2" color="#0a7d9a">mdi-web</v-icon>в Cети
               </router-link>
             </span>
@@ -194,7 +194,7 @@
           </v-col>
           <v-col class="pt-1" cols="12" sm="4">
             <span class="subtitle-1 font-weight-bold">
-              <router-link to="/raspisanie/1" class="mainlink">
+              <router-link to="/sobitiya/msk" class="mainlink">
                 <v-icon class="mr-2" color="#0a7d9a">mdi-city</v-icon>в Москве
               </router-link>
             </span>
@@ -263,7 +263,7 @@
           </v-col>
           <v-col class="pt-1" cols="12" sm="4">
             <span class="subtitle-1 font-weight-bold">
-              <router-link to="/raspisanie/2" class="mainlink">
+              <router-link to="/sobitiya/spb" class="mainlink">
                 <v-icon class="mr-2" color="#0a7d9a">mdi-anchor</v-icon>в Санкт-Петербурге
               </router-link>
             </span>
