@@ -1,298 +1,113 @@
 <template>
-  <v-container fill-height grid-list-md   >
- <v-navigation-drawer
-      v-model="drawer"
-      :clipped="$vuetify.breakpoint.lgAndUp"
-    app
-        width="300px"
+  <div class="fill-height">
+    <v-navigation-drawer
+      :permanent="!$vuetify.breakpoint.xs"
+      v-model="drawer2"
+      app
+      clipped
+      width="300px"
     >
+      <v-list>
+        <v-list-item link to="/" dense>
+          <v-list-item-icon>
+            <v-icon>mdi-arrow-left-bold</v-icon>
+          </v-list-item-icon>
 
-    <v-list-item>
-        <v-list-item-content>
-            <v-list-item-title class="title">
-            Поиск:
-          </v-list-item-title>
-        </v-list-item-content>
-    </v-list-item>
-             <v-list-item>
-
-        <v-list-item-content>
-
-
-          <v-list-item-title class="title">
-            Место:
-          </v-list-item-title>
-
-               <v-select
-          :items="city"
-
-        ></v-select>
-              </v-list-item-content>
-      </v-list-item>
-        <v-list-item>
-
-        <v-list-item-content>
-
-
-          <v-list-item-title class="title">
-            Метки:
-          </v-list-item-title>
-
-                <v-flex
-          v-for="(selection, i) in selections"
-          :key="selection.text"
-          shrink
-        >
-          <v-chip
-            :disabled="loading"
-            close
-            @click:close="selected.splice(i, 1)"
-          >
-            <v-icon
-              left
-              v-text="selection.icon"
-            ></v-icon>
-            {{ selection.text }}
-          </v-chip>
-        </v-flex>
-
-        <v-flex v-if="!allSelected" xs12>
-
-          <v-text-field
-            ref="search"
-            v-model="search"
-            full-width
-            hide-details
-            label="Поиск"
-            single-line
-          ></v-text-field>
-             <v-divider v-if="!allSelected"></v-divider>
-        </v-flex>
-
-
-    <v-list>
-      <template v-for="(item, i) in categories">
-        <v-list-item
-          v-if="!selected.includes(i)"
-          :key="i"
-          :disabled="loading"
-          @click="selected.push(i)"
-        >
-          <v-list-item-avatar>
-            <v-icon
-              :disabled="loading"
-              v-text="item.icon"
-            ></v-icon>
-          </v-list-item-avatar>
-          <v-list-item-title v-text="item.text"></v-list-item-title>
+          <v-list-item-content>
+            <v-list-item-title>Назад</v-list-item-title>
+          </v-list-item-content>
         </v-list-item>
-      </template>
-    </v-list>
-
-    </v-list-item-content>
-      </v-list-item>
+        <v-divider></v-divider>
+      </v-list>
     </v-navigation-drawer>
 
-<appbar v-on:toggle-drawer="drawer=!drawer" />
+    <v-content :style="$vuetify.breakpoint.xs? '': 'padding-top:0px'">
+      <v-container class="px-6">
+        <h2>
+          <v-icon class="mr-2" color="#0a7d9a">mdi-account-group</v-icon>Русские национальные предприятия
+        </h2>
+        <v-row class="ml-0">
+          <v-col lg="3" md="4" sm="6" cols="12" v-for="pr in predpriyatiya" :key="pr.n">
+            <v-card
+              class="flexcard cardhov"
+              height="100%"
+              :to="{path: `/predpriyatiya/${pr.id}`}"
+              elevate="0"
+              flat
+            >
+              <v-img :src="pr.obraz" aspect-ratio="1.5" contain class="ma-2">
+                <v-layout slot="placeholder" fill-height align-center justify-center ma-0>
+                  <v-progress-circular indeterminate color="#0a7d9a"></v-progress-circular>
+                </v-layout>
+              </v-img>
 
-  <v-layout justify-center row class="manual-v-layout">
-<v-flex lg3 md4 xs12   v-for="pr in predpriyatiya" :key="pr.n">
-      <v-card class="flexcard" height="100%" >
+              <v-card-title class="subtitle-1 font-weight-bold" style="word-break: normal
+">{{pr.nazvanie}}</v-card-title>
+              <v-card-text>{{pr.kratkoe_opisanie}}</v-card-text>
 
+              <v-spacer />
 
-        <v-img
-        :src="pr.obraz"
-        aspect-ratio="1.5"
-        contain >
+              <v-divider />
 
-            <v-layout slot="placeholder" fill-height align-center justify-center ma-0>
-                <v-progress-circular indeterminate color="teal lighten-5"></v-progress-circular>
-            </v-layout>
-         </v-img>
+              <v-card-text class="pa-2">
+                <div>
+                  Место:
+                  <v-chip
+                    v-for="(mesto, nm) in pr.mesto"
+                    :key="nm"
+                    small
+                    style="height:18px; margin-left:2px"
+                  >{{mesto}}</v-chip>
+                </div>
 
-          <v-card-title>{{pr.nazvanie}}</v-card-title>
-          <v-card-text> {{pr.kratkoe_opisanie}}</v-card-text>
-
-
-          <v-spacer/>
-
-            <v-divider/>
-
-              <v-card-actions>
-
-                   <b>Место: </b>
-
-                    <v-chip v-for="(mesto, nm) in pr.mesto" :key="nm" small >{{mesto}} </v-chip>
-
-</v-card-actions>
-                <v-card-actions>
-
-                    <div width="100%">
-                      <b>Метки: </b>
-                    <v-chip v-for="(metka, nm) in pr.metki" :key="nm" small >{{metka}} </v-chip>
-</div>
-
-
-            </v-card-actions>
-
-      </v-card>
-</v-flex>
-  </v-layout>
-  </v-container>
+                <div>
+                  Метки:
+                  <v-chip
+                    v-for="(metka, nm) in pr.metki"
+                    :key="nm"
+                    small
+                    style="height:18px; margin-left:2px"
+                  >{{metka}}</v-chip>
+                </div>
+              </v-card-text>
+            </v-card>
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-content>
+  </div>
 </template>
 
 <script>
-import appbar from '../components/appbar';
+import { db } from "../db";
 
 export default {
-  components: {
+  components: {},
+  props: ["drawer"],
 
-    appbar,
-
+  watch: {
+    drawer() {
+      this.drawer2 = !this.drawer2;
+      console.log(this.drawer2);
+    }
   },
   data: () => ({
-    drawer: true,
-    predpriyatiya: [
-      {
-        n: 1,
-        nazvanie: 'Чёрная Сотня',
-        sozdano: '',
-        kratkoe_opisanie: "Книжный клуб Издательства 'Чёрная Сотня'",
-        podrobnoe_opisanie: 'Миссия Книжного Клуба — обеспечить непрерывную деятельность издательства «Чёрная Сотня» по двум направлениям: <br>1. Поиск, восстановление и возвращение в Россию русского литературного, культурного и научного наследия русского зарубежья и работ, попавших под цензуру в советское время.<br>2. Издание современных важнейших работ.<br>У «Чёрной Сотни» никогда не было инвесторов и спонсоров, кроме самих читателей, пять лет мы издавали книги с минимальными ресурсами и выкручивались, как могли. Да, выходило превосходно, но этого мало — с системой предзаказов мы не можем выпускать больше двух книг в год и не можем позволить себе полноценные поиски. Чтобы делать больше, нам требуется постоянная финансовая подпитка, которую сможете обеспечить только вы. Наше наследие забыто и брошено по всей планете (вспомните «Русский комикс, 1935-1945, Королевство Югославия», о котором вообще никто не знал), и никого кроме нас это особо не волнует.<br>За эти пять лет мы показали, на что мы способны. Доказали, что можем реализовывать проекты национального масштаба. Вместе с вами мы сможем ещё больше, и поверьте, это будет не только Большое Русское Дело, но и увлекательное шоу. <br>Присоединяйтесь!',
-        obraz: '/obrazy/chernaya100.jpeg',
-        ssilki: { patreon: 'https://www.patreon.com/chernaya100' },
-        scheta: [
-          'patreon: https://www.patreon.com/chernaya100',
-        ],
-        meropriyatiya: [],
-        metki: ['клуб', 'книги', 'культура'],
-        mesto: ['Сеть', 'Санкт-Петербург'],
-      },
-      {
-        n: 2,
-        nazvanie: 'Международное общественное движение «Альтернатива»',
-        sozdano: '2011',
-        kratkoe_opisanie: 'Освобождаем от рабства',
-        podrobnoe_opisanie: 'Международное общественное движение «Альтернатива» было создано в 2011 году правозащитником Олегом Мельниковым из гуманистических побуждений и по соображению совести, дабы помочь жертвам современного рабства спастись из неволи и начать свободную жизнь. <br>«Альтернатива» помогает жертвам принудительного труда, проституции, попрошайничества и семейного насилия.<br>«Альтернатива» — единственная профильная организация, которая непосредственно участвует в спасательных операциях как на территории РФ, так и в других регионах мира. После освобождения, жертвам предлагается помощь в возвращении домой, или безопасное убежище. По запросу, активисты предоставляют поддержку психолога, юриста-консультанта и помощь в трудоустройстве.Также активисты «Альтернативы» не раз помогали соотечественникам, которые в силу сложившихся обстоятельств (утрата документов) годами жили на нелегальном положении за границей и не имели возможности вернуться домой. <br>«Альтернатива» регулярно публикует сюжеты об освобождениях, проведённых активистами, а также срез релевантных мировых новостей, отражающих текущее состояние проблемы.',
-        obraz: '/obrazy/alternative.png',
-        ssilki: [
-          'Сайт: https://alternative.help/',
-          'Patreon: https://www.patreon.com/alternative_movement',
-          'Facebook:https://www.facebook.com/ru.alternative.help/',
-          'Instagram: https://www.instagram.com/alternative.help/',
-          'Telegram: https://t.me/alternativa_channel',
-          'Twitter:https://twitter.com/AlternativaRus',
-          'Youtube:https://www.youtube.com/channel/UCy6TiUfVnyALXPvfNUCkzSg',
-          'Odnoklassniki: https://ok.ru/alternativhelp/',
-        ],
-        scheta: [
-          'Patreon: https://www.patreon.com/alternative_movement',
-          'Сбербанк > 4276 3801 5524 4887',
-          'Яндекс.Деньги > www.money.yandex.ru/to/410011569894386',
-          'Qiwi-кошелек > +7 (964) 573-72-07',
-          'WebMoney > R305103454198',
-          'PayPal > www.paypal.me/AlternativeHelp',
-          'BitCoin (BTC) > 181QVAnrRkAF3zFfg47ZAE4tCNYjwgW7qc',
-          'Ethereum (ETH) > 0xe36AcE1c0FEA57Ac58eC8003e13Cd850B41E0a63',
-        ],
-        meropriyatiya: [],
-        metki: ['рабство'],
-        mesto: ['Сеть', 'Весь мир'],
-      },
-      {
-        n: 3,
-        nazvanie: 'Розанов Клуб',
-        sozdano: '',
-        kratkoe_opisanie: 'Розанов Клуб - это открытое собрание добрых русских людей и единственная национальная площадка в которой мы собрали все виды контента: живые лекции, экскурсии, статьи, видеоролики, стримы и подкасты. Мы всегда открыты к сотрудничесву и готовы принять новых людей.',
-        podrobnoe_opisanie: '',
-        obraz: '/obrazy/rozanovclub.jpg',
-        ssilki: [
-          'Patreon: https://www.patreon.com/rozanovclub',
-          'вКонтакте: https://vk.com/rozanovclub',
-          'Instagram: https://www.instagram.com/rozanovclub/',
-          'Youtube: https://www.youtube.com/channel/UCTP20lo68ZHFA5bXigF975A',
-
-        ],
-        scheta: [
-          'Patreon: https://www.patreon.com/rozanovclub',
-          'DonationAlerts: https://www.donationalerts.com/r/rozanovclub',
-
-        ],
-        meropriyatiya: [],
-        metki: ['клуб', 'лекции', 'культура'],
-        mesto: ['Сеть', 'Санкт-Петербург'],
-      },
-      {
-        n: 4,
-        nazvanie: 'Центра изучения этнической преступности. Дмитрий Бобров',
-        sozdano: '2019',
-        kratkoe_opisanie: 'Независимый проект по сбору и анализу информации связанной с этнопреступностью в Российской Федерации.',
-        podrobnoe_opisanie: '',
-        obraz: '/obrazy/ethnocrime.png',
-        ssilki: [
-          'Сайт: http://etnocrime.info',
-          'Элпочта: etnocrime@protonmail.com',
-          'Patreon: https://www.patreon.com/dmbobrov',
-          'Youtube: https://www.youtube.com/user/nsiorg',
-
-
-        ],
-        scheta: [
-          'Patreon: https://www.patreon.com/dmbobrov',
-          'карта Сбербанка: 5336 6900 6767 1067',
-
-        ],
-        meropriyatiya: [
-
-        ],
-        metki: ['преступность', 'исследование', 'мигранты', 'кавказ', 'азия'],
-        mesto: ['Сеть', 'Санкт-Петербург'],
-      },
-      {
-        n: 5,
-        nazvanie: '',
-        sozdano: '',
-        kratkoe_opisanie: '',
-        podrobnoe_opisanie: '',
-        obraz: '',
-        ssilki: [
-
-        ],
-        scheta: [
-
-        ],
-        meropriyatiya: [
-
-        ],
-        metki: [],
-        mesto: [],
-      },
-    ],
+    drawer2: false,
+    predpriyatiya: []
   }),
 
+  firestore: {
+    predpriyatiya: db.collection("predpriyatiya")
+  }
 };
 </script>
 
 <style>
- .flexcard {
-            display: flex;
-            flex-direction: column;
-        }
-
-          .manual-v-layout {
-            display: -webkit-box;
-            display: -ms-flexbox;
-            display: flex;
-            -webkit-box-flex: 1;
-            -ms-flex: 1 1 auto;
-            flex: 1 1 auto;
-            -ms-flex-wrap: wrap;
-            flex-wrap: wrap;
-            -webkit-box-orient: horizontal;
-            -webkit-box-direction: normal;
-            -ms-flex-direction: row;
-            flex-direction: row;
-            padding-bottom: 8px !important;
-            padding-top: 8px !important;
-        }
+.flexcard {
+  display: flex;
+  flex-direction: column;
+}
+.cardhov:hover {
+  background-color: #eeeeee;
+}
 </style>

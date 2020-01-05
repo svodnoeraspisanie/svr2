@@ -26,17 +26,17 @@
         <v-row justify="center">
           <v-col cols="auto" class="pt-0">
             <div style="max-width:936px" class="pb-3">
-              <h2>Справка</h2>
+              <h2>Статьи</h2>
             </div>
             <v-card
-              v-for="(spravka,i) in spravki"
+              v-for="(statia,i) in statii"
               :key="i"
               elevation="1"
               class="mb-6 ml-2"
               max-width="936px"
             >
-              <v-card-title>{{spravka.nazvanie}}</v-card-title>
-              <v-card-text v-html="spravka.tekst"></v-card-text>
+              <v-card-title style="word-break: normal">{{statia.nazvanie}}</v-card-title>
+              <v-card-text v-html="statia.text"></v-card-text>
             </v-card>
           </v-col>
         </v-row>
@@ -50,6 +50,7 @@ import { db } from "../db";
 export default {
   components: {},
   props: ["drawer"],
+
   watch: {
     drawer() {
       this.drawer2 = !this.drawer2;
@@ -58,11 +59,11 @@ export default {
   },
   data: () => ({
     drawer2: false,
-    spravki: []
+    statii: []
   }),
 
   firestore: {
-    spravki: db.collection("spravki")
+    statii: db.collection("statii")
   }
 };
 </script>

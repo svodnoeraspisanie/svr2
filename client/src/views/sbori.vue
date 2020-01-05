@@ -23,20 +23,29 @@
 
     <v-content :style="$vuetify.breakpoint.xs? '': 'padding-top:0px'">
       <v-container class="px-6">
-        <v-row justify="center">
-          <v-col cols="auto" class="pt-0">
-            <div style="max-width:936px" class="pb-3">
-              <h2>Справка</h2>
-            </div>
+        <h2>
+          <v-icon class="mr-2" color="#0a7d9a">mdi-cash-multiple</v-icon>Сборы средств
+        </h2>
+
+        <v-row class="ml-0">
+          <v-col lg="3" md="4" sm="6" cols="12" v-for="(sbor,i) in sbori" :key="i">
             <v-card
-              v-for="(spravka,i) in spravki"
-              :key="i"
-              elevation="1"
-              class="mb-6 ml-2"
-              max-width="936px"
+              class="flexcard cardhov"
+              height="100%"
+              elevate="0"
+              flat
+              @click="openlink(sbor.ssilka)"
             >
-              <v-card-title>{{spravka.nazvanie}}</v-card-title>
-              <v-card-text v-html="spravka.tekst"></v-card-text>
+              <v-img :src="sbor.obraz" aspect-ratio="1.5" contain class="ma-2">
+                <v-layout slot="placeholder" fill-height align-center justify-center ma-0>
+                  <v-progress-circular indeterminate color="#0a7d9a"></v-progress-circular>
+                </v-layout>
+              </v-img>
+
+              <v-card-title class="subtitle-2" style="word-break: normal">{{sbor.nazvanie}}</v-card-title>
+              <v-card-text>{{sbor.kratkoe_opisanie}}</v-card-text>
+
+              <v-spacer />
             </v-card>
           </v-col>
         </v-row>
@@ -47,23 +56,29 @@
 
 <script>
 import { db } from "../db";
+
 export default {
   components: {},
   props: ["drawer"],
+
   watch: {
     drawer() {
       this.drawer2 = !this.drawer2;
       console.log(this.drawer2);
-    }
+    },
   },
   data: () => ({
     drawer2: false,
-    spravki: []
+    sbori: [],
   }),
-
   firestore: {
-    spravki: db.collection("spravki")
-  }
+    sbori: db.collection('sbori'),
+  },
+  methods: {
+    openlink(arg) {
+      window.open(arg, '_blank');
+    },
+  },
 };
 </script>
 
@@ -71,5 +86,8 @@ export default {
 .flexcard {
   display: flex;
   flex-direction: column;
+}
+.cardhov:hover {
+  background-color: #eeeeee;
 }
 </style>
