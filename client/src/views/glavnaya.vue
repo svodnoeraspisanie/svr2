@@ -80,7 +80,7 @@
     </v-navigation-drawer>
 
     <v-content :style="$vuetify.breakpoint.xs? '': 'padding-top:0px'">
-      <v-container class="px-6">
+      <v-container :class="$vuetify.breakpoint.xs? 'px-2': 'px-6'">
         <v-row>
           <v-col class="pt-0">
             <div class="headline font-weight-bold pb-1">
