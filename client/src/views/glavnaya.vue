@@ -467,7 +467,14 @@ export default {
     raspsegondya: [[], [], []],
     raspzavtra: [[], [], []]
   }),
-  created() {},
+created(){
+    db.collection("teksti")
+        .doc("glavnaya")
+        .get()
+        .then(snapshot => {
+          this.teksti = snapshot.data().teksti;
+        });
+  },
   watch: {
     drawer() {
       this.drawer2 = !this.drawer2;
@@ -537,8 +544,6 @@ export default {
         }
       }
 
-      console.log(this.raspsegondya);
-      console.log(this.raspzavtra);
     },
 
     openlink(arg) {
@@ -559,7 +564,7 @@ export default {
       .orderBy("data", "desc")
       .limit(5),
     zamisli: db.collection("zamisli"),
-    teksti: db.collection("glavnaya").orderBy("n")
+    
   }
 };
 </script>

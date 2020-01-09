@@ -23,9 +23,15 @@
 
     <v-content :style="$vuetify.breakpoint.xs? '': 'padding-top:0px'">
       <v-container class="px-6">
-        <h2>
-          <v-icon class="mr-2" color="#0a7d9a">mdi-account-group</v-icon>Русские национальные предприятия
+        <h2 @click="poyasnenie=!poyasnenie">
+          <v-icon class="mr-2 pb-1" color="#0a7d9a">mdi-account-group</v-icon>
+          <span style="border-bottom: 1px dashed gray;">Русские национальные предприятия</span>
         </h2>
+        <v-card flat class="ml-3 mt-2" v-if="poyasnenie" @click="poyasnenie=!poyasnenie">
+          <v-card-text
+            class="pb-1 pt-2" v-html="poyasnenie_tekst"
+          ></v-card-text>
+        </v-card>
         <v-row class="ml-0">
           <v-col lg="3" md="4" sm="6" cols="12" v-for="pr in predpriyatiya" :key="pr.n">
             <v-card
@@ -95,8 +101,18 @@ export default {
   },
   data: () => ({
     drawer2: false,
-    predpriyatiya: []
+    predpriyatiya: [],
+    poyasnenie:false,
+    poyasnenie_tekst:""
   }),
+  created(){
+    db.collection("teksti")
+        .doc("predpiyatiya-poyasnenie")
+        .get()
+        .then(snapshot => {
+          this.poyasnenie_tekst = snapshot.data().tekst;
+        });
+  },
 
   firestore: {
     predpriyatiya: db.collection("predpriyatiya")

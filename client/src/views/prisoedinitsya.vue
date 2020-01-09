@@ -133,40 +133,42 @@ export default {
     //console.log(this.teksti);
   },
   methods: {},
-  computed: {
-    zamislitekst() {
-      for (var i = 0; i < this.teksti.length; i++) {
-        console.log(this.teksti[i]);
-        if (this.teksti[i].id === "zamisli-tekst") {
-          return this.teksti[i];
-        }
-      }
-    },
-    deyatelitekst() {
-      for (var i = 0; i < this.teksti.length; i++) {
-        console.log(this.teksti[i]);
-        if (this.teksti[i].id === "deyateli-tekst") {
-          return this.teksti[i];
-        }
-      }
-    },
-    poryadoktekst() {
-      for (var i = 0; i < this.teksti.length; i++) {
-        console.log(this.teksti[i]);
-        if (this.teksti[i].id === "poryadok-tekst") {
-          return this.teksti[i];
-        }
-      }
-    }
+
+  created(){
+    db.collection("teksti")
+        .doc("zamisli")
+        .get()
+        .then(snapshot => {
+          this.zamislitekst = snapshot.data();
+        });
+
+        db.collection("teksti")
+        .doc("deyateli")
+        .get()
+        .then(snapshot => {
+          this.deyatelitekst = snapshot.data();
+        });
+
+         db.collection("teksti")
+        .doc("poryadok")
+        .get()
+        .then(snapshot => {
+          this.poryadoktekst = snapshot.data();
+        });
   },
+
+ 
   data: () => ({
     drawer2: false,
     zamisli: [{ nazvanie: "" }],
-    teksti: []
+    zamislitekst:"",
+    deyatelitekst:"",
+    poryadoktekst:""
+
   }),
   firestore: {
     zamisli: db.collection("zamisli"),
-    teksti: db.collection("prisoedinitsya")
+   
   }
 };
 </script>

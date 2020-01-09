@@ -23,10 +23,14 @@
 
     <v-content :style="$vuetify.breakpoint.xs? '': 'padding-top:0px'">
       <v-container class="px-6">
-        <h2>
-          <v-icon class="mr-2" color="#0a7d9a">mdi-cash-multiple</v-icon>Сборы средств
+        <h2 @click="poyasnenie=!poyasnenie">
+          <v-icon class="mr-2 pb-1" color="#0a7d9a">mdi-cash-multiple</v-icon><span style="border-bottom: 1px dashed gray;" >Сборы средств</span>
         </h2>
-
+<v-card flat class="ml-3 mt-2" v-if="poyasnenie" @click="poyasnenie=!poyasnenie">
+              <v-card-text class="pb-1 pt-2" v-html="sbori_tekst">
+              
+              </v-card-text>
+            </v-card>
         <v-row class="ml-0">
           <v-col lg="3" md="4" sm="6" cols="12" v-for="(sbor,i) in sbori" :key="i">
             <v-card
@@ -69,8 +73,18 @@ export default {
   },
   data: () => ({
     drawer2: false,
-    sbori: []
+    sbori: [],
+    poyasnenie:false,
+    bori_tekst:""
   }),
+   created(){
+    db.collection("teksti")
+        .doc("sbori-poyasnenie")
+        .get()
+        .then(snapshot => {
+          this.sbori_tekst = snapshot.data().tekst;
+        });
+  },
   firestore: {
     sbori: db.collection("sbori")
   },
