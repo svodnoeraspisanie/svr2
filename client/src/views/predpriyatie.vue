@@ -31,16 +31,16 @@
           </v-list-item-icon>
           <v-list-item-content>Что мы делаем?</v-list-item-content>
         </v-list-item>
-        <v-list-item link @click="$vuetify.goTo('#kakpoddergat',offset);;drawer2=false;">
+        <v-list-item link @click="$vuetify.goTo('#kakpoddergat',offset);drawer2=false;">
           <v-list-item-icon>
             <v-icon>mdi-cash-multiple</v-icon>
           </v-list-item-icon>
           <v-list-item-content>Как нас поддержать?</v-list-item-content>
         </v-list-item>
 
-        <v-list-item link @click="$vuetify.goTo('#stranici',offset);;drawer2=false;">
+        <v-list-item link @click="$vuetify.goTo('#ssilki',offset);drawer2=false;">
           <v-list-item-icon>
-            
+
             <v-icon>mdi-web</v-icon>
           </v-list-item-icon>
           <v-list-item-content>Наши страницы в сети</v-list-item-content>
@@ -52,7 +52,7 @@
       <v-container class="px-6">
         <v-row justify="center">
           <v-col cols="auto">
-            <v-card class="mb-4" flat max-width="936px">
+            <v-card class="mb-4 pb-2" flat max-width="936px">
               <v-row>
                 <v-col cols="12" sm="3">
                   <v-img :src="pr.obraz" aspect-ratio="1.5" max-width="500px" contain>
@@ -64,8 +64,15 @@
                 <v-col cols="12" sm="9" class="pb-0">
                   <v-card-title>{{pr.nazvanie}}</v-card-title>
                   <v-card-text>{{pr.kratkoe_opisanie}}</v-card-text>
+                  
+                  <v-btn  class="mr-1 mb-1" depressed color="#f4c900"
+             v-for="(ssilka,servis) in pr.ssilki" :key="servis" :href="ssilka" >
+                                      {{servis}}
+                  </v-btn>
+                
                 </v-col>
               </v-row>
+              
             </v-card>
 
             <v-card class="mb-4" flat max-width="936px" id="chtomidelaem">
@@ -86,7 +93,7 @@
               </v-card-text>
             </v-card>
 
-            <v-card flat max-width="936px" id="stranici">
+            <v-card flat max-width="936px" id="ssilki">
               <v-card-title>Наши страницы в сети</v-card-title>
               <v-card-text>
                 <ul v-for="(ssilka,servis) in pr.ssilki" :key="servis">
