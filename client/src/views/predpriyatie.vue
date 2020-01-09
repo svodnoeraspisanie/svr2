@@ -119,13 +119,7 @@ export default {
   props: ["drawer"],
 
   computed: {
-    corr() {
-      console.log("corr");
-      if (window.width < 600) {
-        return { offset: 0 };
-      }
-      return { offset: -150 };
-    }
+  
   },
   data: () => ({
     drawer2: false,
@@ -139,7 +133,7 @@ export default {
     $route: "fetchData",
     drawer() {
       this.drawer2 = !this.drawer2;
-      console.log(this.drawer2);
+      
     }
   },
   methods: {

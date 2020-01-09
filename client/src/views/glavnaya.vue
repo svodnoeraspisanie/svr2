@@ -498,7 +498,7 @@ created(){
       today.setMinutes(0);
       today.setSeconds(0);
       const tomorrow = new Date(today.getTime() + 48 * 60 * 60 * 1000 - 1000);
-      console.log(today, tomorrow);
+      
       const cals = [
         "2kpu7kvisrlvmgkiheabippc20@group.calendar.google.com",
         "ct8a4t3tuim1jjnkno2d6skkck@group.calendar.google.com",

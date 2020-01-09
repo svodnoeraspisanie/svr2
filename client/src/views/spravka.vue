@@ -41,8 +41,8 @@
             <div class="pl-2" v-for="(razdel,i) in spravki" :key="i">
               <h3 class="pb-2" :id="razdel.id">{{razdel.zagolovok}}</h3>
             <v-card
-              v-for="(vopros,j) in razdel.vio"
-              :key="vopros.vio.n"
+              v-for="vopros in razdel.vio"
+              :key="vopros.n"
               elevation="1"
               class="mb-6 ml-2"
               max-width="936px"
@@ -67,7 +67,7 @@ export default {
   watch: {
     drawer() {
       this.drawer2 = !this.drawer2;
-      console.log(this.drawer2);
+     
     }
   },
   data: () => ({

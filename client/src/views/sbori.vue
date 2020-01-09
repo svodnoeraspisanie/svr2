@@ -68,7 +68,7 @@ export default {
   watch: {
     drawer() {
       this.drawer2 = !this.drawer2;
-      console.log(this.drawer2);
+     
     }
   },
   data: () => ({
