@@ -91,11 +91,11 @@
                 <v-simple-table dense>
                   <tbody>
                     <tr
-                      v-for="(novost,i) in novosti.slice().reverse()"
+                      v-for="(novost,i) in novosti"
                       :key="i"
                       @click="$router.push({ path: novost.ssilka })"
                     >
-                      <td valign="top">{{novost.data}}</td>
+                      <td valign="top" v-html="novost.data.toDate().toLocaleDateString([], { day: '2-digit', month: '2-digit',year:'2-digit' })"></td>
                       <td>{{novost.soobshenie}}</td>
                     </tr>
                   </tbody>
@@ -449,7 +449,7 @@ export default {
   components: {},
 
   props: ["drawer"],
-
+ 
   data: () => ({
     drawer2: false,
     sbori: [{ id: "1", obraz: "" }],
@@ -481,7 +481,14 @@ export default {
       this.pi = this.anyel(this.pi, this.predpriyatiya);
     }, 12000);
   },
+   computed: {
+    
+  },
   methods: {
+    normdata(arg){
+      return arg.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+
+    },
     fetchData() {
       db.collection("teksti")
         .doc("glavnaya")
@@ -566,7 +573,7 @@ export default {
   firestore: {
     sbori: db.collection("sbori"),
     predpriyatiya: db.collection("predpriyatiya"),
-    novosti: db.collection("novosti"),
+    novosti: db.collection("novosti").orderBy('data', "desc").limit(5),
     zamisli: db.collection("zamisli")
   }
 };
