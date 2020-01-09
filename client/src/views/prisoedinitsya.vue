@@ -48,14 +48,10 @@
             <v-card flat class="mb-6">
               <v-card-title
                 class="subtitle-1 font-weight-bold"
-              >Свора занимается не только поддержкой уже существующих предприятий, но и помогает создавать новые.</v-card-title>
-              <v-card-text>
-                Что мешает людям заняться делом?
-                <br />Обычно они не знают что делать, как делать, не могут собрать команду и наладить взаимодействие. Свора будет помогать проробатывать все эти вопросы.
-                И начнём мы со сборы достойных идей, которые стоит воплотить.
-                <br />
-                <b>Присылайте ваши замыслы.</b>
-              </v-card-text>
+                style="word-break: normal"
+                v-html="zamislitekst.zagolovok"
+              ></v-card-title>
+              <v-card-text v-html="zamislitekst.tekst"></v-card-text>
             </v-card>
             <v-card flat>
               <v-card-title class="subtitle-1 font-weight-bold">Список отборных замыслов</v-card-title>
@@ -90,24 +86,18 @@
             <v-card flat class="mb-6">
               <v-card-title
                 class="subtitle-1 font-weight-bold"
-              >Каким бы хорошим ни был замысел, без людей, которые его воплотят, это всего лишь слова.</v-card-title>
-              <v-card-text>
-                Если вы не можете сидеть сложа руки, чувствуете внутреннюю потребность действовать, хотите воплотить свой замысел или присоединиться к другому начинанию, то пишите нам.
-                <br />
-              </v-card-text>
+                style="word-break: normal"
+                v-html="deyatelitekst.zagolovok"
+              ></v-card-title>
+              <v-card-text v-html="deyatelitekst.tekst"></v-card-text>
             </v-card>
             <v-card flat class="mb-6">
-              <v-card-title class="subtitle-1 font-weight-bold">Что дальше?</v-card-title>
-              <v-card-text>
-                <b>Порядок наших действий:</b>
-                <ul>
-                  <li>Собрать достойные воплощения замыслы.</li>
-                  <li>Собрать людей, которые готовы ими заниматься.</li>
-                  <li>Обучить их навыкам плодотворного взаимодействия.</li>
-                  <li>Создать предприятия, занимающееся воплощением определёных замыслов.</li>
-                  <li>Поддерживать и продвигать данные предприятия.</li>
-                </ul>
-              </v-card-text>
+              <v-card-title
+                class="subtitle-1 font-weight-bold"
+                style="word-break: normal"
+                v-html="poryadoktekst.zagolovok"
+              ></v-card-title>
+              <v-card-text v-html="poryadoktekst.tekst"></v-card-text>
             </v-card>
           </v-col>
           <v-col>
@@ -139,12 +129,44 @@ export default {
       console.log(this.drawer2);
     }
   },
+  mounted() {
+    //console.log(this.teksti);
+  },
+  methods: {},
+  computed: {
+    zamislitekst() {
+      for (var i = 0; i < this.teksti.length; i++) {
+        console.log(this.teksti[i]);
+        if (this.teksti[i].id === "zamisli-tekst") {
+          return this.teksti[i];
+        }
+      }
+    },
+    deyatelitekst() {
+      for (var i = 0; i < this.teksti.length; i++) {
+        console.log(this.teksti[i]);
+        if (this.teksti[i].id === "deyateli-tekst") {
+          return this.teksti[i];
+        }
+      }
+    },
+    poryadoktekst() {
+      for (var i = 0; i < this.teksti.length; i++) {
+        console.log(this.teksti[i]);
+        if (this.teksti[i].id === "poryadok-tekst") {
+          return this.teksti[i];
+        }
+      }
+    }
+  },
   data: () => ({
     drawer2: false,
-    zamisli: [{ nazvanie: "" }]
+    zamisli: [{ nazvanie: "" }],
+    teksti: []
   }),
   firestore: {
-    zamisli: db.collection("zamisli")
+    zamisli: db.collection("zamisli"),
+    teksti: db.collection("prisoedinitsya")
   }
 };
 </script>

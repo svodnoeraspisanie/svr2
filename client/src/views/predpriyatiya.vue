@@ -43,8 +43,7 @@
 
               <v-card-title
                 class="subtitle-1 font-weight-bold"
-                style="word-break: normal
-"
+                style="word-break: normal"
               >{{pr.nazvanie}}</v-card-title>
               <v-card-text>{{pr.kratkoe_opisanie}}</v-card-text>
 

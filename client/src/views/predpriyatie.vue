@@ -40,6 +40,7 @@
 
         <v-list-item link @click="$vuetify.goTo('#stranici',offset);;drawer2=false;">
           <v-list-item-icon>
+            
             <v-icon>mdi-web</v-icon>
           </v-list-item-icon>
           <v-list-item-content>Наши страницы в сети</v-list-item-content>
