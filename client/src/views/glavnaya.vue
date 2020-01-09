@@ -95,7 +95,10 @@
                       :key="i"
                       @click="$router.push({ path: novost.ssilka })"
                     >
-                      <td valign="top" v-html="novost.data.toDate().toLocaleDateString([], { day: '2-digit', month: '2-digit',year:'2-digit' })"></td>
+                      <td
+                        valign="top"
+                        v-html="novost.data.toDate().toLocaleDateString([], { day: '2-digit', month: '2-digit',year:'2-digit' })"
+                      ></td>
                       <td>{{novost.soobshenie}}</td>
                     </tr>
                   </tbody>
@@ -107,12 +110,12 @@
             <div class="headline font-weight-bold pb-1">
               <router-link class="mainlink" to="/spravka">
                 <v-icon class="mr-2" color="#0a7d9a">mdi-help-circle-outline</v-icon>
-                {{tekst.nazvanie}}
+                {{teksti[0].zagolovok}}
               </router-link>
             </div>
 
-            <v-card class="cardhov ml-2" flat :to="{path: `/predpriyatiya/svora`}">
-              <v-card-text class="pb-1 pt-2" v-html="tekst.tekst"></v-card-text>
+            <v-card class="cardhov ml-2" flat :to="{path: teksti[0].ssilka}">
+              <v-card-text class="pb-1 pt-2" v-html="teksti[0].tekst"></v-card-text>
             </v-card>
           </v-col>
         </v-row>
@@ -449,13 +452,14 @@ export default {
   components: {},
 
   props: ["drawer"],
- 
+
   data: () => ({
     drawer2: false,
     sbori: [{ id: "1", obraz: "" }],
     predpriyatiya: [{ id: "1", obraz: "" }],
     novosti: [],
     zamisli: [{ nazvanie: "" }],
+    teksti: [],
     si: 0,
     pi: 0,
     tekst: {},
@@ -463,12 +467,8 @@ export default {
     raspsegondya: [[], [], []],
     raspzavtra: [[], [], []]
   }),
-  created() {
-    this.fetchData();
-  },
+  created() {},
   watch: {
-    $route: "fetchData",
-
     drawer() {
       this.drawer2 = !this.drawer2;
     }
@@ -481,27 +481,8 @@ export default {
       this.pi = this.anyel(this.pi, this.predpriyatiya);
     }, 12000);
   },
-   computed: {
-    
-  },
+  computed: {},
   methods: {
-    normdata(arg){
-      return arg.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
-
-    },
-    fetchData() {
-      db.collection("teksti")
-        .doc("glavnaya")
-        .get()
-        .then(snapshot => {
-          this.tekst = snapshot.data();
-        });
-    },
-    normtime(arg) {
-      const d = new Date(arg);
-      return `${d.getHours}:${d.getMinutes}`;
-    },
-
     async zagruzkaraspisaniya() {
       const googleCalendarApiKey = "AIzaSyCSV5kxpkQN3Vfvg_9D_vyBN2DQ7AiBzr4";
       const caladr = "https://www.googleapis.com/calendar/v3/calendars/";
@@ -573,8 +554,12 @@ export default {
   firestore: {
     sbori: db.collection("sbori"),
     predpriyatiya: db.collection("predpriyatiya"),
-    novosti: db.collection("novosti").orderBy('data', "desc").limit(5),
-    zamisli: db.collection("zamisli")
+    novosti: db
+      .collection("novosti")
+      .orderBy("data", "desc")
+      .limit(5),
+    zamisli: db.collection("zamisli"),
+    teksti: db.collection("glavnaya").orderBy("n")
   }
 };
 </script>

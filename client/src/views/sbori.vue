@@ -65,20 +65,20 @@ export default {
     drawer() {
       this.drawer2 = !this.drawer2;
       console.log(this.drawer2);
-    },
+    }
   },
   data: () => ({
     drawer2: false,
-    sbori: [],
+    sbori: []
   }),
   firestore: {
-    sbori: db.collection('sbori'),
+    sbori: db.collection("sbori")
   },
   methods: {
     openlink(arg) {
-      window.open(arg, '_blank');
-    },
-  },
+      window.open(arg, "_blank");
+    }
+  }
 };
 </script>
 

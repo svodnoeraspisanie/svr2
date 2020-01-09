@@ -356,16 +356,18 @@ export default {
   },
 
   mounted() {
-    if (this.$route.params.hasOwnProperty('id')) {
-      switch(this.$route.params.id){
-        case 'set':this.events = this.cals[0];
-        break;
-        case 'msk':this.events = this.cals[1];
-        break;
-        case 'spb':this.events = this.cals[2];
+    if (this.$route.params.hasOwnProperty("id")) {
+      switch (this.$route.params.id) {
+        case "set":
+          this.events = this.cals[0];
+          break;
+        case "msk":
+          this.events = this.cals[1];
+          break;
+        case "spb":
+          this.events = this.cals[2];
       }
-      }
-    
+    }
 
     this.today = new Date();
     this.focus = dateToYMD(this.today);
