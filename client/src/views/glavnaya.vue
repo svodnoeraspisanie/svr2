@@ -95,11 +95,11 @@
                       :key="i"
                       @click="$router.push({ path: novost.ssilka })"
                     >
-                      <td
+                      <td class="px-2"
                         valign="top"
                         v-html="novost.data.toDate().toLocaleDateString([], { day: '2-digit', month: '2-digit',year:'2-digit' })"
                       ></td>
-                      <td>{{novost.soobshenie}}</td>
+                      <td class="px-2" v-html="novost.soobshenie"></td>
                     </tr>
                   </tbody>
                 </v-simple-table>
@@ -141,8 +141,8 @@
                     <tr v-for="(sob,i) in raspsegondya[0]" :key="i">
                       <v-menu :close-on-content-click="false" max-width="400px" offset-x>
                         <template v-slot:activator="{ on }">
-                          <td valign="top" v-on="on" class="font-weight-bold">{{sob.start.time}}</td>
-                          <td v-on="on">{{sob.summary}}</td>
+                          <td class="px-2 font-weight-bold" valign="top" v-on="on">{{sob.start.time}}</td>
+                          <td class="px-2" v-on="on">{{sob.summary}}</td>
                         </template>
 
                         <v-card>
@@ -171,8 +171,8 @@
                     <tr v-for="(sob,i) in raspzavtra[0]" :key="i">
                       <v-menu :close-on-content-click="false" max-width="400px" offset-x>
                         <template v-slot:activator="{ on }">
-                          <td valign="top" v-on="on" class="font-weight-bold">{{sob.start.time}}</td>
-                          <td v-on="on">{{sob.summary}}</td>
+                          <td class="px-2 font-weight-bold" valign="top" v-on="on">{{sob.start.time}}</td>
+                          <td class="px-2" v-on="on">{{sob.summary}}</td>
                         </template>
 
                         <v-card>
@@ -210,8 +210,8 @@
                     <tr v-for="(sob,i) in raspsegondya[1]" :key="i">
                       <v-menu :close-on-content-click="false" max-width="400px" offset-x>
                         <template v-slot:activator="{ on }">
-                          <td valign="top" v-on="on" class="font-weight-bold">{{sob.start.time}}</td>
-                          <td v-on="on">{{sob.summary}}</td>
+                          <td class="px-2 font-weight-bold" valign="top" v-on="on" >{{sob.start.time}}</td>
+                          <td class="px-2" v-on="on">{{sob.summary}}</td>
                         </template>
 
                         <v-card>
@@ -240,8 +240,8 @@
                     <tr v-for="(sob,i) in raspzavtra[1]" :key="i">
                       <v-menu :close-on-content-click="false" max-width="400px" offset-x>
                         <template v-slot:activator="{ on }">
-                          <td valign="top" v-on="on" class="font-weight-bold">{{sob.start.time}}</td>
-                          <td v-on="on">{{sob.summary}}</td>
+                          <td class="px-2 font-weight-bold" valign="top" v-on="on" >{{sob.start.time}}</td>
+                          <td class="px-2" v-on="on">{{sob.summary}}</td>
                         </template>
 
                         <v-card>
@@ -279,8 +279,8 @@
                     <tr v-for="(sob,i) in raspsegondya[2]" :key="i">
                       <v-menu :close-on-content-click="false" max-width="400px" offset-x>
                         <template v-slot:activator="{ on }">
-                          <td valign="top" v-on="on" class="font-weight-bold">{{sob.start.time}}</td>
-                          <td v-on="on">{{sob.summary}}</td>
+                          <td class="px-2 font-weight-bold" valign="top" v-on="on">{{sob.start.time}}</td>
+                          <td class="px-2" v-on="on">{{sob.summary}}</td>
                         </template>
 
                         <v-card>
@@ -309,8 +309,8 @@
                     <tr v-for="(sob,i) in raspzavtra[2]" :key="i">
                       <v-menu :close-on-content-click="false" max-width="400px" offset-x>
                         <template v-slot:activator="{ on }">
-                          <td valign="top" v-on="on" class="font-weight-bold">{{sob.start.time}}</td>
-                          <td v-on="on">{{sob.summary}}</td>
+                          <td class="px-2 font-weight-bold" valign="top" v-on="on" >{{sob.start.time}}</td>
+                          <td class="px-2" v-on="on">{{sob.summary}}</td>
                         </template>
 
                         <v-card>
@@ -432,7 +432,7 @@
                 <v-simple-table dense>
                   <tbody>
                     <tr v-for="(zam,i) in zamisli" :key="i">
-                      <td>{{zam.nazvanie}}</td>
+                      <td class="px-2">{{zam.nazvanie}}</td>
                     </tr>
                   </tbody>
                 </v-simple-table>
