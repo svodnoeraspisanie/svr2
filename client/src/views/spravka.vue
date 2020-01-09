@@ -42,7 +42,7 @@
               <h3 class="pb-2" :id="razdel.id">{{razdel.zagolovok}}</h3>
             <v-card
               v-for="(vopros,j) in razdel.vio"
-              :key="razdel.vio.n"
+              :key="vopros.vio.n"
               elevation="1"
               class="mb-6 ml-2"
               max-width="936px"
