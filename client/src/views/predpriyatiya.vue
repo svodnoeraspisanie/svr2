@@ -38,7 +38,7 @@
 
     <v-content :style="$vuetify.breakpoint.xs? '': 'padding-top:0px'">
       <v-container class="px-6">
-        <h2 @click="poyasnenie=!poyasnenie">
+        <h2 @click="poyasnenie=!poyasnenie;">
           <v-icon class="mr-2 pb-1" color="#0a7d9a">mdi-account-group</v-icon>
           <span style="border-bottom: 1px dashed gray;">Русские национальные предприятия</span>
         </h2>
@@ -100,7 +100,7 @@
 </template>
 
 <script>
-import { db } from "../db";
+import { db, st } from "../db";
 
 export default {
   components: {},
@@ -124,11 +124,34 @@ export default {
       .then(snapshot => {
         this.poyasnenie_tekst = snapshot.data().tekst;
       });
+
+db.collection("predpriyatiya")      
+      .get()
+      .then(querySnapshot  => {
+        this.predpriyatiya = querySnapshot.docs.map(doc => doc.data())
+      });
+      
+      for (let i=0;i<this.predpriyatiya.lenght;i++){
+        st.ref()
+        .child(this.predpriyatiya[i].obraz)
+        .getDownloadURL()
+        .then(function onSuccess(url) {
+          this.predpriyatiya[i].obraz=url
+       
+      })
+      .catch(function onError(err) {
+        console.log("Error occured..." + err);
+      });
+      }
+
+  },
+  methods: {
+     
   },
 
-  firestore: {
-    predpriyatiya: db.collection("predpriyatiya")
-  }
+ // firestore: {
+////    predpriyatiya: db.collection("predpriyatiya")
+ // }
 };
 </script>
 
