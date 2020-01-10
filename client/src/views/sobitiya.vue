@@ -53,7 +53,7 @@
       <v-container class="cont pa-0 ma-0" fluid>
         <v-toolbar elevation="0">
           <v-icon class="mr-2" color="#0a7d9a">mdi-calendar</v-icon>
-          <div style="max-width:220px">
+          <div :style="$vuetify.breakpoint.xs? 'width:100%': 'max-width:220px'" >
             <v-select
               autofocus
               flat
@@ -67,13 +67,14 @@
               class="pt-7 mr-2"
             ></v-select>
           </div>
+          <template v-if="!$vuetify.breakpoint.xs">
           <v-divider vertical />
           <v-btn
             outlined
             @click="setToday"
             class="ml-2"
             elevation="3"
-            v-if="!$vuetify.breakpoint.xs"
+           
           >Сегодня</v-btn>
           <v-btn
             @click="prev"
@@ -82,7 +83,7 @@
             min-width="36px"
             width="36px"
             elevation="3"
-            v-if="!$vuetify.breakpoint.xs"
+           
           >
             <v-icon>mdi-chevron-left</v-icon>
           </v-btn>
@@ -93,14 +94,14 @@
             min-width="36px"
             width="36px"
             elevation="3"
-            v-if="!$vuetify.breakpoint.xs"
+            
           >
             <v-icon>mdi-chevron-right</v-icon>
           </v-btn>
 
-          <v-toolbar-title v-if="$vuetify.breakpoint.xs" class="ml-2">{{title}}</v-toolbar-title>
+          <v-toolbar-title  class="ml-2">{{title}}</v-toolbar-title>
           <v-spacer></v-spacer>
-
+          </template>
           <div style="max-width:200px">
             <v-select
               v-if="!$vuetify.breakpoint.xs"
@@ -119,6 +120,7 @@
 
         <div class="fill-height">
           <FullCalendar
+            noEventsMessage="Нет сведений о событиях в эти дни ☹"
             height="parent"
             ref="fullCalendar"
             v-model="focus"
@@ -331,6 +333,7 @@ export default {
 
     gotodate() {
       this.calendarApi.gotoDate(new Date(this.focus));
+      this.drawer2=false;
     },
 
     prev() {
