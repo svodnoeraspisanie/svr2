@@ -21,7 +21,8 @@
 
       <v-list-item link v-for="(razdel,i) in spravki" :key="i" @click="$vuetify.goTo('#'+razdel.id,{offset:-150});drawer2=false;">
           <v-list-item-icon>
-            <v-icon>mdi-record</v-icon>
+            <v-icon v-text="razdel.obraz"></v-icon>
+           
           </v-list-item-icon>
           <v-list-item-content>
             <v-list-item-title>{{razdel.zagolovok}}</v-list-item-title>
@@ -53,17 +54,18 @@
               <h2> <v-icon class="mr-2 pb-1" color="#0a7d9a">mdi-help-circle-outline</v-icon>Справка</h2>
             </div>
             <div class="pl-2" v-for="(razdel,i) in spravki" :key="i">
-              <h3 class="pb-2" :id="razdel.id">{{razdel.zagolovok}}</h3>
+              <h3 class="pb-2" :id="razdel.id"> <v-icon class="mr-2" color="#0a7d9a" v-text="razdel.obraz"></v-icon> {{razdel.zagolovok}}</h3>
             <v-card
-              v-for="vopros in razdel.vio"
+              v-for="(vopros,j) in razdel.vio"
               :key="vopros.n"
-              elevation="1"
-              class="mb-6 ml-2"
+              flat
+              
+              class="mb-4 ml-2"
               max-width="936px"
             >
-              <v-card-title class="subtitle-1 font-weight-bold"
-                style="word-break: normal">{{vopros.vopros}}</v-card-title>
-              <v-card-text v-html="vopros.otvet"></v-card-text>
+              <v-card-title class="subtitle-1 font-weight-bold pb-1 pt-2" 
+                style="word-break: normal"> {{vopros.vopros}}</v-card-title>
+              <v-card-text class="pb-1 pt-0" v-html="vopros.otvet"></v-card-text>
             </v-card>
             </div>
           </v-col>

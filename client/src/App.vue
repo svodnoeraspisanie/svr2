@@ -25,7 +25,8 @@
     >
       <template v-slot:activator>
         <v-btn color="#f4c900" link fab >
-          <v-img src="/android-chrome-96x96.png" height="46px" contain></v-img>
+          <v-icon v-if="fab">mdi-close</v-icon>
+          <v-img v-else src="/android-chrome-96x96.png" height="46px" contain></v-img>
          
         </v-btn>
       </template>
