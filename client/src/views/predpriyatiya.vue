@@ -19,6 +19,21 @@
         </v-list-item>
         <v-divider></v-divider>
       </v-list>
+
+      <template v-slot:append v-if="$vuetify.breakpoint.xs">
+        <v-list>
+          <v-divider></v-divider>
+          <v-list-item link @click="drawer2=false">
+            <v-list-item-icon>
+              <v-icon>mdi-arrow-expand-left</v-icon>
+            </v-list-item-icon>
+
+            <v-list-item-content>
+              <v-list-item-title>Свернуть</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </v-list>
+      </template>
     </v-navigation-drawer>
 
     <v-content :style="$vuetify.breakpoint.xs? '': 'padding-top:0px'">
@@ -28,9 +43,7 @@
           <span style="border-bottom: 1px dashed gray;">Русские национальные предприятия</span>
         </h2>
         <v-card flat class="ml-3 mt-2" v-if="poyasnenie" @click="poyasnenie=!poyasnenie">
-          <v-card-text
-            class="pb-1 pt-2" v-html="poyasnenie_tekst"
-          ></v-card-text>
+          <v-card-text class="pb-1 pt-2" v-html="poyasnenie_tekst"></v-card-text>
         </v-card>
         <v-row class="ml-0">
           <v-col lg="3" md="4" sm="6" cols="12" v-for="pr in predpriyatiya" :key="pr.n">
@@ -96,22 +109,21 @@ export default {
   watch: {
     drawer() {
       this.drawer2 = !this.drawer2;
-   
     }
   },
   data: () => ({
     drawer2: false,
     predpriyatiya: [],
-    poyasnenie:false,
-    poyasnenie_tekst:""
+    poyasnenie: false,
+    poyasnenie_tekst: ""
   }),
-  created(){
+  created() {
     db.collection("teksti")
-        .doc("predpiyatiya-poyasnenie")
-        .get()
-        .then(snapshot => {
-          this.poyasnenie_tekst = snapshot.data().tekst;
-        });
+      .doc("predpiyatiya-poyasnenie")
+      .get()
+      .then(snapshot => {
+        this.poyasnenie_tekst = snapshot.data().tekst;
+      });
   },
 
   firestore: {

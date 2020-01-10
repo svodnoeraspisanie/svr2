@@ -24,9 +24,9 @@
       transition="slide-x-reverse-transition"
     >
       <template v-slot:activator>
-        <v-btn color="#f4c900" link fab>
-          <v-icon v-if="fab">mdi-close</v-icon>
-          <v-icon v-else>mdi-menu</v-icon>
+        <v-btn color="#f4c900" link fab >
+          <v-img src="/android-chrome-96x96.png" height="46px" contain></v-img>
+         
         </v-btn>
       </template>
       <v-btn fab color="#f4c900"  small to="/">

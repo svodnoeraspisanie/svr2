@@ -33,6 +33,20 @@
         </v-list-item>
         <v-divider></v-divider>
       </v-list>
+      <template v-slot:append v-if="$vuetify.breakpoint.xs">
+        <v-list>
+          <v-divider></v-divider>
+          <v-list-item link @click="drawer2=false">
+            <v-list-item-icon>
+              <v-icon>mdi-arrow-expand-left</v-icon>
+            </v-list-item-icon>
+
+            <v-list-item-content>
+              <v-list-item-title>Свернуть</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </v-list>
+      </template>
     </v-navigation-drawer>
 
     <v-content class="fill-height" :style="$vuetify.breakpoint.xs? '': 'padding-top:0px'">
@@ -84,7 +98,7 @@
             <v-icon>mdi-chevron-right</v-icon>
           </v-btn>
 
-          <v-toolbar-title class="ml-2">{{title}}</v-toolbar-title>
+          <v-toolbar-title v-if="$vuetify.breakpoint.xs" class="ml-2">{{title}}</v-toolbar-title>
           <v-spacer></v-spacer>
 
           <div style="max-width:200px">

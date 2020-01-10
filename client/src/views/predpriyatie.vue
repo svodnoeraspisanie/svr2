@@ -46,6 +46,20 @@
           <v-list-item-content>Наши страницы в сети</v-list-item-content>
         </v-list-item>
       </v-list>
+      <template v-slot:append v-if="$vuetify.breakpoint.xs">
+        <v-list>
+          <v-divider></v-divider>
+          <v-list-item link @click="drawer2=false">
+            <v-list-item-icon>
+              <v-icon>mdi-arrow-expand-left</v-icon>
+            </v-list-item-icon>
+
+            <v-list-item-content>
+              <v-list-item-title>Свернуть</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </v-list>
+      </template>
     </v-navigation-drawer>
 
     <v-content :style="$vuetify.breakpoint.xs? '': 'padding-top:0px'">
@@ -64,12 +78,12 @@
                 <v-col cols="12" sm="9" class="pb-0">
                   <v-card-title>{{pr.nazvanie}}</v-card-title>
                   <v-card-text>{{pr.kratkoe_opisanie}}</v-card-text>
-                  
+                  <v-card-text class="py-0">
                   <v-btn  class="mr-1 mb-1" depressed color="#f4c900"
              v-for="(ssilka,servis) in pr.ssilki" :key="servis" :href="ssilka" >
                                       {{servis}}
                   </v-btn>
-                
+                </v-card-text>
                 </v-col>
               </v-row>
               
