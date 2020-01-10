@@ -17,7 +17,7 @@
     "@fullcalendar/vue": "^4.3.1",
     "@mdi/font": "^4.7.95",
     "core-js": "^2.6.11",
-    "firebase": "^7.6.1",
+    "firebase": "^7.6.2",
     "firebase-admin": "^8.9.0",
     "roboto-fontface": "^0.10.0",
     "vue": "^2.6.11",
