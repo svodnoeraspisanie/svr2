@@ -136,7 +136,7 @@ db.collection("predpriyatiya")
         .child(this.predpriyatiya[i].obraz)
         .getDownloadURL()
         .then(function onSuccess(url) {
-          this.predpriyatiya[i].obraz=url
+          this.predpriyatiya[i].obraz=url;
        
       })
       .catch(function onError(err) {
@@ -149,9 +149,7 @@ db.collection("predpriyatiya")
      
   },
 
- // firestore: {
-////    predpriyatiya: db.collection("predpriyatiya")
- // }
+
 };
 </script>
 
