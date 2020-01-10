@@ -56,7 +56,7 @@
             <div class="pl-2" v-for="(razdel,i) in spravki" :key="i">
               <h3 class="pb-2" :id="razdel.id"> <v-icon class="mr-2" color="#0a7d9a" v-text="razdel.obraz"></v-icon> {{razdel.zagolovok}}</h3>
             <v-card
-              v-for="(vopros,j) in razdel.vio"
+              v-for="vopros in razdel.vio"
               :key="vopros.n"
               flat
               
