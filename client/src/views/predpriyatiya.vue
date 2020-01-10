@@ -128,7 +128,7 @@ export default {
 db.collection("predpriyatiya")      
       .get()
       .then(querySnapshot  => {
-        this.predpriyatiya = querySnapshot.docs.map(doc => doc.data())
+        this.predpriyatiya = querySnapshot.docs.map(doc => doc.data())  //здесь надо добавить получение id документа
       });
       
       for (let i=0;i<this.predpriyatiya.lenght;i++){
