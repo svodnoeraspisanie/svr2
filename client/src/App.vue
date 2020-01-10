@@ -29,25 +29,25 @@
           <v-icon v-else>mdi-menu</v-icon>
         </v-btn>
       </template>
-      <v-btn fab color="#0a7d9a" dark small to="/">
+      <v-btn fab color="#f4c900"  small to="/">
         <v-icon>mdi-view-dashboard</v-icon>
       </v-btn>
-      <v-btn fab color="#0a7d9a" dark small to="/statii">
+      <v-btn fab color="#f4c900"  small to="/statii">
         <v-icon>mdi-book-open</v-icon>
       </v-btn>
-      <v-btn fab color="#0a7d9a" dark small to="/predpriyatiya">
+      <v-btn fab color="#f4c900"  small to="/predpriyatiya">
         <v-icon>mdi-account-group</v-icon>
       </v-btn>
-      <v-btn fab color="#0a7d9a" dark small to="/sbori">
+      <v-btn fab color="#f4c900"  small to="/sbori">
         <v-icon>mdi-cash-multiple</v-icon>
       </v-btn>
-      <v-btn fab color="#0a7d9a" dark small to="/sobitiya">
+      <v-btn fab color="#f4c900"  small to="/sobitiya">
         <v-icon>mdi-calendar</v-icon>
       </v-btn>
-      <v-btn fab color="#0a7d9a" dark small to="/prisoedinitsya">
+      <v-btn fab color="#f4c900"  small to="/prisoedinitsya">
         <v-icon>mdi-account-multiple-plus</v-icon>
       </v-btn>
-      <v-btn fab color="#0a7d9a" dark small to="/spravka">
+      <v-btn fab color="#f4c900"  small to="/spravka">
         <v-icon>mdi-help-circle-outline</v-icon>
       </v-btn>
     </v-speed-dial>
