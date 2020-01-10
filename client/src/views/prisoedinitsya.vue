@@ -19,7 +19,7 @@
         </v-list-item>
         <v-divider></v-divider>
 
-        <v-list-item link @click="$vuetify.goTo(0);">
+        <v-list-item link @click="$vuetify.goTo(0);drawer2=false;">
           <v-list-item-icon>
             <v-icon>mdi-lightbulb-on-outline</v-icon>
           </v-list-item-icon>
@@ -27,7 +27,7 @@
             <v-list-item-title>Замыслы</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-        <v-list-item link @click="$vuetify.goTo('#deyateli',{offset:-150});">
+        <v-list-item link @click="$vuetify.goTo('#deyateli',{offset:-150});drawer2=false;">
           <v-list-item-icon>
             <v-icon>mdi-account-multiple</v-icon>
           </v-list-item-icon>

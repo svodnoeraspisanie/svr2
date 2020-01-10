@@ -19,7 +19,7 @@
         </v-list-item>
         <v-divider></v-divider>
 
-      <v-list-item link v-for="(razdel,i) in spravki" :key="i" @click="$vuetify.goTo('#'+razdel.id,{offset:-150});">
+      <v-list-item link v-for="(razdel,i) in spravki" :key="i" @click="$vuetify.goTo('#'+razdel.id,{offset:-150});drawer2=false;">
           <v-list-item-icon>
             <v-icon>mdi-record</v-icon>
           </v-list-item-icon>
