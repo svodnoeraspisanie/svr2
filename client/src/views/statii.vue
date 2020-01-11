@@ -36,16 +36,18 @@
     </v-navigation-drawer>
 
     <v-content :style="$vuetify.breakpoint.xs? '': 'padding-top:0px'">
-      <v-container class="px-6">
+      <v-container :class="$vuetify.breakpoint.xs? 'px-2': 'px-6'">
         <v-row justify="center">
           <v-col cols="auto" class="pt-0">
             <div style="max-width:936px" class="pb-3">
-              <h2>Статьи</h2>
+              <h2> <v-icon class="mr-2 pb-1" color="#0a7d9a">mdi-book-open</v-icon>
+              
+              Статьи</h2>
             </div>
             <v-card
               v-for="(statia,i) in statii"
               :key="i"
-              elevation="1"
+              flat
               class="mb-6 ml-2"
               max-width="936px"
             >

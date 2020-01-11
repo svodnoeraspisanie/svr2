@@ -36,7 +36,7 @@
     </v-navigation-drawer>
 
     <v-content :style="$vuetify.breakpoint.xs? '': 'padding-top:0px'">
-      <v-container class="px-6">
+      <v-container :class="$vuetify.breakpoint.xs? 'px-2': 'px-6'">
         <h2 @click="poyasnenie=!poyasnenie">
           <v-icon class="mr-2 pb-1" color="#0a7d9a">mdi-cash-multiple</v-icon><span style="border-bottom: 1px dashed gray;" >Сборы средств</span>
         </h2>

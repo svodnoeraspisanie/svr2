@@ -37,7 +37,7 @@
     </v-navigation-drawer>
 
     <v-content :style="$vuetify.breakpoint.xs? '': 'padding-top:0px'">
-      <v-container class="px-6">
+      <v-container :class="$vuetify.breakpoint.xs? 'px-2': 'px-6'">
         <h2 @click="poyasnenie=!poyasnenie;">
           <v-icon class="mr-2 pb-1" color="#0a7d9a">mdi-account-group</v-icon>
           <span style="border-bottom: 1px dashed gray;">Русские национальные предприятия</span>
@@ -117,7 +117,10 @@ export default {
     poyasnenie: false,
     poyasnenie_tekst: ""
   }),
+
   created() {
+    const vm = this;
+
     db.collection("teksti")
       .doc("predpiyatiya-poyasnenie")
       .get()
@@ -125,31 +128,29 @@ export default {
         this.poyasnenie_tekst = snapshot.data().tekst;
       });
 
-db.collection("predpriyatiya")      
+    db.collection("predpriyatiya")
       .get()
-      .then(querySnapshot  => {
-        this.predpriyatiya = querySnapshot.docs.map(doc => doc.data())  //здесь надо добавить получение id документа
+      .then(function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+          let res = doc.data();
+          res.id = doc.id;
+
+          st.ref()
+            .child(res.obraz)
+            .getDownloadURL()
+            .then(function onSuccess(url) {
+              res.obraz = url;
+               vm.predpriyatiya.push(res);
+            })
+            .catch(function onError(err) {
+              console.log("Error occured..." + err);
+            });
+
+         
+        });
       });
-      
-      for (let i=0;i<this.predpriyatiya.lenght;i++){
-        st.ref()
-        .child(this.predpriyatiya[i].obraz)
-        .getDownloadURL()
-        .then(function onSuccess(url) {
-          this.predpriyatiya[i].obraz=url;
-       
-      })
-      .catch(function onError(err) {
-        console.log("Error occured..." + err);
-      });
-      }
-
   },
-  methods: {
-     
-  },
-
-
+  methods: {}
 };
 </script>
 

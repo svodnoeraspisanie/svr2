@@ -53,7 +53,7 @@
     </v-navigation-drawer>
 
     <v-content :style="$vuetify.breakpoint.xs? '': 'padding-top:0px'">
-      <v-container class="px-6">
+      <v-container :class="$vuetify.breakpoint.xs? 'px-2': 'px-6'">
         <h2 id="zamisli">
           <v-icon class="mr-2" color="#0a7d9a">mdi-lightbulb-on-outline</v-icon>Замыслы
         </h2>

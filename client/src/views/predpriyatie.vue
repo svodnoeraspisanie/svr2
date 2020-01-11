@@ -63,7 +63,7 @@
     </v-navigation-drawer>
 
     <v-content :style="$vuetify.breakpoint.xs? '': 'padding-top:0px'">
-      <v-container class="px-6">
+      <v-container :class="$vuetify.breakpoint.xs? 'px-2': 'px-6'">
         <v-row justify="center">
           <v-col cols="auto">
             <v-card class="mb-4 pb-2" flat max-width="936px">
@@ -125,7 +125,7 @@
 </template>
 
 <script>
-import { db } from "../db";
+import { db,st } from "../db";
 
 export default {
   components: {},
@@ -138,7 +138,7 @@ export default {
   data: () => ({
     drawer2: false,
 
-    pr: null
+    pr: {obraz:""}
   }),
   created() {
     this.fetchData();
@@ -152,11 +152,28 @@ export default {
   },
   methods: {
     fetchData() {
+      const vm = this;
+
       db.collection("predpriyatiya")
         .doc(this.$route.params.id)
         .get()
         .then(snapshot => {
-          this.pr = snapshot.data();
+          let res = snapshot.data();
+          
+
+           st.ref()
+            .child(res.obraz)
+            .getDownloadURL()
+            .then(function onSuccess(url) {
+              res.obraz = url;
+              vm.pr =res;
+            })
+            .catch(function onError(err) {
+              console.log("Error occured..." + err);
+            });
+
+
+
         });
     }
   }

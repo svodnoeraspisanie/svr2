@@ -76,7 +76,21 @@
             @click="openlink('https://www.subscribestar.com/yasnost')"
           >Поддержать</v-btn>
         </div>
+        <v-list v-if="$vuetify.breakpoint.xs">
+          <v-divider></v-divider>
+          <v-list-item link @click="drawer2=false">
+            <v-list-item-icon>
+              <v-icon>mdi-arrow-expand-left</v-icon>
+            </v-list-item-icon>
+
+            <v-list-item-content>
+              <v-list-item-title>Свернуть</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </v-list>
+        
       </template>
+     
     </v-navigation-drawer>
 
     <v-content :style="$vuetify.breakpoint.xs? '': 'padding-top:0px'">
@@ -362,7 +376,7 @@
                 <v-icon>mdi-shuffle-variant</v-icon>
               </v-btn>
 
-              <v-card-text class="cardhov" @click="openlink(sbori[si].ssilka)">
+              <v-card-text class="cardhov pa-2" @click="openlink(sbori[si].ssilka)">
                 <v-img :src="sbori[si].obraz" aspect-ratio="1.5" contain eager class="ma-2">
                   <v-layout slot="placeholder" fill-height align-center justify-center ma-0>
                     <v-progress-circular indeterminate color="#0a7d9a"></v-progress-circular>
@@ -399,7 +413,7 @@
                 <v-icon>mdi-shuffle-variant</v-icon>
               </v-btn>
               <router-link class="cardlink" :to="{path: `/predpriyatiya/${predpriyatiya[pi].id}`}">
-                <v-card-text class="cardhov">
+                <v-card-text class="cardhov pa-2" >
                   <v-img
                     :src="predpriyatiya[pi].obraz"
                     eager
@@ -446,7 +460,7 @@
 </template>
 
 <script>
-import { db } from "../db";
+import { db,st } from "../db";
 
 export default {
   components: {},
@@ -455,8 +469,8 @@ export default {
 
   data: () => ({
     drawer2: false,
-    sbori: [{ id: "1", obraz: "" }],
-    predpriyatiya: [{ id: "1", obraz: "" }],
+    sbori: [],
+    predpriyatiya: [],
     novosti: [],
     zamisli: [{ nazvanie: "" }],
     teksti: [],
@@ -468,12 +482,41 @@ export default {
     raspzavtra: [[], [], []]
   }),
 created(){
+   this.zagruzkaraspisaniya();
+
     db.collection("teksti")
         .doc("glavnaya")
         .get()
         .then(snapshot => {
           this.teksti = snapshot.data().teksti;
         });
+
+const vm = this;
+
+       db.collection("predpriyatiya")
+      .get()
+      .then(function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+          let res = doc.data();
+          res.id = doc.id;
+
+          st.ref()
+            .child(res.obraz)
+            .getDownloadURL()
+            .then(function onSuccess(url) {
+              res.obraz = url;
+               vm.predpriyatiya.push(res);
+            })
+            .catch(function onError(err) {
+              console.log("Error occured..." + err);
+            });
+
+         
+        });
+      });
+
+
+
   },
   watch: {
     drawer() {
@@ -481,7 +524,7 @@ created(){
     }
   },
   mounted() {
-    this.zagruzkaraspisaniya();
+   
 
     window.setInterval(() => {
       this.si = this.anyel(this.si, this.sbori);
@@ -558,7 +601,7 @@ created(){
 
   firestore: {
     sbori: db.collection("sbori"),
-    predpriyatiya: db.collection("predpriyatiya"),
+    
     novosti: db
       .collection("novosti")
       .orderBy("data", "desc")
