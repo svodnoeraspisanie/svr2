@@ -130,9 +130,9 @@ func getEnv(key, fallback string) string {
 func prepareArgs() (bool, string, string, string){
 	debug := flag.Bool("d", false, "debug")
 	timepadURL := getEnv("TIMEPAD_URL", "https://api.timepad.ru/v1/events")
-	flag.StringVar(&timepadURL, "t", timepadURL, "a url of the timepad API")
+	flag.StringVar(&timepadURL, "t", timepadURL, "a URL of the timepad API")
 	calendarURL := getEnv("CALENDAR_URL", "https://us-central1-tost-766cf.cloudfunctions.net/addEventsToDatabase")
-	flag.StringVar(&calendarURL, "c", calendarURL, "a url of a google calendar")
+	flag.StringVar(&calendarURL, "c", calendarURL, "a URL of the API to add events to a Google Calendar")
 	secret := getEnv("SECRET", "")
 	flag.StringVar(&secret, "s", secret, "a secret token")
 	flag.Usage = func() {
