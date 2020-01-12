@@ -491,6 +491,7 @@ created(){
           this.teksti = snapshot.data().teksti;
         });
 
+
 const vm = this;
 
        db.collection("predpriyatiya")
@@ -513,6 +514,8 @@ const vm = this;
 
          
         });
+        vm.si = vm.anyel(vm.si, vm.sbori);
+      vm.pi = vm.anyel(vm.pi, vm.predpriyatiya);
       });
 
 
@@ -525,6 +528,7 @@ const vm = this;
   },
   mounted() {
    
+
 
     window.setInterval(() => {
       this.si = this.anyel(this.si, this.sbori);
