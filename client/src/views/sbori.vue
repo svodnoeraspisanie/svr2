@@ -38,6 +38,16 @@
               <v-list-item-title>Завершённые сборы</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
+           <v-divider></v-divider>
+        <v-list-item link @click="openlink('https://docs.google.com/forms/d/e/1FAIpQLSf8oxgFBIPUjz0kqAFoAmrJxDEVy6l76801t89LqXMbnkR55w/viewform?usp=sf_link');drawer2=false;" >
+          <v-list-item-icon>
+            <v-icon>mdi-database-plus</v-icon>
+          </v-list-item-icon>
+
+          <v-list-item-content>
+            <v-list-item-title>Добавить в список</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
       </v-list>
       <template v-slot:append v-if="$vuetify.breakpoint.xs">
         <v-list>
