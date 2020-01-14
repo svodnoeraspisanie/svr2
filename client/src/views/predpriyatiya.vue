@@ -18,6 +18,15 @@
           </v-list-item-content>
         </v-list-item>
         <v-divider></v-divider>
+        <v-list-item link @click="openlink('https://forms.gle/i3WgnfFHsQzbnXocA');drawer2=false;" >
+          <v-list-item-icon>
+            <v-icon>mdi-database-plus</v-icon>
+          </v-list-item-icon>
+
+          <v-list-item-content>
+            <v-list-item-title>Добавить в список</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
       </v-list>
 
       <template v-slot:append v-if="$vuetify.breakpoint.xs">
@@ -150,7 +159,11 @@ export default {
         });
       });
   },
-  methods: {}
+  methods: {
+    openlink(arg) {
+      window.open(arg, "_blank");
+    },
+  }
 };
 </script>
 

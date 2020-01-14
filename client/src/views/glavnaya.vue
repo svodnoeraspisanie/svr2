@@ -604,7 +604,7 @@ const vm = this;
   },
 
   firestore: {
-    sbori: db.collection("sbori"),
+    sbori: db.collection("sbori").where("idet","==",true),
     
     novosti: db
       .collection("novosti")
