@@ -80,7 +80,7 @@
                   <v-card-text>{{pr.kratkoe_opisanie}}</v-card-text>
                   <v-card-text class="py-0">
                   <v-btn  class="mr-1 mb-1" depressed color="#f4c900"
-             v-for="(ssilka,servis) in pr.ssilki" :key="servis" :href="ssilka" >
+             v-for="(ssilka,servis) in pr.ssilki" :key="servis" :href="ssilka" target="_blank" >
                                       {{servis}}
                   </v-btn>
                 </v-card-text>

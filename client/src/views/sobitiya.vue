@@ -31,7 +31,17 @@
             @change="gotodate"
           ></v-date-picker>
         </v-list-item>
-        <v-divider></v-divider>
+      
+         <v-divider></v-divider>
+        <v-list-item link @click="openlink('https://docs.google.com/forms/d/e/1FAIpQLSfdSx-AidxewA9vnBgQaCtVpBtVzX5zyhN0Jj61VLrcQp-GnQ/viewform?usp=sf_link');drawer2=false;" >
+          <v-list-item-icon>
+            <v-icon>mdi-database-plus</v-icon>
+          </v-list-item-icon>
+
+          <v-list-item-content>
+            <v-list-item-title>Предложить событие</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
       </v-list>
       <template v-slot:append v-if="$vuetify.breakpoint.xs">
         <v-list>

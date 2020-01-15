@@ -24,7 +24,7 @@
           </v-list-item-icon>
 
           <v-list-item-content>
-            <v-list-item-title>Добавить в список</v-list-item-title>
+            <v-list-item-title>Предложить предприятие</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list>
