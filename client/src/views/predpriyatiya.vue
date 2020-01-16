@@ -8,7 +8,7 @@
       width="300px"
     >
       <v-list>
-        <v-list-item link to="/" dense>
+        <v-list-item link to="/" >
           <v-list-item-icon>
             <v-icon>mdi-arrow-left-bold</v-icon>
           </v-list-item-icon>
@@ -18,7 +18,7 @@
           </v-list-item-content>
         </v-list-item>
         <v-divider></v-divider>
-        <v-list-item link @click="openlink('https://forms.gle/i3WgnfFHsQzbnXocA');drawer2=false;" >
+        <v-list-item link @click="openlink('https://forms.gle/i3WgnfFHsQzbnXocA');drawer2=false;">
           <v-list-item-icon>
             <v-icon>mdi-database-plus</v-icon>
           </v-list-item-icon>
@@ -55,69 +55,51 @@
           <v-card-text class="pb-1 pt-2" v-html="poyasnenie_tekst"></v-card-text>
         </v-card>
 
-
         <v-row class="ml-0">
           <v-col lg="3" md="4" sm="6" cols="12" v-for="pr in predpriyatiya" :key="pr.n">
-
-            
-            <v-card
-              class=" cardhov"
-              height="100%"
-              :to="{path: `/predpriyatiya/${pr.id}`}"
-              outlined
-            
-            >
-            <v-container  class="fill-height pa-0">
-
-            <v-row no-gutters  align-content="start" align="start" class="fill-height">
-              <v-col cols="12" class="pa-0" >
-<v-img :src="pr.obraz" aspect-ratio="1"  contain style="width:100%" >
-                <v-layout slot="placeholder" fill-height align-center justify-center ma-0>
-                  <v-progress-circular indeterminate color="#0a7d9a"></v-progress-circular>
-                </v-layout>
-              </v-img>
-                <v-divider />
-              </v-col>
-
-              <v-col cols="12" class="py-0 " align-self="start" >
-              
- <v-card-title
-                class="subtitle-1 font-weight-bold"
-                style="word-break: normal"
-              >{{pr.nazvanie}}</v-card-title>
-              <v-card-text>{{pr.kratkoe_opisanie}}</v-card-text>
-
-              </v-col>
-     
-             
-              <v-col class="py-0" align-self="stretch"  >
-
-                <v-divider />
-
-              <v-card-text class="pa-2">
+            <v-card class="cardhov" height="100%" :to="{path: `/predpriyatiya/${pr.id}`}" outlined>
+              <div style="display: flex;  flex-flow: column;   height:100%">
                 <div>
-                  Место:
-                  <v-chip
-                    v-for="(mesto, nm) in pr.mesto"
-                    :key="nm"
-                    small
-                    style="height:18px; margin-left:2px"
-                  >{{mesto}}</v-chip>
+                  <v-img :src="pr.obraz" aspect-ratio="1" contain style="width:100%">
+                    <v-layout slot="placeholder" fill-height align-center justify-center ma-0>
+                      <v-progress-circular indeterminate color="#0a7d9a"></v-progress-circular>
+                    </v-layout>
+                  </v-img>
+                  <v-divider />
                 </div>
-
+                <div style="flex:1;">
+                  <v-card-title
+                    class="subtitle-1 font-weight-bold"
+                    style="word-break: normal"
+                  >{{pr.nazvanie}}</v-card-title>
+                  <v-card-text>{{pr.kratkoe_opisanie}}</v-card-text>
+                </div>
                 <div>
-                  Метки:
-                  <v-chip
-                    v-for="(metka, nm) in pr.metki"
-                    :key="nm"
-                    small
-                    style="height:18px; margin-left:2px"
-                  >{{metka}}</v-chip>
+                  <v-divider />
+
+                  <v-card-text class="pa-2">
+                    <div>
+                      Место:
+                      <v-chip
+                        v-for="(mesto, nm) in pr.mesto"
+                        :key="nm"
+                        small
+                        style="height:18px; margin-left:2px;"
+                      >{{mesto}}</v-chip>
+                    </div>
+
+                    <div>
+                      Метки:
+                      <v-chip
+                        v-for="(metka, nm) in pr.metki"
+                        :key="nm"
+                        small
+                        style="height:18px; margin-left:2px"
+                      >{{metka}}</v-chip>
+                    </div>
+                  </v-card-text>
                 </div>
-              </v-card-text>
-              </v-col>
-            </v-row>
-            </v-container>
+              </div>
             </v-card>
           </v-col>
         </v-row>
@@ -167,20 +149,18 @@ export default {
             .getDownloadURL()
             .then(function onSuccess(url) {
               res.obraz = url;
-               vm.predpriyatiya.push(res);
+              vm.predpriyatiya.push(res);
             })
             .catch(function onError(err) {
               console.log("Error occured..." + err);
             });
-
-         
         });
       });
   },
   methods: {
     openlink(arg) {
       window.open(arg, "_blank");
-    },
+    }
   }
 };
 </script>
@@ -193,5 +173,4 @@ export default {
 .cardhov:hover {
   background-color: #eeeeee;
 }
-
 </style>

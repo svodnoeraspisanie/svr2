@@ -8,7 +8,7 @@
       clipped
     >
       <v-list>
-        <v-list-item link to="/" dense>
+        <v-list-item link to="/" >
           <v-list-item-icon>
             <v-icon>mdi-arrow-left-bold</v-icon>
           </v-list-item-icon>

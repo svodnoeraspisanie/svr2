@@ -8,7 +8,7 @@
       width="300px"
     >
       <v-list>
-        <v-list-item link to="/predpriyatiya" exact dense>
+        <v-list-item link to="/predpriyatiya" exact >
           <v-list-item-icon>
             <v-icon>mdi-arrow-left-bold</v-icon>
           </v-list-item-icon>

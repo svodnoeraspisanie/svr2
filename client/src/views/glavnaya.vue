@@ -360,7 +360,7 @@
               </router-link>
             </span>
 
-            <v-card outlined class="ml-2 mt-2">
+            <v-card outlined class="ml-2 mt-2 cardhov" max-width="250px" >
               <v-btn
                 color="#0a7d9a"
                 fab
@@ -376,18 +376,18 @@
                 <v-icon>mdi-shuffle-variant</v-icon>
               </v-btn>
 
-              <v-card-text class="cardhov pa-2" @click="openlink(sbori[si].ssilka)">
-                <v-img :src="sbori[si].obraz" aspect-ratio="1.5" contain eager class="ma-2">
+              <div @click="openlink(sbori[si].ssilka)">
+                <v-img :src="sbori[si].obraz" aspect-ratio="1" contain eager class="ma-2">
                   <v-layout slot="placeholder" fill-height align-center justify-center ma-0>
                     <v-progress-circular indeterminate color="#0a7d9a"></v-progress-circular>
                   </v-layout>
                 </v-img>
-
+<v-divider />
                 <v-card-title
                   class="subtitle-1 font-weight-bold"
                   style="color:#1f2020; word-break: normal;"
                 >{{sbori[si].nazvanie}}</v-card-title>
-              </v-card-text>
+              </div>
             </v-card>
           </v-col>
           <v-col class="pt-0" cols="12" sm="4">
@@ -397,7 +397,7 @@
               </router-link>
             </span>
 
-            <v-card outlined class="ml-2 mt-2">
+            <v-card outlined class="cardhov ml-2 mt-2" max-width="250px">
               <v-btn
                 color="#0a7d9a"
                 fab
@@ -413,21 +413,25 @@
                 <v-icon>mdi-shuffle-variant</v-icon>
               </v-btn>
               <router-link class="cardlink" :to="{path: `/predpriyatiya/${predpriyatiya[pi].id}`}">
-                <v-card-text class="cardhov pa-2" >
+
+                
+                  
                   <v-img
                     :src="predpriyatiya[pi].obraz"
                     eager
-                    aspect-ratio="1.5"
+                    aspect-ratio="1"
                     contain
-                    class="ma-2"
+                    
+                    
                   >
                     <v-layout slot="placeholder" fill-height align-center justify-center ma-0>
                       <v-progress-circular indeterminate color="#0a7d9a"></v-progress-circular>
                     </v-layout>
                   </v-img>
-
+                  <v-card-text class="pa-2" >
+<v-divider />
                   <v-card-title
-                    class="subtitle-1 font-weight-bold"
+                    class="subtitle-1 font-weight-bold pa-2"
                     style=" word-break: normal"
                   >{{predpriyatiya[pi].nazvanie}}</v-card-title>
                 </v-card-text>
@@ -618,6 +622,7 @@ const vm = this;
 <style scoped>
 .mainlink {
   text-decoration: none;
+  
   color: #1f2020 !important;
 }
 .mainlink:hover {
