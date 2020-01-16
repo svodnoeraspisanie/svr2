@@ -83,26 +83,32 @@
         <v-row class="ml-0">
           <v-col lg="3" md="4" sm="6" cols="12" v-for="(sbor,i) in sbori" :key="i">
             <v-card
-              class="flexcard cardhov"
+              class=" cardhov"
               height="100%"
              
               outlined
               @click="openlink(sbor.ssilka)"
             >
-              <v-img :src="sbor.obraz" aspect-ratio="1.5" contain class="ma-2">
+            <div style="display: flex;  flex-flow: column;   height:100%">
+                <div>
+              <v-img :src="sbor.obraz" aspect-ratio="1" contain >
                 <v-layout slot="placeholder" fill-height align-center justify-center ma-0>
                   <v-progress-circular indeterminate color="#0a7d9a"></v-progress-circular>
                 </v-layout>
               </v-img>
-
+                </div>
+<div style="flex:1;">
+  <v-divider/>
               <v-card-title class="subtitle-2" style="word-break: normal">{{sbor.nazvanie}}</v-card-title>
               <v-card-text>{{sbor.kratkoe_opisanie}}</v-card-text>
 
-              <v-spacer />
+</div>
+            </div>
             </v-card>
           </v-col>
         </v-row>
 
+      
         <h2 id="zavershennie" @click="poyasnenie2=!poyasnenie2">
           <v-icon class="mr-2 pb-1" color="#0a7d9a">mdi-progress-check</v-icon><span style="border-bottom: 1px dashed gray;" >Завершённые сборы средств</span>
         </h2>
