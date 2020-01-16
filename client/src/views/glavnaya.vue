@@ -88,9 +88,7 @@
             </v-list-item-content>
           </v-list-item>
         </v-list>
-        
       </template>
-     
     </v-navigation-drawer>
 
     <v-content :style="$vuetify.breakpoint.xs? '': 'padding-top:0px'">
@@ -109,7 +107,8 @@
                       :key="i"
                       @click="$router.push({ path: novost.ssilka })"
                     >
-                      <td class="px-2"
+                      <td
+                        class="px-2"
                         valign="top"
                         v-html="novost.data.toDate().toLocaleDateString([], { day: '2-digit', month: '2-digit',year:'2-digit' })"
                       ></td>
@@ -138,6 +137,67 @@
             <v-icon class="mr-2" color="#0a7d9a">mdi-calendar</v-icon>Ближайшие события
           </router-link>
         </div>
+
+        <v-dialog
+          v-model="pokazatSobitie"
+          :fullscreen="$vuetify.breakpoint.xs"
+          max-width="500px"
+          transition="slide-x-reverse-transition"
+          v-if="vibrannoeSobitie!=null"
+          scrollable
+        >
+          <v-card
+            min-width="150px"
+            max-width="500px"
+            :max-height="$vuetify.breakpoint.xs? '': '500px'"
+            
+          >
+            <v-card-title  style="background-color:#eef5f8;" class="py-1 pr-0">
+            
+                {{vibrannoeSobitie.start.time}} //
+                {{new Date(vibrannoeSobitie.start.dateTime).toLocaleDateString([],
+                { day: '2-digit', month: '2-digit',year:'2-digit' }) }}
+              
+            
+            </v-card-title>
+
+            <v-divider class="pa-0" />
+
+            <v-card-text>
+              <h3>{{vibrannoeSobitie.summary}}</h3>
+              <div v-html="vibrannoeSobitie.description"></div>
+            </v-card-text>
+
+            <v-btn
+              v-if="$vuetify.breakpoint.xs"
+              color="#f4c900"
+              link
+              fab
+              right
+              fixed
+              bottom
+              @click="pokazatSobitie=false;"
+            >
+              <v-icon>mdi-close</v-icon>
+            </v-btn>
+
+            <v-btn
+              v-if="!$vuetify.breakpoint.xs"
+              color="#eef5f8"
+              link
+              fab
+              right
+              style="margin-top:20px; margin-right:-12px"
+              absolute
+              small depressed
+              top
+              @click="pokazatSobitie=false;"
+            >
+              <v-icon>mdi-close</v-icon>
+            </v-btn>
+          </v-card>
+        </v-dialog>
+
         <v-row class="ml-0">
           <v-col class="pt-1" cols="12" sm="4">
             <span class="subtitle-1 font-weight-bold">
@@ -152,27 +212,13 @@
 
                 <v-simple-table dense>
                   <tbody>
-                    <tr v-for="(sob,i) in raspsegondya[0]" :key="i">
-                      <v-menu :close-on-content-click="false" max-width="400px" offset-x>
-                        <template v-slot:activator="{ on }">
-                          <td class="px-2 font-weight-bold" valign="top" v-on="on">{{sob.start.time}}</td>
-                          <td class="px-2" v-on="on">{{sob.summary}}</td>
-                        </template>
-
-                        <v-card>
-                          <v-sheet
-                            class="overflow-y-auto mt-1"
-                            min-width="150px"
-                            max-width="400px"
-                            max-height="500px"
-                          >
-                            <v-card-text>
-                              <h3>{{sob.summary}}</h3>
-                              <div v-html="sob.description"></div>
-                            </v-card-text>
-                          </v-sheet>
-                        </v-card>
-                      </v-menu>
+                    <tr
+                      v-for="(sob,i) in raspsegondya[0]"
+                      :key="i"
+                      @click="vibrannoeSobitie=sob;pokazatSobitie=true;"
+                    >
+                      <td class="px-2 font-weight-bold" valign="top">{{sob.start.time}}</td>
+                      <td class="px-2">{{sob.summary}}</td>
                     </tr>
                   </tbody>
                 </v-simple-table>
@@ -182,27 +228,13 @@
 
                 <v-simple-table dense>
                   <tbody>
-                    <tr v-for="(sob,i) in raspzavtra[0]" :key="i">
-                      <v-menu :close-on-content-click="false" max-width="400px" offset-x>
-                        <template v-slot:activator="{ on }">
-                          <td class="px-2 font-weight-bold" valign="top" v-on="on">{{sob.start.time}}</td>
-                          <td class="px-2" v-on="on">{{sob.summary}}</td>
-                        </template>
-
-                        <v-card>
-                          <v-sheet
-                            class="overflow-y-auto mt-1"
-                            min-width="150px"
-                            max-width="400px"
-                            max-height="500px"
-                          >
-                            <v-card-text>
-                              <h3>{{sob.summary}}</h3>
-                              <div v-html="sob.description"></div>
-                            </v-card-text>
-                          </v-sheet>
-                        </v-card>
-                      </v-menu>
+                    <tr
+                      v-for="(sob,i) in raspzavtra[0]"
+                      :key="i"
+                      @click="vibrannoeSobitie=sob;pokazatSobitie=true;"
+                    >
+                      <td class="px-2 font-weight-bold" valign="top">{{sob.start.time}}</td>
+                      <td class="px-2" v-on="on">{{sob.summary}}</td>
                     </tr>
                   </tbody>
                 </v-simple-table>
@@ -221,27 +253,13 @@
                 <div v-if="!raspsegondya[1].length" class="pl-2">нет сведений</div>
                 <v-simple-table dense>
                   <tbody>
-                    <tr v-for="(sob,i) in raspsegondya[1]" :key="i">
-                      <v-menu :close-on-content-click="false" max-width="400px" offset-x>
-                        <template v-slot:activator="{ on }">
-                          <td class="px-2 font-weight-bold" valign="top" v-on="on" >{{sob.start.time}}</td>
-                          <td class="px-2" v-on="on">{{sob.summary}}</td>
-                        </template>
-
-                        <v-card>
-                          <v-sheet
-                            class="overflow-y-auto"
-                            min-width="150px"
-                            max-width="400px"
-                            max-height="500px"
-                          >
-                            <v-card-text>
-                              <h3>{{sob.summary}}</h3>
-                              <div v-html="sob.description"></div>
-                            </v-card-text>
-                          </v-sheet>
-                        </v-card>
-                      </v-menu>
+                    <tr
+                      v-for="(sob,i) in raspsegondya[1]"
+                      :key="i"
+                      @click="vibrannoeSobitie=sob;pokazatSobitie=true;"
+                    >
+                      <td class="px-2 font-weight-bold" valign="top" v-on="on">{{sob.start.time}}</td>
+                      <td class="px-2" v-on="on">{{sob.summary}}</td>
                     </tr>
                   </tbody>
                 </v-simple-table>
@@ -251,27 +269,13 @@
 
                 <v-simple-table dense>
                   <tbody>
-                    <tr v-for="(sob,i) in raspzavtra[1]" :key="i">
-                      <v-menu :close-on-content-click="false" max-width="400px" offset-x>
-                        <template v-slot:activator="{ on }">
-                          <td class="px-2 font-weight-bold" valign="top" v-on="on" >{{sob.start.time}}</td>
-                          <td class="px-2" v-on="on">{{sob.summary}}</td>
-                        </template>
-
-                        <v-card>
-                          <v-sheet
-                            class="overflow-y-auto mt-1"
-                            min-width="150px"
-                            max-width="400px"
-                            max-height="500px"
-                          >
-                            <v-card-text>
-                              <h3>{{sob.summary}}</h3>
-                              <div v-html="sob.description"></div>
-                            </v-card-text>
-                          </v-sheet>
-                        </v-card>
-                      </v-menu>
+                    <tr
+                      v-for="(sob,i) in raspzavtra[1]"
+                      :key="i"
+                      @click="vibrannoeSobitie=sob;pokazatSobitie=true;"
+                    >
+                      <td class="px-2 font-weight-bold" valign="top" v-on="on">{{sob.start.time}}</td>
+                      <td class="px-2" v-on="on">{{sob.summary}}</td>
                     </tr>
                   </tbody>
                 </v-simple-table>
@@ -290,27 +294,13 @@
                 <div v-if="!raspsegondya[2].length" class="pl-2">нет сведений</div>
                 <v-simple-table dense>
                   <tbody>
-                    <tr v-for="(sob,i) in raspsegondya[2]" :key="i">
-                      <v-menu :close-on-content-click="false" max-width="400px" offset-x>
-                        <template v-slot:activator="{ on }">
-                          <td class="px-2 font-weight-bold" valign="top" v-on="on">{{sob.start.time}}</td>
-                          <td class="px-2" v-on="on">{{sob.summary}}</td>
-                        </template>
-
-                        <v-card>
-                          <v-sheet
-                            class="overflow-y-auto"
-                            min-width="150px"
-                            max-width="400px"
-                            max-height="500px"
-                          >
-                            <v-card-text>
-                              <h3>{{sob.summary}}</h3>
-                              <div v-html="sob.description"></div>
-                            </v-card-text>
-                          </v-sheet>
-                        </v-card>
-                      </v-menu>
+                    <tr
+                      v-for="(sob,i) in raspsegondya[2]"
+                      :key="i"
+                      @click="vibrannoeSobitie=sob;pokazatSobitie=true;"
+                    >
+                      <td class="px-2 font-weight-bold" valign="top" v-on="on">{{sob.start.time}}</td>
+                      <td class="px-2" v-on="on">{{sob.summary}}</td>
                     </tr>
                   </tbody>
                 </v-simple-table>
@@ -320,27 +310,13 @@
 
                 <v-simple-table dense>
                   <tbody>
-                    <tr v-for="(sob,i) in raspzavtra[2]" :key="i">
-                      <v-menu :close-on-content-click="false" max-width="400px" offset-x>
-                        <template v-slot:activator="{ on }">
-                          <td class="px-2 font-weight-bold" valign="top" v-on="on" >{{sob.start.time}}</td>
-                          <td class="px-2" v-on="on">{{sob.summary}}</td>
-                        </template>
-
-                        <v-card>
-                          <v-sheet
-                            class="overflow-y-auto mt-1"
-                            min-width="150px"
-                            max-width="400px"
-                            max-height="500px"
-                          >
-                            <v-card-text>
-                              <h3>{{sob.summary}}</h3>
-                              <div v-html="sob.description"></div>
-                            </v-card-text>
-                          </v-sheet>
-                        </v-card>
-                      </v-menu>
+                    <tr
+                      v-for="(sob,i) in raspzavtra[2]"
+                      :key="i"
+                      @click="vibrannoeSobitie=sob;pokazatSobitie=true;"
+                    >
+                      <td class="px-2 font-weight-bold" valign="top" v-on="on">{{sob.start.time}}</td>
+                      <td class="px-2" v-on="on">{{sob.summary}}</td>
                     </tr>
                   </tbody>
                 </v-simple-table>
@@ -360,7 +336,7 @@
               </router-link>
             </span>
 
-            <v-card outlined class="ml-2 mt-2 cardhov" max-width="250px" >
+            <v-card outlined class="ml-2 mt-2 cardhov" max-width="250px">
               <v-btn
                 color="#0a7d9a"
                 fab
@@ -382,7 +358,7 @@
                     <v-progress-circular indeterminate color="#0a7d9a"></v-progress-circular>
                   </v-layout>
                 </v-img>
-<v-divider />
+                <v-divider />
                 <v-card-title
                   class="subtitle-1 font-weight-bold"
                   style="color:#1f2020; word-break: normal;"
@@ -413,23 +389,13 @@
                 <v-icon>mdi-shuffle-variant</v-icon>
               </v-btn>
               <router-link class="cardlink" :to="{path: `/predpriyatiya/${predpriyatiya[pi].id}`}">
-
-                
-                  
-                  <v-img
-                    :src="predpriyatiya[pi].obraz"
-                    eager
-                    aspect-ratio="1"
-                    contain
-                    
-                    
-                  >
-                    <v-layout slot="placeholder" fill-height align-center justify-center ma-0>
-                      <v-progress-circular indeterminate color="#0a7d9a"></v-progress-circular>
-                    </v-layout>
-                  </v-img>
-                  <v-card-text class="pa-2" >
-<v-divider />
+                <v-img :src="predpriyatiya[pi].obraz" eager aspect-ratio="1" contain>
+                  <v-layout slot="placeholder" fill-height align-center justify-center ma-0>
+                    <v-progress-circular indeterminate color="#0a7d9a"></v-progress-circular>
+                  </v-layout>
+                </v-img>
+                <v-card-text class="pa-2">
+                  <v-divider />
                   <v-card-title
                     class="subtitle-1 font-weight-bold pa-2"
                     style=" word-break: normal"
@@ -464,7 +430,7 @@
 </template>
 
 <script>
-import { db,st } from "../db";
+import { db, st } from "../db";
 
 export default {
   components: {},
@@ -481,24 +447,24 @@ export default {
     si: 0,
     pi: 0,
     tekst: {},
-
+    pokazatSobitie: false,
+    vibrannoeSobitie: null,
     raspsegondya: [[], [], []],
     raspzavtra: [[], [], []]
   }),
-created(){
-   this.zagruzkaraspisaniya();
+  created() {
+    this.zagruzkaraspisaniya();
 
     db.collection("teksti")
-        .doc("glavnaya")
-        .get()
-        .then(snapshot => {
-          this.teksti = snapshot.data().teksti;
-        });
+      .doc("glavnaya")
+      .get()
+      .then(snapshot => {
+        this.teksti = snapshot.data().teksti;
+      });
 
+    const vm = this;
 
-const vm = this;
-
-       db.collection("predpriyatiya")
+    db.collection("predpriyatiya")
       .get()
       .then(function(querySnapshot) {
         querySnapshot.forEach(function(doc) {
@@ -510,20 +476,15 @@ const vm = this;
             .getDownloadURL()
             .then(function onSuccess(url) {
               res.obraz = url;
-               vm.predpriyatiya.push(res);
+              vm.predpriyatiya.push(res);
             })
             .catch(function onError(err) {
               console.log("Error occured..." + err);
             });
-
-         
         });
         vm.si = vm.anyel(vm.si, vm.sbori);
-      vm.pi = vm.anyel(vm.pi, vm.predpriyatiya);
+        vm.pi = vm.anyel(vm.pi, vm.predpriyatiya);
       });
-
-
-
   },
   watch: {
     drawer() {
@@ -531,9 +492,6 @@ const vm = this;
     }
   },
   mounted() {
-   
-
-
     window.setInterval(() => {
       this.si = this.anyel(this.si, this.sbori);
       this.pi = this.anyel(this.pi, this.predpriyatiya);
@@ -549,7 +507,7 @@ const vm = this;
       today.setMinutes(0);
       today.setSeconds(0);
       const tomorrow = new Date(today.getTime() + 48 * 60 * 60 * 1000 - 1000);
-      
+
       const cals = [
         "2kpu7kvisrlvmgkiheabippc20@group.calendar.google.com",
         "ct8a4t3tuim1jjnkno2d6skkck@group.calendar.google.com",
@@ -594,7 +552,6 @@ const vm = this;
           }
         }
       }
-
     },
 
     openlink(arg) {
@@ -608,21 +565,20 @@ const vm = this;
   },
 
   firestore: {
-    sbori: db.collection("sbori").where("idet","==",true),
-    
+    sbori: db.collection("sbori").where("idet", "==", true),
+
     novosti: db
       .collection("novosti")
       .orderBy("data", "desc")
       .limit(5),
-    zamisli: db.collection("zamisli"),
-    
+    zamisli: db.collection("zamisli")
   }
 };
 </script>
 <style scoped>
 .mainlink {
   text-decoration: none;
-  
+
   color: #1f2020 !important;
 }
 .mainlink:hover {
