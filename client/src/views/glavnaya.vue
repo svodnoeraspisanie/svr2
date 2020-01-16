@@ -100,7 +100,7 @@
             <div class="headline font-weight-bold pb-1">
               <v-icon class="mr-2" color="#0a7d9a">mdi-message-text</v-icon>Новости
             </div>
-            <v-card flat class="ml-2">
+            <v-card outlined class="ml-2">
               <v-card-text class="pb-1 pt-2">
                 <v-simple-table dense>
                   <tbody>
@@ -128,7 +128,7 @@
               </router-link>
             </div>
 
-            <v-card class="cardhov ml-2" flat :to="{path: teksti[0].ssilka}">
+            <v-card class="cardhov ml-2" outlined :to="{path: teksti[0].ssilka}">
               <v-card-text class="pb-1 pt-2" v-html="teksti[0].tekst"></v-card-text>
             </v-card>
           </v-col>
@@ -145,7 +145,7 @@
                 <v-icon class="mr-2" color="#0a7d9a">mdi-web</v-icon>в Cети
               </router-link>
             </span>
-            <v-card flat class="ml-2 mt-2">
+            <v-card outlined class="ml-2 mt-2">
               <v-card-text class="pt-2">
                 <span class="subtitle-2">Сегодня</span>
                 <div v-if="!raspsegondya[0].length" class="pl-2">нет сведений</div>
@@ -215,7 +215,7 @@
                 <v-icon class="mr-2" color="#0a7d9a">mdi-city</v-icon>в Москве
               </router-link>
             </span>
-            <v-card flat class="ml-2 mt-2">
+            <v-card outlined class="ml-2 mt-2">
               <v-card-text class="pt-2">
                 <span class="subtitle-2">Сегодня</span>
                 <div v-if="!raspsegondya[1].length" class="pl-2">нет сведений</div>
@@ -284,7 +284,7 @@
                 <v-icon class="mr-2" color="#0a7d9a">mdi-anchor</v-icon>в Санкт-Петербурге
               </router-link>
             </span>
-            <v-card flat class="ml-2 mt-2">
+            <v-card outlined class="ml-2 mt-2">
               <v-card-text class="pt-2">
                 <span class="subtitle-2">Сегодня</span>
                 <div v-if="!raspsegondya[2].length" class="pl-2">нет сведений</div>
@@ -360,7 +360,7 @@
               </router-link>
             </span>
 
-            <v-card flat class="ml-2 mt-2">
+            <v-card outlined class="ml-2 mt-2">
               <v-btn
                 color="#0a7d9a"
                 fab
@@ -397,7 +397,7 @@
               </router-link>
             </span>
 
-            <v-card flat class="ml-2 mt-2">
+            <v-card outlined class="ml-2 mt-2">
               <v-btn
                 color="#0a7d9a"
                 fab
@@ -441,7 +441,7 @@
                 <v-icon class="mr-2" color="#0a7d9a">mdi-lightbulb-on-outline</v-icon>Замысел
               </router-link>
             </span>
-            <v-card flat class="ml-2 mt-2" to="/prisoedinitsya">
+            <v-card outlined class="ml-2 mt-2" to="/prisoedinitsya">
               <v-card-text>
                 <v-simple-table dense>
                   <tbody>

@@ -58,7 +58,7 @@
             <v-card
               v-for="vopros in razdel.vio"
               :key="vopros.n"
-              flat
+              outlined
               
               class="mb-4 ml-2"
               max-width="936px"

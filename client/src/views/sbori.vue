@@ -75,7 +75,7 @@
         <h2 @click="poyasnenie=!poyasnenie">
           <v-icon class="mr-2 pb-1" color="#0a7d9a">mdi-cash-multiple</v-icon><span style="border-bottom: 1px dashed gray;" >Идущие сборы средств</span>
         </h2>
-<v-card flat class="ml-3 mt-2" v-if="poyasnenie" @click="poyasnenie=!poyasnenie">
+<v-card outlined class="ml-3 mt-2" v-if="poyasnenie" @click="poyasnenie=!poyasnenie">
               <v-card-text class="pb-1 pt-2" v-html="sbori_tekst">
               
               </v-card-text>
@@ -85,8 +85,8 @@
             <v-card
               class="flexcard cardhov"
               height="100%"
-              elevate="0"
-              flat
+             
+              outlined
               @click="openlink(sbor.ssilka)"
             >
               <v-img :src="sbor.obraz" aspect-ratio="1.5" contain class="ma-2">
@@ -106,7 +106,7 @@
         <h2 id="zavershennie" @click="poyasnenie2=!poyasnenie2">
           <v-icon class="mr-2 pb-1" color="#0a7d9a">mdi-progress-check</v-icon><span style="border-bottom: 1px dashed gray;" >Завершённые сборы средств</span>
         </h2>
-<v-card flat class="ml-3 mt-2" v-if="poyasnenie2" @click="poyasnenie2=!poyasnenie2">
+<v-card outlined class="ml-3 mt-2" v-if="poyasnenie2" @click="poyasnenie2=!poyasnenie2">
               <v-card-text class="pb-1 pt-2" v-html="sbori_tekst2">
               
               </v-card-text>
@@ -116,8 +116,8 @@
             <v-card
               class="flexcard cardhov"
               height="100%"
-              elevate="0"
-              flat
+              
+              outlined
               @click="openlink(sbor.ssilka)"
             >
               <v-img :src="sbor.obraz" aspect-ratio="1.5" contain class="ma-2">

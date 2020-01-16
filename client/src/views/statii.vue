@@ -47,7 +47,7 @@
             <v-card
               v-for="(statia,i) in statii"
               :key="i"
-              flat
+              outlined
               class="mb-6 ml-2"
               max-width="936px"
             >

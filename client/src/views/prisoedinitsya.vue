@@ -59,7 +59,7 @@
         </h2>
         <v-row class="ml-1">
           <v-col cols="12" sm="6">
-            <v-card flat class="mb-6">
+            <v-card outlined class="mb-6">
               <v-card-title
                 class="subtitle-1 font-weight-bold"
                 style="word-break: normal"
@@ -67,7 +67,7 @@
               ></v-card-title>
               <v-card-text v-html="zamislitekst.tekst"></v-card-text>
             </v-card>
-            <v-card flat>
+            <v-card outlined>
               <v-card-title class="subtitle-1 font-weight-bold">Список отборных замыслов</v-card-title>
               <v-card-text>
                 <v-simple-table dense>
@@ -97,7 +97,7 @@
         </h2>
         <v-row class="ml-1">
           <v-col cols="12" sm="6">
-            <v-card flat class="mb-6">
+            <v-card outlined class="mb-6">
               <v-card-title
                 class="subtitle-1 font-weight-bold"
                 style="word-break: normal"
@@ -105,7 +105,7 @@
               ></v-card-title>
               <v-card-text v-html="deyatelitekst.tekst"></v-card-text>
             </v-card>
-            <v-card flat class="mb-6">
+            <v-card outlined class="mb-6">
               <v-card-title
                 class="subtitle-1 font-weight-bold"
                 style="word-break: normal"

@@ -51,33 +51,48 @@
           <v-icon class="mr-2 pb-1" color="#0a7d9a">mdi-account-group</v-icon>
           <span style="border-bottom: 1px dashed gray;">Русские национальные предприятия</span>
         </h2>
-        <v-card flat class="ml-3 mt-2" v-if="poyasnenie" @click="poyasnenie=!poyasnenie">
+        <v-card outlined class="ml-3 mt-2" v-if="poyasnenie" @click="poyasnenie=!poyasnenie">
           <v-card-text class="pb-1 pt-2" v-html="poyasnenie_tekst"></v-card-text>
         </v-card>
+
+
         <v-row class="ml-0">
           <v-col lg="3" md="4" sm="6" cols="12" v-for="pr in predpriyatiya" :key="pr.n">
+
+            
             <v-card
-              class="flexcard cardhov"
+              class=" cardhov"
               height="100%"
               :to="{path: `/predpriyatiya/${pr.id}`}"
-              elevate="0"
-              flat
+              outlined
+            
             >
-              <v-img :src="pr.obraz" aspect-ratio="1.5" contain class="ma-2">
+            <v-container  class="fill-height pa-0">
+
+            <v-row no-gutters  align-content="start" align="start" class="fill-height">
+              <v-col cols="12" class="pa-0" >
+<v-img :src="pr.obraz" aspect-ratio="1"  contain style="width:100%" >
                 <v-layout slot="placeholder" fill-height align-center justify-center ma-0>
                   <v-progress-circular indeterminate color="#0a7d9a"></v-progress-circular>
                 </v-layout>
               </v-img>
+                <v-divider />
+              </v-col>
 
-              <v-card-title
+              <v-col cols="12" class="py-0 " align-self="start" >
+              
+ <v-card-title
                 class="subtitle-1 font-weight-bold"
                 style="word-break: normal"
               >{{pr.nazvanie}}</v-card-title>
               <v-card-text>{{pr.kratkoe_opisanie}}</v-card-text>
 
-              <v-spacer />
+              </v-col>
+     
+             
+              <v-col class="py-0" align-self="stretch"  >
 
-              <v-divider />
+                <v-divider />
 
               <v-card-text class="pa-2">
                 <div>
@@ -100,6 +115,9 @@
                   >{{metka}}</v-chip>
                 </div>
               </v-card-text>
+              </v-col>
+            </v-row>
+            </v-container>
             </v-card>
           </v-col>
         </v-row>
@@ -175,4 +193,5 @@ export default {
 .cardhov:hover {
   background-color: #eeeeee;
 }
+
 </style>

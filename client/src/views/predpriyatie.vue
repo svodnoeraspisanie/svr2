@@ -66,7 +66,7 @@
       <v-container :class="$vuetify.breakpoint.xs? 'px-2': 'px-6'">
         <v-row justify="center">
           <v-col cols="auto">
-            <v-card class="mb-4 pb-2" flat max-width="936px">
+            <v-card class="mb-4 pb-2" outlined max-width="936px">
               <v-row>
                 <v-col cols="12" sm="3">
                   <v-img :src="pr.obraz" aspect-ratio="1.5" max-width="500px" contain>
@@ -89,12 +89,12 @@
               
             </v-card>
 
-            <v-card class="mb-4" flat max-width="936px" id="chtomidelaem">
+            <v-card class="mb-4" outlined max-width="936px" id="chtomidelaem">
               <v-card-title>Что мы делаем?</v-card-title>
               <v-card-text v-html="pr.podrobnoe_opisanie"></v-card-text>
             </v-card>
 
-            <v-card class="mb-4" flat id="kakpoddergat">
+            <v-card class="mb-4" outlined id="kakpoddergat">
               <v-card-title>Как нас поддержать?</v-card-title>
               <v-card-text>
                 <ul v-for="(schet,gate) in pr.scheta" :key="gate">
@@ -107,7 +107,7 @@
               </v-card-text>
             </v-card>
 
-            <v-card flat max-width="936px" id="ssilki">
+            <v-card outlined max-width="936px" id="ssilki">
               <v-card-title>Наши страницы в сети</v-card-title>
               <v-card-text>
                 <ul v-for="(ssilka,servis) in pr.ssilki" :key="servis">
