@@ -157,7 +157,8 @@
               :style="$vuetify.breakpoint.xs? 'padding-right:0px!important': ''"
             >
               <v-icon class="mr-2" color="#0a7d9a">mdi-calendar</v-icon>
-              {{vibrannoeSobitie.start.time}}
+              {{vibrannoeSobitie.start.time}} - 
+               {{new Date(vibrannoeSobitie.end.dateTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}}
               <v-spacer />
               {{new Date(vibrannoeSobitie.start.dateTime).toLocaleDateString([],
               { day: '2-digit', month: 'long',year:'numeric' }) }}
@@ -538,7 +539,7 @@ export default {
 
         const response = await fetch(url);
         if (response.ok) {
-          const data = response.json();
+          const data = await response.json();
           data.items.sort((a, b) => {
             if (new Date(a.start.dateTime) > new Date(b.start.dateTime)) {
               return 1;
