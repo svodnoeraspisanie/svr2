@@ -528,7 +528,7 @@ export default {
         'uq550s4cd42vsoojk09patvfvk@group.calendar.google.com',
       ];
 
-      for (let i = 0; i < cals.length; i++) {
+      for (let i = 0; i < cals.length; i += 1) {
         const url = `${caladr
           + encodeURIComponent(cals[i])}/events?timeMin=${encodeURIComponent(
           today.toISOString(),
@@ -538,7 +538,7 @@ export default {
 
         const response = await fetch(url);
         if (response.ok) {
-          const data = await response.json();
+          const data = response.json();
           data.items.sort((a, b) => {
             if (new Date(a.start.dateTime) > new Date(b.start.dateTime)) {
               return 1;
@@ -550,14 +550,14 @@ export default {
             return 0;
           });
 
-          for (let j = 0; j < data.items.length; j++) {
+          for (let j = 0; j < data.items.length; j += 1) {
             data.items[j].start.time = new Date(
               data.items[j].start.dateTime,
             ).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
             if (
               new Date(data.items[j].start.dateTime).getDay()
-              == new Date().getDay()
+              === new Date().getDay()
             ) {
               this.raspsegondya[i].push(data.items[j]);
             } else {
@@ -574,7 +574,7 @@ export default {
     anyel(i, ar) {
       const i2 = ~~(Math.random() * ar.length);
 
-      return i == i2 ? (i == ar.length - 1 ? i - 1 : i + 1) : i2;
+      return i === i2 ? (i === ar.length - 1 ? i - 1 : i + 1) : i2;
     },
   },
 
