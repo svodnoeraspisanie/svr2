@@ -8,7 +8,7 @@
       width="300px"
     >
       <v-list>
-        <v-list-item link to="/" dense>
+        <v-list-item link to="/">
           <v-list-item-icon>
             <v-icon>mdi-arrow-left-bold</v-icon>
           </v-list-item-icon>
@@ -18,6 +18,15 @@
           </v-list-item-content>
         </v-list-item>
         <v-divider></v-divider>
+        <v-list-item link @click="openlink('https://forms.gle/i3WgnfFHsQzbnXocA');drawer2=false;">
+          <v-list-item-icon>
+            <v-icon>mdi-database-plus</v-icon>
+          </v-list-item-icon>
+
+          <v-list-item-content>
+            <v-list-item-title>Предложить предприятие</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
       </v-list>
 
       <template v-slot:append v-if="$vuetify.breakpoint.xs">
@@ -37,60 +46,60 @@
     </v-navigation-drawer>
 
     <v-content :style="$vuetify.breakpoint.xs? '': 'padding-top:0px'">
-      <v-container class="px-6">
-        <h2 @click="poyasnenie=!poyasnenie">
+      <v-container :class="$vuetify.breakpoint.xs? 'px-2': 'px-6'">
+        <h2 @click="poyasnenie=!poyasnenie;">
           <v-icon class="mr-2 pb-1" color="#0a7d9a">mdi-account-group</v-icon>
           <span style="border-bottom: 1px dashed gray;">Русские национальные предприятия</span>
         </h2>
-        <v-card flat class="ml-3 mt-2" v-if="poyasnenie" @click="poyasnenie=!poyasnenie">
+        <v-card outlined class="ml-3 mt-2" v-if="poyasnenie" @click="poyasnenie=!poyasnenie">
           <v-card-text class="pb-1 pt-2" v-html="poyasnenie_tekst"></v-card-text>
         </v-card>
+
         <v-row class="ml-0">
           <v-col lg="3" md="4" sm="6" cols="12" v-for="pr in predpriyatiya" :key="pr.n">
-            <v-card
-              class="flexcard cardhov"
-              height="100%"
-              :to="{path: `/predpriyatiya/${pr.id}`}"
-              elevate="0"
-              flat
-            >
-              <v-img :src="pr.obraz" aspect-ratio="1.5" contain class="ma-2">
-                <v-layout slot="placeholder" fill-height align-center justify-center ma-0>
-                  <v-progress-circular indeterminate color="#0a7d9a"></v-progress-circular>
-                </v-layout>
-              </v-img>
-
-              <v-card-title
-                class="subtitle-1 font-weight-bold"
-                style="word-break: normal"
-              >{{pr.nazvanie}}</v-card-title>
-              <v-card-text>{{pr.kratkoe_opisanie}}</v-card-text>
-
-              <v-spacer />
-
-              <v-divider />
-
-              <v-card-text class="pa-2">
+            <v-card class="cardhov" height="100%" :to="{path: `/predpriyatiya/${pr.id}`}" outlined>
+              <div style="display: flex;  flex-flow: column;   height:100%">
                 <div>
-                  Место:
-                  <v-chip
-                    v-for="(mesto, nm) in pr.mesto"
-                    :key="nm"
-                    small
-                    style="height:18px; margin-left:2px"
-                  >{{mesto}}</v-chip>
+                  <v-img :src="pr.obraz" aspect-ratio="1" contain style="width:100%">
+                    <v-layout slot="placeholder" fill-height align-center justify-center ma-0>
+                      <v-progress-circular indeterminate color="#0a7d9a"></v-progress-circular>
+                    </v-layout>
+                  </v-img>
+                  <v-divider />
                 </div>
-
+                <div style="flex:1;">
+                  <v-card-title
+                    class="subtitle-1 font-weight-bold"
+                    style="word-break: normal"
+                  >{{pr.nazvanie}}</v-card-title>
+                  <v-card-text>{{pr.kratkoe_opisanie}}</v-card-text>
+                </div>
                 <div>
-                  Метки:
-                  <v-chip
-                    v-for="(metka, nm) in pr.metki"
-                    :key="nm"
-                    small
-                    style="height:18px; margin-left:2px"
-                  >{{metka}}</v-chip>
+                  <v-divider />
+
+                  <v-card-text class="pa-2">
+                    <div>
+                      Место:
+                      <v-chip
+                        v-for="(mesto, nm) in pr.mesto"
+                        :key="nm"
+                        small
+                        style="height:18px; margin-left:2px;"
+                      >{{mesto}}</v-chip>
+                    </div>
+
+                    <div>
+                      Метки:
+                      <v-chip
+                        v-for="(metka, nm) in pr.metki"
+                        :key="nm"
+                        small
+                        style="height:18px; margin-left:2px"
+                      >{{metka}}</v-chip>
+                    </div>
+                  </v-card-text>
                 </div>
-              </v-card-text>
+              </div>
             </v-card>
           </v-col>
         </v-row>
@@ -100,43 +109,63 @@
 </template>
 
 <script>
-import { db } from "../db";
+import { db, st } from '../db';
 
 export default {
   components: {},
-  props: ["drawer"],
+  props: ['drawer'],
 
   watch: {
     drawer() {
       this.drawer2 = !this.drawer2;
-    }
+    },
   },
   data: () => ({
     drawer2: false,
     predpriyatiya: [],
     poyasnenie: false,
-    poyasnenie_tekst: ""
+    poyasnenie_tekst: '',
   }),
+
   created() {
-    db.collection("teksti")
-      .doc("predpiyatiya-poyasnenie")
+    const vm = this;
+
+    db.collection('teksti')
+      .doc('predpiyatiya-poyasnenie')
       .get()
-      .then(snapshot => {
+      .then((snapshot) => {
         this.poyasnenie_tekst = snapshot.data().tekst;
       });
-  },
 
-  firestore: {
-    predpriyatiya: db.collection("predpriyatiya")
-  }
+    db.collection('predpriyatiya')
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          const res = doc.data();
+          res.id = doc.id;
+
+          st.ref()
+            .child(res.obraz)
+            .getDownloadURL()
+            .then((url) => {
+              res.obraz = url;
+              vm.predpriyatiya.push(res);
+            })
+            .catch((err) => {
+              console.log(`Error occured...${err}`);
+            });
+        });
+      });
+  },
+  methods: {
+    openlink(arg) {
+      window.open(arg, '_blank');
+    },
+  },
 };
 </script>
 
 <style>
-.flexcard {
-  display: flex;
-  flex-direction: column;
-}
 .cardhov:hover {
   background-color: #eeeeee;
 }

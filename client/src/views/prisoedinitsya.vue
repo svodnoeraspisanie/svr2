@@ -8,7 +8,7 @@
       app
     >
       <v-list>
-        <v-list-item link to="/" dense>
+        <v-list-item link to="/">
           <v-list-item-icon>
             <v-icon>mdi-arrow-left-bold</v-icon>
           </v-list-item-icon>
@@ -53,13 +53,13 @@
     </v-navigation-drawer>
 
     <v-content :style="$vuetify.breakpoint.xs? '': 'padding-top:0px'">
-      <v-container class="px-6">
+      <v-container :class="$vuetify.breakpoint.xs? 'px-2': 'px-6'">
         <h2 id="zamisli">
           <v-icon class="mr-2" color="#0a7d9a">mdi-lightbulb-on-outline</v-icon>Замыслы
         </h2>
         <v-row class="ml-1">
           <v-col cols="12" sm="6">
-            <v-card flat class="mb-6">
+            <v-card outlined class="mb-6">
               <v-card-title
                 class="subtitle-1 font-weight-bold"
                 style="word-break: normal"
@@ -67,7 +67,7 @@
               ></v-card-title>
               <v-card-text v-html="zamislitekst.tekst"></v-card-text>
             </v-card>
-            <v-card flat>
+            <v-card outlined>
               <v-card-title class="subtitle-1 font-weight-bold">Список отборных замыслов</v-card-title>
               <v-card-text>
                 <v-simple-table dense>
@@ -97,7 +97,7 @@
         </h2>
         <v-row class="ml-1">
           <v-col cols="12" sm="6">
-            <v-card flat class="mb-6">
+            <v-card outlined class="mb-6">
               <v-card-title
                 class="subtitle-1 font-weight-bold"
                 style="word-break: normal"
@@ -105,7 +105,7 @@
               ></v-card-title>
               <v-card-text v-html="deyatelitekst.tekst"></v-card-text>
             </v-card>
-            <v-card flat class="mb-6">
+            <v-card outlined class="mb-6">
               <v-card-title
                 class="subtitle-1 font-weight-bold"
                 style="word-break: normal"
@@ -131,59 +131,53 @@
 </template>
 
 <script>
-import { db } from "../db";
+import { db } from '../db';
 
 export default {
   components: {},
-  props: ["drawer"],
+  props: ['drawer'],
 
   watch: {
     drawer() {
       this.drawer2 = !this.drawer2;
-   
-    }
+    },
   },
-  mounted() {
-
-  },
+  mounted() {},
   methods: {},
 
-  created(){
-    db.collection("teksti")
-        .doc("zamisli")
-        .get()
-        .then(snapshot => {
-          this.zamislitekst = snapshot.data();
-        });
+  created() {
+    db.collection('teksti')
+      .doc('zamisli')
+      .get()
+      .then((snapshot) => {
+        this.zamislitekst = snapshot.data();
+      });
 
-        db.collection("teksti")
-        .doc("deyateli")
-        .get()
-        .then(snapshot => {
-          this.deyatelitekst = snapshot.data();
-        });
+    db.collection('teksti')
+      .doc('deyateli')
+      .get()
+      .then((snapshot) => {
+        this.deyatelitekst = snapshot.data();
+      });
 
-         db.collection("teksti")
-        .doc("poryadok")
-        .get()
-        .then(snapshot => {
-          this.poryadoktekst = snapshot.data();
-        });
+    db.collection('teksti')
+      .doc('poryadok')
+      .get()
+      .then((snapshot) => {
+        this.poryadoktekst = snapshot.data();
+      });
   },
 
- 
   data: () => ({
     drawer2: false,
-    zamisli: [{ nazvanie: "" }],
-    zamislitekst:"",
-    deyatelitekst:"",
-    poryadoktekst:""
-
+    zamisli: [{ nazvanie: '' }],
+    zamislitekst: '',
+    deyatelitekst: '',
+    poryadoktekst: '',
   }),
   firestore: {
-    zamisli: db.collection("zamisli"),
-   
-  }
+    zamisli: db.collection('zamisli'),
+  },
 };
 </script>
 

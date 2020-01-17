@@ -16,7 +16,7 @@
       <v-divider class="d-sm-flex" />
 
       <v-toolbar dense class="px-3 py-0" elevation="3">
-        
+
 
         <v-tooltip bottom v-if="$vuetify.breakpoint.xs">
           <template v-slot:activator="{ on }">
@@ -94,7 +94,7 @@ export default {};
   padding: 0px;
   height: 100% !important;
 }
-.theme--light.v-list-item--active:before, .theme--light.v-list-item--active:hover:before, .theme--light.v-list-item:focus:before{ 
+.theme--light.v-list-item--active:before, .theme--light.v-list-item--active:hover:before, .theme--light.v-list-item:focus:before{
   opacity:0;
 }
 

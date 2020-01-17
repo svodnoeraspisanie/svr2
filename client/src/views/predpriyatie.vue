@@ -8,7 +8,7 @@
       width="300px"
     >
       <v-list>
-        <v-list-item link to="/predpriyatiya" exact dense>
+        <v-list-item link to="/predpriyatiya" exact>
           <v-list-item-icon>
             <v-icon>mdi-arrow-left-bold</v-icon>
           </v-list-item-icon>
@@ -40,7 +40,6 @@
 
         <v-list-item link @click="$vuetify.goTo('#ssilki',offset);drawer2=false;">
           <v-list-item-icon>
-
             <v-icon>mdi-web</v-icon>
           </v-list-item-icon>
           <v-list-item-content>Наши страницы в сети</v-list-item-content>
@@ -63,10 +62,10 @@
     </v-navigation-drawer>
 
     <v-content :style="$vuetify.breakpoint.xs? '': 'padding-top:0px'">
-      <v-container class="px-6">
+      <v-container :class="$vuetify.breakpoint.xs? 'px-2': 'px-6'">
         <v-row justify="center">
           <v-col cols="auto">
-            <v-card class="mb-4 pb-2" flat max-width="936px">
+            <v-card class="mb-4 pb-2" outlined max-width="936px">
               <v-row>
                 <v-col cols="12" sm="3">
                   <v-img :src="pr.obraz" aspect-ratio="1.5" max-width="500px" contain>
@@ -79,22 +78,26 @@
                   <v-card-title>{{pr.nazvanie}}</v-card-title>
                   <v-card-text>{{pr.kratkoe_opisanie}}</v-card-text>
                   <v-card-text class="py-0">
-                  <v-btn  class="mr-1 mb-1" depressed color="#f4c900"
-             v-for="(ssilka,servis) in pr.ssilki" :key="servis" :href="ssilka" >
-                                      {{servis}}
-                  </v-btn>
-                </v-card-text>
+                    <v-btn
+                      class="mr-1 mb-1"
+                      depressed
+                      color="#f4c900"
+                      v-for="(ssilka,servis) in pr.ssilki"
+                      :key="servis"
+                      :href="ssilka"
+                      target="_blank"
+                    >{{servis}}</v-btn>
+                  </v-card-text>
                 </v-col>
               </v-row>
-              
             </v-card>
 
-            <v-card class="mb-4" flat max-width="936px" id="chtomidelaem">
+            <v-card class="mb-4" outlined max-width="936px" id="chtomidelaem">
               <v-card-title>Что мы делаем?</v-card-title>
               <v-card-text v-html="pr.podrobnoe_opisanie"></v-card-text>
             </v-card>
 
-            <v-card class="mb-4" flat id="kakpoddergat">
+            <v-card class="mb-4" outlined id="kakpoddergat">
               <v-card-title>Как нас поддержать?</v-card-title>
               <v-card-text>
                 <ul v-for="(schet,gate) in pr.scheta" :key="gate">
@@ -107,7 +110,7 @@
               </v-card-text>
             </v-card>
 
-            <v-card flat max-width="936px" id="ssilki">
+            <v-card outlined max-width="936px" id="ssilki">
               <v-card-title>Наши страницы в сети</v-card-title>
               <v-card-text>
                 <ul v-for="(ssilka,servis) in pr.ssilki" :key="servis">
@@ -125,41 +128,51 @@
 </template>
 
 <script>
-import { db } from "../db";
+import { db, st } from '../db';
 
 export default {
   components: {},
 
-  props: ["drawer"],
+  props: ['drawer'],
 
-  computed: {
-  
-  },
+  computed: {},
   data: () => ({
     drawer2: false,
 
-    pr: null
+    pr: { obraz: '' },
   }),
   created() {
     this.fetchData();
   },
   watch: {
-    $route: "fetchData",
+    $route: 'fetchData',
     drawer() {
       this.drawer2 = !this.drawer2;
-      
-    }
+    },
   },
   methods: {
     fetchData() {
-      db.collection("predpriyatiya")
+      const vm = this;
+
+      db.collection('predpriyatiya')
         .doc(this.$route.params.id)
         .get()
-        .then(snapshot => {
-          this.pr = snapshot.data();
+        .then((snapshot) => {
+          const res = snapshot.data();
+
+          st.ref()
+            .child(res.obraz)
+            .getDownloadURL()
+            .then((url) => {
+              res.obraz = url;
+              vm.pr = res;
+            })
+            .catch((err) => {
+              console.log(`Error occured...${err}`);
+            });
         });
-    }
-  }
+    },
+  },
 };
 </script>
 

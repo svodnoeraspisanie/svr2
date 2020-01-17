@@ -8,7 +8,7 @@
       clipped
     >
       <v-list>
-        <v-list-item link to="/" dense>
+        <v-list-item link to="/">
           <v-list-item-icon>
             <v-icon>mdi-arrow-left-bold</v-icon>
           </v-list-item-icon>
@@ -31,7 +31,20 @@
             @change="gotodate"
           ></v-date-picker>
         </v-list-item>
+
         <v-divider></v-divider>
+        <v-list-item
+          link
+          @click="openlink('https://docs.google.com/forms/d/e/1FAIpQLSfdSx-AidxewA9vnBgQaCtVpBtVzX5zyhN0Jj61VLrcQp-GnQ/viewform?usp=sf_link');drawer2=false;"
+        >
+          <v-list-item-icon>
+            <v-icon>mdi-database-plus</v-icon>
+          </v-list-item-icon>
+
+          <v-list-item-content>
+            <v-list-item-title>Предложить событие</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
       </v-list>
       <template v-slot:append v-if="$vuetify.breakpoint.xs">
         <v-list>
@@ -53,7 +66,7 @@
       <v-container class="cont pa-0 ma-0" fluid>
         <v-toolbar elevation="0">
           <v-icon class="mr-2" color="#0a7d9a">mdi-calendar</v-icon>
-          <div :style="$vuetify.breakpoint.xs? 'width:100%': 'max-width:220px'" >
+          <div :style="$vuetify.breakpoint.xs? 'width:100%': 'max-width:220px'">
             <v-select
               autofocus
               flat
@@ -68,39 +81,17 @@
             ></v-select>
           </div>
           <template v-if="!$vuetify.breakpoint.xs">
-          <v-divider vertical />
-          <v-btn
-            outlined
-            @click="setToday"
-            class="ml-2"
-            elevation="3"
-           
-          >Сегодня</v-btn>
-          <v-btn
-            @click="prev"
-            outlined
-            class="ml-2"
-            min-width="36px"
-            width="36px"
-            elevation="3"
-           
-          >
-            <v-icon>mdi-chevron-left</v-icon>
-          </v-btn>
-          <v-btn
-            @click="next"
-            outlined
-            class="ml-2"
-            min-width="36px"
-            width="36px"
-            elevation="3"
-            
-          >
-            <v-icon>mdi-chevron-right</v-icon>
-          </v-btn>
+            <v-divider vertical />
+            <v-btn outlined @click="setToday" class="ml-2" elevation="3">Сегодня</v-btn>
+            <v-btn @click="prev" outlined class="ml-2" min-width="36px" width="36px" elevation="3">
+              <v-icon>mdi-chevron-left</v-icon>
+            </v-btn>
+            <v-btn @click="next" outlined class="ml-2" min-width="36px" width="36px" elevation="3">
+              <v-icon>mdi-chevron-right</v-icon>
+            </v-btn>
 
-          <v-toolbar-title  class="ml-2">{{title}}</v-toolbar-title>
-          <v-spacer></v-spacer>
+            <v-toolbar-title class="ml-2">{{title}}</v-toolbar-title>
+            <v-spacer></v-spacer>
           </template>
           <div style="max-width:200px">
             <v-select
@@ -125,6 +116,7 @@
             ref="fullCalendar"
             v-model="focus"
             :defaultView="type"
+            :eventTimeFormat="{hour: 'numeric',  minute: '2-digit', meridiem: false}"
             eventTextColor="black"
             :allDaySlot="false"
             :eventLimit="true"
@@ -136,6 +128,7 @@
             :events="events"
             :googleCalendarApiKey="googleCalendarApiKey"
             :firstDay="1"
+            minTime="08:00:00"
             locale="ru"
             :views="{
       timeGridDay: {
@@ -148,7 +141,7 @@
     weekday: 'long'}"
             :listDayAltFormat="false"
             @eventClick="showevent"
-            @datesRender="update"
+            :datesRender="update"
           />
         </div>
       </v-container>
@@ -161,14 +154,103 @@
         offset-x
       >
         <v-card>
+           <v-card-title
+              style="background-color:#eef5f8;"
+              class="py-1 pr-6 pl-2"
+              :style="$vuetify.breakpoint.xs? 'padding-right:0px!important': ''"
+            >
+              <v-icon class="mr-2" color="#0a7d9a">mdi-calendar</v-icon>
+              {{new Date(selectedEvent.start).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}} - 
+               {{new Date(selectedEvent.end).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}}
+              <v-spacer />
+              {{new Date(selectedEvent.start).toLocaleDateString([],
+              { day: '2-digit', month: 'long',year:'numeric' }) }}
+            </v-card-title>
+
+
           <v-sheet class="overflow-y-auto" min-width="150px" max-width="400px" max-height="500px">
             <v-card-text>
               <h3>{{selectedEvent.title}}</h3>
               <div v-html="selectedEvent.description"></div>
             </v-card-text>
           </v-sheet>
+          <v-btn
+              v-if="!$vuetify.breakpoint.xs"
+              color="#eef5f8"
+              link
+              fab
+              right
+              style="margin-top:20px; margin-right:-16px"
+              absolute
+              small
+              depressed
+              top
+              @click="selectedOpen=false;"
+            >
+              <v-icon>mdi-close</v-icon>
+            </v-btn>
         </v-card>
       </v-menu>
+
+      <v-dialog
+        v-if="$vuetify.breakpoint.xs"
+        v-model="selectedOpen"
+        fullscreen
+        transition="slide-x-reverse-transition"
+        scrollable
+      >
+        <v-card>
+          <v-card-title
+              style="background-color:#eef5f8;"
+              class="py-1 pr-6 pl-2"
+              :style="$vuetify.breakpoint.xs? 'padding-right:10px!important': ''"
+            >
+              <v-icon class="mr-2" color="#0a7d9a">mdi-calendar</v-icon>
+              {{new Date(selectedEvent.start).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}} - 
+               {{new Date(selectedEvent.end).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}}
+              <v-spacer />
+              {{new Date(selectedEvent.start).toLocaleDateString([],
+              { day: '2-digit', month: 'long',year:'numeric' }) }}
+            </v-card-title>
+
+            
+          <v-divider class="pa-0" />
+
+          <v-card-text class="pt-2">
+            <h3>{{selectedEvent.title}}</h3>
+            <div v-html="selectedEvent.description"></div>
+          </v-card-text>
+
+          <v-btn
+            v-if="$vuetify.breakpoint.xs"
+            color="#f4c900"
+            link
+            fab
+            right
+            fixed
+            bottom
+            @click="pokazatSobitie=false;"
+          >
+            <v-icon>mdi-close</v-icon>
+          </v-btn>
+
+          <v-btn
+            v-if="!$vuetify.breakpoint.xs"
+            color="#eef5f8"
+            link
+            fab
+            right
+            style="margin-top:20px; margin-right:-16px"
+            absolute
+            small
+            depressed
+            top
+            @click="pokazatSobitie=false;"
+          >
+            <v-icon>mdi-close</v-icon>
+          </v-btn>
+        </v-card>
+      </v-dialog>
     </v-content>
   </div>
 </template>
@@ -255,7 +337,7 @@ export default {
     events: {
       title: "СЕТЬ",
       googleCalendarId: "2kpu7kvisrlvmgkiheabippc20@group.calendar.google.com",
-      color: "#c5dde8",
+
       className: "set"
     },
 
@@ -264,7 +346,7 @@ export default {
         title: "СЕТЬ",
         googleCalendarId:
           "2kpu7kvisrlvmgkiheabippc20@group.calendar.google.com",
-        color: "#c5dde8",
+
         className: "set"
       },
 
@@ -272,16 +354,16 @@ export default {
         title: "МОСКВА",
         googleCalendarId:
           "ct8a4t3tuim1jjnkno2d6skkck@group.calendar.google.com",
-        color: "#cde6bb",
-        className: "moskva"
+
+        className: "msk"
       },
 
       {
         title: "САНКТ-ПЕТЕРБУРГ",
         googleCalendarId:
           "uq550s4cd42vsoojk09patvfvk@group.calendar.google.com",
-        color: "#e9ddbb",
-        className: "piter"
+
+        className: "spb"
       }
     ]
   }),
@@ -320,7 +402,7 @@ export default {
     },
 
     update() {
-      if (this.hasOwnProperty("calendarApi")) {
+      if (this.calendarApi != null) {
         this.title = this.calendarApi.view.title;
       }
     },
@@ -333,7 +415,7 @@ export default {
 
     gotodate() {
       this.calendarApi.gotoDate(new Date(this.focus));
-      this.drawer2=false;
+      this.drawer2 = false;
     },
 
     prev() {
@@ -414,10 +496,39 @@ function dateToYMD(date) {
 .fc-day-header.fc-sun {
   background-color: #f2e1e1;
 }
+.fc-event {
+  border: thin solid rgba(0, 0, 0, 0.12);
+  border-radius: 4px;
+}
+
+.fc-unthemed td.fc-today {
+  background: #fcf8e3;
+}
+.set {
+  background-color: #c5dde8;
+}
+
+.msk {
+  background-color: #cde6bb;
+}
+.spb {
+  background-color: #e9ddbb;
+}
 
 .cont {
   height: calc(100vh - 64px);
 }
+
+.v-application a {
+  text-decoration: none;
+
+  color: #1f2020 !important;
+}
+.v-application a:hover {
+  text-decoration: underline;
+  color: #1f2020 !important;
+}
+
 @import "~@fullcalendar/core/main.css";
 @import "~@fullcalendar/daygrid/main.css";
 @import "~@fullcalendar/timegrid/main.css";
