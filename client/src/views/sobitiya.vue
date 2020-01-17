@@ -519,12 +519,12 @@ function dateToYMD(date) {
   height: calc(100vh - 64px);
 }
 
-a {
+.v-application a {
   text-decoration: none;
 
   color: #1f2020 !important;
 }
-a:hover {
+.v-application a:hover {
   text-decoration: underline;
   color: #1f2020 !important;
 }
