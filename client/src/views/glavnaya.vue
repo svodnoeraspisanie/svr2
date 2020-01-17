@@ -102,7 +102,8 @@
               <v-card-text class="pb-1 pt-2">
                 <v-simple-table dense>
                   <tbody v-if="novosti.length>0">
-                    <tr
+                    <tr 
+                      class="tablink"
                       v-for="(novost,i) in novosti"
                       :key="i"
                       @click="$router.push({ path: novost.ssilka })"
@@ -217,6 +218,7 @@
                 <v-simple-table dense>
                   <tbody>
                     <tr
+                      class="tablink"
                       v-for="(sob,i) in raspsegondya[0]"
                       :key="i"
                       @click="vibrannoeSobitie=sob;pokazatSobitie=true;"
@@ -233,6 +235,7 @@
                 <v-simple-table dense>
                   <tbody>
                     <tr
+                      class="tablink"
                       v-for="(sob,i) in raspzavtra[0]"
                       :key="i"
                       @click="vibrannoeSobitie=sob;pokazatSobitie=true;"
@@ -258,6 +261,7 @@
                 <v-simple-table dense>
                   <tbody>
                     <tr
+                      class="tablink"
                       v-for="(sob,i) in raspsegondya[1]"
                       :key="i"
                       @click="vibrannoeSobitie=sob;pokazatSobitie=true;"
@@ -274,6 +278,7 @@
                 <v-simple-table dense>
                   <tbody>
                     <tr
+                      class="tablink"
                       v-for="(sob,i) in raspzavtra[1]"
                       :key="i"
                       @click="vibrannoeSobitie=sob;pokazatSobitie=true;"
@@ -299,6 +304,7 @@
                 <v-simple-table dense>
                   <tbody>
                     <tr
+                      class="tablink"
                       v-for="(sob,i) in raspsegondya[2]"
                       :key="i"
                       @click="vibrannoeSobitie=sob;pokazatSobitie=true;"
@@ -315,6 +321,7 @@
                 <v-simple-table dense>
                   <tbody>
                     <tr
+                      class="tablink"
                       v-for="(sob,i) in raspzavtra[2]"
                       :key="i"
                       @click="vibrannoeSobitie=sob;pokazatSobitie=true;"
@@ -362,7 +369,7 @@
               </v-btn>
 
               <div @click="openlink(sbori[si].ssilka)">
-                <v-img :src="sbori[si].obraz" aspect-ratio="1" contain eager class="ma-2">
+                <v-img :src="sbori[si].obraz" aspect-ratio="1" contain eager >
                   <v-layout slot="placeholder" fill-height align-center justify-center ma-0>
                     <v-progress-circular indeterminate color="#0a7d9a"></v-progress-circular>
                   </v-layout>
@@ -429,7 +436,7 @@
               <v-card-text>
                 <v-simple-table dense>
                   <tbody>
-                    <tr v-for="(zam,i) in zamisli" :key="i">
+                    <tr  class="tablink" v-for="(zam,i) in zamisli" :key="i">
                       <td class="px-2">{{zam.nazvanie}}</td>
                     </tr>
                   </tbody>
@@ -608,10 +615,18 @@ export default {
 .cardlink {
   text-decoration: none;
   color: #1f2020 !important;
+  
+
 }
 .cardlink:hover {
   text-decoration: none;
   color: #1f2020 !important;
+}
+.cardhov {
+  cursor: pointer;
+}
+.tablink {
+  cursor: pointer;
 }
 .cardhov:hover {
   background-color: #eeeeee;
