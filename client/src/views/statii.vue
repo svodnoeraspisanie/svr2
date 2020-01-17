@@ -62,7 +62,7 @@
 </template>
 
 <script>
-import { db } from '../db';
+
 
 export default {
   components: {},
@@ -78,8 +78,10 @@ export default {
     statii: [],
   }),
 
-  firestore: {
-    statii: db.collection('statii'),
+  firestore () {
+    return {
+    statii: this.$firebase.collection('statii'),
+    }
   },
 };
 </script>

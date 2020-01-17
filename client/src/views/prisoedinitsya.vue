@@ -131,7 +131,7 @@
 </template>
 
 <script>
-import { db } from '../db';
+
 
 export default {
   components: {},
@@ -146,21 +146,21 @@ export default {
   methods: {},
 
   created() {
-    db.collection('teksti')
+    this.$firebase.collection('teksti')
       .doc('zamisli')
       .get()
       .then((snapshot) => {
         this.zamislitekst = snapshot.data();
       });
 
-    db.collection('teksti')
+    this.$firebase.collection('teksti')
       .doc('deyateli')
       .get()
       .then((snapshot) => {
         this.deyatelitekst = snapshot.data();
       });
 
-    db.collection('teksti')
+    this.$firebase.collection('teksti')
       .doc('poryadok')
       .get()
       .then((snapshot) => {
@@ -175,15 +175,14 @@ export default {
     deyatelitekst: '',
     poryadoktekst: '',
   }),
-  firestore: {
-    zamisli: db.collection('zamisli'),
+  firestore()  {
+    return {
+    zamisli: this.$firebase.collection('zamisli'),
+    }
   },
 };
 </script>
 
 <style>
-.flexcard {
-  display: flex;
-  flex-direction: column;
-}
+
 </style>

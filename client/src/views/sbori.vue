@@ -127,7 +127,7 @@
 </template>
 
 <script>
-import { db } from '../db';
+
 
 export default {
   components: {},
@@ -148,7 +148,7 @@ export default {
     sboriZavershennie: [],
   }),
   created() {
-    db.collection('teksti')
+    this.$firebase.collection('teksti')
       .doc('sbori-poyasnenie')
       .get()
       .then((snapshot) => {
@@ -156,9 +156,11 @@ export default {
         this.sbori_tekst2 = snapshot.data().tekst2;
       });
   },
-  firestore: {
-    sbori: db.collection('sbori').where('idet', '==', true),
-    sboriZavershennie: db.collection('sbori').where('idet', '==', false),
+  firestore() {
+    return {
+    sbori: this.$firebase.collection('sbori').where('idet', '==', true),
+    sboriZavershennie: this.$firebase.collection('sbori').where('idet', '==', false),
+  }
   },
   methods: {
     openlink(arg) {

@@ -109,7 +109,7 @@
 </template>
 
 <script>
-import { db, st } from '../db';
+
 
 export default {
   components: {},
@@ -130,21 +130,21 @@ export default {
   created() {
     const vm = this;
 
-    db.collection('teksti')
+    this.$firebase.collection('teksti')
       .doc('predpiyatiya-poyasnenie')
       .get()
       .then((snapshot) => {
         this.poyasnenie_tekst = snapshot.data().tekst;
       });
 
-    db.collection('predpriyatiya')
+    this.$firebase.collection('predpriyatiya')
       .get()
       .then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
           const res = doc.data();
           res.id = doc.id;
 
-          st.ref()
+          this.$store.ref()
             .child(res.obraz)
             .getDownloadURL()
             .then((url) => {

@@ -128,7 +128,7 @@
 </template>
 
 <script>
-import { db, st } from '../db';
+
 
 export default {
   components: {},
@@ -154,13 +154,13 @@ export default {
     fetchData() {
       const vm = this;
 
-      db.collection('predpriyatiya')
+      this.$firebase.collection('predpriyatiya')
         .doc(this.$route.params.id)
         .get()
         .then((snapshot) => {
           const res = snapshot.data();
 
-          st.ref()
+          this.$store.ref()
             .child(res.obraz)
             .getDownloadURL()
             .then((url) => {
@@ -177,8 +177,5 @@ export default {
 </script>
 
 <style>
-.flexcard {
-  display: flex;
-  flex-direction: column;
-}
+
 </style>

@@ -85,7 +85,7 @@
 </template>
 
 <script>
-import { db } from '../db';
+
 
 export default {
   components: {},
@@ -100,8 +100,10 @@ export default {
     spravki: [],
   }),
 
-  firestore: {
-    spravki: db.collection('spravki'),
+  firestore() {
+    return{
+    spravki: this.$firebase.collection('spravki'),
+    }
   },
 };
 </script>

@@ -58,7 +58,7 @@
 import appbar from './components/appbar.vue';
 
 export default {
-  name: 'App',
+  name: 'app',
   components: {
     appbar,
   },
@@ -66,6 +66,7 @@ export default {
     drawer: true,
     fab: false,
   }),
+
 };
 </script>
 

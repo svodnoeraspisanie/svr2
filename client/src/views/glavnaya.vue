@@ -452,7 +452,7 @@
 </template>
 
 <script>
-import { db, st } from '../db';
+
 
 export default {
   components: {},
@@ -460,6 +460,7 @@ export default {
   props: ['drawer'],
 
   data: () => ({
+    db:null,
     drawer2: false,
     sbori: [],
     predpriyatiya: [],
@@ -476,6 +477,8 @@ export default {
   }),
   created() {
     this.zagruzkaraspisaniya();
+    const db = this.$firebase;
+    const st = this.$store;
 
     db.collection('teksti')
       .doc('glavnaya')
@@ -485,6 +488,7 @@ export default {
       });
 
     const vm = this;
+
 
     db.collection('predpriyatiya')
       .get()
@@ -508,6 +512,10 @@ export default {
         vm.si = vm.anyel(vm.si, vm.sbori);
         vm.pi = vm.anyel(vm.pi, vm.predpriyatiya);
       });
+
+
+
+      
   },
   watch: {
     drawer() {
@@ -587,15 +595,17 @@ export default {
     },
   },
 
-  firestore: {
-    sbori: db.collection('sbori').where('idet', '==', true),
+  firestore() {
+    return {
+    sbori: this.$firebase.collection('sbori').where('idet', '==', true),
 
-    novosti: db
+    novosti: this.$firebase
       .collection('novosti')
       .orderBy('data', 'desc')
       .limit(5),
-    zamisli: db.collection('zamisli'),
-  },
+
+    zamisli: this.$firebase.collection('zamisli'),
+  }},
 };
 </script>
 <style scoped>
