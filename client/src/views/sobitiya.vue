@@ -203,7 +203,7 @@
           <v-card-title
               style="background-color:#eef5f8;"
               class="py-1 pr-6 pl-2"
-              :style="$vuetify.breakpoint.xs? 'padding-right:0px!important': ''"
+              :style="$vuetify.breakpoint.xs? 'padding-right:10px!important': ''"
             >
               <v-icon class="mr-2" color="#0a7d9a">mdi-calendar</v-icon>
               {{new Date(selectedEvent.start).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}} - 
