@@ -101,9 +101,9 @@
             <v-card outlined class="ml-2">
               <v-card-text class="pb-1 pt-2">
                 <v-simple-table dense>
-                  <tbody>
+                  <tbody v-if="novosti.length>0">
                     <tr
-                      v-if="novosti.length>0"
+                      
                       v-for="(novost,i) in novosti"
                       :key="i"
                       @click="$router.push({ path: novost.ssilka })"
@@ -153,18 +153,20 @@
             :max-height="$vuetify.breakpoint.xs? '': '500px'"
             
           >
-            <v-card-title  style="background-color:#eef5f8;" class="py-1 pr-0">
-            
-                {{vibrannoeSobitie.start.time}} //
+            <v-card-title  style="background-color:#eef5f8;" class="py-1 pr-6 pl-2" :style="$vuetify.breakpoint.xs? 'padding-right:0px!important': ''">
+            <v-icon class="mr-2" color="#0a7d9a">mdi-calendar</v-icon>
+                {{vibrannoeSobitie.start.time}} 
+                <v-spacer/>
+
                 {{new Date(vibrannoeSobitie.start.dateTime).toLocaleDateString([],
-                { day: '2-digit', month: '2-digit',year:'2-digit' }) }}
+                { day: '2-digit', month: 'long',year:'numeric' }) }}
               
             
             </v-card-title>
 
             <v-divider class="pa-0" />
 
-            <v-card-text>
+            <v-card-text class="pt-2">
               <h3>{{vibrannoeSobitie.summary}}</h3>
               <div v-html="vibrannoeSobitie.description"></div>
             </v-card-text>
@@ -188,7 +190,7 @@
               link
               fab
               right
-              style="margin-top:20px; margin-right:-12px"
+              style="margin-top:20px; margin-right:-16px"
               absolute
               small depressed
               top
@@ -337,7 +339,7 @@
               </router-link>
             </span>
 
-            <v-card outlined class="ml-2 mt-2 cardhov" max-width="250px" v-if="sbori.length>0">
+            <v-card outlined class="ml-2 mt-2 cardhov" :max-width="$vuetify.breakpoint.xs? '': '250px'" v-if="sbori.length>0">
               <v-btn
                 color="#0a7d9a"
                 fab
@@ -374,7 +376,7 @@
               </router-link>
             </span>
 
-            <v-card outlined class="cardhov ml-2 mt-2" max-width="250px" v-if="predpriyatiya.length>1">
+            <v-card outlined class="cardhov ml-2 mt-2" :max-width="$vuetify.breakpoint.xs? '': '250px'" v-if="predpriyatiya.length>1">
               <v-btn
                 color="#0a7d9a"
                 fab
