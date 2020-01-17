@@ -8,7 +8,7 @@
       app
     >
       <v-list>
-        <v-list-item link to="/" >
+        <v-list-item link to="/">
           <v-list-item-icon>
             <v-icon>mdi-arrow-left-bold</v-icon>
           </v-list-item-icon>
@@ -40,9 +40,9 @@
         <v-row justify="center">
           <v-col cols="auto" class="pt-0">
             <div style="max-width:936px" class="pb-3">
-              <h2> <v-icon class="mr-2 pb-1" color="#0a7d9a">mdi-book-open</v-icon>
-              
-              Статьи</h2>
+              <h2>
+                <v-icon class="mr-2 pb-1" color="#0a7d9a">mdi-book-open</v-icon>Статьи
+              </h2>
             </div>
             <v-card
               v-for="(statia,i) in statii"
@@ -61,28 +61,26 @@
   </div>
 </template>
 
-
-
 <script>
-import { db } from "../db";
+import { db } from '../db';
+
 export default {
   components: {},
-  props: ["drawer"],
+  props: ['drawer'],
 
   watch: {
     drawer() {
       this.drawer2 = !this.drawer2;
-     
-    }
+    },
   },
   data: () => ({
     drawer2: false,
-    statii: []
+    statii: [],
   }),
 
   firestore: {
-    statii: db.collection("statii")
-  }
+    statii: db.collection('statii'),
+  },
 };
 </script>
 

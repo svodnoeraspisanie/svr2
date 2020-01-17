@@ -24,31 +24,30 @@
       transition="slide-x-reverse-transition"
     >
       <template v-slot:activator>
-        <v-btn color="#f4c900" link fab >
+        <v-btn color="#f4c900" link fab>
           <v-icon v-if="fab">mdi-close</v-icon>
           <v-img v-else src="/android-chrome-96x96.png" height="46px" contain></v-img>
-         
         </v-btn>
       </template>
-      <v-btn fab color="#f4c900"  small to="/">
+      <v-btn fab color="#f4c900" small to="/">
         <v-icon>mdi-view-dashboard</v-icon>
       </v-btn>
-      <v-btn fab color="#f4c900"  small to="/statii">
+      <v-btn fab color="#f4c900" small to="/statii">
         <v-icon>mdi-book-open</v-icon>
       </v-btn>
-      <v-btn fab color="#f4c900"  small to="/predpriyatiya">
+      <v-btn fab color="#f4c900" small to="/predpriyatiya">
         <v-icon>mdi-account-group</v-icon>
       </v-btn>
-      <v-btn fab color="#f4c900"  small to="/sbori">
+      <v-btn fab color="#f4c900" small to="/sbori">
         <v-icon>mdi-cash-multiple</v-icon>
       </v-btn>
-      <v-btn fab color="#f4c900"  small to="/sobitiya">
+      <v-btn fab color="#f4c900" small to="/sobitiya">
         <v-icon>mdi-calendar</v-icon>
       </v-btn>
-      <v-btn fab color="#f4c900"  small to="/prisoedinitsya">
+      <v-btn fab color="#f4c900" small to="/prisoedinitsya">
         <v-icon>mdi-account-multiple-plus</v-icon>
       </v-btn>
-      <v-btn fab color="#f4c900"  small to="/spravka">
+      <v-btn fab color="#f4c900" small to="/spravka">
         <v-icon>mdi-help-circle-outline</v-icon>
       </v-btn>
     </v-speed-dial>
@@ -56,17 +55,17 @@
 </template>
 
 <script>
-import appbar from "./components/appbar.vue";
+import appbar from './components/appbar.vue';
 
 export default {
-  name: "App",
+  name: 'App',
   components: {
-    appbar
+    appbar,
   },
   data: () => ({
     drawer: true,
-    fab: false
-  })
+    fab: false,
+  }),
 };
 </script>
 

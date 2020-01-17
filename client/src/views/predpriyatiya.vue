@@ -8,7 +8,7 @@
       width="300px"
     >
       <v-list>
-        <v-list-item link to="/" >
+        <v-list-item link to="/">
           <v-list-item-icon>
             <v-icon>mdi-arrow-left-bold</v-icon>
           </v-list-item-icon>
@@ -109,67 +109,63 @@
 </template>
 
 <script>
-import { db, st } from "../db";
+import { db, st } from '../db';
 
 export default {
   components: {},
-  props: ["drawer"],
+  props: ['drawer'],
 
   watch: {
     drawer() {
       this.drawer2 = !this.drawer2;
-    }
+    },
   },
   data: () => ({
     drawer2: false,
     predpriyatiya: [],
     poyasnenie: false,
-    poyasnenie_tekst: ""
+    poyasnenie_tekst: '',
   }),
 
   created() {
     const vm = this;
 
-    db.collection("teksti")
-      .doc("predpiyatiya-poyasnenie")
+    db.collection('teksti')
+      .doc('predpiyatiya-poyasnenie')
       .get()
-      .then(snapshot => {
+      .then((snapshot) => {
         this.poyasnenie_tekst = snapshot.data().tekst;
       });
 
-    db.collection("predpriyatiya")
+    db.collection('predpriyatiya')
       .get()
-      .then(function(querySnapshot) {
-        querySnapshot.forEach(function(doc) {
-          let res = doc.data();
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          const res = doc.data();
           res.id = doc.id;
 
           st.ref()
             .child(res.obraz)
             .getDownloadURL()
-            .then(function onSuccess(url) {
+            .then((url) => {
               res.obraz = url;
               vm.predpriyatiya.push(res);
             })
-            .catch(function onError(err) {
-              console.log("Error occured..." + err);
+            .catch((err) => {
+              console.log(`Error occured...${err}`);
             });
         });
       });
   },
   methods: {
     openlink(arg) {
-      window.open(arg, "_blank");
-    }
-  }
+      window.open(arg, '_blank');
+    },
+  },
 };
 </script>
 
 <style>
-.flexcard {
-  display: flex;
-  flex-direction: column;
-}
 .cardhov:hover {
   background-color: #eeeeee;
 }

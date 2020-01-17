@@ -8,7 +8,7 @@
       width="300px"
     >
       <v-list>
-        <v-list-item link to="/predpriyatiya" exact >
+        <v-list-item link to="/predpriyatiya" exact>
           <v-list-item-icon>
             <v-icon>mdi-arrow-left-bold</v-icon>
           </v-list-item-icon>
@@ -40,7 +40,6 @@
 
         <v-list-item link @click="$vuetify.goTo('#ssilki',offset);drawer2=false;">
           <v-list-item-icon>
-
             <v-icon>mdi-web</v-icon>
           </v-list-item-icon>
           <v-list-item-content>Наши страницы в сети</v-list-item-content>
@@ -79,14 +78,18 @@
                   <v-card-title>{{pr.nazvanie}}</v-card-title>
                   <v-card-text>{{pr.kratkoe_opisanie}}</v-card-text>
                   <v-card-text class="py-0">
-                  <v-btn  class="mr-1 mb-1" depressed color="#f4c900"
-             v-for="(ssilka,servis) in pr.ssilki" :key="servis" :href="ssilka" target="_blank" >
-                                      {{servis}}
-                  </v-btn>
-                </v-card-text>
+                    <v-btn
+                      class="mr-1 mb-1"
+                      depressed
+                      color="#f4c900"
+                      v-for="(ssilka,servis) in pr.ssilki"
+                      :key="servis"
+                      :href="ssilka"
+                      target="_blank"
+                    >{{servis}}</v-btn>
+                  </v-card-text>
                 </v-col>
               </v-row>
-              
             </v-card>
 
             <v-card class="mb-4" outlined max-width="936px" id="chtomidelaem">
@@ -125,58 +128,51 @@
 </template>
 
 <script>
-import { db,st } from "../db";
+import { db, st } from '../db';
 
 export default {
   components: {},
 
-  props: ["drawer"],
+  props: ['drawer'],
 
-  computed: {
-  
-  },
+  computed: {},
   data: () => ({
     drawer2: false,
 
-    pr: {obraz:""}
+    pr: { obraz: '' },
   }),
   created() {
     this.fetchData();
   },
   watch: {
-    $route: "fetchData",
+    $route: 'fetchData',
     drawer() {
       this.drawer2 = !this.drawer2;
-      
-    }
+    },
   },
   methods: {
     fetchData() {
       const vm = this;
 
-      db.collection("predpriyatiya")
+      db.collection('predpriyatiya')
         .doc(this.$route.params.id)
         .get()
-        .then(snapshot => {
-          let res = snapshot.data();
-          
+        .then((snapshot) => {
+          const res = snapshot.data();
 
-           st.ref()
+          st.ref()
             .child(res.obraz)
             .getDownloadURL()
-            .then(function onSuccess(url) {
+            .then((url) => {
               res.obraz = url;
-              vm.pr =res;
+              vm.pr = res;
             })
-            .catch(function onError(err) {
-              console.log("Error occured..." + err);
+            .catch((err) => {
+              console.log(`Error occured...${err}`);
             });
-
-
-
         });
-    }
-  }
+    },
+  },
 };
 </script>
 

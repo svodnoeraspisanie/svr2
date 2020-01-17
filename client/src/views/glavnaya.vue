@@ -77,7 +77,7 @@
           >Поддержать</v-btn>
         </div>
         <v-list v-if="$vuetify.breakpoint.xs">
-          <v-divider/>
+          <v-divider />
           <v-list-item link @click="drawer2=false">
             <v-list-item-icon>
               <v-icon>mdi-arrow-expand-left</v-icon>
@@ -103,7 +103,6 @@
                 <v-simple-table dense>
                   <tbody v-if="novosti.length>0">
                     <tr
-                      
                       v-for="(novost,i) in novosti"
                       :key="i"
                       @click="$router.push({ path: novost.ssilka })"
@@ -120,7 +119,7 @@
               </v-card-text>
             </v-card>
           </v-col>
-          <v-col class="pt-0 d-none d-sm-block"  v-if="teksti.length>0">
+          <v-col class="pt-0 d-none d-sm-block" v-if="teksti.length>0">
             <div class="headline font-weight-bold pb-1">
               <router-link class="mainlink" to="/spravka">
                 <v-icon class="mr-2" color="#0a7d9a">mdi-help-circle-outline</v-icon>
@@ -151,17 +150,17 @@
             min-width="150px"
             max-width="500px"
             :max-height="$vuetify.breakpoint.xs? '': '500px'"
-            
           >
-            <v-card-title  style="background-color:#eef5f8;" class="py-1 pr-6 pl-2" :style="$vuetify.breakpoint.xs? 'padding-right:0px!important': ''">
-            <v-icon class="mr-2" color="#0a7d9a">mdi-calendar</v-icon>
-                {{vibrannoeSobitie.start.time}} 
-                <v-spacer/>
-
-                {{new Date(vibrannoeSobitie.start.dateTime).toLocaleDateString([],
-                { day: '2-digit', month: 'long',year:'numeric' }) }}
-              
-            
+            <v-card-title
+              style="background-color:#eef5f8;"
+              class="py-1 pr-6 pl-2"
+              :style="$vuetify.breakpoint.xs? 'padding-right:0px!important': ''"
+            >
+              <v-icon class="mr-2" color="#0a7d9a">mdi-calendar</v-icon>
+              {{vibrannoeSobitie.start.time}}
+              <v-spacer />
+              {{new Date(vibrannoeSobitie.start.dateTime).toLocaleDateString([],
+              { day: '2-digit', month: 'long',year:'numeric' }) }}
             </v-card-title>
 
             <v-divider class="pa-0" />
@@ -192,7 +191,8 @@
               right
               style="margin-top:20px; margin-right:-16px"
               absolute
-              small depressed
+              small
+              depressed
               top
               @click="pokazatSobitie=false;"
             >
@@ -339,7 +339,12 @@
               </router-link>
             </span>
 
-            <v-card outlined class="ml-2 mt-2 cardhov" :max-width="$vuetify.breakpoint.xs? '': '250px'" v-if="sbori.length>0">
+            <v-card
+              outlined
+              class="ml-2 mt-2 cardhov"
+              :max-width="$vuetify.breakpoint.xs? '': '250px'"
+              v-if="sbori.length>0"
+            >
               <v-btn
                 color="#0a7d9a"
                 fab
@@ -376,7 +381,12 @@
               </router-link>
             </span>
 
-            <v-card outlined class="cardhov ml-2 mt-2" :max-width="$vuetify.breakpoint.xs? '': '250px'" v-if="predpriyatiya.length>1">
+            <v-card
+              outlined
+              class="cardhov ml-2 mt-2"
+              :max-width="$vuetify.breakpoint.xs? '': '250px'"
+              v-if="predpriyatiya.length>1"
+            >
               <v-btn
                 color="#0a7d9a"
                 fab
@@ -391,7 +401,7 @@
               >
                 <v-icon>mdi-shuffle-variant</v-icon>
               </v-btn>
-              <router-link class="cardlink" :to="{path: `/predpriyatiya/${predpriyatiya[pi].id}`}" >
+              <router-link class="cardlink" :to="{path: `/predpriyatiya/${predpriyatiya[pi].id}`}">
                 <v-img :src="predpriyatiya[pi].obraz" eager aspect-ratio="1" contain>
                   <v-layout slot="placeholder" fill-height align-center justify-center ma-0>
                     <v-progress-circular indeterminate color="#0a7d9a"></v-progress-circular>
@@ -433,12 +443,12 @@
 </template>
 
 <script>
-import { db, st } from "../db";
+import { db, st } from '../db';
 
 export default {
   components: {},
 
-  props: ["drawer"],
+  props: ['drawer'],
 
   data: () => ({
     drawer2: false,
@@ -453,41 +463,37 @@ export default {
     pokazatSobitie: false,
     vibrannoeSobitie: null,
     raspsegondya: [[], [], []],
-    raspzavtra: [[], [], []]
+    raspzavtra: [[], [], []],
   }),
   created() {
     this.zagruzkaraspisaniya();
 
-    db.collection("teksti")
-      .doc("glavnaya")
+    db.collection('teksti')
+      .doc('glavnaya')
       .get()
-      .then(snapshot => {
+      .then((snapshot) => {
         this.teksti = snapshot.data().teksti;
       });
 
     const vm = this;
 
-    db.collection("predpriyatiya")
+    db.collection('predpriyatiya')
       .get()
-      .then(function(querySnapshot) {
-        querySnapshot.forEach(function(doc) {
-          let res = doc.data();
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          const res = doc.data();
           res.id = doc.id;
-         
 
           st.ref()
             .child(res.obraz)
             .getDownloadURL()
-            .then(function onSuccess(url) {
-              
+            .then((url) => {
               res.obraz = url;
-              
+
               vm.predpriyatiya.push(res);
-              
-              
             })
-            .catch(function onError(err) {
-              console.log("Error occured..." + err);
+            .catch((err) => {
+              console.log(`Error occured...${err}`);
             });
         });
         vm.si = vm.anyel(vm.si, vm.sbori);
@@ -497,7 +503,7 @@ export default {
   watch: {
     drawer() {
       this.drawer2 = !this.drawer2;
-    }
+    },
   },
   mounted() {
     window.setInterval(() => {
@@ -508,8 +514,8 @@ export default {
   computed: {},
   methods: {
     async zagruzkaraspisaniya() {
-      const googleCalendarApiKey = "AIzaSyCSV5kxpkQN3Vfvg_9D_vyBN2DQ7AiBzr4";
-      const caladr = "https://www.googleapis.com/calendar/v3/calendars/";
+      const googleCalendarApiKey = 'AIzaSyCSV5kxpkQN3Vfvg_9D_vyBN2DQ7AiBzr4';
+      const caladr = 'https://www.googleapis.com/calendar/v3/calendars/';
       const today = new Date();
       today.setHours(0);
       today.setMinutes(0);
@@ -517,23 +523,23 @@ export default {
       const tomorrow = new Date(today.getTime() + 48 * 60 * 60 * 1000 - 1000);
 
       const cals = [
-        "2kpu7kvisrlvmgkiheabippc20@group.calendar.google.com",
-        "ct8a4t3tuim1jjnkno2d6skkck@group.calendar.google.com",
-        "uq550s4cd42vsoojk09patvfvk@group.calendar.google.com"
+        '2kpu7kvisrlvmgkiheabippc20@group.calendar.google.com',
+        'ct8a4t3tuim1jjnkno2d6skkck@group.calendar.google.com',
+        'uq550s4cd42vsoojk09patvfvk@group.calendar.google.com',
       ];
 
       for (let i = 0; i < cals.length; i++) {
-        const url = `${caladr +
-          encodeURIComponent(cals[i])}/events?timeMin=${encodeURIComponent(
-          today.toISOString()
+        const url = `${caladr
+          + encodeURIComponent(cals[i])}/events?timeMin=${encodeURIComponent(
+          today.toISOString(),
         )}&timeMax=${encodeURIComponent(
-          tomorrow.toISOString()
+          tomorrow.toISOString(),
         )}&key=${googleCalendarApiKey}`;
 
         const response = await fetch(url);
         if (response.ok) {
           const data = await response.json();
-          data.items.sort(function(a, b) {
+          data.items.sort((a, b) => {
             if (new Date(a.start.dateTime) > new Date(b.start.dateTime)) {
               return 1;
             }
@@ -546,12 +552,12 @@ export default {
 
           for (let j = 0; j < data.items.length; j++) {
             data.items[j].start.time = new Date(
-              data.items[j].start.dateTime
-            ).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+              data.items[j].start.dateTime,
+            ).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
             if (
-              new Date(data.items[j].start.dateTime).getDay() ==
-              new Date().getDay()
+              new Date(data.items[j].start.dateTime).getDay()
+              == new Date().getDay()
             ) {
               this.raspsegondya[i].push(data.items[j]);
             } else {
@@ -563,24 +569,24 @@ export default {
     },
 
     openlink(arg) {
-      window.open(arg, "_blank");
+      window.open(arg, '_blank');
     },
     anyel(i, ar) {
       const i2 = ~~(Math.random() * ar.length);
 
       return i == i2 ? (i == ar.length - 1 ? i - 1 : i + 1) : i2;
-    }
+    },
   },
 
   firestore: {
-    sbori: db.collection("sbori").where("idet", "==", true),
+    sbori: db.collection('sbori').where('idet', '==', true),
 
     novosti: db
-      .collection("novosti")
-      .orderBy("data", "desc")
+      .collection('novosti')
+      .orderBy('data', 'desc')
       .limit(5),
-    zamisli: db.collection("zamisli")
-  }
+    zamisli: db.collection('zamisli'),
+  },
 };
 </script>
 <style scoped>

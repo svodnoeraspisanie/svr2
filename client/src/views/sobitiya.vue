@@ -116,9 +116,7 @@
             ref="fullCalendar"
             v-model="focus"
             :defaultView="type"
-
             :eventTimeFormat="{hour: 'numeric',  minute: '2-digit', meridiem: false}"
-
             eventTextColor="black"
             :allDaySlot="false"
             :eventLimit="true"
@@ -131,7 +129,6 @@
             :googleCalendarApiKey="googleCalendarApiKey"
             :firstDay="1"
             minTime="08:00:00"
-
             locale="ru"
             :views="{
       timeGridDay: {
@@ -144,7 +141,7 @@
     weekday: 'long'}"
             :listDayAltFormat="false"
             @eventClick="showevent"
-            @datesRender="update"
+            :datesRender="update"
           />
         </div>
       </v-container>
@@ -170,116 +167,116 @@
 </template>
 
 <script>
-import FullCalendar from "@fullcalendar/vue";
-import dayGridPlugin from "@fullcalendar/daygrid";
-import timeGridPlugin from "@fullcalendar/timegrid";
-import interactionPlugin from "@fullcalendar/interaction";
-import listPlugin from "@fullcalendar/list";
-import googleCalendarPlugin from "@fullcalendar/google-calendar";
-import { formatDate } from "@fullcalendar/core";
+import FullCalendar from '@fullcalendar/vue';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import timeGridPlugin from '@fullcalendar/timegrid';
+import interactionPlugin from '@fullcalendar/interaction';
+import listPlugin from '@fullcalendar/list';
+import googleCalendarPlugin from '@fullcalendar/google-calendar';
+import { formatDate } from '@fullcalendar/core';
 
 export default {
   components: {
-    FullCalendar
+    FullCalendar,
   },
-  props: ["drawer"],
+  props: ['drawer'],
 
   watch: {
     drawer() {
       this.drawer2 = !this.drawer2;
-    }
+    },
   },
   data: () => ({
     cardposX: 0,
     cardposY: 0,
     calendarApi: null,
 
-    title: "",
+    title: '',
     calendarPlugins: [
       // plugins must be defined in the JS
       dayGridPlugin,
       timeGridPlugin,
       listPlugin,
       googleCalendarPlugin,
-      interactionPlugin // needed for dateClick
+      interactionPlugin, // needed for dateClick
     ],
     calendarWeekends: true,
 
-    googleCalendarApiKey: "AIzaSyCSV5kxpkQN3Vfvg_9D_vyBN2DQ7AiBzr4",
+    googleCalendarApiKey: 'AIzaSyCSV5kxpkQN3Vfvg_9D_vyBN2DQ7AiBzr4',
 
     drawer2: false,
     wd: [1, 2, 3, 4, 5, 6, 0],
 
-    mesta: ["Сеть", "Москва", "Санкт-Петербург"],
-    mesto: "Сеть",
+    mesta: ['Сеть', 'Москва', 'Санкт-Петербург'],
+    mesto: 'Сеть',
 
     loading: false,
 
     showTooltip: false,
 
-    today: "",
-    focus: "",
-    type: "dayGridMonth",
+    today: '',
+    focus: '',
+    type: 'dayGridMonth',
 
     selectedEvent: {},
     selectedElement: null,
     selectedOpen: false,
 
     caltype: {
-      title: "МЕСЯЦ",
-      value: "dayGridMonth"
+      title: 'МЕСЯЦ',
+      value: 'dayGridMonth',
     },
     vidi: [
       {
-        title: "МЕСЯЦ",
-        value: "dayGridMonth"
+        title: 'МЕСЯЦ',
+        value: 'dayGridMonth',
       },
       {
-        title: "НЕДЕЛЯ",
-        value: "timeGridWeek"
+        title: 'НЕДЕЛЯ',
+        value: 'timeGridWeek',
       },
       {
-        title: "ДЕНЬ",
-        value: "timeGridDay"
+        title: 'ДЕНЬ',
+        value: 'timeGridDay',
       },
       {
-        title: "РАСПИСАНИЕ",
-        value: "listMonth"
-      }
+        title: 'РАСПИСАНИЕ',
+        value: 'listMonth',
+      },
     ],
 
     events: {
-      title: "СЕТЬ",
-      googleCalendarId: "2kpu7kvisrlvmgkiheabippc20@group.calendar.google.com",
+      title: 'СЕТЬ',
+      googleCalendarId: '2kpu7kvisrlvmgkiheabippc20@group.calendar.google.com',
 
-      className: "set"
+      className: 'set',
     },
 
     cals: [
       {
-        title: "СЕТЬ",
+        title: 'СЕТЬ',
         googleCalendarId:
-          "2kpu7kvisrlvmgkiheabippc20@group.calendar.google.com",
+          '2kpu7kvisrlvmgkiheabippc20@group.calendar.google.com',
 
-        className: "set"
+        className: 'set',
       },
 
       {
-        title: "МОСКВА",
+        title: 'МОСКВА',
         googleCalendarId:
-          "ct8a4t3tuim1jjnkno2d6skkck@group.calendar.google.com",
+          'ct8a4t3tuim1jjnkno2d6skkck@group.calendar.google.com',
 
-        className: "msk"
+        className: 'msk',
       },
 
       {
-        title: "САНКТ-ПЕТЕРБУРГ",
+        title: 'САНКТ-ПЕТЕРБУРГ',
         googleCalendarId:
-          "uq550s4cd42vsoojk09patvfvk@group.calendar.google.com",
+          'uq550s4cd42vsoojk09patvfvk@group.calendar.google.com',
 
-        className: "spb"
-      }
-    ]
+        className: 'spb',
+      },
+    ],
   }),
 
   computed: {
@@ -293,7 +290,7 @@ export default {
 
       if (!search) return this.items;
 
-      return this.items.filter(item => {
+      return this.items.filter((item) => {
         const text = item.text.toLowerCase();
 
         return text.indexOf(search) > -1;
@@ -307,16 +304,16 @@ export default {
       }
 
       return selections;
-    }
+    },
   },
   methods: {
     clickdate(arg) {
-      this.changeView("timeGridDay");
+      this.changeView('timeGridDay');
       this.calendarApi.gotoDate(arg.date);
     },
 
     update() {
-      if (this.hasOwnProperty("calendarApi")) {
+      if (this.calendarApi != null) {
         this.title = this.calendarApi.view.title;
       }
     },
@@ -365,19 +362,19 @@ export default {
         open();
       }
       arg.jsEvent.stopPropagation();
-    }
+    },
   },
 
   mounted() {
-    if (this.$route.params.hasOwnProperty("id")) {
+    if (this.$route.params.hasOwnProperty('id')) {
       switch (this.$route.params.id) {
-        case "set":
+        case 'set':
           this.events = this.cals[0];
           break;
-        case "msk":
+        case 'msk':
           this.events = this.cals[1];
           break;
-        case "spb":
+        case 'spb':
           this.events = this.cals[2];
       }
     }
@@ -387,9 +384,9 @@ export default {
     this.calendarApi = this.$refs.fullCalendar.getApi();
 
     if (window.innerWidth < 700) {
-      this.changeView("listMonth");
+      this.changeView('listMonth');
     }
-  }
+  },
 };
 
 function dateToYMD(date) {
@@ -416,7 +413,7 @@ function dateToYMD(date) {
 }
 
 .fc-unthemed td.fc-today {
-    background: #fcf8e3;
+  background: #fcf8e3;
 }
 .set {
   background-color: #c5dde8;

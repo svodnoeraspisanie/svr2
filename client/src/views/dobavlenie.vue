@@ -22,16 +22,16 @@
 <script>
 export default {
   data: () => ({
-    org: "",
-    drawer: true
+    org: '',
+    drawer: true,
   }),
   methods: {
     get(arg) {
       const requestUrl = `https://api.timepad.ru/v1/events?organization_ids=${this.org}`;
       // var requestUrl = "https://api.timepad.ru/v1/events/1124163";
       const req = new XMLHttpRequest();
-      req.open("GET", requestUrl, true);
-      req.onreadystatechange = function(aEvt) {
+      req.open('GET', requestUrl, true);
+      req.onreadystatechange = function (aEvt) {
         if (req.readyState === 4) {
           if (req.status === 200) {
             const result = JSON.parse(req.responseText);
@@ -41,8 +41,8 @@ export default {
         }
       };
       req.send(null);
-    }
-  }
+    },
+  },
 };
 </script>
 

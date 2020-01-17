@@ -8,7 +8,7 @@
       app
     >
       <v-list>
-        <v-list-item link to="/" >
+        <v-list-item link to="/">
           <v-list-item-icon>
             <v-icon>mdi-arrow-left-bold</v-icon>
           </v-list-item-icon>
@@ -131,59 +131,53 @@
 </template>
 
 <script>
-import { db } from "../db";
+import { db } from '../db';
 
 export default {
   components: {},
-  props: ["drawer"],
+  props: ['drawer'],
 
   watch: {
     drawer() {
       this.drawer2 = !this.drawer2;
-   
-    }
+    },
   },
-  mounted() {
-
-  },
+  mounted() {},
   methods: {},
 
-  created(){
-    db.collection("teksti")
-        .doc("zamisli")
-        .get()
-        .then(snapshot => {
-          this.zamislitekst = snapshot.data();
-        });
+  created() {
+    db.collection('teksti')
+      .doc('zamisli')
+      .get()
+      .then((snapshot) => {
+        this.zamislitekst = snapshot.data();
+      });
 
-        db.collection("teksti")
-        .doc("deyateli")
-        .get()
-        .then(snapshot => {
-          this.deyatelitekst = snapshot.data();
-        });
+    db.collection('teksti')
+      .doc('deyateli')
+      .get()
+      .then((snapshot) => {
+        this.deyatelitekst = snapshot.data();
+      });
 
-         db.collection("teksti")
-        .doc("poryadok")
-        .get()
-        .then(snapshot => {
-          this.poryadoktekst = snapshot.data();
-        });
+    db.collection('teksti')
+      .doc('poryadok')
+      .get()
+      .then((snapshot) => {
+        this.poryadoktekst = snapshot.data();
+      });
   },
 
- 
   data: () => ({
     drawer2: false,
-    zamisli: [{ nazvanie: "" }],
-    zamislitekst:"",
-    deyatelitekst:"",
-    poryadoktekst:""
-
+    zamisli: [{ nazvanie: '' }],
+    zamislitekst: '',
+    deyatelitekst: '',
+    poryadoktekst: '',
   }),
   firestore: {
-    zamisli: db.collection("zamisli"),
-   
-  }
+    zamisli: db.collection('zamisli'),
+  },
 };
 </script>
 
