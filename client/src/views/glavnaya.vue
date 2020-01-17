@@ -142,14 +142,15 @@
         <v-dialog
           v-model="pokazatSobitie"
           :fullscreen="$vuetify.breakpoint.xs"
-          max-width="500px"
+          max-width="600px"
+         
           transition="slide-x-reverse-transition"
           v-if="vibrannoeSobitie!=null"
           scrollable
         >
           <v-card
-            min-width="150px"
-            max-width="500px"
+            
+           
             :max-height="$vuetify.breakpoint.xs? '': '500px'"
           >
             <v-card-title
