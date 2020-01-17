@@ -77,7 +77,7 @@
           >Поддержать</v-btn>
         </div>
         <v-list v-if="$vuetify.breakpoint.xs">
-          <v-divider></v-divider>
+          <v-divider/>
           <v-list-item link @click="drawer2=false">
             <v-list-item-icon>
               <v-icon>mdi-arrow-expand-left</v-icon>
@@ -103,6 +103,7 @@
                 <v-simple-table dense>
                   <tbody>
                     <tr
+                      v-if="novosti.length>0"
                       v-for="(novost,i) in novosti"
                       :key="i"
                       @click="$router.push({ path: novost.ssilka })"
@@ -119,7 +120,7 @@
               </v-card-text>
             </v-card>
           </v-col>
-          <v-col class="pt-0 d-none d-sm-block">
+          <v-col class="pt-0 d-none d-sm-block"  v-if="teksti.length>0">
             <div class="headline font-weight-bold pb-1">
               <router-link class="mainlink" to="/spravka">
                 <v-icon class="mr-2" color="#0a7d9a">mdi-help-circle-outline</v-icon>
@@ -234,7 +235,7 @@
                       @click="vibrannoeSobitie=sob;pokazatSobitie=true;"
                     >
                       <td class="px-2 font-weight-bold" valign="top">{{sob.start.time}}</td>
-                      <td class="px-2" v-on="on">{{sob.summary}}</td>
+                      <td class="px-2">{{sob.summary}}</td>
                     </tr>
                   </tbody>
                 </v-simple-table>
@@ -258,8 +259,8 @@
                       :key="i"
                       @click="vibrannoeSobitie=sob;pokazatSobitie=true;"
                     >
-                      <td class="px-2 font-weight-bold" valign="top" v-on="on">{{sob.start.time}}</td>
-                      <td class="px-2" v-on="on">{{sob.summary}}</td>
+                      <td class="px-2 font-weight-bold" valign="top">{{sob.start.time}}</td>
+                      <td class="px-2">{{sob.summary}}</td>
                     </tr>
                   </tbody>
                 </v-simple-table>
@@ -274,8 +275,8 @@
                       :key="i"
                       @click="vibrannoeSobitie=sob;pokazatSobitie=true;"
                     >
-                      <td class="px-2 font-weight-bold" valign="top" v-on="on">{{sob.start.time}}</td>
-                      <td class="px-2" v-on="on">{{sob.summary}}</td>
+                      <td class="px-2 font-weight-bold" valign="top">{{sob.start.time}}</td>
+                      <td class="px-2">{{sob.summary}}</td>
                     </tr>
                   </tbody>
                 </v-simple-table>
@@ -299,8 +300,8 @@
                       :key="i"
                       @click="vibrannoeSobitie=sob;pokazatSobitie=true;"
                     >
-                      <td class="px-2 font-weight-bold" valign="top" v-on="on">{{sob.start.time}}</td>
-                      <td class="px-2" v-on="on">{{sob.summary}}</td>
+                      <td class="px-2 font-weight-bold" valign="top">{{sob.start.time}}</td>
+                      <td class="px-2">{{sob.summary}}</td>
                     </tr>
                   </tbody>
                 </v-simple-table>
@@ -315,8 +316,8 @@
                       :key="i"
                       @click="vibrannoeSobitie=sob;pokazatSobitie=true;"
                     >
-                      <td class="px-2 font-weight-bold" valign="top" v-on="on">{{sob.start.time}}</td>
-                      <td class="px-2" v-on="on">{{sob.summary}}</td>
+                      <td class="px-2 font-weight-bold" valign="top">{{sob.start.time}}</td>
+                      <td class="px-2">{{sob.summary}}</td>
                     </tr>
                   </tbody>
                 </v-simple-table>
@@ -336,7 +337,7 @@
               </router-link>
             </span>
 
-            <v-card outlined class="ml-2 mt-2 cardhov" max-width="250px">
+            <v-card outlined class="ml-2 mt-2 cardhov" max-width="250px" v-if="sbori.length>0">
               <v-btn
                 color="#0a7d9a"
                 fab
@@ -373,7 +374,7 @@
               </router-link>
             </span>
 
-            <v-card outlined class="cardhov ml-2 mt-2" max-width="250px">
+            <v-card outlined class="cardhov ml-2 mt-2" max-width="250px" v-if="predpriyatiya.length>1">
               <v-btn
                 color="#0a7d9a"
                 fab
@@ -388,7 +389,7 @@
               >
                 <v-icon>mdi-shuffle-variant</v-icon>
               </v-btn>
-              <router-link class="cardlink" :to="{path: `/predpriyatiya/${predpriyatiya[pi].id}`}">
+              <router-link class="cardlink" :to="{path: `/predpriyatiya/${predpriyatiya[pi].id}`}" >
                 <v-img :src="predpriyatiya[pi].obraz" eager aspect-ratio="1" contain>
                   <v-layout slot="placeholder" fill-height align-center justify-center ma-0>
                     <v-progress-circular indeterminate color="#0a7d9a"></v-progress-circular>
@@ -442,7 +443,7 @@ export default {
     sbori: [],
     predpriyatiya: [],
     novosti: [],
-    zamisli: [{ nazvanie: "" }],
+    zamisli: [],
     teksti: [],
     si: 0,
     pi: 0,
@@ -470,13 +471,18 @@ export default {
         querySnapshot.forEach(function(doc) {
           let res = doc.data();
           res.id = doc.id;
+         
 
           st.ref()
             .child(res.obraz)
             .getDownloadURL()
             .then(function onSuccess(url) {
+              
               res.obraz = url;
+              
               vm.predpriyatiya.push(res);
+              
+              
             })
             .catch(function onError(err) {
               console.log("Error occured..." + err);
