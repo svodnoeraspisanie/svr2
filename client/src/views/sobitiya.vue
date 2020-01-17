@@ -518,6 +518,17 @@ function dateToYMD(date) {
 .cont {
   height: calc(100vh - 64px);
 }
+
+a {
+  text-decoration: none;
+
+  color: #1f2020 !important;
+}
+a:hover {
+  text-decoration: underline;
+  color: #1f2020 !important;
+}
+
 @import "~@fullcalendar/core/main.css";
 @import "~@fullcalendar/daygrid/main.css";
 @import "~@fullcalendar/timegrid/main.css";
