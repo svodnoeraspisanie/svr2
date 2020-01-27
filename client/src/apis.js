@@ -1,4 +1,4 @@
-export default config = {
+export const config = {
     apiKey: 'AIzaSyBUrnt50CnPcbG0EvIVsoQawYC_rHyzlQ0',
     authDomain: 'svora-6f3df.firebaseapp.com',
     databaseURL: 'https://svora-6f3df.firebaseio.com',

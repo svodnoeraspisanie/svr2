@@ -11,7 +11,7 @@ import router from './router';
 
 import vuetify from './plugins/vuetify';
 
-import config from './apis.js'
+import {config} from './apis.js'
 
 
 
