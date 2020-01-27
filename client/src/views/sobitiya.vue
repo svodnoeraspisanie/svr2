@@ -154,20 +154,19 @@
         offset-x
       >
         <v-card>
-           <v-card-title
-              style="background-color:#eef5f8;"
-              class="py-1 pr-6 pl-2"
-              :style="$vuetify.breakpoint.xs? 'padding-right:0px!important': ''"
-            >
-              <v-icon class="mr-2" color="#0a7d9a">mdi-calendar</v-icon>
-              {{new Date(selectedEvent.start).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}} - 
-               {{new Date(selectedEvent.end).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}}
-              <v-spacer />
-              {{new Date(selectedEvent.start).toLocaleDateString([],
-              { day: '2-digit', month: 'long',year:'numeric' }) }}
-            </v-card-title>
-
-
+          <v-card-title
+            style="background-color:#c5dde8;"
+            class="py-1 pr-6 pl-2"
+            :style="$vuetify.breakpoint.xs? 'padding-right:0px!important': ''"
+          >
+            <v-icon class="mr-2" color="#0a7d9a">mdi-calendar</v-icon>
+            {{new Date(selectedEvent.start).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}} -
+            {{new Date(selectedEvent.end).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}}
+            <v-spacer />
+            {{new Date(selectedEvent.start).toLocaleDateString([],
+            { day: '2-digit', month: 'long',year:'numeric' }) }}
+          </v-card-title>
+    <v-divider class="pa-0" />
           <v-sheet class="overflow-y-auto" min-width="150px" max-width="400px" max-height="500px">
             <v-card-text>
               <h3>{{selectedEvent.title}}</h3>
@@ -175,20 +174,20 @@
             </v-card-text>
           </v-sheet>
           <v-btn
-              v-if="!$vuetify.breakpoint.xs"
-              color="#eef5f8"
-              link
-              fab
-              right
-              style="margin-top:20px; margin-right:-16px"
-              absolute
-              small
-              depressed
-              top
-              @click="selectedOpen=false;"
-            >
-              <v-icon>mdi-close</v-icon>
-            </v-btn>
+            v-if="!$vuetify.breakpoint.xs"
+            color="#eef5f8"
+            link
+            fab
+            right
+            style="margin-top:20px; margin-right:-16px"
+            absolute
+            small
+            depressed
+            top
+            @click="selectedOpen=false;"
+          >
+            <v-icon>mdi-close</v-icon>
+          </v-btn>
         </v-card>
       </v-menu>
 
@@ -201,19 +200,18 @@
       >
         <v-card>
           <v-card-title
-              style="background-color:#eef5f8;"
-              class="py-1 pr-6 pl-2"
-              :style="$vuetify.breakpoint.xs? 'padding-right:10px!important': ''"
-            >
-              <v-icon class="mr-2" color="#0a7d9a">mdi-calendar</v-icon>
-              {{new Date(selectedEvent.start).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}} - 
-               {{new Date(selectedEvent.end).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}}
-              <v-spacer />
-              {{new Date(selectedEvent.start).toLocaleDateString([],
-              { day: '2-digit', month: 'long',year:'numeric' }) }}
-            </v-card-title>
+            style="background-color:#c5dde8"
+            class="py-1 pr-6 pl-2"
+            :style="$vuetify.breakpoint.xs? 'padding-right:10px!important': ''"
+          >
+            <v-icon class="mr-2" color="#0a7d9a">mdi-calendar</v-icon>
+            {{new Date(selectedEvent.start).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}} -
+            {{new Date(selectedEvent.end).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}}
+            <v-spacer />
+            {{new Date(selectedEvent.start).toLocaleDateString([],
+            { day: '2-digit', month: 'long',year:'numeric' }) }}
+          </v-card-title>
 
-            
           <v-divider class="pa-0" />
 
           <v-card-text class="pt-2">
@@ -519,13 +517,13 @@ function dateToYMD(date) {
   height: calc(100vh - 64px);
 }
 
-.v-application a {
+.fc-list-item-title a {
   text-decoration: none;
 
   color: #1f2020 !important;
 }
-.v-application a:hover {
-  text-decoration: underline;
+.fc-list-item-title a[href]:hover {
+  text-decoration: none;
   color: #1f2020 !important;
 }
 

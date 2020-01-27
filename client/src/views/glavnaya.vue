@@ -626,8 +626,6 @@ export default {
 .cardlink {
   text-decoration: none;
   color: #1f2020 !important;
-  
-
 }
 .cardlink:hover {
   text-decoration: none;
