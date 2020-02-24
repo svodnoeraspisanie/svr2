@@ -21,9 +21,6 @@ Vue.prototype.$firebase = firebase.firestore();
 Vue.prototype.$store = firebase.storage();
 
 firebase.analytics();
-// export const db = firebase.firestore();
-// export const st = firebase.storage();
-
 const { Timestamp, GeoPoint } = firebase.firestore;
 export { Timestamp, GeoPoint };
 

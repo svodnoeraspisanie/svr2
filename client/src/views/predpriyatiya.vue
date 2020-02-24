@@ -109,59 +109,52 @@
 </template>
 
 <script>
-
-
 export default {
   components: {},
-  props: ['drawer'],
+  props: ["drawer"],
 
   watch: {
     drawer() {
       this.drawer2 = !this.drawer2;
-    },
+    }
   },
   data: () => ({
     drawer2: false,
     predpriyatiya: [],
     poyasnenie: false,
-    poyasnenie_tekst: '',
+    poyasnenie_tekst: "",
+    zagruzheniobrazy: false
   }),
 
   created() {
     const vm = this;
 
-    this.$firebase.collection('teksti')
-      .doc('predpiyatiya-poyasnenie')
+    this.$firebase
+      .collection("teksti")
+      .doc("predpiyatiya-poyasnenie")
       .get()
-      .then((snapshot) => {
+      .then(snapshot => {
         this.poyasnenie_tekst = snapshot.data().tekst;
       });
 
-    this.$firebase.collection('predpriyatiya')
+    this.$firebase
+      .collection("predpriyatiya")
+      .orderBy("nazvanie")
       .get()
-      .then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
+      .then(querySnapshot => {
+        querySnapshot.forEach(doc => {
           const res = doc.data();
           res.id = doc.id;
-
-          this.$store.ref()
-            .child(res.obraz)
-            .getDownloadURL()
-            .then((url) => {
-              res.obraz = url;
-              vm.predpriyatiya.push(res);
-            })
-            .catch((err) => {
-              console.log(`Error occured...${err}`);
-            });
+          vm.predpriyatiya.push(res);
         });
       });
   },
   methods: {
+    
     openlink(arg) {
-      window.open(arg, '_blank');
-    },
-  },
+      window.open(arg, "_blank");
+    }
+  }
 };
 </script>
 
