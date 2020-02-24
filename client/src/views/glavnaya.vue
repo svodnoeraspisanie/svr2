@@ -496,18 +496,8 @@ export default {
         querySnapshot.forEach((doc) => {
           const res = doc.data();
           res.id = doc.id;
-
-          st.ref()
-            .child(res.obraz)
-            .getDownloadURL()
-            .then((url) => {
-              res.obraz = url;
-
-              vm.predpriyatiya.push(res);
-            })
-            .catch((err) => {
-              console.log(`Error occured...${err}`);
-            });
+vm.predpriyatiya.push(res);
+          
         });
         vm.si = vm.anyel(vm.si, vm.sbori);
         vm.pi = vm.anyel(vm.pi, vm.predpriyatiya);

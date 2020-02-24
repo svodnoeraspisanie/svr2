@@ -159,17 +159,8 @@ export default {
         .get()
         .then((snapshot) => {
           const res = snapshot.data();
-
-          this.$store.ref()
-            .child(res.obraz)
-            .getDownloadURL()
-            .then((url) => {
-              res.obraz = url;
-              vm.pr = res;
-            })
-            .catch((err) => {
-              console.log(`Error occured...${err}`);
-            });
+vm.pr = res;
+          
         });
     },
   },
