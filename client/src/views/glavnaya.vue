@@ -100,36 +100,55 @@
             </div>
             <v-card outlined class="ml-2">
               <v-card-text class="pb-1 pt-2">
-                <v-simple-table dense>
-                  <tbody v-if="novosti.length>0">
-                    <tr 
-                      class="tablink"
-                      v-for="(novost,i) in novosti"
-                      :key="i"
-                      @click="$router.push({ path: novost.ssilka })"
-                    >
-                      <td
-                        class="px-2"
-                        valign="top"
-                        v-html="novost.data.toDate().toLocaleDateString([], { day: '2-digit', month: '2-digit',year:'2-digit' })"
-                      ></td>
-                      <td class="px-2" v-html="novost.soobshenie"></td>
-                    </tr>
-                  </tbody>
-                </v-simple-table>
+                <v-skeleton-loader
+                  :loading="!novostiZagruzheni"
+                  
+                  type="sentences@5"
+                >
+                  <v-simple-table dense>
+                    <tbody v-if="novosti.length>0">
+                      <tr
+                        class="tablink"
+                        v-for="(novost,i) in novosti"
+                        :key="i"
+                        @click="$router.push({ path: novost.ssilka })"
+                      >
+                        <td
+                          class="px-2"
+                          valign="top"
+                          v-html="novost.data.toDate().toLocaleDateString([], { day: '2-digit', month: '2-digit',year:'2-digit' })"
+                        ></td>
+                        <td class="px-2" v-html="novost.soobshenie"></td>
+                      </tr>
+                    </tbody>
+                  </v-simple-table>
+                </v-skeleton-loader>
               </v-card-text>
             </v-card>
           </v-col>
-          <v-col class="pt-0 d-none d-sm-block" v-if="teksti.length>0">
+          <v-col class="pt-0 d-none d-sm-block">
             <div class="headline font-weight-bold pb-1">
               <router-link class="mainlink" to="/spravka">
-                <v-icon class="mr-2" color="#0a7d9a">mdi-help-circle-outline</v-icon>
-                {{teksti[0].zagolovok}}
+                <v-skeleton-loader
+                  :loading="!tekstiZagruzheni"
+                 
+                  :class="!tekstiZagruzheni? 'pb-3': ''"
+                  type="heading"
+                >
+                  <v-icon class="mr-2" color="#0a7d9a">mdi-help-circle-outline</v-icon>
+                  {{teksti[0].zagolovok}}
+                </v-skeleton-loader>
               </router-link>
             </div>
 
             <v-card class="cardhov ml-2" outlined :to="{path: teksti[0].ssilka}">
-              <v-card-text class="pb-1 pt-2" v-html="teksti[0].tekst"></v-card-text>
+              <v-skeleton-loader
+                  :loading="!tekstiZagruzheni"
+                  :class="!tekstiZagruzheni? 'pa-3': ''"
+                  type="paragraph@3"
+                >
+              <v-card-text  class="pb-1 pt-2" v-html="teksti[0].tekst"></v-card-text>
+              </v-skeleton-loader>
             </v-card>
           </v-col>
         </v-row>
@@ -143,24 +162,19 @@
           v-model="pokazatSobitie"
           :fullscreen="$vuetify.breakpoint.xs"
           max-width="600px"
-         
           transition="slide-x-reverse-transition"
           v-if="vibrannoeSobitie!=null"
           scrollable
         >
-          <v-card
-            
-           
-            :max-height="$vuetify.breakpoint.xs? '': '500px'"
-          >
+          <v-card :max-height="$vuetify.breakpoint.xs? '': '500px'">
             <v-card-title
               style="background-color:#eef5f8;"
               class="py-1 pr-6 pl-2"
               :style="$vuetify.breakpoint.xs? 'padding-right:10px!important': ''"
             >
               <v-icon class="mr-2" color="#0a7d9a">mdi-calendar</v-icon>
-              {{vibrannoeSobitie.start.time}} - 
-               {{new Date(vibrannoeSobitie.end.dateTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}}
+              {{vibrannoeSobitie.start.time}} -
+              {{new Date(vibrannoeSobitie.end.dateTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}}
               <v-spacer />
               {{new Date(vibrannoeSobitie.start.dateTime).toLocaleDateString([],
               { day: '2-digit', month: 'long',year:'numeric' }) }}
@@ -370,7 +384,7 @@
               </v-btn>
 
               <div @click="openlink(sbori[si].ssilka)">
-                <v-img :src="sbori[si].obraz" aspect-ratio="1" contain eager >
+                <v-img :src="sbori[si].obraz" aspect-ratio="1" contain eager>
                   <v-layout slot="placeholder" fill-height align-center justify-center ma-0>
                     <v-progress-circular indeterminate color="#0a7d9a"></v-progress-circular>
                   </v-layout>
@@ -437,7 +451,7 @@
               <v-card-text>
                 <v-simple-table dense>
                   <tbody>
-                    <tr  class="tablink" v-for="(zam,i) in zamisli" :key="i">
+                    <tr class="tablink" v-for="(zam,i) in zamisli" :key="i">
                       <td class="px-2">{{zam.nazvanie}}</td>
                     </tr>
                   </tbody>
@@ -452,15 +466,15 @@
 </template>
 
 <script>
-
-
 export default {
   components: {},
 
-  props: ['drawer'],
+  props: ["drawer"],
 
   data: () => ({
-    db:null,
+    novostiZagruzheni: false,
+    tekstiZagruzheni: false,
+    db: null,
     drawer2: false,
     sbori: [],
     predpriyatiya: [],
@@ -473,44 +487,44 @@ export default {
     pokazatSobitie: false,
     vibrannoeSobitie: null,
     raspsegondya: [[], [], []],
-    raspzavtra: [[], [], []],
+    raspzavtra: [[], [], []]
   }),
   created() {
     this.zagruzkaraspisaniya();
     const db = this.$firebase;
     const st = this.$store;
 
-    db.collection('teksti')
-      .doc('glavnaya')
+    db.collection("teksti")
+      .doc("glavnaya")
       .get()
-      .then((snapshot) => {
+      .then(snapshot => {
         this.teksti = snapshot.data().teksti;
+        this.tekstiZagruzheni = true;
       });
 
     const vm = this;
 
-
-    db.collection('predpriyatiya')
+    db.collection("predpriyatiya")
       .get()
-      .then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
+      .then(querySnapshot => {
+        querySnapshot.forEach(doc => {
           const res = doc.data();
           res.id = doc.id;
-vm.predpriyatiya.push(res);
-          
+          vm.predpriyatiya.push(res);
         });
         vm.si = vm.anyel(vm.si, vm.sbori);
         vm.pi = vm.anyel(vm.pi, vm.predpriyatiya);
       });
-
-
-
-      
   },
   watch: {
     drawer() {
       this.drawer2 = !this.drawer2;
     },
+    novosti() {
+      if (this.novosti.length > 0) {
+        this.novostiZagruzheni = true;
+      }
+    }
   },
   mounted() {
     window.setInterval(() => {
@@ -521,8 +535,8 @@ vm.predpriyatiya.push(res);
   computed: {},
   methods: {
     async zagruzkaraspisaniya() {
-      const googleCalendarApiKey = 'AIzaSyCSV5kxpkQN3Vfvg_9D_vyBN2DQ7AiBzr4';
-      const caladr = 'https://www.googleapis.com/calendar/v3/calendars/';
+      const googleCalendarApiKey = "AIzaSyCSV5kxpkQN3Vfvg_9D_vyBN2DQ7AiBzr4";
+      const caladr = "https://www.googleapis.com/calendar/v3/calendars/";
       const today = new Date();
       today.setHours(0);
       today.setMinutes(0);
@@ -530,17 +544,17 @@ vm.predpriyatiya.push(res);
       const tomorrow = new Date(today.getTime() + 48 * 60 * 60 * 1000 - 1000);
 
       const cals = [
-        '2kpu7kvisrlvmgkiheabippc20@group.calendar.google.com',
-        'ct8a4t3tuim1jjnkno2d6skkck@group.calendar.google.com',
-        'uq550s4cd42vsoojk09patvfvk@group.calendar.google.com',
+        "2kpu7kvisrlvmgkiheabippc20@group.calendar.google.com",
+        "ct8a4t3tuim1jjnkno2d6skkck@group.calendar.google.com",
+        "uq550s4cd42vsoojk09patvfvk@group.calendar.google.com"
       ];
 
       for (let i = 0; i < cals.length; i += 1) {
-        const url = `${caladr
-          + encodeURIComponent(cals[i])}/events?timeMin=${encodeURIComponent(
-          today.toISOString(),
+        const url = `${caladr +
+          encodeURIComponent(cals[i])}/events?timeMin=${encodeURIComponent(
+          today.toISOString()
         )}&timeMax=${encodeURIComponent(
-          tomorrow.toISOString(),
+          tomorrow.toISOString()
         )}&key=${googleCalendarApiKey}`;
 
         const response = await fetch(url);
@@ -559,12 +573,12 @@ vm.predpriyatiya.push(res);
 
           for (let j = 0; j < data.items.length; j += 1) {
             data.items[j].start.time = new Date(
-              data.items[j].start.dateTime,
-            ).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+              data.items[j].start.dateTime
+            ).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
 
             if (
-              new Date(data.items[j].start.dateTime).getDay()
-              === new Date().getDay()
+              new Date(data.items[j].start.dateTime).getDay() ===
+              new Date().getDay()
             ) {
               this.raspsegondya[i].push(data.items[j]);
             } else {
@@ -576,26 +590,27 @@ vm.predpriyatiya.push(res);
     },
 
     openlink(arg) {
-      window.open(arg, '_blank');
+      window.open(arg, "_blank");
     },
     anyel(i, ar) {
       const i2 = ~~(Math.random() * ar.length);
 
       return i === i2 ? (i === ar.length - 1 ? i - 1 : i + 1) : i2;
-    },
+    }
   },
 
   firestore() {
     return {
-    sbori: this.$firebase.collection('sbori').where('idet', '==', true),
+      sbori: this.$firebase.collection("sbori").where("idet", "==", true),
 
-    novosti: this.$firebase
-      .collection('novosti')
-      .orderBy('data', 'desc')
-      .limit(5),
+      novosti: this.$firebase
+        .collection("novosti")
+        .orderBy("data", "desc")
+        .limit(7),
 
-    zamisli: this.$firebase.collection('zamisli'),
-  }},
+      zamisli: this.$firebase.collection("zamisli")
+    };
+  }
 };
 </script>
 <style scoped>
