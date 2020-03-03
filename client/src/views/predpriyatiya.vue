@@ -27,6 +27,49 @@
             <v-list-item-title>Предложить предприятие</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
+<v-divider></v-divider>
+
+       <v-flex
+          v-for="(selection, i) in selections"
+          :key="selection.text"
+          shrink
+        >
+          <v-chip
+            :disabled="loading"
+            close
+            @click:close="selected.splice(i, 1)"
+          >
+            <v-icon
+              left
+              v-text="selection.icon"
+            ></v-icon>
+            {{ selection.text }}
+          </v-chip>
+        </v-flex>
+
+        <v-flex v-if="!allSelected" xs12>
+
+          <v-text-field
+            ref="search"
+            v-model="search"
+            full-width
+            hide-details
+            label="Поиск"
+            single-line
+          ></v-text-field>
+             <v-divider v-if="!allSelected"></v-divider>
+        </v-flex>
+
+<v-list>
+      <template v-for="(item, i) in pokazannie_metki">
+        <v-list-item small>
+       
+          <v-list-item-title v-text="item[0]"></v-list-item-title>
+        </v-list-item>
+      </template>
+    </v-list>
+
+
       </v-list>
 
       <template v-slot:append v-if="$vuetify.breakpoint.xs">
