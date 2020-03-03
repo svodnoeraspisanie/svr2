@@ -49,14 +49,16 @@
       <v-container :class="$vuetify.breakpoint.xs? 'px-2': 'px-6'">
         <h2 @click="poyasnenie=!poyasnenie;">
           <v-icon class="mr-2 pb-1" color="#0a7d9a">mdi-account-group</v-icon>
-          <span style="border-bottom: 1px dashed gray;">Русские национальные предприятия ({{predpriyatiya.length+1}})</span>
+          <span
+            style="border-bottom: 1px dashed gray;"
+          >Русские национальные предприятия ({{vsepredpriyatiya.length+1}})</span>
         </h2>
         <v-card outlined class="ml-3 mt-2" v-if="poyasnenie" @click="poyasnenie=!poyasnenie">
           <v-card-text class="pb-1 pt-2" v-html="poyasnenie_tekst"></v-card-text>
         </v-card>
 
         <v-row class="ml-0">
-          <v-col lg="3" md="4" sm="6" cols="12" v-for="pr in predpriyatiya" :key="pr.n">
+          <v-col lg="3" md="4" sm="6" cols="12" v-for="pr in vsepredpriyatiya" :key="pr.n">
             <v-card class="cardhov" height="100%" :to="{path: `/predpriyatiya/${pr.id}`}" outlined>
               <div style="display: flex;  flex-flow: column;   height:100%">
                 <div>
@@ -120,7 +122,9 @@ export default {
   },
   data: () => ({
     drawer2: false,
-    predpriyatiya: [],
+    vsepredpriyatiya: [],
+    pokazannie_redpriyatiya:[],
+    pokazannie_metki:[],
     poyasnenie: false,
     poyasnenie_tekst: "",
     zagruzheniobrazy: false
@@ -145,12 +149,58 @@ export default {
         querySnapshot.forEach(doc => {
           const res = doc.data();
           res.id = doc.id;
-          vm.predpriyatiya.push(res);
+          vm.vsepredpriyatiya.push(res);
+          vm.pokazannie_redpriyatiya.push(res);
         });
+        this.obnovitSpiski();
       });
+      
   },
   methods: {
-    
+    obnovitSpiski(){
+      let vm = this;
+      let vse_metki=[];
+
+      for (let i=0;i<vm.pokazannie_redpriyatiya.length;++i){
+        vse_metki=vse_metki.concat(vm.pokazannie_redpriyatiya[i].metki);
+
+      };
+      
+
+      let counterMap = vse_metki.reduce(function (sameMap, item) { 
+        if (!sameMap[item]) {
+            sameMap[item] = 1;
+        } else {
+            sameMap[item]++;
+        }
+
+        return sameMap;
+    }, {});
+
+
+let result = Object.keys(counterMap).map(function (key) { 
+          
+       
+        return [key, counterMap[key]]; 
+    }); 
+
+
+  result.sort(function (a, b) {
+  if (a[1] < b[1]) {
+    return 1;
+  }
+  if (a[1] > b[1]) {
+    return -1;
+  }
+  // a должно быть равным b
+  return 0;
+});
+
+
+
+vm.pokazannie_metki=result;
+      console.log(result);
+    },
     openlink(arg) {
       window.open(arg, "_blank");
     }
