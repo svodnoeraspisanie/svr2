@@ -27,49 +27,15 @@
             <v-list-item-title>Предложить предприятие</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-<v-divider></v-divider>
-
-       <v-flex
-          v-for="(selection, i) in selections"
-          :key="selection.text"
-          shrink
-        >
-          <v-chip
-            :disabled="loading"
-            close
-            @click:close="selected.splice(i, 1)"
-          >
-            <v-icon
-              left
-              v-text="selection.icon"
-            ></v-icon>
-            {{ selection.text }}
-          </v-chip>
-        </v-flex>
-
-        <v-flex v-if="!allSelected" xs12>
-
-          <v-text-field
-            ref="search"
-            v-model="search"
-            full-width
-            hide-details
-            label="Поиск"
-            single-line
-          ></v-text-field>
-             <v-divider v-if="!allSelected"></v-divider>
-        </v-flex>
-
-<v-list>
-      <template v-for="(item, i) in pokazannie_metki">
-        <v-list-item small>
-       
-          <v-list-item-title v-text="item[0]"></v-list-item-title>
-        </v-list-item>
-      </template>
-    </v-list>
-
-
+        <v-divider></v-divider>
+        <div class="pt-2 pl-4 subtitle-1 font-weight-bold	" >Выберите метки:</div>
+        <v-list class="pt-0 pl-4">
+          <template v-for="(item, i) in pokazannie_metki">
+            <v-list-item  style="min-height: 24px;" small :key="i" @click="vibrannie_metki.push(item)">
+              <v-list-item-title v-text="item[0]"></v-list-item-title>
+            </v-list-item>
+          </template>
+        </v-list>
       </v-list>
 
       <template v-slot:append v-if="$vuetify.breakpoint.xs">
@@ -94,14 +60,20 @@
           <v-icon class="mr-2 pb-1" color="#0a7d9a">mdi-account-group</v-icon>
           <span
             style="border-bottom: 1px dashed gray;"
-          >Русские национальные предприятия ({{vsepredpriyatiya.length+1}})</span>
+          >Русские национальные предприятия ({{pokazannie_redpriyatiya.length}})</span>
         </h2>
         <v-card outlined class="ml-3 mt-2" v-if="poyasnenie" @click="poyasnenie=!poyasnenie">
           <v-card-text class="pb-1 pt-2" v-html="poyasnenie_tekst"></v-card-text>
         </v-card>
-
+        <v-chip
+          v-for="(metka,i) in vibrannie_metki"
+          :key="i"
+         class="mt-1 mr-1"
+         
+          @click="vibrannie_metki.splice(i,1)"
+        >{{metka[0]}}</v-chip>
         <v-row class="ml-0">
-          <v-col lg="3" md="4" sm="6" cols="12" v-for="pr in vsepredpriyatiya" :key="pr.n">
+          <v-col lg="3" md="4" sm="6" cols="12" v-for="pr in pokazannie_redpriyatiya" :key="pr.n">
             <v-card class="cardhov" height="100%" :to="{path: `/predpriyatiya/${pr.id}`}" outlined>
               <div style="display: flex;  flex-flow: column;   height:100%">
                 <div>
@@ -161,13 +133,35 @@ export default {
   watch: {
     drawer() {
       this.drawer2 = !this.drawer2;
+    },
+    pokazannie_redpriyatiya() {
+      this.obnovitSpiski();
+    },
+    vibrannie_metki() {
+      this.pokazannie_redpriyatiya = [];
+
+      for (let i = 0; i < this.vsepredpriyatiya.length; ++i) {
+        let pr = this.vsepredpriyatiya[i];
+        let podhodit = 0;
+        for (let j = 0; j < this.vibrannie_metki.length; ++j) {
+          let metka = this.vibrannie_metki[j];
+
+          if (pr.metki.indexOf(metka[0]) > -1) {
+            podhodit = podhodit + 1;
+          }
+        }
+        if (this.vibrannie_metki.length == podhodit) {
+          this.pokazannie_redpriyatiya.push(pr);
+        }
+      }
     }
   },
   data: () => ({
     drawer2: false,
     vsepredpriyatiya: [],
-    pokazannie_redpriyatiya:[],
-    pokazannie_metki:[],
+    pokazannie_redpriyatiya: [],
+    pokazannie_metki: [],
+    vibrannie_metki: [],
     poyasnenie: false,
     poyasnenie_tekst: "",
     zagruzheniobrazy: false
@@ -197,52 +191,51 @@ export default {
         });
         this.obnovitSpiski();
       });
-      
   },
   methods: {
-    obnovitSpiski(){
+    obnovitSpiski() {
       let vm = this;
-      let vse_metki=[];
+      let vse_metki = [];
 
-      for (let i=0;i<vm.pokazannie_redpriyatiya.length;++i){
-        vse_metki=vse_metki.concat(vm.pokazannie_redpriyatiya[i].metki);
+      for (let i = 0; i < vm.pokazannie_redpriyatiya.length; ++i) {
+        vse_metki = vse_metki.concat(vm.pokazannie_redpriyatiya[i].metki);
+      }
 
-      };
-      
-
-      let counterMap = vse_metki.reduce(function (sameMap, item) { 
+      let counterMap = vse_metki.reduce(function(sameMap, item) {
         if (!sameMap[item]) {
-            sameMap[item] = 1;
+          sameMap[item] = 1;
         } else {
-            sameMap[item]++;
+          sameMap[item]++;
         }
 
         return sameMap;
-    }, {});
+      }, {});
 
+      let result = Object.keys(counterMap).map(function(key) {
+        return [key, counterMap[key]];
+      });
 
-let result = Object.keys(counterMap).map(function (key) { 
-          
-       
-        return [key, counterMap[key]]; 
-    }); 
+      result.sort(function(a, b) {
+        if (a[1] < b[1]) {
+          return 1;
+        }
+        if (a[1] > b[1]) {
+          return -1;
+        }
+        // a должно быть равным b
+        return 0;
+      });
 
+      vm.pokazannie_metki = result;
 
-  result.sort(function (a, b) {
-  if (a[1] < b[1]) {
-    return 1;
-  }
-  if (a[1] > b[1]) {
-    return -1;
-  }
-  // a должно быть равным b
-  return 0;
-});
-
-
-
-vm.pokazannie_metki=result;
-      console.log(result);
+      for (let i = 0; i < vm.vibrannie_metki.length; ++i) {
+        for (let j = 0; j < vm.pokazannie_metki.length; ++j) {
+          if (vm.vibrannie_metki[i][0] === vm.pokazannie_metki[j][0]) {
+            vm.pokazannie_metki.splice(j, 1);
+            break;
+          }
+        }
+      }
     },
     openlink(arg) {
       window.open(arg, "_blank");
