@@ -97,7 +97,7 @@
               <v-card-text v-html="pr.podrobnoe_opisanie"></v-card-text>
             </v-card>
 
-            <v-card class="mb-4" outlined id="kakpoddergat">
+            <v-card class="mb-4" outlined max-width="936px" id="kakpoddergat">
               <v-card-title>Как нас поддержать?</v-card-title>
               <v-card-text>
                 <ul v-for="(schet,gate) in pr.scheta" :key="gate">
@@ -107,6 +107,10 @@
                     <span v-else>{{schet}}</span>
                   </li>
                 </ul>
+              </v-card-text>
+              
+              <v-card-text class="font-italic red--text text--lighten-1">
+Номера карт, адреса кошельков и прочие реквизиты могут поменяться. <br/>Обязательно проверяйте их правильность на официальном сайте перед переводом средств.
               </v-card-text>
             </v-card>
 

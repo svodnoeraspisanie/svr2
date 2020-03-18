@@ -49,7 +49,7 @@
       <v-container :class="$vuetify.breakpoint.xs? 'px-2': 'px-6'">
         <h2 @click="poyasnenie=!poyasnenie;">
           <v-icon class="mr-2 pb-1" color="#0a7d9a">mdi-account-group</v-icon>
-          <span style="border-bottom: 1px dashed gray;">Русские национальные предприятия</span>
+          <span style="border-bottom: 1px dashed gray;">Русские национальные предприятия ({{predpriyatiya.length+1}})</span>
         </h2>
         <v-card outlined class="ml-3 mt-2" v-if="poyasnenie" @click="poyasnenie=!poyasnenie">
           <v-card-text class="pb-1 pt-2" v-html="poyasnenie_tekst"></v-card-text>

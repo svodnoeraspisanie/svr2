@@ -72,7 +72,7 @@
       <v-container :class="$vuetify.breakpoint.xs? 'px-2': 'px-6'">
         <h2 @click="poyasnenie=!poyasnenie">
           <v-icon class="mr-2 pb-1" color="#0a7d9a">mdi-cash-multiple</v-icon>
-          <span style="border-bottom: 1px dashed gray;">Идущие сборы средств</span>
+          <span style="border-bottom: 1px dashed gray;">Идущие сборы средств ({{sbori.length+1}})</span>
         </h2>
         <v-card outlined class="ml-3 mt-2" v-if="poyasnenie" @click="poyasnenie=!poyasnenie">
           <v-card-text class="pb-1 pt-2" v-html="sbori_tekst"></v-card-text>
@@ -100,7 +100,7 @@
 
         <h2 id="zavershennie" @click="poyasnenie2=!poyasnenie2">
           <v-icon class="mr-2 pb-1" color="#0a7d9a">mdi-progress-check</v-icon>
-          <span style="border-bottom: 1px dashed gray;">Завершённые сборы средств</span>
+          <span style="border-bottom: 1px dashed gray;">Завершённые сборы средств ({{sboriZavershennie.length+1}})</span>
         </h2>
         <v-card outlined class="ml-3 mt-2" v-if="poyasnenie2" @click="poyasnenie2=!poyasnenie2">
           <v-card-text class="pb-1 pt-2" v-html="sbori_tekst2"></v-card-text>
