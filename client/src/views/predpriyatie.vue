@@ -128,45 +128,42 @@
 </template>
 
 <script>
-
-
 export default {
   components: {},
 
-  props: ['drawer'],
+  props: ["drawer"],
 
   computed: {},
   data: () => ({
     drawer2: false,
 
-    pr: { obraz: '' },
+    pr: { obraz: "" }
   }),
   created() {
     this.fetchData();
   },
   watch: {
-    $route: 'fetchData',
+    $route: "fetchData",
     drawer() {
       this.drawer2 = !this.drawer2;
-    },
+    }
   },
   methods: {
     fetchData() {
       const vm = this;
 
-      this.$firebase.collection('predpriyatiya')
+      this.$firebase
+        .collection("predpriyatiya")
         .doc(this.$route.params.id)
         .get()
-        .then((snapshot) => {
+        .then(snapshot => {
           const res = snapshot.data();
-vm.pr = res;
-          
+          vm.pr = res;
         });
-    },
-  },
+    }
+  }
 };
 </script>
 
 <style>
-
 </style>
