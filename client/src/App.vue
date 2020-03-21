@@ -68,7 +68,7 @@ export default {
   }),
    watch: {
       '$route' (to, from) {
-        document.title = to.meta.title || 'Свора - русское предпринимательство и благотворительность';
+        document.title = to.meta.title;
       }
     },
 

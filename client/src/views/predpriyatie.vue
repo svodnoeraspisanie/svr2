@@ -163,6 +163,7 @@ export default {
         .then(snapshot => {
           const res = snapshot.data();
           vm.pr = res;
+          document.title=vm.pr.nazvanie+' | Свора';
         });
     }
   }

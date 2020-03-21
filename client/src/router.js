@@ -14,6 +14,8 @@ export default new Router({
       name: 'glavnaya',
       component: glavnaya,
       props: true,
+      meta:{title:"Свора - русское предпринимательство и благотворительность"},
+      
       
     },
     {
@@ -21,12 +23,14 @@ export default new Router({
       name: 'spravka',
       props: true,
       component: () => import('./views/spravka.vue'),
+      meta:{title:"Свора - русское предпринимательство и благотворительность"},
     },
     {
       path: '/statii',
       name: 'statii',
       props: true,
       component: () => import('./views/statii.vue'),
+      meta:{title:"Свора - русское предпринимательство и благотворительность"},
     },
     {
       path: '/sobitiya',
@@ -45,7 +49,7 @@ export default new Router({
       path: '/predpriyatiya',
       name: 'predpriyatiya',
       props: true,
-      meta:{title:"Русский национальные предприятия | Свора"},
+      meta:{title:"Русские национальные предприятия | Свора"},
       component: () => import('./views/predpriyatiya.vue'),
     },
     {
