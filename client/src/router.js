@@ -14,6 +14,7 @@ export default new Router({
       name: 'glavnaya',
       component: glavnaya,
       props: true,
+      
     },
     {
       path: '/spravka',
@@ -31,19 +32,20 @@ export default new Router({
       path: '/sobitiya',
       name: 'sobitiya',
       props: true,
-
+      meta:{title:"Расписание событий русской культуры, истории и политики | Свора"},
       component: () => import('./views/sobitiya.vue'),
     },
     {
       path: '/sobitiya/:id',
       props: true,
-
+      meta:{title:"Расписание событий русской культуры, истории и политики | Свора"},
       component: () => import('./views/sobitiya.vue'),
     },
     {
       path: '/predpriyatiya',
       name: 'predpriyatiya',
       props: true,
+      meta:{title:"Русский национальные предприятия | Свора"},
       component: () => import('./views/predpriyatiya.vue'),
     },
     {
@@ -56,6 +58,7 @@ export default new Router({
       path: '/sbori',
       name: 'sbori',
       props: true,
+      meta:{title:"Сборы средств для начинаний | Свора"},
       component: () => import('./views/sbori.vue'),
     },
     {
@@ -68,6 +71,7 @@ export default new Router({
       path: '/prisoedinitsya',
       name: 'prisoedinitsya',
       props: true,
+      meta:{title:"Присоединиться | Свора"},
       component: () => import('./views/prisoedinitsya.vue'),
     },
   ],

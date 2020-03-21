@@ -66,6 +66,11 @@ export default {
     drawer: true,
     fab: false,
   }),
+   watch: {
+      '$route' (to, from) {
+        document.title = to.meta.title || 'Свора - русское предпринимательство и благотворительность';
+      }
+    },
 
 };
 </script>
