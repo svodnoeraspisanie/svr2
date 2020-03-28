@@ -103,7 +103,7 @@
                 <ul v-for="(schet,gate) in pr.scheta" :key="gate">
                   <li>
                     <b>{{gate}}</b>:
-                    <a v-if="schet.slice(0,5)=='https'" :href="schet">{{schet}}</a>
+                    <a v-if="schet.slice(0,4)=='http'" :href="schet">{{schet}}</a>
                     <span v-else>{{schet}}</span>
                   </li>
                 </ul>
