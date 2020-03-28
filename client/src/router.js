@@ -33,6 +33,12 @@ export default new Router({
       meta:{title:"Свора - русское предпринимательство и благотворительность"},
     },
     {
+      path: '/statii/:id',
+      props: true,
+
+      component: () => import('./views/statiya.vue'),
+    },
+    {
       path: '/sobitiya',
       name: 'sobitiya',
       props: true,

@@ -143,28 +143,20 @@ export default {
 
     pr: { obraz: "" }
   }),
-  created() {
-    this.fetchData();
+
+    firestore() {
+    return {
+      pr: this.$firebase.collection("predpriyatiya").doc(this.$route.params.id)
+    };
   },
+ 
   watch: {
-    $route: "fetchData",
+    
     drawer() {
       this.drawer2 = !this.drawer2;
-    }
-  },
-  methods: {
-    fetchData() {
-      const vm = this;
-
-      this.$firebase
-        .collection("predpriyatiya")
-        .doc(this.$route.params.id)
-        .get()
-        .then(snapshot => {
-          const res = snapshot.data();
-          vm.pr = res;
-          document.title=vm.pr.nazvanie+' | Свора';
-        });
+    },
+    pr(){
+      document.title=this.pr.nazvanie+' | Свора';
     }
   }
 };

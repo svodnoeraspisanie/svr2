@@ -147,6 +147,7 @@ export default {
     sbori_tekst2: '',
     sboriZavershennie: [],
   }),
+  
   created() {
     this.$firebase.collection('teksti')
       .doc('sbori-poyasnenie')

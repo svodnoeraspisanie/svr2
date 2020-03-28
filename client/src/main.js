@@ -24,7 +24,10 @@ firebase.analytics();
 const { Timestamp, GeoPoint } = firebase.firestore;
 export { Timestamp, GeoPoint };
 
-Vue.use(firestorePlugin);
+const serialize = (snapshot) => {return Object.defineProperty(snapshot.data(), 'id', { value: snapshot.id })
+}
+
+Vue.use(firestorePlugin, { serialize });
 
 new Vue({
   router,

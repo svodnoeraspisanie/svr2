@@ -63,7 +63,7 @@
           >Русские национальные предприятия ({{pokazannie_redpriyatiya.length}})</span>
         </h2>
         <v-card outlined class="ml-3 mt-2" v-if="poyasnenie" @click="poyasnenie=!poyasnenie">
-          <v-card-text class="pb-1 pt-2" v-html="poyasnenie_tekst"></v-card-text>
+          <v-card-text class="pb-1 pt-2" v-html="poyasnenie_tekst.tekst"></v-card-text>
         </v-card>
         <v-chip
           v-for="(metka,i) in vibrannie_metki"
@@ -73,7 +73,7 @@
           @click="vibrannie_metki.splice(i,1)"
         >{{metka[0]}}</v-chip>
         <v-row class="ml-0">
-          <v-col lg="3" md="4" sm="6" cols="12" v-for="pr in pokazannie_redpriyatiya" :key="pr.n">
+          <v-col lg="3" md="4" sm="6" cols="12" v-for="(pr,i) in pokazannie_redpriyatiya" :key="i">
             <v-card class="cardhov" height="100%" :to="{path: `/predpriyatiya/${pr.id}`}" outlined>
               <div style="display: flex;  flex-flow: column;   height:100%">
                 <div>
@@ -131,6 +131,12 @@ export default {
   props: ["drawer"],
 
   watch: {
+       vsepredpriyatiya() {
+      this.pokazannie_redpriyatiya=this.vsepredpriyatiya.slice();
+      this.obnovitSpiski();
+      console.log("obnovit");
+
+    },
     drawer() {
       this.drawer2 = !this.drawer2;
     },
@@ -166,34 +172,16 @@ export default {
     poyasnenie_tekst: "",
     zagruzheniobrazy: false
   }),
-
-  created() {
-    const vm = this;
-
-    this.$firebase
-      .collection("teksti")
-      .doc("predpiyatiya-poyasnenie")
-      .get()
-      .then(snapshot => {
-        this.poyasnenie_tekst = snapshot.data().tekst;
-      });
-
-    this.$firebase
-      .collection("predpriyatiya")
-      .orderBy("nazvanie")
-      .get()
-      .then(querySnapshot => {
-        querySnapshot.forEach(doc => {
-          const res = doc.data();
-          res.id = doc.id;
-          vm.vsepredpriyatiya.push(res);
-          vm.pokazannie_redpriyatiya.push(res);
-        });
-        this.obnovitSpiski();
-      });
+firestore() {
+    return {
+    vsepredpriyatiya: this.$firebase.collection("predpriyatiya").orderBy("nazvanie"),
+    poyasnenie_tekst:this.$firebase.collection("teksti").doc("predpiyatiya-poyasnenie"),
+    }
   },
+
   methods: {
     obnovitSpiski() {
+      
       let vm = this;
       let vse_metki = [];
 
