@@ -50,7 +50,7 @@
             <v-card
                class="cardhov" height="100%"  outlined :to="{path: `/statii/${statia.id}`}"
             >
-            <v-img :src="statia.obraz" aspect-ratio="1" contain style="width:100%">
+            <v-img :src="statia.obraz" aspect-ratio="1.5" contain style="width:100%">
                     <v-layout slot="placeholder" fill-height align-center justify-center ma-0>
                       <v-progress-circular indeterminate color="#0a7d9a"></v-progress-circular>
                     </v-layout>
