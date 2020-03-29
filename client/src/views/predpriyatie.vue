@@ -23,26 +23,26 @@
             <v-icon>mdi-account-group</v-icon>
           </v-list-item-icon>
 
-          <v-list-item-content>Кто мы?</v-list-item-content>
+          <v-list-item-content>Сводка</v-list-item-content>
         </v-list-item>
         <v-list-item link @click="$vuetify.goTo('#chtomidelaem',offset);drawer2=false;;">
           <v-list-item-icon>
             <v-icon>mdi-trending-up</v-icon>
           </v-list-item-icon>
-          <v-list-item-content>Что мы делаем?</v-list-item-content>
+          <v-list-item-content>Описание</v-list-item-content>
         </v-list-item>
         <v-list-item link @click="$vuetify.goTo('#kakpoddergat',offset);drawer2=false;">
           <v-list-item-icon>
             <v-icon>mdi-cash-multiple</v-icon>
           </v-list-item-icon>
-          <v-list-item-content>Как нас поддержать?</v-list-item-content>
+          <v-list-item-content>Как поддержать?</v-list-item-content>
         </v-list-item>
 
         <v-list-item link @click="$vuetify.goTo('#ssilki',offset);drawer2=false;">
           <v-list-item-icon>
             <v-icon>mdi-web</v-icon>
           </v-list-item-icon>
-          <v-list-item-content>Наши страницы в сети</v-list-item-content>
+          <v-list-item-content>Страницы в сети</v-list-item-content>
         </v-list-item>
       </v-list>
       <template v-slot:append v-if="$vuetify.breakpoint.xs">
@@ -93,12 +93,12 @@
             </v-card>
 
             <v-card class="mb-4" outlined max-width="936px" id="chtomidelaem">
-              <v-card-title>Что мы делаем?</v-card-title>
+              
               <v-card-text v-html="pr.podrobnoe_opisanie"></v-card-text>
             </v-card>
 
             <v-card class="mb-4" outlined max-width="936px" id="kakpoddergat">
-              <v-card-title>Как нас поддержать?</v-card-title>
+              <v-card-title>Как поддержать?</v-card-title>
               <v-card-text>
                 <ul v-for="(schet,gate) in pr.scheta" :key="gate">
                   <li>
@@ -115,7 +115,7 @@
             </v-card>
 
             <v-card outlined max-width="936px" id="ssilki">
-              <v-card-title>Наши страницы в сети</v-card-title>
+              <v-card-title>Страницы в сети</v-card-title>
               <v-card-text>
                 <ul v-for="(ssilka,servis) in pr.ssilki" :key="servis">
                   <li>

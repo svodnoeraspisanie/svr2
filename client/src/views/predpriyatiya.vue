@@ -135,17 +135,22 @@ export default {
 
   watch: {
        vsepredpriyatiya() {
-      this.pokazannie_redpriyatiya=this.vsepredpriyatiya.slice();
+         if (this.vsepredpriyatiya.length>0){
+
+      let granica = this.vsepredpriyatiya.findIndex(pr => pr.nazvanie.slice(0,1)==="А");
+      console.log(granica);
+      //this.pokazannie_redpriyatiya=this.vsepredpriyatiya.slice();
+      this.pokazannie_redpriyatiya=this.vsepredpriyatiya.slice(granica).concat(this.vsepredpriyatiya.slice(0,granica));
       this.obnovitSpiski();
      
-
+         }
     },
     drawer() {
       this.drawer2 = !this.drawer2;
     },
     pokazannie_redpriyatiya() {
       this.obnovitSpiski();
-
+     
      
     },
     vibrannie_metki() {

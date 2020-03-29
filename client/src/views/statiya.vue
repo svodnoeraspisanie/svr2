@@ -46,7 +46,8 @@
             </div>
             
             <v-card outlined class="mb-6 ml-2" max-width="936px">
-   <v-img :src="statiya.obraz"  max-height="300px" >
+   <v-img :src="statiya.obraz"  max-height="300px
+   " >
                     <v-layout slot="placeholder" fill-height align-center justify-center ma-0>
                       <v-progress-circular indeterminate color="#0a7d9a"></v-progress-circular>
                     </v-layout>
