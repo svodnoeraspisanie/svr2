@@ -37,27 +37,20 @@
 
     <v-content :style="$vuetify.breakpoint.xs? '': 'padding-top:0px'">
       <v-container :class="$vuetify.breakpoint.xs? 'px-2': 'px-6'">
-       
-            
-              <h2>
-                <v-icon class="mr-2 pb-1" color="#0a7d9a">mdi-book-open</v-icon>Статьи
-              </h2>
-            
+        <h2>
+          <v-icon class="mr-2 pb-1" color="#0a7d9a">mdi-book-open</v-icon>Статьи
+        </h2>
 
-            <v-row class="ml-0">
-          <v-col lg="4" md="4" sm="6" cols="12" v-for="(statia,i) in statii"  :key="i">
-
-            <v-card
-               class="cardhov" height="100%"  outlined :to="{path: `/statii/${statia.id}`}"
-            >
-            <v-img :src="statia.obraz" aspect-ratio="1.5" contain style="width:100%">
-                    <v-layout slot="placeholder" fill-height align-center justify-center ma-0>
-                      <v-progress-circular indeterminate color="#0a7d9a"></v-progress-circular>
-                    </v-layout>
-                  </v-img>
-                  <v-divider />
+        <v-row class="ml-0">
+          <v-col lg="4" md="4" sm="6" cols="12" v-for="(statia,i) in statii" :key="i">
+            <v-card class="cardhov" height="100%" outlined :to="{path: `/statii/${statia.id}`}">
+              <v-img :src="statia.obraz" aspect-ratio="1.5" contain style="width:100%">
+                <v-layout slot="placeholder" fill-height align-center justify-center ma-0>
+                  <v-progress-circular indeterminate color="#0a7d9a"></v-progress-circular>
+                </v-layout>
+              </v-img>
+              <v-divider />
               <v-card-title style="word-break: normal">{{statia.nazvanie}}</v-card-title>
-              
             </v-card>
           </v-col>
         </v-row>
@@ -67,11 +60,9 @@
 </template>
 
 <script>
-
-
 export default {
   components: {},
-  props: ['drawer'],
+  props: ["drawer"],
 
   watch: {
     drawer() {
@@ -80,14 +71,14 @@ export default {
   },
   data: () => ({
     drawer2: false,
-    statii: [],
+    statii: []
   }),
 
-  firestore () {
+  firestore() {
     return {
-    statii: this.$firebase.collection('statii').orderBy("pokazano", "desc")
-    }
-  },
+      statii: this.$firebase.collection("statii").orderBy("pokazano", "desc")
+    };
+  }
 };
 </script>
 

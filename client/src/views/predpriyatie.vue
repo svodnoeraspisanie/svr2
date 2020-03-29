@@ -93,7 +93,6 @@
             </v-card>
 
             <v-card class="mb-4" outlined max-width="936px" id="chtomidelaem">
-              
               <v-card-text v-html="pr.podrobnoe_opisanie"></v-card-text>
             </v-card>
 
@@ -108,9 +107,10 @@
                   </li>
                 </ul>
               </v-card-text>
-              
+
               <v-card-text class="font-italic red--text text--lighten-1">
-Номера карт, адреса кошельков и прочие реквизиты могут поменяться. <br/>Обязательно проверяйте их правильность на официальном сайте перед переводом средств.
+                Номера карт, адреса кошельков и прочие реквизиты могут поменяться.
+                <br />Обязательно проверяйте их правильность на официальном сайте перед переводом средств.
               </v-card-text>
             </v-card>
 
@@ -144,19 +144,18 @@ export default {
     pr: { obraz: "" }
   }),
 
-    firestore() {
+  firestore() {
     return {
       pr: this.$firebase.collection("predpriyatiya").doc(this.$route.params.id)
     };
   },
- 
+
   watch: {
-    
     drawer() {
       this.drawer2 = !this.drawer2;
     },
-    pr(){
-      document.title=this.pr.nazvanie+' | Свора';
+    pr() {
+      document.title = this.pr.nazvanie + " | Свора";
     }
   }
 };

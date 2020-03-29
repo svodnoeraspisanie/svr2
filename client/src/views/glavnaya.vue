@@ -100,11 +100,7 @@
             </div>
             <v-card outlined class="ml-2">
               <v-card-text class="pb-1 pt-2">
-                <v-skeleton-loader
-                  :loading="!novostiZagruzheni"
-                  
-                  type="sentences@5"
-                >
+                <v-skeleton-loader :loading="!novostiZagruzheni" type="sentences@5">
                   <v-simple-table dense>
                     <tbody v-if="novosti.length>0">
                       <tr
@@ -131,7 +127,6 @@
               <router-link class="mainlink" to="/spravka">
                 <v-skeleton-loader
                   :loading="!tekstiZagruzheni"
-                 
                   :class="!tekstiZagruzheni? 'pb-3': ''"
                   type="heading"
                 >
@@ -143,11 +138,11 @@
 
             <v-card class="cardhov ml-2" outlined :to="{path: teksti.teksti[0].ssilka}">
               <v-skeleton-loader
-                  :loading="!tekstiZagruzheni"
-                  :class="!tekstiZagruzheni? 'pa-3': ''"
-                  type="paragraph@3"
-                >
-              <v-card-text  class="pb-1 pt-2" v-html="teksti.teksti[0].tekst"></v-card-text>
+                :loading="!tekstiZagruzheni"
+                :class="!tekstiZagruzheni? 'pa-3': ''"
+                type="paragraph@3"
+              >
+                <v-card-text class="pb-1 pt-2" v-html="teksti.teksti[0].tekst"></v-card-text>
               </v-skeleton-loader>
             </v-card>
           </v-col>
@@ -491,16 +486,15 @@ export default {
   }),
   created() {
     this.zagruzkaraspisaniya();
-  
   },
   watch: {
-    teksti(){
+    teksti() {
       this.tekstiZagruzheni = true;
     },
-    predpriyatiya(){
+    predpriyatiya() {
       this.pi = this.anyel(this.pi, this.predpriyatiya);
     },
-    sbori(){
+    sbori() {
       this.si = this.anyel(this.si, this.sbori);
     },
     drawer() {
@@ -588,7 +582,10 @@ export default {
   firestore() {
     return {
       sbori: this.$firebase.collection("sbori").where("idet", "==", true),
-      novosti: this.$firebase.collection("novosti").orderBy("data", "desc").limit(7),
+      novosti: this.$firebase
+        .collection("novosti")
+        .orderBy("data", "desc")
+        .limit(7),
       predpriyatiya: this.$firebase.collection("predpriyatiya"),
       teksti: this.$firebase.collection("teksti").doc("glavnaya"),
       zamisli: this.$firebase.collection("zamisli")

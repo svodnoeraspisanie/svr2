@@ -166,7 +166,7 @@
             {{new Date(selectedEvent.start).toLocaleDateString([],
             { day: '2-digit', month: 'long',year:'numeric' }) }}
           </v-card-title>
-    <v-divider class="pa-0" />
+          <v-divider class="pa-0" />
           <v-sheet class="overflow-y-auto" min-width="150px" max-width="400px" max-height="500px">
             <v-card-text>
               <h3>{{selectedEvent.title}}</h3>
@@ -366,7 +366,6 @@ export default {
     ]
   }),
 
- 
   methods: {
     clickdate(arg) {
       this.changeView("timeGridDay");
@@ -479,14 +478,12 @@ function dateToYMD(date) {
 .set {
   background-color: #c5dde8;
 }
-
 .msk {
   background-color: #cde6bb;
 }
 .spb {
   background-color: #e9ddbb;
 }
-
 .cont {
   height: calc(100vh - 64px);
 }

@@ -131,40 +131,35 @@
 </template>
 
 <script>
-
-
 export default {
   components: {},
-  props: ['drawer'],
+  props: ["drawer"],
 
   watch: {
     drawer() {
       this.drawer2 = !this.drawer2;
-    },
+    }
   },
   mounted() {},
   methods: {},
 
-
-
   data: () => ({
     drawer2: false,
-    zamisli: [{ nazvanie: '' }],
-    zamislitekst: '',
-    deyatelitekst: '',
-    poryadoktekst: '',
+    zamisli: [{ nazvanie: "" }],
+    zamislitekst: "",
+    deyatelitekst: "",
+    poryadoktekst: ""
   }),
-  firestore()  {
+  firestore() {
     return {
-    zamisli: this.$firebase.collection('zamisli'),
-    zamislitekst: this.$firebase.collection('teksti').doc('zamisli'),
-    deyatelitekst: this.$firebase.collection('teksti').doc('deyateli'),
-    poryadoktekst: this.$firebase.collection('teksti').doc('poryadok'),
-    }
-  },
+      zamisli: this.$firebase.collection("zamisli"),
+      zamislitekst: this.$firebase.collection("teksti").doc("zamisli"),
+      deyatelitekst: this.$firebase.collection("teksti").doc("deyateli"),
+      poryadoktekst: this.$firebase.collection("teksti").doc("poryadok")
+    };
+  }
 };
 </script>
 
 <style>
-
 </style>

@@ -28,16 +28,27 @@
           </v-list-item-content>
         </v-list-item>
         <v-divider></v-divider>
-        <div v-if="pokazannie_metki.length>0"  class="pt-2 pl-4 subtitle-1 font-weight-bold	" >Выберите метки:</div>
-        <v-container class="pa-0 overflow-y-auto" style="height:100%" v-if="pokazannie_metki.length>0" >
-        
-        <v-list class="pt-0 pl-4">
-          <template v-for="(item, i) in pokazannie_metki">
-            <v-list-item  style="min-height: 24px;" small :key="i" @click="vibrannie_metki.push(item)">
-              <v-list-item-title > {{item[0]}} ({{item[1]}})</v-list-item-title>
-            </v-list-item>
-          </template>
-        </v-list>
+        <div
+          v-if="pokazannie_metki.length>0"
+          class="pt-2 pl-4 subtitle-1 font-weight-bold"
+        >Выберите метки:</div>
+        <v-container
+          class="pa-0 overflow-y-auto"
+          style="height:100%"
+          v-if="pokazannie_metki.length>0"
+        >
+          <v-list class="pt-0 pl-4">
+            <template v-for="(item, i) in pokazannie_metki">
+              <v-list-item
+                style="min-height: 24px;"
+                small
+                :key="i"
+                @click="vibrannie_metki.push(item)"
+              >
+                <v-list-item-title>{{item[0]}} ({{item[1]}})</v-list-item-title>
+              </v-list-item>
+            </template>
+          </v-list>
         </v-container>
       </v-list>
 
@@ -71,8 +82,7 @@
         <v-chip
           v-for="(metka,i) in vibrannie_metki"
           :key="i"
-         class="mt-1 mr-1"
-         
+          class="mt-1 mr-1"
           @click="vibrannie_metki.splice(i,1)"
         >{{metka[0]}}</v-chip>
         <v-row class="ml-0">
@@ -134,24 +144,19 @@ export default {
   props: ["drawer"],
 
   watch: {
-       vsepredpriyatiya() {
-         if (this.vsepredpriyatiya.length>0){
-
-      let granica = this.vsepredpriyatiya.findIndex(pr => pr.nazvanie.slice(0,1)==="А");
-      console.log(granica);
-      //this.pokazannie_redpriyatiya=this.vsepredpriyatiya.slice();
-      this.pokazannie_redpriyatiya=this.vsepredpriyatiya.slice(granica).concat(this.vsepredpriyatiya.slice(0,granica));
-      this.obnovitSpiski();
-     
-         }
+    vsepredpriyatiya() {
+      if (this.vsepredpriyatiya.length > 0) {
+        this.pokazannie_redpriyatiya = this.vsepredpriyatiya
+          .slice(granica)
+          .concat(this.vsepredpriyatiya.slice(0, granica));
+        this.obnovitSpiski();
+      }
     },
     drawer() {
       this.drawer2 = !this.drawer2;
     },
     pokazannie_redpriyatiya() {
       this.obnovitSpiski();
-     
-     
     },
     vibrannie_metki() {
       this.pokazannie_redpriyatiya = [];
@@ -170,9 +175,6 @@ export default {
           this.pokazannie_redpriyatiya.push(pr);
         }
       }
-    
-     
-      
     }
   },
   data: () => ({
@@ -185,16 +187,19 @@ export default {
     poyasnenie_tekst: "",
     zagruzheniobrazy: false
   }),
-firestore() {
+  firestore() {
     return {
-    vsepredpriyatiya: this.$firebase.collection("predpriyatiya").orderBy("nazvanie"),
-    poyasnenie_tekst:this.$firebase.collection("teksti").doc("predpiyatiya-poyasnenie"),
-    }
+      vsepredpriyatiya: this.$firebase
+        .collection("predpriyatiya")
+        .orderBy("nazvanie"),
+      poyasnenie_tekst: this.$firebase
+        .collection("teksti")
+        .doc("predpiyatiya-poyasnenie")
+    };
   },
 
   methods: {
     obnovitSpiski() {
-      
       let vm = this;
       let vse_metki = [];
 
@@ -236,13 +241,12 @@ firestore() {
             vm.pokazannie_metki.splice(j, 1);
             break;
           }
-          
-          
         }
       }
-     // убираю метки, которые есть у всех показанных предприятий
-     this.pokazannie_metki=this.pokazannie_metki.filter(metka => metka[1]<this.pokazannie_redpriyatiya.length);
-
+      // убираю метки, которые есть у всех показанных предприятий
+      this.pokazannie_metki = this.pokazannie_metki.filter(
+        metka => metka[1] < this.pokazannie_redpriyatiya.length
+      );
     },
     openlink(arg) {
       window.open(arg, "_blank");

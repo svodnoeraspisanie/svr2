@@ -41,18 +41,19 @@
           <v-col cols="auto" class="pt-0">
             <div style="max-width:936px" class="pb-3">
               <h2>
-                <v-icon class="mr-2 pb-1" color="#0a7d9a">mdi-book-open</v-icon>{{statiya.nazvanie}}
+                <v-icon class="mr-2 pb-1" color="#0a7d9a">mdi-book-open</v-icon>
+                {{statiya.nazvanie}}
               </h2>
             </div>
-            
+
             <v-card outlined class="mb-6 ml-2" max-width="936px">
-   <v-img :src="statiya.obraz"  max-height="300px
-   " >
-                    <v-layout slot="placeholder" fill-height align-center justify-center ma-0>
-                      <v-progress-circular indeterminate color="#0a7d9a"></v-progress-circular>
-                    </v-layout>
-                  </v-img>
-                  <v-divider />
+              <v-img :src="statiya.obraz" max-height="300px
+   ">
+                <v-layout slot="placeholder" fill-height align-center justify-center ma-0>
+                  <v-progress-circular indeterminate color="#0a7d9a"></v-progress-circular>
+                </v-layout>
+              </v-img>
+              <v-divider />
               <v-card-text v-html="statiya.text"></v-card-text>
             </v-card>
           </v-col>
@@ -66,7 +67,7 @@
 export default {
   components: {},
   props: ["drawer"],
-data: () => ({
+  data: () => ({
     drawer2: false,
     statiya: {}
   }),
@@ -75,10 +76,10 @@ data: () => ({
       this.drawer2 = !this.drawer2;
     },
     statiya() {
-      document.title=this.statiya.nazvanie+' | Свора';
+      document.title = this.statiya.nazvanie + " | Свора";
     }
   },
-  
+
   firestore() {
     return {
       statiya: this.$firebase.collection("statii").doc(this.$route.params.id)
