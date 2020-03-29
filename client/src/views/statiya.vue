@@ -41,11 +41,17 @@
           <v-col cols="auto" class="pt-0">
             <div style="max-width:936px" class="pb-3">
               <h2>
-                <v-icon class="mr-2 pb-1" color="#0a7d9a">mdi-book-open</v-icon>Статьи
+                <v-icon class="mr-2 pb-1" color="#0a7d9a">mdi-book-open</v-icon>{{statiya.nazvanie}}
               </h2>
             </div>
+            
             <v-card outlined class="mb-6 ml-2" max-width="936px">
-              <v-card-title style="word-break: normal">{{statiya.nazvanie}}</v-card-title>
+   <v-img :src="statiya.obraz"  max-height="300px" >
+                    <v-layout slot="placeholder" fill-height align-center justify-center ma-0>
+                      <v-progress-circular indeterminate color="#0a7d9a"></v-progress-circular>
+                    </v-layout>
+                  </v-img>
+                  <v-divider />
               <v-card-text v-html="statiya.text"></v-card-text>
             </v-card>
           </v-col>

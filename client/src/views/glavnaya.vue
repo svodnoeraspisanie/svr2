@@ -136,18 +136,18 @@
                   type="heading"
                 >
                   <v-icon class="mr-2" color="#0a7d9a">mdi-help-circle-outline</v-icon>
-                  {{teksti[0].zagolovok}}
+                  {{teksti.teksti[0].zagolovok}}
                 </v-skeleton-loader>
               </router-link>
             </div>
 
-            <v-card class="cardhov ml-2" outlined :to="{path: teksti[0].ssilka}">
+            <v-card class="cardhov ml-2" outlined :to="{path: teksti.teksti[0].ssilka}">
               <v-skeleton-loader
                   :loading="!tekstiZagruzheni"
                   :class="!tekstiZagruzheni? 'pa-3': ''"
                   type="paragraph@3"
                 >
-              <v-card-text  class="pb-1 pt-2" v-html="teksti[0].tekst"></v-card-text>
+              <v-card-text  class="pb-1 pt-2" v-html="teksti.teksti[0].tekst"></v-card-text>
               </v-skeleton-loader>
             </v-card>
           </v-col>
@@ -491,32 +491,18 @@ export default {
   }),
   created() {
     this.zagruzkaraspisaniya();
-    const db = this.$firebase;
-    const st = this.$store;
-
-    db.collection("teksti")
-      .doc("glavnaya")
-      .get()
-      .then(snapshot => {
-        this.teksti = snapshot.data().teksti;
-        this.tekstiZagruzheni = true;
-      });
-
-    const vm = this;
-
-    db.collection("predpriyatiya")
-      .get()
-      .then(querySnapshot => {
-        querySnapshot.forEach(doc => {
-          const res = doc.data();
-          res.id = doc.id;
-          vm.predpriyatiya.push(res);
-        });
-        vm.si = vm.anyel(vm.si, vm.sbori);
-        vm.pi = vm.anyel(vm.pi, vm.predpriyatiya);
-      });
+  
   },
   watch: {
+    teksti(){
+      this.tekstiZagruzheni = true;
+    },
+    predpriyatiya(){
+      this.pi = this.anyel(this.pi, this.predpriyatiya);
+    },
+    sbori(){
+      this.si = this.anyel(this.si, this.sbori);
+    },
     drawer() {
       this.drawer2 = !this.drawer2;
     },
@@ -602,12 +588,9 @@ export default {
   firestore() {
     return {
       sbori: this.$firebase.collection("sbori").where("idet", "==", true),
-
-      novosti: this.$firebase
-        .collection("novosti")
-        .orderBy("data", "desc")
-        .limit(7),
-
+      novosti: this.$firebase.collection("novosti").orderBy("data", "desc").limit(7),
+      predpriyatiya: this.$firebase.collection("predpriyatiya"),
+      teksti: this.$firebase.collection("teksti").doc("glavnaya"),
       zamisli: this.$firebase.collection("zamisli")
     };
   }

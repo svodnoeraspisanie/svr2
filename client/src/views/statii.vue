@@ -55,6 +55,7 @@
                       <v-progress-circular indeterminate color="#0a7d9a"></v-progress-circular>
                     </v-layout>
                   </v-img>
+                  <v-divider />
               <v-card-title style="word-break: normal">{{statia.nazvanie}}</v-card-title>
               
             </v-card>
@@ -84,7 +85,7 @@ export default {
 
   firestore () {
     return {
-    statii: this.$firebase.collection('statii'),
+    statii: this.$firebase.collection('statii').orderBy("pokazano", "desc")
     }
   },
 };

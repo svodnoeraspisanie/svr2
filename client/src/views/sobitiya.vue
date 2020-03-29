@@ -366,33 +366,7 @@ export default {
     ]
   }),
 
-  computed: {
-    //
-
-    allSelected() {
-      return this.selected.length === this.items.length;
-    },
-    categories() {
-      const search = this.search.toLowerCase();
-
-      if (!search) return this.items;
-
-      return this.items.filter(item => {
-        const text = item.text.toLowerCase();
-
-        return text.indexOf(search) > -1;
-      });
-    },
-    selections() {
-      const selections = [];
-
-      for (const selection of this.selected) {
-        selections.push(this.items[selection]);
-      }
-
-      return selections;
-    }
-  },
+ 
   methods: {
     clickdate(arg) {
       this.changeView("timeGridDay");

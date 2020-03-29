@@ -7,7 +7,7 @@
       clipped
       width="300px"
     >
-      <v-list>
+      <v-list style="height:76%">
         <v-list-item link to="/">
           <v-list-item-icon>
             <v-icon>mdi-arrow-left-bold</v-icon>
@@ -28,14 +28,17 @@
           </v-list-item-content>
         </v-list-item>
         <v-divider></v-divider>
-        <div class="pt-2 pl-4 subtitle-1 font-weight-bold	" >Выберите метки:</div>
+        <div v-if="pokazannie_metki.length>0"  class="pt-2 pl-4 subtitle-1 font-weight-bold	" >Выберите метки:</div>
+        <v-container class="pa-0 overflow-y-auto" style="height:100%" v-if="pokazannie_metki.length>0" >
+        
         <v-list class="pt-0 pl-4">
           <template v-for="(item, i) in pokazannie_metki">
             <v-list-item  style="min-height: 24px;" small :key="i" @click="vibrannie_metki.push(item)">
-              <v-list-item-title v-text="item[0]"></v-list-item-title>
+              <v-list-item-title > {{item[0]}} ({{item[1]}})</v-list-item-title>
             </v-list-item>
           </template>
         </v-list>
+        </v-container>
       </v-list>
 
       <template v-slot:append v-if="$vuetify.breakpoint.xs">
@@ -134,7 +137,7 @@ export default {
        vsepredpriyatiya() {
       this.pokazannie_redpriyatiya=this.vsepredpriyatiya.slice();
       this.obnovitSpiski();
-      console.log("obnovit");
+     
 
     },
     drawer() {
@@ -142,6 +145,8 @@ export default {
     },
     pokazannie_redpriyatiya() {
       this.obnovitSpiski();
+
+     
     },
     vibrannie_metki() {
       this.pokazannie_redpriyatiya = [];
@@ -160,6 +165,9 @@ export default {
           this.pokazannie_redpriyatiya.push(pr);
         }
       }
+    
+     
+      
     }
   },
   data: () => ({
@@ -216,14 +224,20 @@ firestore() {
 
       vm.pokazannie_metki = result;
 
+      //убираю метки, которые уже выбраны
       for (let i = 0; i < vm.vibrannie_metki.length; ++i) {
         for (let j = 0; j < vm.pokazannie_metki.length; ++j) {
           if (vm.vibrannie_metki[i][0] === vm.pokazannie_metki[j][0]) {
             vm.pokazannie_metki.splice(j, 1);
             break;
           }
+          
+          
         }
       }
+     // убираю метки, которые есть у всех показанных предприятий
+     this.pokazannie_metki=this.pokazannie_metki.filter(metka => metka[1]<this.pokazannie_redpriyatiya.length);
+
     },
     openlink(arg) {
       window.open(arg, "_blank");
