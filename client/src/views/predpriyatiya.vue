@@ -146,6 +146,7 @@ export default {
   watch: {
     vsepredpriyatiya() {
       if (this.vsepredpriyatiya.length > 0) {
+        let granica = this.vsepredpriyatiya.findIndex(pr => pr.nazvanie.slice(0,1)==="А");
         this.pokazannie_redpriyatiya = this.vsepredpriyatiya
           .slice(granica)
           .concat(this.vsepredpriyatiya.slice(0, granica));
