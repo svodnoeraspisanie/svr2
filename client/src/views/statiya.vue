@@ -76,7 +76,7 @@ export default {
       this.drawer2 = !this.drawer2;
     },
     statiya() {
-      document.title = this.statiya.nazvanie + " | Свора";
+      document.title = this.statiya.nazvanie + " | Ракитов Куст";
     }
   },
 

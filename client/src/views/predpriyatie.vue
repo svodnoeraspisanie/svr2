@@ -155,7 +155,7 @@ export default {
       this.drawer2 = !this.drawer2;
     },
     pr() {
-      document.title = this.pr.nazvanie + " | Свора";
+      document.title = this.pr.nazvanie + " | Ракитов Куст";
     }
   }
 };

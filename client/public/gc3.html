@@ -13,6 +13,8 @@
     <button id="authorize_button" style="display: none;">Authorize</button>
     <button id="signout_button" style="display: none;">Sign Out</button>
 
+    <button id="check_button" style="display: none;">Проверить каналы</button>
+
     <pre id="content" style="white-space: pre-wrap;"></pre>
 
     <script type="text/javascript">
@@ -29,6 +31,8 @@
 
         var authorizeButton = document.getElementById('authorize_button');
         var signoutButton = document.getElementById('signout_button');
+
+        var checkButton = document.getElementById('check_button');
 
         /**
          *  On load, called to load the auth2 library and API client library.
@@ -55,6 +59,7 @@
                 updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
                 authorizeButton.onclick = handleAuthClick;
                 signoutButton.onclick = handleSignoutClick;
+                checkButton.onclick = start;
             }, function (error) {
                 appendPre(JSON.stringify(error, null, 2));
             });
@@ -68,7 +73,7 @@
             if (isSignedIn) {
                 authorizeButton.style.display = 'none';
                 signoutButton.style.display = 'block';
-                sledit();
+                // sledit();
 
             } else {
                 authorizeButton.style.display = 'block';
@@ -110,7 +115,7 @@
 
         const spiskoKanalov = [
             { id: "UC3__2CKZlG6aKX0Ex53SGDw", dlitelnost: 2, n: "гроза" },
-            { id: "UCYNd5lLoDN-VThLdTWDDASw", dlitelnost: 2, n: "фунт" },
+          
             { id: "UC7GcUuO8Z8OBWvJLtQ4d3Sw", dlitelnost: 1, n: "кашин" },
             { id: "UC0VgZiqHIeKlYvVtabVfamw", dlitelnost: 5, n: "галковский" },
             { id: "UCGNFIJaVOs3TJJbzctDCiJg", dlitelnost: 2, n: "юнеман" },
@@ -124,6 +129,9 @@
             { id: "UCNd1jPh65H4dfYPGOHVJyxA", dlitelnost: 3, n: "холмогоров" },
             { id: "UCAJioHOMJaWRhcK_x1QzHcw", dlitelnost: 3, n: "погром" },
             { id: "UCTP20lo68ZHFA5bXigF975A", dlitelnost: 3, n: "розанов клуб" },
+            { id: "UCYNm5hOquzAKM-ctxqOHhZQ", dlitelnost: 3, n: "локал крю" },
+            { id: "UCjc2hUqt3M9VU7yhc_Lv8wg", dlitelnost: 3, n: "чёрная сотня и листва" },
+            { id: "UCdhz2BflgqhUfri8y9Oqn7A", dlitelnost: 3, n: "крюков" },
 
         ];
 
@@ -134,23 +142,23 @@
             window.setInterval(async () => {
                 appendPre(new Date());
                 try {
-                for (let i = 0; i < spiskoKanalov.length; ++i) {
-                    await dobavitStrimiVRaspisanie(spiskoKanalov[i]);
+                    for (let i = 0; i < spiskoKanalov.length; ++i) {
+                        await dobavitStrimiVRaspisanie(spiskoKanalov[i]);
+                    }
+                } catch (e) {
+                    console.log(e);
+                    appendPre(e.result.error.message);
                 }
-            } catch (e) {
-                console.log(e);
-                appendPre(e.result.error.message);
-            }
-            }, 2*60*60*1000);
+            }, 2 * 60 * 60 * 1000);
 
 
 
         }
 
         async function start() {
-           
-                appendPre(new Date());
-                try {
+
+            appendPre(new Date());
+            try {
                 for (let i = 0; i < spiskoKanalov.length; ++i) {
                     await dobavitStrimiVRaspisanie(spiskoKanalov[i]);
                 }
@@ -158,92 +166,106 @@
                 console.log(e);
                 appendPre(e.result.error.message);
             }
-           
+
 
 
 
         }
 
-        async function dobavitStrimiVRaspisanie(kanal) {
+        async function test() {
+
             
+            const res = await gapi.client.youtube.channels.list({
+                "part": "snippet,contentDetails",
+                "id": "UC3__2CKZlG6aKX0Ex53SGDw",
+                
+            });
+            console.log(res);
 
-                const budushieStrimi = await gapi.client.youtube.search.list({
-                    "part": "snippet",
-                    "channelId": kanal.id,
-                    "eventType": "upcoming",
-                    "maxResults": 25,
-                    "type": "video"
-                });
+        }
+      //  "No filter selected. Expected one of: mySubscribers, mine, categoryId, managedByMe, forUsername, idParam, id"
+// UC3__2CKZlG6aKX0Ex53SGDw.Zx4DA4xg9IM               "uploads": "UU3__2CKZlG6aKX0Ex53SGDw",  
+        async function dobavitStrimiVRaspisanie(kanal) {
 
-                appendPre("проверяем " + kanal.n);
 
-                let spisok = [];
-                for (let x = 0; x < budushieStrimi.result.items.length; ++x) {
-                    spisok.push(budushieStrimi.result.items[x].id.videoId);
+            const budushieStrimi = await gapi.client.youtube.search.list({
+                "part": "snippet",
+                "channelId": kanal.id,
+                "eventType": "upcoming",
+                "maxResults": 25,
+                "type": "video"
+            });
+
+            appendPre("проверяем " + kanal.n);
+
+            let spisok = [];
+            for (let x = 0; x < budushieStrimi.result.items.length; ++x) {
+                spisok.push(budushieStrimi.result.items[x].id.videoId);
+            };
+
+            const strimi = await gapi.client.youtube.videos.list({
+                "part": "snippet,liveStreamingDetails",
+                "id": spisok.toString()
+            });
+            console.log(strimi);
+
+
+            for (let i = 0; i < strimi.result.items.length; ++i) {
+                let st = strimi.result.items[i].liveStreamingDetails.scheduledStartTime;
+                let et = new Date(st);
+                et.setHours(et.getHours() + kanal.dlitelnost);
+                et = et.toISOString();
+
+                let sobitie = {
+                    'summary': strimi.result.items[i].snippet.channelTitle + ": " + strimi.result.items[i].snippet.title,
+
+                    'description': "<a href='https://www.youtube.com/watch?v=" + strimi.result.items[i].id + "'>Открыть Youtube</a><br/><br/>" + strimi.result.items[i].snippet.description,
+                    'start': {
+                        'dateTime': st,
+
+                    },
+                    'end': {
+                        'dateTime': et,
+
+                    },
+
                 };
 
-                const strimi = await gapi.client.youtube.videos.list({
-                    "part": "snippet,liveStreamingDetails",
-                    "id": spisok.toString()
+
+                let sobVRasp = await gapi.client.calendar.events.list({
+
+                    //'calendarId': 'q6gg9p4b5oa1ij98867jp6tuno@group.calendar.google.com',
+                    'calendarId': '2kpu7kvisrlvmgkiheabippc20@group.calendar.google.com',
+                    'timeMin': st,
+                    'singleEvents': true,
+                    'maxResults': 1,
+                    'orderBy': 'startTime'
                 });
+                //console.log(sobVRasp);
 
 
-
-                for (let i = 0; i < strimi.result.items.length; ++i) {
-                    let st = strimi.result.items[i].liveStreamingDetails.scheduledStartTime;
-                    let et = new Date(st);
-                    et.setHours(et.getHours() + kanal.dlitelnost);
-                    et = et.toISOString();
-                    let sobitie = {
-                        'summary': strimi.result.items[i].snippet.channelTitle + ": " + strimi.result.items[i].snippet.title,
-
-                        'description': strimi.result.items[i].snippet.description,
-                        'start': {
-                            'dateTime': st,
-
-                        },
-                        'end': {
-                            'dateTime': et,
-
-                        },
-
-                    };
-
-
-                    let sobVRasp = await gapi.client.calendar.events.list({
-                        
-                        //'calendarId': 'q6gg9p4b5oa1ij98867jp6tuno@group.calendar.google.com',
-                        'calendarId': '2kpu7kvisrlvmgkiheabippc20@group.calendar.google.com',
-                        'timeMin': st,
-                        'singleEvents': true,
-                        'maxResults': 1,
-                        'orderBy': 'startTime'
-                    });
-                    //console.log(sobVRasp);
-
-
-                    if (sobVRasp.result.items.length > 0) {
-                        if (sobVRasp.result.items[0].summary != sobitie.summary) {
-                            console.log("добавлено событие ", sobitie.summary)
-                            var request = await gapi.client.calendar.events.insert({
-                                'calendarId': 'q6gg9p4b5oa1ij98867jp6tuno@group.calendar.google.com',
-                                'resource': sobitie
-                            });
-                        }
-                    } else {
+                if (sobVRasp.result.items.length > 0) {
+                    if (sobVRasp.result.items[0].summary != sobitie.summary) {
+                        console.log("добавлено событие ", sobitie.summary)
                         var request = await gapi.client.calendar.events.insert({
-                            'calendarId': 'q6gg9p4b5oa1ij98867jp6tuno@group.calendar.google.com',
+                            'calendarId': '2kpu7kvisrlvmgkiheabippc20@group.calendar.google.com',
                             'resource': sobitie
-                        })
-
+                        });
                     }
-
-
-
+                } else {
+                    var request = await gapi.client.calendar.events.insert({
+                        'calendarId': '2kpu7kvisrlvmgkiheabippc20@group.calendar.google.com',
+                        'resource': sobitie
+                    })
 
                 }
 
-           
+
+
+
+            }
+
+
         }
 
 

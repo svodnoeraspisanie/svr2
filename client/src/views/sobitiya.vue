@@ -175,7 +175,7 @@
           </v-sheet>
           <v-btn
             v-if="!$vuetify.breakpoint.xs"
-            color="#eef5f8"
+            color="#c5dde8"
             link
             fab
             right
@@ -221,7 +221,7 @@
 
           <v-btn
             v-if="$vuetify.breakpoint.xs"
-            color="#f4c900"
+            color="#c5dde8"
             link
             fab
             right

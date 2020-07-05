@@ -14,7 +14,7 @@ export default new Router({
       name: 'glavnaya',
       component: glavnaya,
       props: true,
-      meta:{title:"Свора - русское предпринимательство и благотворительность"},
+      meta:{title:"Ракитов Куст - русское предпринимательство и благотворительность"},
       
       
     },
@@ -23,14 +23,14 @@ export default new Router({
       name: 'spravka',
       props: true,
       component: () => import('./views/spravka.vue'),
-      meta:{title:"Свора - русское предпринимательство и благотворительность"},
+      meta:{title:"Ракитов Куст - русское предпринимательство и благотворительность"},
     },
     {
       path: '/statii',
       name: 'statii',
       props: true,
       component: () => import('./views/statii.vue'),
-      meta:{title:"Свора - русское предпринимательство и благотворительность"},
+      meta:{title:"Ракитов Куст - русское предпринимательство и благотворительность"},
     },
     {
       path: '/statii/:id',
@@ -42,20 +42,20 @@ export default new Router({
       path: '/sobitiya',
       name: 'sobitiya',
       props: true,
-      meta:{title:"Расписание событий русской культуры, истории и политики | Свора"},
+      meta:{title:"Расписание событий русской культуры, истории и политики | Ракитов Куст"},
       component: () => import('./views/sobitiya.vue'),
     },
     {
       path: '/sobitiya/:id',
       props: true,
-      meta:{title:"Расписание событий русской культуры, истории и политики | Свора"},
+      meta:{title:"Расписание событий русской культуры, истории и политики | Ракитов Куст"},
       component: () => import('./views/sobitiya.vue'),
     },
     {
       path: '/predpriyatiya',
       name: 'predpriyatiya',
       props: true,
-      meta:{title:"Русские национальные предприятия | Свора"},
+      meta:{title:"Русские национальные предприятия | Ракитов Куст"},
       component: () => import('./views/predpriyatiya.vue'),
     },
     {
@@ -68,7 +68,7 @@ export default new Router({
       path: '/sbori',
       name: 'sbori',
       props: true,
-      meta:{title:"Сборы средств для начинаний | Свора"},
+      meta:{title:"Сборы средств для начинаний | Ракитов Куст"},
       component: () => import('./views/sbori.vue'),
     },
     {
@@ -81,8 +81,15 @@ export default new Router({
       path: '/prisoedinitsya',
       name: 'prisoedinitsya',
       props: true,
-      meta:{title:"Присоединиться | Свора"},
+      meta:{title:"Присоединиться | Ракитов Куст"},
       component: () => import('./views/prisoedinitsya.vue'),
+    },
+    {
+      path: '/praviykurs',
+      name: 'praviykurs',
+      props: true,
+      meta:{title:"Правый курс | Ракитов Куст"},
+      component: () => import('./views/praviykurs.vue'),
     },
   ],
 });

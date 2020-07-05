@@ -42,7 +42,7 @@
         </h2>
 
         <v-row class="ml-0">
-          <v-col lg="4" md="4" sm="6" cols="12" v-for="(statia,i) in statii" :key="i">
+          <v-col lg="4" md="6" sm="12" cols="12" v-for="(statia,i) in statii" :key="i">
             <v-card class="cardhov" height="100%" outlined :to="{path: `/statii/${statia.id}`}">
               <v-img :src="statia.obraz" aspect-ratio="1.5" contain style="width:100%">
                 <v-layout slot="placeholder" fill-height align-center justify-center ma-0>

@@ -8,6 +8,17 @@
       app
     >
       <v-list>
+<v-list-item link to="/praviykurs">
+          <v-list-item-icon>
+            <v-img max-height="24px" max-width="24px" contain src="https://firebasestorage.googleapis.com/v0/b/svora-6f3df.appspot.com/o/rc.png?alt=media&token=d78085f4-bf3b-4cee-a0f0-5c192ffaa17a"></v-img>
+          </v-list-item-icon>
+
+          <v-list-item-content>
+            <v-list-item-title>Правый курс</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
+
         <v-list-item link to="/statii">
           <v-list-item-icon>
             <v-icon>mdi-book-open</v-icon>
@@ -475,7 +486,7 @@ export default {
     predpriyatiya: [],
     novosti: [],
     zamisli: [],
-    teksti: [],
+    teksti: {teksti:[{zagolovok:''}]},
     si: 0,
     pi: 0,
     tekst: {},
@@ -585,7 +596,7 @@ export default {
       novosti: this.$firebase
         .collection("novosti")
         .orderBy("data", "desc")
-        .limit(7),
+        .limit(5),
       predpriyatiya: this.$firebase.collection("predpriyatiya"),
       teksti: this.$firebase.collection("teksti").doc("glavnaya"),
       zamisli: this.$firebase.collection("zamisli")
