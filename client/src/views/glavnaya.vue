@@ -79,7 +79,9 @@
       </v-list>
 
       <template v-slot:append>
-         <div class="pa-2 pb-0">
+
+        <div class="pa-2 pb-0">
+
           <v-btn
             block
             depressed
