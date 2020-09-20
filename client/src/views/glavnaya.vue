@@ -79,6 +79,14 @@
       </v-list>
 
       <template v-slot:append>
+        <div class="pa-2 pb-0">
+          <v-btn
+            block
+            depressed
+            color="#cde6bb"
+            @click="openlink('https://t.me/rakitov_kust')"
+          >Телеграм</v-btn>
+        </div>
         <div class="pa-2">
           <v-btn
             block
