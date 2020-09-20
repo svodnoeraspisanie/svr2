@@ -8,6 +8,17 @@
       app
     >
       <v-list>
+<v-list-item link to="/praviykurs">
+          <v-list-item-icon>
+            <v-img max-height="24px" max-width="24px" contain src="https://firebasestorage.googleapis.com/v0/b/svora-6f3df.appspot.com/o/rc.png?alt=media&token=d78085f4-bf3b-4cee-a0f0-5c192ffaa17a"></v-img>
+          </v-list-item-icon>
+
+          <v-list-item-content>
+            <v-list-item-title>Правый курс</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
+
         <v-list-item link to="/statii">
           <v-list-item-icon>
             <v-icon>mdi-book-open</v-icon>
@@ -100,11 +111,7 @@
             </div>
             <v-card outlined class="ml-2">
               <v-card-text class="pb-1 pt-2">
-                <v-skeleton-loader
-                  :loading="!novostiZagruzheni"
-                  
-                  type="sentences@5"
-                >
+                <v-skeleton-loader :loading="!novostiZagruzheni" type="sentences@5">
                   <v-simple-table dense>
                     <tbody v-if="novosti.length>0">
                       <tr
@@ -131,23 +138,22 @@
               <router-link class="mainlink" to="/spravka">
                 <v-skeleton-loader
                   :loading="!tekstiZagruzheni"
-                 
                   :class="!tekstiZagruzheni? 'pb-3': ''"
                   type="heading"
                 >
                   <v-icon class="mr-2" color="#0a7d9a">mdi-help-circle-outline</v-icon>
-                  {{teksti[0].zagolovok}}
+                  {{teksti.teksti[0].zagolovok}}
                 </v-skeleton-loader>
               </router-link>
             </div>
 
-            <v-card class="cardhov ml-2" outlined :to="{path: teksti[0].ssilka}">
+            <v-card class="cardhov ml-2" outlined :to="{path: teksti.teksti[0].ssilka}">
               <v-skeleton-loader
-                  :loading="!tekstiZagruzheni"
-                  :class="!tekstiZagruzheni? 'pa-3': ''"
-                  type="paragraph@3"
-                >
-              <v-card-text  class="pb-1 pt-2" v-html="teksti[0].tekst"></v-card-text>
+                :loading="!tekstiZagruzheni"
+                :class="!tekstiZagruzheni? 'pa-3': ''"
+                type="paragraph@3"
+              >
+                <v-card-text class="pb-1 pt-2" v-html="teksti.teksti[0].tekst"></v-card-text>
               </v-skeleton-loader>
             </v-card>
           </v-col>
@@ -480,7 +486,7 @@ export default {
     predpriyatiya: [],
     novosti: [],
     zamisli: [],
-    teksti: [],
+    teksti: {teksti:[{zagolovok:''}]},
     si: 0,
     pi: 0,
     tekst: {},
@@ -491,32 +497,17 @@ export default {
   }),
   created() {
     this.zagruzkaraspisaniya();
-    const db = this.$firebase;
-    const st = this.$store;
-
-    db.collection("teksti")
-      .doc("glavnaya")
-      .get()
-      .then(snapshot => {
-        this.teksti = snapshot.data().teksti;
-        this.tekstiZagruzheni = true;
-      });
-
-    const vm = this;
-
-    db.collection("predpriyatiya")
-      .get()
-      .then(querySnapshot => {
-        querySnapshot.forEach(doc => {
-          const res = doc.data();
-          res.id = doc.id;
-          vm.predpriyatiya.push(res);
-        });
-        vm.si = vm.anyel(vm.si, vm.sbori);
-        vm.pi = vm.anyel(vm.pi, vm.predpriyatiya);
-      });
   },
   watch: {
+    teksti() {
+      this.tekstiZagruzheni = true;
+    },
+    predpriyatiya() {
+      this.pi = this.anyel(this.pi, this.predpriyatiya);
+    },
+    sbori() {
+      this.si = this.anyel(this.si, this.sbori);
+    },
     drawer() {
       this.drawer2 = !this.drawer2;
     },
@@ -602,12 +593,12 @@ export default {
   firestore() {
     return {
       sbori: this.$firebase.collection("sbori").where("idet", "==", true),
-
       novosti: this.$firebase
         .collection("novosti")
         .orderBy("data", "desc")
-        .limit(7),
-
+        .limit(5),
+      predpriyatiya: this.$firebase.collection("predpriyatiya"),
+      teksti: this.$firebase.collection("teksti").doc("glavnaya"),
       zamisli: this.$firebase.collection("zamisli")
     };
   }

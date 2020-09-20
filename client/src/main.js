@@ -15,16 +15,32 @@ import {config} from './apis.js'
 
 
 
+
 firebase.initializeApp(config);
 
 Vue.prototype.$firebase = firebase.firestore();
 Vue.prototype.$store = firebase.storage();
 
+
 firebase.analytics();
 const { Timestamp, GeoPoint } = firebase.firestore;
 export { Timestamp, GeoPoint };
 
-Vue.use(firestorePlugin);
+const serialize = (snapshot) => {return Object.defineProperty(snapshot.data(), 'id', { value: snapshot.id })
+}
+
+Vue.use(firestorePlugin, { serialize });
+
+
+Vue.filter("truncate", function(value, length) {
+  if (!value) return "";
+  value = value.toString();
+  if (value.length > length) {
+      return value.substring(0, length) + "...";
+  } else {
+      return value;
+  }
+});
 
 new Vue({
   router,

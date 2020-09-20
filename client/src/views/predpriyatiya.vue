@@ -7,7 +7,7 @@
       clipped
       width="300px"
     >
-      <v-list>
+      <v-list style="height:76%">
         <v-list-item link to="/">
           <v-list-item-icon>
             <v-icon>mdi-arrow-left-bold</v-icon>
@@ -28,14 +28,28 @@
           </v-list-item-content>
         </v-list-item>
         <v-divider></v-divider>
-        <div class="pt-2 pl-4 subtitle-1 font-weight-bold	" >Выберите метки:</div>
-        <v-list class="pt-0 pl-4">
-          <template v-for="(item, i) in pokazannie_metki">
-            <v-list-item  style="min-height: 24px;" small :key="i" @click="vibrannie_metki.push(item)">
-              <v-list-item-title v-text="item[0]"></v-list-item-title>
-            </v-list-item>
-          </template>
-        </v-list>
+        <div
+          v-if="pokazannie_metki.length>0"
+          class="pt-2 pl-4 subtitle-1 font-weight-bold"
+        >Выберите метки:</div>
+        <v-container
+          class="pa-0 overflow-y-auto"
+          style="height:100%"
+          v-if="pokazannie_metki.length>0"
+        >
+          <v-list class="pt-0 pl-4">
+            <template v-for="(item, i) in pokazannie_metki">
+              <v-list-item
+                style="min-height: 24px;"
+                small
+                :key="i"
+                @click="vibrannie_metki.push(item)"
+              >
+                <v-list-item-title>{{item[0]}} ({{item[1]}})</v-list-item-title>
+              </v-list-item>
+            </template>
+          </v-list>
+        </v-container>
       </v-list>
 
       <template v-slot:append v-if="$vuetify.breakpoint.xs">
@@ -63,17 +77,16 @@
           >Русские национальные предприятия ({{pokazannie_redpriyatiya.length}})</span>
         </h2>
         <v-card outlined class="ml-3 mt-2" v-if="poyasnenie" @click="poyasnenie=!poyasnenie">
-          <v-card-text class="pb-1 pt-2" v-html="poyasnenie_tekst"></v-card-text>
+          <v-card-text class="pb-1 pt-2" v-html="poyasnenie_tekst.tekst"></v-card-text>
         </v-card>
         <v-chip
           v-for="(metka,i) in vibrannie_metki"
           :key="i"
-         class="mt-1 mr-1"
-         
+          class="mt-1 mr-1"
           @click="vibrannie_metki.splice(i,1)"
         >{{metka[0]}}</v-chip>
         <v-row class="ml-0">
-          <v-col lg="3" md="4" sm="6" cols="12" v-for="pr in pokazannie_redpriyatiya" :key="pr.n">
+          <v-col lg="3" md="4" sm="6" cols="12" v-for="(pr,i) in pokazannie_redpriyatiya" :key="i">
             <v-card class="cardhov" height="100%" :to="{path: `/predpriyatiya/${pr.id}`}" outlined>
               <div style="display: flex;  flex-flow: column;   height:100%">
                 <div>
@@ -131,6 +144,15 @@ export default {
   props: ["drawer"],
 
   watch: {
+    vsepredpriyatiya() {
+      if (this.vsepredpriyatiya.length > 0) {
+        let granica = this.vsepredpriyatiya.findIndex(pr => pr.nazvanie.slice(0,1)==="А");
+        this.pokazannie_redpriyatiya = this.vsepredpriyatiya
+          .slice(granica)
+          .concat(this.vsepredpriyatiya.slice(0, granica));
+        this.obnovitSpiski();
+      }
+    },
     drawer() {
       this.drawer2 = !this.drawer2;
     },
@@ -166,32 +188,17 @@ export default {
     poyasnenie_tekst: "",
     zagruzheniobrazy: false
   }),
-
-  created() {
-    const vm = this;
-
-    this.$firebase
-      .collection("teksti")
-      .doc("predpiyatiya-poyasnenie")
-      .get()
-      .then(snapshot => {
-        this.poyasnenie_tekst = snapshot.data().tekst;
-      });
-
-    this.$firebase
-      .collection("predpriyatiya")
-      .orderBy("nazvanie")
-      .get()
-      .then(querySnapshot => {
-        querySnapshot.forEach(doc => {
-          const res = doc.data();
-          res.id = doc.id;
-          vm.vsepredpriyatiya.push(res);
-          vm.pokazannie_redpriyatiya.push(res);
-        });
-        this.obnovitSpiski();
-      });
+  firestore() {
+    return {
+      vsepredpriyatiya: this.$firebase
+        .collection("predpriyatiya")
+        .orderBy("nazvanie"),
+      poyasnenie_tekst: this.$firebase
+        .collection("teksti")
+        .doc("predpiyatiya-poyasnenie")
+    };
   },
+
   methods: {
     obnovitSpiski() {
       let vm = this;
@@ -228,6 +235,7 @@ export default {
 
       vm.pokazannie_metki = result;
 
+      //убираю метки, которые уже выбраны
       for (let i = 0; i < vm.vibrannie_metki.length; ++i) {
         for (let j = 0; j < vm.pokazannie_metki.length; ++j) {
           if (vm.vibrannie_metki[i][0] === vm.pokazannie_metki[j][0]) {
@@ -236,6 +244,10 @@ export default {
           }
         }
       }
+      // убираю метки, которые есть у всех показанных предприятий
+      this.pokazannie_metki = this.pokazannie_metki.filter(
+        metka => metka[1] < this.pokazannie_redpriyatiya.length
+      );
     },
     openlink(arg) {
       window.open(arg, "_blank");

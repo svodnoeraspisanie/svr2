@@ -9,7 +9,7 @@
     <v-list width="100%" class="py-0">
       <v-list-item to="/" class="pa-0 ma-0 d-none d-sm-flex" active-class="act">
         <v-list-item-content>
-          <v-img src="/svora.png" contain width="250px"></v-img>
+          <v-img src="/rakitovkust.png" ></v-img>
         </v-list-item-content>
       </v-list-item>
 

@@ -8,7 +8,7 @@
       app
     >
       <v-list>
-        <v-list-item link to="/">
+        <v-list-item link to="/statii">
           <v-list-item-icon>
             <v-icon>mdi-arrow-left-bold</v-icon>
           </v-list-item-icon>
@@ -37,20 +37,24 @@
 
     <v-content :style="$vuetify.breakpoint.xs? '': 'padding-top:0px'">
       <v-container :class="$vuetify.breakpoint.xs? 'px-2': 'px-6'">
-        <h2>
-          <v-icon class="mr-2 pb-1" color="#0a7d9a">mdi-book-open</v-icon>Статьи
-        </h2>
+        <v-row justify="center">
+          <v-col cols="auto" class="pt-0">
+            <div style="max-width:936px" class="pb-3">
+              <h2>
+                <v-icon class="mr-2 pb-1" color="#0a7d9a">mdi-book-open</v-icon>
+                {{statiya.nazvanie}}
+              </h2>
+            </div>
 
-        <v-row class="ml-0">
-          <v-col lg="4" md="6" sm="12" cols="12" v-for="(statia,i) in statii" :key="i">
-            <v-card class="cardhov" height="100%" outlined :to="{path: `/statii/${statia.id}`}">
-              <v-img :src="statia.obraz" aspect-ratio="1.5" contain style="width:100%">
+            <v-card outlined class="mb-6 ml-2" max-width="936px">
+              <v-img :src="statiya.obraz" max-height="300px
+   ">
                 <v-layout slot="placeholder" fill-height align-center justify-center ma-0>
                   <v-progress-circular indeterminate color="#0a7d9a"></v-progress-circular>
                 </v-layout>
               </v-img>
               <v-divider />
-              <v-card-title style="word-break: normal">{{statia.nazvanie}}</v-card-title>
+              <v-card-text v-html="statiya.text"></v-card-text>
             </v-card>
           </v-col>
         </v-row>
@@ -63,27 +67,30 @@
 export default {
   components: {},
   props: ["drawer"],
-
+  data: () => ({
+    drawer2: false,
+    statiya: {}
+  }),
   watch: {
     drawer() {
       this.drawer2 = !this.drawer2;
+    },
+    statiya() {
+      document.title = this.statiya.nazvanie + " | Ракитов Куст";
     }
   },
-  data: () => ({
-    drawer2: false,
-    statii: []
-  }),
 
   firestore() {
     return {
-      statii: this.$firebase.collection("statii").orderBy("pokazano", "desc")
+      statiya: this.$firebase.collection("statii").doc(this.$route.params.id)
     };
   }
 };
 </script>
 
 <style>
-.cardhov:hover {
-  background-color: #eeeeee;
+.flexcard {
+  display: flex;
+  flex-direction: column;
 }
 </style>

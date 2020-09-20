@@ -75,7 +75,7 @@
           <span style="border-bottom: 1px dashed gray;">Идущие сборы средств ({{sbori.length}})</span>
         </h2>
         <v-card outlined class="ml-3 mt-2" v-if="poyasnenie" @click="poyasnenie=!poyasnenie">
-          <v-card-text class="pb-1 pt-2" v-html="sbori_tekst"></v-card-text>
+          <v-card-text class="pb-1 pt-2" v-html="sbori_teksti.tekst"></v-card-text>
         </v-card>
         <v-row class="ml-0">
           <v-col lg="3" md="4" sm="6" cols="12" v-for="(sbor,i) in sbori" :key="i">
@@ -100,10 +100,12 @@
 
         <h2 id="zavershennie" @click="poyasnenie2=!poyasnenie2">
           <v-icon class="mr-2 pb-1" color="#0a7d9a">mdi-progress-check</v-icon>
-          <span style="border-bottom: 1px dashed gray;">Завершённые сборы средств ({{sboriZavershennie.length}})</span>
+          <span
+            style="border-bottom: 1px dashed gray;"
+          >Завершённые сборы средств ({{sboriZavershennie.length}})</span>
         </h2>
         <v-card outlined class="ml-3 mt-2" v-if="poyasnenie2" @click="poyasnenie2=!poyasnenie2">
-          <v-card-text class="pb-1 pt-2" v-html="sbori_tekst2"></v-card-text>
+          <v-card-text class="pb-1 pt-2" v-html="sbori_teksti.tekst2"></v-card-text>
         </v-card>
         <v-row class="ml-0">
           <v-col lg="3" md="4" sm="6" cols="12" v-for="(sbor,i) in sboriZavershennie" :key="i">
@@ -127,46 +129,38 @@
 </template>
 
 <script>
-
-
 export default {
   components: {},
-  props: ['drawer'],
+  props: ["drawer"],
 
   watch: {
     drawer() {
       this.drawer2 = !this.drawer2;
-    },
+    }
   },
   data: () => ({
     drawer2: false,
     sbori: [],
     poyasnenie: false,
     poyasnenie2: false,
-    sbori_tekst: '',
-    sbori_tekst2: '',
-    sboriZavershennie: [],
+    sbori_teksti: {},
+    sboriZavershennie: []
   }),
-  created() {
-    this.$firebase.collection('teksti')
-      .doc('sbori-poyasnenie')
-      .get()
-      .then((snapshot) => {
-        this.sbori_tekst = snapshot.data().tekst;
-        this.sbori_tekst2 = snapshot.data().tekst2;
-      });
-  },
+
   firestore() {
     return {
-    sbori: this.$firebase.collection('sbori').where('idet', '==', true),
-    sboriZavershennie: this.$firebase.collection('sbori').where('idet', '==', false),
-  }
+      sbori: this.$firebase.collection("sbori").where("idet", "==", true),
+      sboriZavershennie: this.$firebase
+        .collection("sbori")
+        .where("idet", "==", false),
+      sbori_teksti: this.$firebase.collection("teksti").doc("sbori-poyasnenie")
+    };
   },
   methods: {
     openlink(arg) {
-      window.open(arg, '_blank');
-    },
-  },
+      window.open(arg, "_blank");
+    }
+  }
 };
 </script>
 

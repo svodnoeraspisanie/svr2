@@ -166,7 +166,7 @@
             {{new Date(selectedEvent.start).toLocaleDateString([],
             { day: '2-digit', month: 'long',year:'numeric' }) }}
           </v-card-title>
-    <v-divider class="pa-0" />
+          <v-divider class="pa-0" />
           <v-sheet class="overflow-y-auto" min-width="150px" max-width="400px" max-height="500px">
             <v-card-text>
               <h3>{{selectedEvent.title}}</h3>
@@ -175,7 +175,7 @@
           </v-sheet>
           <v-btn
             v-if="!$vuetify.breakpoint.xs"
-            color="#eef5f8"
+            color="#c5dde8"
             link
             fab
             right
@@ -221,7 +221,7 @@
 
           <v-btn
             v-if="$vuetify.breakpoint.xs"
-            color="#f4c900"
+            color="#c5dde8"
             link
             fab
             right
@@ -366,33 +366,6 @@ export default {
     ]
   }),
 
-  computed: {
-    //
-
-    allSelected() {
-      return this.selected.length === this.items.length;
-    },
-    categories() {
-      const search = this.search.toLowerCase();
-
-      if (!search) return this.items;
-
-      return this.items.filter(item => {
-        const text = item.text.toLowerCase();
-
-        return text.indexOf(search) > -1;
-      });
-    },
-    selections() {
-      const selections = [];
-
-      for (const selection of this.selected) {
-        selections.push(this.items[selection]);
-      }
-
-      return selections;
-    }
-  },
   methods: {
     clickdate(arg) {
       this.changeView("timeGridDay");
@@ -505,14 +478,12 @@ function dateToYMD(date) {
 .set {
   background-color: #c5dde8;
 }
-
 .msk {
   background-color: #cde6bb;
 }
 .spb {
   background-color: #e9ddbb;
 }
-
 .cont {
   height: calc(100vh - 64px);
 }

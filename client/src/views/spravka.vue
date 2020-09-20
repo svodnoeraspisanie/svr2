@@ -85,26 +85,24 @@
 </template>
 
 <script>
-
-
 export default {
   components: {},
-  props: ['drawer'],
+  props: ["drawer"],
   watch: {
     drawer() {
       this.drawer2 = !this.drawer2;
-    },
+    }
   },
   data: () => ({
     drawer2: false,
-    spravki: [],
+    spravki: []
   }),
 
   firestore() {
-    return{
-    spravki: this.$firebase.collection('spravki'),
-    }
-  },
+    return {
+      spravki: this.$firebase.collection("spravki")
+    };
+  }
 };
 </script>
 
