@@ -72,6 +72,13 @@ export default new Router({
       component: () => import('./views/sbori.vue'),
     },
     {
+      path: '/podpisi',
+      name: 'podpisi',
+      props: true,
+      meta:{title:"Подписные кампании | Ракитов Куст"},
+      component: () => import('./views/podpisi.vue'),
+    },
+    {
       path: '/dob',
       name: 'dob',
       props: true,

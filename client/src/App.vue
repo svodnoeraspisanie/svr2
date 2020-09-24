@@ -42,6 +42,9 @@
       <v-btn fab color="#f4c900" small to="/predpriyatiya">
         <v-icon>mdi-account-group</v-icon>
       </v-btn>
+      <v-btn fab color="#f4c900" small to="/podpisi">
+        <v-icon>mdi-lead-pencil</v-icon>
+      </v-btn>
       <v-btn fab color="#f4c900" small to="/sbori">
         <v-icon>mdi-cash-multiple</v-icon>
       </v-btn>

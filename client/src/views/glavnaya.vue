@@ -48,6 +48,16 @@
           </v-list-item-content>
         </v-list-item>
 
+        <v-list-item link to="/podpisi">
+          <v-list-item-icon>
+            <v-icon>mdi-lead-pencil</v-icon>
+          </v-list-item-icon>
+
+          <v-list-item-content>
+            <v-list-item-title>Сборы подписей</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
         <v-list-item link to="/sobitiya">
           <v-list-item-icon>
             <v-icon>mdi-calendar</v-icon>

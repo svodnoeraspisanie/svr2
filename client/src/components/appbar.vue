@@ -53,6 +53,15 @@
           </template>
           <span>Сборы средств</span>
         </v-tooltip>
+        
+         <v-tooltip bottom>
+          <template v-slot:activator="{ on }">
+            <v-btn icon to="/podpisi" v-on="on">
+              <v-icon>mdi-lead-pencil</v-icon>
+            </v-btn>
+          </template>
+          <span>Сборы подписей</span>
+        </v-tooltip>
 
         <v-tooltip bottom>
           <template v-slot:activator="{ on }">
@@ -72,14 +81,7 @@
           <span>Присоединиться</span>
         </v-tooltip>
 
-        <v-tooltip bottom>
-          <template v-slot:activator="{ on }">
-            <v-btn icon to="/spravka" v-on="on">
-              <v-icon>mdi-help-circle-outline</v-icon>
-            </v-btn>
-          </template>
-          <span>Ответы на вопросы</span>
-        </v-tooltip>
+     
       </v-toolbar>
     </v-list>
   </v-app-bar>
