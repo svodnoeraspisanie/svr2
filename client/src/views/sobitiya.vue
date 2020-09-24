@@ -34,6 +34,16 @@
 
         <v-divider></v-divider>
         <v-list-item
+           link to="/spravka" >
+          <v-list-item-icon>
+            <v-icon>mdi-cellphone-text</v-icon>
+          </v-list-item-icon>
+
+          <v-list-item-content>
+            <v-list-item-title>Расписание на смартфоне</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        <v-list-item
           link
           @click="openlink('https://docs.google.com/forms/d/e/1FAIpQLSfdSx-AidxewA9vnBgQaCtVpBtVzX5zyhN0Jj61VLrcQp-GnQ/viewform?usp=sf_link');drawer2=false;"
         >

@@ -45,10 +45,20 @@
           >Правый курс (tg:@rightcourse)</span>
         </h2>
         <v-card outlined class="ml-3 mt-2" v-if="poyasnenie" @click="poyasnenie=!poyasnenie">
-          <v-card-text class="pb-1 pt-2" ><a href="https://t.me/rightcourse" target="_blank">@rightcoursee</a> - Все правые новости русского Telegram. <br/>Дисклеймер: наш канал является агрегатором и публикует самые разные идеи и мысли правого спектра от православных фундаменталистов до либертарианцев. Для связи с нами: <a href="https://t.me/rightcoursemessage" target="_blank">@rightcoursemessage</a></v-card-text>
+          <v-card-text class="pb-1 pt-2" ><a href="https://t.me/rightcourse" target="_blank">@rightcoursee</a> - Все правые новости русского Telegram. <br/>Дисклеймер: наш канал является агрегатором и публикует самые разные идеи и мысли правого спектра от православных фундаменталистов до либертарианцев. Для связи: <a href="https://t.me/rightcoursemessage" target="_blank">@rightcoursemessage</a></v-card-text>
         </v-card>
 
         <v-row class="ml-0">
+
+
+          <v-col v-if="!zagruzheno"lg="4" md="6" sm="12" cols="12" v-for="n in 9" :key="n">
+            <v-skeleton-loader
+            class="mx-auto"
+            max-width="300"
+            type="card"
+    ></v-skeleton-loader>
+          </v-col>
+
 
           <v-col lg="4" md="6" sm="12" cols="12" v-for="(soobshenie,i) in feed.items" :key="i">
             <v-card outlined class="cardhov" height="100%"   @click.stop="vibrannoeSoobshenie=soobshenie;pokazatSoobshenie=true;" >
@@ -109,6 +119,7 @@ export default {
   data: () => ({
     drawer2: false,
     statii: [],
+    zagruzheno:false,
     poyasnenie:true,
     pokazatSoobshenie:false,
     vibrannoeSoobshenie:"",
@@ -122,6 +133,17 @@ export default {
 
    this.feed = await parser.parseURL(CORS_PROXY +'https://rsshub.app/telegram/channel/rightcourse');
 
+   for (let i = 0; i < this.feed.items.length; i++) { 
+    let temp = document.createElement('div');
+    temp.innerHTML = this.feed.items[i].content;
+    let bigimg = temp.getElementsByTagName('img')[0];
+    if(bigimg && bigimg.style) {
+    bigimg.style.maxHeight = '300px';
+    bigimg.style.maxWidth = '300px';
+}
+   this.feed.items[i].content=String(temp.innerHTML);
+   this.zagruzheno=true;
+}
 
  
 
