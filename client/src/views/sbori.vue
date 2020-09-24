@@ -82,7 +82,7 @@
             <v-card class="cardhov" height="100%" outlined @click="openlink(sbor.ssilka)">
               <div style="display: flex;  flex-flow: column;   height:100%">
                 <div>
-                  <v-img :src="sbor.obraz" aspect-ratio="1" contain>
+                  <v-img :src="sbor.obraz" aspect-ratio="1.5" contain>
                     <v-layout slot="placeholder" fill-height align-center justify-center ma-0>
                       <v-progress-circular indeterminate color="#0a7d9a"></v-progress-circular>
                     </v-layout>
@@ -110,7 +110,7 @@
         <v-row class="ml-0">
           <v-col lg="3" md="4" sm="6" cols="12" v-for="(sbor,i) in sboriZavershennie" :key="i">
             <v-card class="cardhov" height="100%" outlined @click="openlink(sbor.ssilka)">
-              <v-img :src="sbor.obraz" aspect-ratio="1.5" contain class="ma-2">
+              <v-img :src="sbor.obraz" aspect-ratio="1.5" contain >
                 <v-layout slot="placeholder" fill-height align-center justify-center ma-0>
                   <v-progress-circular indeterminate color="#0a7d9a"></v-progress-circular>
                 </v-layout>

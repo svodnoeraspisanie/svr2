@@ -67,7 +67,7 @@
               <div style="display: flex;  flex-flow: column;   height:100%">
                 <div style="widht:100%; background:#cde6bb; text-align:center">{{extractDomain(sbor.ssilka)}}</div>
                 <div>
-                  <v-img :src="sbor.obraz" aspect-ratio="1" fill>
+                  <v-img :src="sbor.obraz" aspect-ratio="1.5" contain>
                     <v-layout slot="placeholder" fill-height align-center justify-center ma-0>
                       <v-progress-circular indeterminate color="#0a7d9a"></v-progress-circular>
                     </v-layout>

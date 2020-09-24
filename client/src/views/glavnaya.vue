@@ -384,7 +384,7 @@
           <v-col class="pt-0" cols="12" sm="4">
             <span class="subtitle-1 font-weight-bold">
               <router-link to="/sbori" class="mainlink">
-                <v-icon class="mr-2" color="#0a7d9a">mdi-cash-100</v-icon>Дело
+                <v-icon class="mr-2" color="#0a7d9a">mdi-cash-multiple</v-icon>Сбор средств
               </router-link>
             </span>
 
@@ -410,7 +410,7 @@
               </v-btn>
 
               <div @click="openlink(sbori[si].ssilka)">
-                <v-img :src="sbori[si].obraz" aspect-ratio="1" contain eager>
+                <v-img :src="sbori[si].obraz" aspect-ratio="1" fill eager>
                   <v-layout slot="placeholder" fill-height align-center justify-center ma-0>
                     <v-progress-circular indeterminate color="#0a7d9a"></v-progress-circular>
                   </v-layout>
@@ -423,6 +423,51 @@
               </div>
             </v-card>
           </v-col>
+
+
+<v-col class="pt-0" cols="12" sm="4">
+            <span class="subtitle-1 font-weight-bold">
+              <router-link to="/podpisi" class="mainlink">
+                <v-icon class="mr-2" color="#0a7d9a">mdi-lead-pencil</v-icon>Сбор подписей
+              </router-link>
+            </span>
+
+            <v-card
+              outlined
+              class="ml-2 mt-2 cardhov"
+              :max-width="$vuetify.breakpoint.xs? '': '250px'"
+              v-if="podpisi.length>0"
+            >
+              <v-btn
+                color="#0a7d9a"
+                fab
+                dark
+                small
+                absolute
+                top
+                depressed
+                right
+                @click="poi=anyel(poi,podpisi)"
+                style="margin-top:5px;margin-right:-24px"
+              >
+                <v-icon>mdi-shuffle-variant</v-icon>
+              </v-btn>
+
+              <div @click="openlink(podpisi[poi].ssilka)">
+                <v-img :src="podpisi[poi].obraz" aspect-ratio="1" fill eager>
+                  <v-layout slot="placeholder" fill-height align-center justify-center ma-0>
+                    <v-progress-circular indeterminate color="#0a7d9a"></v-progress-circular>
+                  </v-layout>
+                </v-img>
+                <v-divider />
+                <v-card-title
+                  class="subtitle-1 font-weight-bold"
+                  style="color:#1f2020; word-break: normal;"
+                >{{podpisi[poi].nazvanie}}</v-card-title>
+              </div>
+            </v-card>
+          </v-col>
+
           <v-col class="pt-0" cols="12" sm="4">
             <span class="subtitle-1 font-weight-bold">
               <router-link to="/predpriyatiya" class="mainlink">
@@ -467,24 +512,7 @@
             </v-card>
           </v-col>
 
-          <v-col class="pt-0" cols="12" sm="4">
-            <span class="subtitle-1 font-weight-bold">
-              <router-link to="/prisoedinitsya" class="mainlink">
-                <v-icon class="mr-2" color="#0a7d9a">mdi-lightbulb-on-outline</v-icon>Замысел
-              </router-link>
-            </span>
-            <v-card outlined class="ml-2 mt-2" to="/prisoedinitsya">
-              <v-card-text>
-                <v-simple-table dense>
-                  <tbody>
-                    <tr class="tablink" v-for="(zam,i) in zamisli" :key="i">
-                      <td class="px-2">{{zam.nazvanie}}</td>
-                    </tr>
-                  </tbody>
-                </v-simple-table>
-              </v-card-text>
-            </v-card>
-          </v-col>
+          
         </v-row>
       </v-container>
     </v-content>
@@ -503,12 +531,14 @@ export default {
     db: null,
     drawer2: false,
     sbori: [],
+    podpisi: [],
     predpriyatiya: [],
     novosti: [],
     zamisli: [],
     teksti: {teksti:[{zagolovok:''}]},
     si: 0,
     pi: 0,
+    poi:0,
     tekst: {},
     pokazatSobitie: false,
     vibrannoeSobitie: null,
@@ -528,6 +558,9 @@ export default {
     sbori() {
       this.si = this.anyel(this.si, this.sbori);
     },
+    podpisi() {
+      this.poi = this.anyel(this.poi, this.podpisi);
+    },
     drawer() {
       this.drawer2 = !this.drawer2;
     },
@@ -541,6 +574,7 @@ export default {
     window.setInterval(() => {
       this.si = this.anyel(this.si, this.sbori);
       this.pi = this.anyel(this.pi, this.predpriyatiya);
+      this.poi = this.anyel(this.poi, this.podpisi);
     }, 12000);
   },
   computed: {},
@@ -613,6 +647,7 @@ export default {
   firestore() {
     return {
       sbori: this.$firebase.collection("sbori").where("idet", "==", true),
+      podpisi: this.$firebase.collection("podpisi").where("idet", "==", true),
       novosti: this.$firebase
         .collection("novosti")
         .orderBy("data", "desc")
