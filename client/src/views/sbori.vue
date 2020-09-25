@@ -78,6 +78,18 @@
           <v-card-text class="pb-1 pt-2" v-html="sbori_teksti.tekst"></v-card-text>
         </v-card>
         <v-row class="ml-0">
+
+<v-col v-if="sbori.length === 0" lg="3" md="4" sm="6" cols="12"  v-for="n in 12" :key="n">
+            <v-skeleton-loader
+            class="mx-auto"
+            
+            
+            type="card"
+    ></v-skeleton-loader>
+          </v-col>
+
+
+
           <v-col lg="3" md="4" sm="6" cols="12" v-for="(sbor,i) in sbori" :key="i">
             <v-card class="cardhov" height="100%" outlined @click="openlink(sbor.ssilka)">
               <div style="display: flex;  flex-flow: column;   height:100%">

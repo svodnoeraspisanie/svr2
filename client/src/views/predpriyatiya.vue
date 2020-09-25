@@ -86,6 +86,17 @@
           @click="vibrannie_metki.splice(i,1)"
         >{{metka[0]}}</v-chip>
         <v-row class="ml-0">
+
+          <v-col v-if="vsepredpriyatiya.length === 0" lg="3" md="4" sm="6" cols="12"  v-for="n in 12" :key="n">
+            <v-skeleton-loader
+            class="mx-auto"
+            
+            
+            type="card"
+    ></v-skeleton-loader>
+          </v-col>
+
+
           <v-col lg="3" md="4" sm="6" cols="12" v-for="(pr,i) in pokazannie_redpriyatiya" :key="i">
             <v-card class="cardhov" height="100%" :to="{path: `/predpriyatiya/${pr.id}`}" outlined>
               <div style="display: flex;  flex-flow: column;   height:100%">
@@ -153,6 +164,12 @@ export default {
         this.obnovitSpiski();
       }
     },
+ 
+    
+     
+    
+  
+
     drawer() {
       this.drawer2 = !this.drawer2;
     },
