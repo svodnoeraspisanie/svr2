@@ -10,10 +10,10 @@
 
 
     <!--Add buttons to initiate auth sequence and sign out-->
-    <button id="authorize_button" style="display: none;">Authorize</button>
-    <button id="signout_button" style="display: none;">Sign Out</button>
+    <button id="authorize_button" style="display: none;">Войти в гугл аккаунт</button>
+    <button id="signout_button" style="display: none;">Выйти из гугл аккаунта</button>
 
-    <button id="check_button" style="display: none;">Проверить каналы</button>
+    <button id="check_button" ">Проверить каналы</button>
 
     <pre id="content" style="white-space: pre-wrap;"></pre>
 
@@ -132,6 +132,8 @@
             { id: "UCYNm5hOquzAKM-ctxqOHhZQ", dlitelnost: 3, n: "локал крю" },
             { id: "UCjc2hUqt3M9VU7yhc_Lv8wg", dlitelnost: 3, n: "чёрная сотня и листва" },
             { id: "UCdhz2BflgqhUfri8y9Oqn7A", dlitelnost: 3, n: "крюков" },
+            { id: "UCYW__ANioO_suDvT26yh1kg", dlitelnost: 3, n: "гроаз-стрим, второй канал" },
+            { id: "UClJuNOPfPB6emSO8hroeefQ", dlitelnost: 3, n: "постискра" },
 
         ];
 
@@ -246,7 +248,8 @@
 
                 if (sobVRasp.result.items.length > 0) {
                     if (sobVRasp.result.items[0].summary != sobitie.summary) {
-                        console.log("добавлено событие ", sobitie.summary)
+                        //console.log("добавлено событие ", sobitie.summary)
+                        appendPre("&npsp;&npsp;&npsp;&npsp;&npsp;добавлено событие " + sobitie.summary);
                         var request = await gapi.client.calendar.events.insert({
                             'calendarId': '2kpu7kvisrlvmgkiheabippc20@group.calendar.google.com',
                             'resource': sobitie
