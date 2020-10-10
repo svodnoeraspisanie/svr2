@@ -72,6 +72,13 @@ export default new Router({
       component: () => import('./views/sbori.vue'),
     },
     {
+      path: '/gnezdo',
+      name: 'gnezdo',
+      props: true,
+      meta:{title:"Гнездо | Ракитов Куст"},
+      component: () => import('./views/gnezdo.vue'),
+    },
+    {
       path: '/podpisi',
       name: 'podpisi',
       props: true,
