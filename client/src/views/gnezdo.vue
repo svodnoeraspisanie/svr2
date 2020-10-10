@@ -75,28 +75,37 @@
           <span style="border-bottom: 1px dashed gray;">Гнездо </span>
         </h2>
         <v-card outlined class="ml-3 mt-2" v-if="poyasnenie" @click="poyasnenie=!poyasnenie">
-          <v-card-text class="pb-1 pt-2" v-html="sbori_teksti.tekst"></v-card-text>
+          <v-card-text class="pb-1 pt-2" >Инкубатор, акселератор, учебный центр и питомник деятелей и начинаний.</v-card-text>
         </v-card>
 
         <v-row class="ml-0">
 
-          <v-col lg="4" md="4" sm="12" cols="12" >
+          <v-col lg="4" md="4" sm="12" cols="12" class="pr-6">
             <v-row class="ml-0 pb-4">
-            <v-card class="cardhov" height="100%" outlined >
-              <v-card-title>Побуждение</v-card-title>
-              <v-card-text>В основе деятельности лежит побуждение,  это желание  сделать что-то. И возникает оно из осознания, что существующие положение вещей неудовлетворительно и его надо изменить.</v-card-text>
+              <h2 class="subtitle-1 font-weight-bold">
+          <v-icon class="mr-2" color="#0a7d9a ">mdi-lightbulb-on-outline</v-icon>Побуждение
+        </h2>
+            <v-card class="ml-2 mt-2" outlined >
+              
+              <v-card-text>В основе деятельности лежит побуждение - это желание  сделать что-то. И возникает оно из осознания, что существующие положение вещей неудовлетворительно и его надо изменить.</v-card-text>
           </v-card>
             </v-row>
           <v-row class="ml-0">
-          <v-card class="cardhov" height="100%" outlined >
-           <v-card-title>Делание</v-card-title>
-            <v-card-text>Извечный вопрос "что делать?" И несколько простых ответов. Есть хороший замысел - предложи. Нравится замыслел - воплоти. Уже идёт дело - присоединись. Не можешь присоединиться - поддержи и подпитай.  </v-card-text>
+            <h2 class="subtitle-1 font-weight-bold">
+          <v-icon class="mr-2" color="#0a7d9a ">mdi-lightbulb-on-outline</v-icon>Делание
+        </h2>
+          <v-card class="ml-2 mt-2" outlined >
+         
+            <v-card-text>Извечный вопрос "что делать?" <br/> И несколько простых ответов.<br/> Есть хороший замысел - предложи его.<br/> Нравится замыслел - воплоти его.<br/> Уже идёт дело - присоединись к нему.<br/> Не можешь присоединиться - поддержи и подпитай его.  </v-card-text>
             </v-card>
           </v-row>
           </v-col>
-          <v-col lg="8" md="8" sm="12" cols="12" >
-            <v-card class="cardhov" height="100%" outlined >
-              <v-card-title>Проблемы</v-card-title>
+          <v-col lg="8" md="8" sm="12" cols="12" class="pl-6" >
+            <h2 class="subtitle-1 font-weight-bold">
+          <v-icon class="mr-2" color="#0a7d9a ">mdi-lightbulb-on-outline</v-icon>Проблемы
+        </h2>
+            <v-card class="ml-2 mt-2" outlined >
+ 
                <v-card-text>
               <v-simple-table dense>
                   <tbody>
@@ -142,16 +151,22 @@
             </v-card>
           </v-col>
         </v-row>
-        <v-row class="ml-0">
+        <v-row class="ml-0 pt-6">
 
           <v-col lg="6" md="6" sm="12" cols="12" >
-            <v-card class="cardhov" height="100%" outlined >
-              <v-card-title>Замыслы решений</v-card-title>
+            <h2 class="subtitle-1 font-weight-bold">
+          <v-icon class="mr-2" color="#0a7d9a ">mdi-lightbulb-on-outline</v-icon>Замыслы решений
+        </h2>
+            <v-card class="ml-2 mt-2" outlined >
+              <v-card-title class="subtitle-1 font-weight-bold"></v-card-title>
             </v-card>
           </v-col>
           <v-col lg="6" md="6" sm="12" cols="12" >
-            <v-card class="cardhov" height="100%" outlined >
-              <v-card-title>Существующие решения</v-card-title>
+            <h2 class="subtitle-1 font-weight-bold">
+          <v-icon class="mr-2" color="#0a7d9a ">mdi-lightbulb-on-outline</v-icon>Существующие решения
+        </h2>
+            <v-card class="ml-2 mt-2" outlined >
+              <v-card-title class="subtitle-1 font-weight-bold"></v-card-title>
             </v-card>
           </v-col>
         </v-row>
