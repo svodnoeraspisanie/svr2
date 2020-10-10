@@ -51,7 +51,7 @@
         <v-row class="ml-0">
 
 
-          <v-col v-if="!eed.items.length===0" lg="4" md="6" sm="12" cols="12" v-for="n in 9" :key="n">
+          <v-col v-if="!feed.items.length===0" lg="4" md="6" sm="12" cols="12" v-for="n in 9" :key="n">
             <v-skeleton-loader
             class="mx-auto"
             max-width="300"
