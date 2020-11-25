@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8" />
+</head>
+
+<body>
+
+
+    <!--Add buttons to initiate auth sequence and sign out-->
+    <button id="authorize_button" style="display: none;">Войти в гугл аккаунт</button>
+    <button id="signout_button" style="display: none;">Выйти из гугл аккаунта</button>
+
+    <button id="check_button" >Проверить каналы</button>
+    <button id="check_timepad" ">Проверить устроителей на Таймпад</button>
+
+
+    <pre id="content" style="white-space: pre-wrap;"></pre>
+
+    <script type="text/javascript">
+        // Client ID and API key from the Developer Console
+        var CLIENT_ID = '604330438559-shiai0cgk0j2v7e7tk8cv7a84ufkcbo0.apps.googleusercontent.com';
+        var API_KEY = 'AIzaSyCSV5kxpkQN3Vfvg_9D_vyBN2DQ7AiBzr4';
+
+        // Array of API discovery doc URLs for APIs used by the quickstart
+        var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest", "https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest"];
+
+        // Authorization scopes required by the API; multiple scopes can be
+        // included, separated by spaces.
+        var SCOPES = "https://www.googleapis.com/auth/calendar.events https://www.googleapis.com/auth/youtube.readonly";
+
+        var authorizeButton = document.getElementById('authorize_button');
+        var signoutButton = document.getElementById('signout_button');
+
+        var checkButton = document.getElementById('check_button');
+        var checkTimepad = document.getElementById('check_timepad');
+
+        /**
+         *  On load, called to load the auth2 library and API client library.
+         */
+        function handleClientLoad() {
+            gapi.load('client:auth2', initClient);
+        }
+
+        /**
+         *  Initializes the API client library and sets up sign-in state
+         *  listeners.
+         */
+        function initClient() {
+            gapi.client.init({
+                apiKey: API_KEY,
+                clientId: CLIENT_ID,
+                discoveryDocs: DISCOVERY_DOCS,
+                scope: SCOPES
+            }).then(function () {
+                // Listen for sign-in state changes.
+                gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
+
+                // Handle the initial sign-in state.
+                updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
+                authorizeButton.onclick = handleAuthClick;
+                signoutButton.onclick = handleSignoutClick;
+                checkButton.onclick = start;
+                checkTimepad.onclick = timepad;
+            }, function (error) {
+                appendPre(JSON.stringify(error, null, 2));
+            });
+        }
+
+        /**
+         *  Called when the signed in status changes, to update the UI
+         *  appropriately. After a sign-in, the API is called.
+         */
+        function updateSigninStatus(isSignedIn) {
+            if (isSignedIn) {
+                authorizeButton.style.display = 'none';
+                signoutButton.style.display = 'block';
+                // sledit();
+
+            } else {
+                authorizeButton.style.display = 'block';
+                signoutButton.style.display = 'none';
+            }
+        }
+
+        /**
+         *  Sign in the user upon button click.
+         */
+        function handleAuthClick(event) {
+            gapi.auth2.getAuthInstance().signIn();
+        }
+
+        /**
+         *  Sign out the user upon button click.
+         */
+        function handleSignoutClick(event) {
+            gapi.auth2.getAuthInstance().signOut();
+        }
+
+        /**
+         * Append a pre element to the body containing the given message
+         * as its text node. Used to display the results of the API call.
+         *
+         * @param {string} message Text to be placed in pre element.
+         */
+        function appendPre(message) {
+            var pre = document.getElementById('content');
+            var textContent = document.createTextNode(message + '\n');
+            pre.appendChild(textContent);
+        }
+
+        /**
+         * Print the summary and start datetime/date of the next ten events in
+         * the authorized user's calendar. If no events are found an
+         * appropriate message is printed.
+         */
+
+        const spiskoKanalov = [
+            { id: "UC3__2CKZlG6aKX0Ex53SGDw", dlitelnost: 2, n: "гроза" },
+          
+            { id: "UC7GcUuO8Z8OBWvJLtQ4d3Sw", dlitelnost: 1, n: "кашин" },
+            { id: "UC0VgZiqHIeKlYvVtabVfamw", dlitelnost: 5, n: "галковский" },
+            { id: "UCGNFIJaVOs3TJJbzctDCiJg", dlitelnost: 2, n: "юнеман" },
+            { id: "UC95fWjcgwdAwv5fVQdZ4ByQ", dlitelnost: 1, n: "001" },
+            { id: "UCJl3qzjljHA8-Nxiep2fMqA", dlitelnost: 3, n: "искра" },
+            { id: "UCDrqiFM-NUx-8xnEe9Fsk9Q", dlitelnost: 2, n: "бобров" },
+            { id: "UCW-W3lZ0cbNF5xf5sZzRP0A", dlitelnost: 1, n: "савельев" },
+            { id: "UCAsrEe9qrt7mxkAqO-iOzeA", dlitelnost: 2, n: "ндп" },
+            { id: "UCj837tBwGFjcKyVriMp_6pA", dlitelnost: 3, n: "задумов" },
+            { id: "UCMmKqsMmFVEjxA82P6eTIXA", dlitelnost: 3, n: "колосов" },
+            { id: "UCNd1jPh65H4dfYPGOHVJyxA", dlitelnost: 3, n: "холмогоров" },
+            { id: "UCAJioHOMJaWRhcK_x1QzHcw", dlitelnost: 3, n: "погром" },
+            { id: "UCTP20lo68ZHFA5bXigF975A", dlitelnost: 3, n: "розанов клуб" },
+            { id: "UCYNm5hOquzAKM-ctxqOHhZQ", dlitelnost: 3, n: "локал крю" },
+            { id: "UCjc2hUqt3M9VU7yhc_Lv8wg", dlitelnost: 3, n: "чёрная сотня и листва" },
+            { id: "UCdhz2BflgqhUfri8y9Oqn7A", dlitelnost: 3, n: "крюков" },
+            { id: "UCYW__ANioO_suDvT26yh1kg", dlitelnost: 3, n: "гроаз-стрим, второй канал" },
+            { id: "UClJuNOPfPB6emSO8hroeefQ", dlitelnost: 3, n: "постискра" },
+
+        ];
+
+        const spisokTimepad = [
+            { id: "237886", n: "Листва Москва" , m:"Москва"},
+            { id: "150659", n: "Листва Питер" , m:"Питер"},
+            
+           
+
+        ];
+
+
+//mMRwA38mVYVFyx
+
+        async function sledit() {
+            window.setInterval(async () => {
+                appendPre(new Date());
+                try {
+                    for (let i = 0; i < spiskoKanalov.length; ++i) {
+                        await dobavitStrimiVRaspisanie(spiskoKanalov[i]);
+                    }
+                } catch (e) {
+                    console.log(e);
+                    appendPre(e.result.error.message);
+                }
+            }, 2 * 60 * 60 * 1000);
+
+
+
+        }
+
+        async function start() {
+
+            appendPre(new Date());
+            try {
+                for (let i = 0; i < spiskoKanalov.length; ++i) {
+                    await dobavitStrimiVRaspisanie(spiskoKanalov[i]);
+                }
+            } catch (e) {
+                console.log(e);
+                appendPre(e.result.error.message);
+            }
+
+
+
+
+        }
+        async function timepad() {
+
+            appendPre(new Date());
+            try {
+               // for (let i = 0; i < spisokTimepad.length; ++i) {
+                await dobavitSobitiya(spisokTimepad[0]);
+             //  }
+            } catch (e) {
+                console.log(e);
+                 appendPre(e.result.error.message);
+            }
+
+        }
+
+        async function poluchitsobitie(id){
+
+let response = await fetch("https://api.timepad.ru/v1/events/"+id,
+{
+headers: {'Authorization':'Bearer ed7b7aa0a72852116c02bbf2f4aae980047f5c5d'}
+});
+
+
+
+
+if (response.ok) { 
+
+let json = await response.json();
+//console.log(json);
+return json;
+
+
+
+          } else {
+ console.log("Ошибка HTTP: " + response.status);
+}
+}
+
+
+
+        async function dobavitSobitiya(ustroitel){
+
+
+
+            let id="1421648";
+            let ustrid="237886,150659"; // чс
+            
+           /* let response = await fetch("https://api.timepad.ru/v1/events/"+id,
+            {
+             headers: {'Authorization':'Bearer ed7b7aa0a72852116c02bbf2f4aae980047f5c5d'}
+            });*/
+            let response = await fetch("https://api.timepad.ru/v1/events?limit=20&organization_ids="+ustrid+"&access_statuses=public&moderation_statuses=featured%2Cshown%2Cnot_moderated&starts_at_min=now"
+,
+            {
+             headers: {'Authorization':'Bearer ed7b7aa0a72852116c02bbf2f4aae980047f5c5d'}
+            });
+            
+            
+
+            if (response.ok) { 
+
+            let json = await response.json();
+            console.log(json);
+
+            let sobititya=[];
+                for (let i = 0; i < json.values.length; ++i) { 
+                    sobititya.push(poluchitsobitie(json.values[i].id))
+
+                }
+                console.log(sobititya);
+
+                          } else {
+                 console.log("Ошибка HTTP: " + response.status);
+            }
+        }
+
+        async function dobavitStrimiVRaspisanie(kanal) {
+
+
+            const budushieStrimi = await gapi.client.youtube.search.list({
+                "part": "snippet",
+                "channelId": kanal.id,
+                "eventType": "upcoming",
+                "maxResults": 25,
+                "type": "video"
+            });
+
+            appendPre("проверяем " + kanal.n);
+
+            let spisok = [];
+            for (let x = 0; x < budushieStrimi.result.items.length; ++x) {
+                spisok.push(budushieStrimi.result.items[x].id.videoId);
+            };
+
+            const strimi = await gapi.client.youtube.videos.list({
+                "part": "snippet,liveStreamingDetails",
+                "id": spisok.toString()
+            });
+            console.log(strimi);
+
+
+            for (let i = 0; i < strimi.result.items.length; ++i) {
+                let st = strimi.result.items[i].liveStreamingDetails.scheduledStartTime;
+                let et = new Date(st);
+                et.setHours(et.getHours() + kanal.dlitelnost);
+                et = et.toISOString();
+
+                let sobitie = {
+                    'summary': strimi.result.items[i].snippet.channelTitle + ": " + strimi.result.items[i].snippet.title,
+
+                    'description': "<a href='https://www.youtube.com/watch?v=" + strimi.result.items[i].id + "'>Открыть Youtube</a><br/><br/>" + strimi.result.items[i].snippet.description,
+                    'start': {
+                        'dateTime': st,
+
+                    },
+                    'end': {
+                        'dateTime': et,
+
+                    },
+
+                };
+
+
+                let sobVRasp = await gapi.client.calendar.events.list({
+
+                    //'calendarId': 'q6gg9p4b5oa1ij98867jp6tuno@group.calendar.google.com',
+                    'calendarId': '2kpu7kvisrlvmgkiheabippc20@group.calendar.google.com',
+                    'timeMin': st,
+                    'singleEvents': true,
+                    'maxResults': 1,
+                    'orderBy': 'startTime'
+                });
+                //console.log(sobVRasp);
+
+
+                if (sobVRasp.result.items.length > 0) {
+                    if (sobVRasp.result.items[0].summary != sobitie.summary) {
+                        //console.log("добавлено событие ", sobitie.summary)
+                        appendPre("&npsp;&npsp;&npsp;&npsp;&npsp;добавлено событие " + sobitie.summary);
+                        var request = await gapi.client.calendar.events.insert({
+                            'calendarId': '2kpu7kvisrlvmgkiheabippc20@group.calendar.google.com',
+                            'resource': sobitie
+                        });
+                    }
+                } else {
+                    var request = await gapi.client.calendar.events.insert({
+                        'calendarId': '2kpu7kvisrlvmgkiheabippc20@group.calendar.google.com',
+                        'resource': sobitie
+                    })
+
+                }
+
+
+
+
+            }
+
+
+        }
+
+
+
+
+    </script>
+
+    <script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};handleClientLoad()"
+        onreadystatechange="if (this.readyState === 'complete') this.onload()">
+        </script>
+</body>
+
+</html>
