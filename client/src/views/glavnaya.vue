@@ -381,7 +381,7 @@
           <v-icon class="mr-2" color="#0a7d9a">mdi-tab-plus</v-icon>Поддержать
         </div>
         <v-row class="ml-0">
-          <v-col class="pt-0" cols="12" sm="4">
+          <v-col class="pt-0" cols="12" sm="3">
             <span class="subtitle-1 font-weight-bold">
               <router-link to="/sbori" class="mainlink">
                 <v-icon class="mr-2" color="#0a7d9a">mdi-cash-multiple</v-icon>Сбор средств
@@ -425,7 +425,7 @@
           </v-col>
 
 
-<v-col class="pt-0" cols="12" sm="4">
+<v-col class="pt-0" cols="12" sm="3">
             <span class="subtitle-1 font-weight-bold">
               <router-link to="/podpisi" class="mainlink">
                 <v-icon class="mr-2" color="#0a7d9a">mdi-lead-pencil</v-icon>Сбор подписей
@@ -468,7 +468,7 @@
             </v-card>
           </v-col>
 
-          <v-col class="pt-0" cols="12" sm="4">
+          <v-col class="pt-0" cols="12" sm="3">
             <span class="subtitle-1 font-weight-bold">
               <router-link to="/predpriyatiya" class="mainlink">
                 <v-icon class="mr-2" color="#0a7d9a">mdi-account-group</v-icon>Предприятие
@@ -512,6 +512,41 @@
             </v-card>
           </v-col>
 
+          <v-col class="pt-0" cols="12" sm="3">
+            <span class="subtitle-1 font-weight-bold">
+              <router-link to="/prisoedinitsya" class="mainlink">
+                <v-icon class="mr-2" color="#0a7d9a">mdi-lightbulb-on-outline</v-icon>Замысел
+              </router-link>
+            </span>
+            <v-card flat class="ml-2 mt-2" to="">
+            <v-btn
+                color="#0a7d9a"
+                fab
+                dark
+                small
+                absolute
+                top
+                right
+                depressed
+                style="margin-top:5px;margin-right:-24px"
+                @click="zi=anyel(zi,zamisli)"
+              >
+                <v-icon>mdi-shuffle-variant</v-icon>
+              </v-btn>
+              <router-link class="cardlink" to="/prisoedinitsya" >
+              <v-card-text>
+
+            <v-card-title
+                    class="subtitle-1 font-weight-bold pa-2"
+                    style=" word-break: normal"
+                  >{{zamisli[zi].nazvanie}}</v-card-title>
+                </v-card-text>
+</router-link>
+               
+             
+            </v-card>
+          </v-col>
+
           
         </v-row>
       </v-container>
@@ -538,6 +573,7 @@ export default {
     teksti: {teksti:[{zagolovok:''}]},
     si: 0,
     pi: 0,
+    zi: 0,
     poi:0,
     tekst: {},
     pokazatSobitie: false,
@@ -561,6 +597,9 @@ export default {
     podpisi() {
       this.poi = this.anyel(this.poi, this.podpisi);
     },
+    zamisli() {
+      this.zi = this.anyel(this.zi, this.zamisli);
+    },
     drawer() {
       this.drawer2 = !this.drawer2;
     },
@@ -575,6 +614,7 @@ export default {
       this.si = this.anyel(this.si, this.sbori);
       this.pi = this.anyel(this.pi, this.predpriyatiya);
       this.poi = this.anyel(this.poi, this.podpisi);
+      this.zi = this.anyel(this.zi, this.zamisli);
     }, 12000);
   },
   computed: {},
