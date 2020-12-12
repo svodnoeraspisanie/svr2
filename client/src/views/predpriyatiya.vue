@@ -98,24 +98,32 @@
 
 
           <v-col lg="3" md="4" sm="6" cols="12" v-for="(pr,i) in pokazannie_redpriyatiya" :key="i">
-            <v-card class="cardhov" height="100%" :to="{path: `/predpriyatiya/${pr.id}`}" outlined>
+            <v-card class="cardhov" height="100%"  outlined>
+            
               <div style="display: flex;  flex-flow: column;   height:100%">
                 <div>
+                  <router-link :to=" `/predpriyatiya/${pr.id}`">
                   <v-img :src="pr.obraz" aspect-ratio="1" contain style="width:100%">
                     <v-layout slot="placeholder" fill-height align-center justify-center ma-0>
                       <v-progress-circular indeterminate color="#0a7d9a"></v-progress-circular>
                     </v-layout>
                   </v-img>
                   <v-divider />
+                  </router-link>
                 </div>
-                <div style="flex:1;">
+                <router-link style="flex:1;" class="cardlink" :to=" `/predpriyatiya/${pr.id}`" >
+                <div >
+                
                   <v-card-title
                     class="subtitle-1 font-weight-bold"
-                    style="word-break: normal"
+                    style="word-break: normal "
                   >{{pr.nazvanie}}</v-card-title>
                   <v-card-text>{{pr.kratkoe_opisanie}}</v-card-text>
+               
                 </div>
+                 </router-link>
                 <div>
+
                   <v-divider />
 
                   <v-card-text class="pa-2">
@@ -136,6 +144,8 @@
                         :key="nm"
                         small
                         style="height:18px; margin-left:2px"
+                        @click="vibrannie_metki.push([metka,0])"
+
                       >{{metka}}</v-chip>
                     </div>
                   </v-card-text>
@@ -276,5 +286,13 @@ export default {
 <style>
 .cardhov:hover {
   background-color: #eeeeee;
+}
+.cardlink {
+  text-decoration: none;
+  color: #1f2020 !important;
+}
+.cardlink:hover {
+  text-decoration: none;
+  color: #1f2020 !important;
 }
 </style>
