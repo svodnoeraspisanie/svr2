@@ -501,13 +501,13 @@
                     <v-progress-circular indeterminate color="#0a7d9a"></v-progress-circular>
                   </v-layout>
                 </v-img>
-                <v-card-text class="pa-2">
+               
                   <v-divider />
                   <v-card-title
                     class="subtitle-1 font-weight-bold pa-2"
                     style=" word-break: normal"
                   >{{predpriyatiya[pi].nazvanie}}</v-card-title>
-                </v-card-text>
+                
               </router-link>
             </v-card>
           </v-col>
