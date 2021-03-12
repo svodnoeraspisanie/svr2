@@ -97,7 +97,7 @@
             depressed
             color="#cde6bb"
             @click="openlink('https://t.me/rakitov_kust')"
-          >Телеграм</v-btn>
+          >Читать ТГ-канал</v-btn>
         </div>
         <div class="pa-2">
           <v-btn
@@ -501,13 +501,13 @@
                     <v-progress-circular indeterminate color="#0a7d9a"></v-progress-circular>
                   </v-layout>
                 </v-img>
-               
+
                   <v-divider />
                   <v-card-title
                     class="subtitle-1 font-weight-bold pa-2"
                     style=" word-break: normal"
                   >{{predpriyatiya[pi].nazvanie}}</v-card-title>
-                
+
               </router-link>
             </v-card>
           </v-col>
@@ -542,12 +542,12 @@
                   >{{zamisli[zi].nazvanie}}</v-card-title>
                 </v-card-text>
 </router-link>
-               
-             
+
+
             </v-card>
           </v-col>
 
-          
+
         </v-row>
       </v-container>
     </v-content>
@@ -558,7 +558,7 @@
 export default {
   components: {},
 
-  props: ["drawer"],
+  props: ['drawer'],
 
   data: () => ({
     novostiZagruzheni: false,
@@ -570,16 +570,16 @@ export default {
     predpriyatiya: [],
     novosti: [],
     zamisli: [],
-    teksti: {teksti:[{zagolovok:''}]},
+    teksti: { teksti: [{ zagolovok: '' }] },
     si: 0,
     pi: 0,
     zi: 0,
-    poi:0,
+    poi: 0,
     tekst: {},
     pokazatSobitie: false,
     vibrannoeSobitie: null,
     raspsegondya: [[], [], []],
-    raspzavtra: [[], [], []]
+    raspzavtra: [[], [], []],
   }),
   created() {
     this.zagruzkaraspisaniya();
@@ -607,7 +607,7 @@ export default {
       if (this.novosti.length > 0) {
         this.novostiZagruzheni = true;
       }
-    }
+    },
   },
   mounted() {
     window.setInterval(() => {
@@ -620,8 +620,8 @@ export default {
   computed: {},
   methods: {
     async zagruzkaraspisaniya() {
-      const googleCalendarApiKey = "AIzaSyCSV5kxpkQN3Vfvg_9D_vyBN2DQ7AiBzr4";
-      const caladr = "https://www.googleapis.com/calendar/v3/calendars/";
+      const googleCalendarApiKey = 'AIzaSyCSV5kxpkQN3Vfvg_9D_vyBN2DQ7AiBzr4';
+      const caladr = 'https://www.googleapis.com/calendar/v3/calendars/';
       const today = new Date();
       today.setHours(0);
       today.setMinutes(0);
@@ -629,17 +629,17 @@ export default {
       const tomorrow = new Date(today.getTime() + 48 * 60 * 60 * 1000 - 1000);
 
       const cals = [
-        "2kpu7kvisrlvmgkiheabippc20@group.calendar.google.com",
-        "ct8a4t3tuim1jjnkno2d6skkck@group.calendar.google.com",
-        "uq550s4cd42vsoojk09patvfvk@group.calendar.google.com"
+        '2kpu7kvisrlvmgkiheabippc20@group.calendar.google.com',
+        'ct8a4t3tuim1jjnkno2d6skkck@group.calendar.google.com',
+        'uq550s4cd42vsoojk09patvfvk@group.calendar.google.com',
       ];
 
       for (let i = 0; i < cals.length; i += 1) {
-        const url = `${caladr +
-          encodeURIComponent(cals[i])}/events?timeMin=${encodeURIComponent(
-          today.toISOString()
+        const url = `${caladr
+          + encodeURIComponent(cals[i])}/events?timeMin=${encodeURIComponent(
+          today.toISOString(),
         )}&timeMax=${encodeURIComponent(
-          tomorrow.toISOString()
+          tomorrow.toISOString(),
         )}&key=${googleCalendarApiKey}`;
 
         const response = await fetch(url);
@@ -658,12 +658,12 @@ export default {
 
           for (let j = 0; j < data.items.length; j += 1) {
             data.items[j].start.time = new Date(
-              data.items[j].start.dateTime
-            ).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+              data.items[j].start.dateTime,
+            ).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
             if (
-              new Date(data.items[j].start.dateTime).getDay() ===
-              new Date().getDay()
+              new Date(data.items[j].start.dateTime).getDay()
+              === new Date().getDay()
             ) {
               this.raspsegondya[i].push(data.items[j]);
             } else {
@@ -675,28 +675,28 @@ export default {
     },
 
     openlink(arg) {
-      window.open(arg, "_blank");
+      window.open(arg, '_blank');
     },
     anyel(i, ar) {
       const i2 = ~~(Math.random() * ar.length);
 
       return i === i2 ? (i === ar.length - 1 ? i - 1 : i + 1) : i2;
-    }
+    },
   },
 
   firestore() {
     return {
-      sbori: this.$firebase.collection("sbori").where("idet", "==", true),
-      podpisi: this.$firebase.collection("podpisi").where("idet", "==", true),
+      sbori: this.$firebase.collection('sbori').where('idet', '==', true),
+      podpisi: this.$firebase.collection('podpisi').where('idet', '==', true),
       novosti: this.$firebase
-        .collection("novosti")
-        .orderBy("data", "desc")
+        .collection('novosti')
+        .orderBy('data', 'desc')
         .limit(5),
-      predpriyatiya: this.$firebase.collection("predpriyatiya"),
-      teksti: this.$firebase.collection("teksti").doc("glavnaya"),
-      zamisli: this.$firebase.collection("zamisli")
+      predpriyatiya: this.$firebase.collection('predpriyatiya'),
+      teksti: this.$firebase.collection('teksti').doc('glavnaya'),
+      zamisli: this.$firebase.collection('zamisli'),
     };
-  }
+  },
 };
 </script>
 <style scoped>

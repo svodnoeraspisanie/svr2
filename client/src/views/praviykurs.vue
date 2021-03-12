@@ -38,7 +38,7 @@
     <v-content :style="$vuetify.breakpoint.xs? '': 'padding-top:0px'">
       <v-container :class="$vuetify.breakpoint.xs? 'px-2': 'px-6'">
         <h2 @click="poyasnenie=!poyasnenie;">
-         
+
           <v-img max-height="24px" max-width="24px" class="d-inline-block mr-2 pb-1"  src="https://firebasestorage.googleapis.com/v0/b/svora-6f3df.appspot.com/o/rc.png?alt=media&token=d78085f4-bf3b-4cee-a0f0-5c192ffaa17a"></v-img>
           <span
             style="border-bottom: 1px dashed gray;"
@@ -77,12 +77,12 @@
           scrollable
         >
           <v-card :max-height="$vuetify.breakpoint.xs? '': '90vh'">
-       
+
 
             <v-divider class="pa-0" />
 
             <v-card-text class="pt-2" v-html="vibrannoeSoobshenie.content ">
-              
+
             </v-card-text>
 
            <v-btn
@@ -105,55 +105,48 @@
 </template>
 
 <script>
-import Parser from "rss-parser";
+import Parser from 'rss-parser';
 
 export default {
   components: {},
-  props: ["drawer"],
+  props: ['drawer'],
 
   watch: {
     drawer() {
       this.drawer2 = !this.drawer2;
-    }
+    },
   },
   data: () => ({
     drawer2: false,
     statii: [],
-    zagruzheno:false,
-    poyasnenie:true,
-    pokazatSoobshenie:false,
-    vibrannoeSoobshenie:"",
-    feed:[]
+    zagruzheno: false,
+    poyasnenie: true,
+    pokazatSoobshenie: false,
+    vibrannoeSoobshenie: '',
+    feed: [],
   }),
-  mounted(){
-    const CORS_PROXY = "https://cors-anywhere.herokuapp.com/"
+  mounted() {
+    const CORS_PROXY = 'https://cors-anywhere.herokuapp.com/';
 
-    let parser = new Parser();
+    const parser = new Parser();
     (async () => {
+      this.feed = await parser.parseURL(`${CORS_PROXY}https://rsshub.app/telegram/channel/rightcourse`);
 
-   this.feed = await parser.parseURL(CORS_PROXY +'https://rsshub.app/telegram/channel/rightcourse');
-
-   for (let i = 0; i < this.feed.items.length; i++) { 
-    let temp = document.createElement('div');
-    temp.innerHTML = this.feed.items[i].content;
-    let bigimg = temp.getElementsByTagName('img')[0];
-    if(bigimg && bigimg.style) {
-    bigimg.style.maxHeight = '300px';
-    bigimg.style.maxWidth = '300px';
-}
-   this.feed.items[i].content=String(temp.innerHTML);
-   this.zagruzheno=true;
-}
-
- 
-
-})();
+      for (let i = 0; i < this.feed.items.length; i++) {
+        const temp = document.createElement('div');
+        temp.innerHTML = this.feed.items[i].content;
+        const bigimg = temp.getElementsByTagName('img')[0];
+        if (bigimg && bigimg.style) {
+          bigimg.style.maxHeight = '300px';
+          bigimg.style.maxWidth = '300px';
+        }
+        this.feed.items[i].content = String(temp.innerHTML);
+        this.zagruzheno = true;
+      }
+    })();
+  },
 
 
-    
-  }
-
-  
 };
 </script>
 
